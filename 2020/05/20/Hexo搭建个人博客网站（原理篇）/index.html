@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">风中的鱼</title>
+  <title itemprop="name">Hexo搭建个人博客网站（原理篇） | 风中的鱼</title>
   
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -327,357 +327,200 @@
   </div>
 </header>
 
-      <div class="blank" style="padding-top: 0px;"></div>
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+<div class="pattern-center-blank"></div>
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_hexo/hexo.png);" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_hexo/hexo.png">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      Hexo搭建个人博客网站（原理篇）</h1>
+      <p class="entry-census">
+        <span>
+          <a href="www.yulinblog.com">
+            <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/avatar.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="www.yulinblog.com">YUYU</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2020-5-20<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
+  </div>
+
 <div id="content" class="site-content">
-  
-  <div class="notice" style="margin-top:60px">
-    <i class="iconfont icon-notification">
-    </i>
-    <div class="notice-content">起风了，请继续完成理想吧，不留下遗憾地去完成</div>
-  </div>
-  
-  <div class="top-feature-row">
-  <h1 class="fes-title" style="font-family: 'Ubuntu', sans-serif;">
-  <i class="fa fa-anchor" aria-hidden="true">
-  </i>
-  相遇</h1>
-  
-  <div class="top-feature-v2">
-    <div class="the-feature square from_left_and_right">
-      <a href="/categories/笔记/" target="_blank">
-        <div class="img">
-          <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/startdash/1w.jpg">
-        </div>
-        <div class="info">
-          <h3>NOTES</h3>
-          <p>温故而知新</p>
-        </div>
-      </a>
-    </div>
-  </div>
-  
-  <div class="top-feature-v2">
-    <div class="the-feature square from_left_and_right">
-      <a href="/categories/项目/" target="_blank">
-        <div class="img">
-          <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/startdash/2w.jpg">
-        </div>
-        <div class="info">
-          <h3>Program</h3>
-          <p>代码使我快乐</p>
-        </div>
-      </a>
-    </div>
-  </div>
-  
-  <div class="top-feature-v2">
-    <div class="the-feature square from_left_and_right">
-      <a href="/" target="_blank">
-        <div class="img">
-          <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/startdash/wangshiwu.jpg">
-        </div>
-        <div class="info">
-          <h3>鱼鱼的万事屋</h3>
-          <p>技术服务</p>
-        </div>
-      </a>
-    </div>
-  </div>
-  
-</div>
   <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
-      <h1 class="main-title" style="font-family: 'Ubuntu', sans-serif;">
-      <i class="fa fa-envira" aria-hidden="true"></i>
-      Discovery</h1>
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+        <div class="entry-content">
+          <p>Hexo搭建个人博客网站（原理篇）</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>学习HEXO的初衷是想建立一个博客网站，分享记录日常所学。参考了网上很多的资料，在安装、配置、开发的过程中补过坑，也接触了新的领域。挖掘新事物的过程就像从开始发现一粒沙到后来窥探到瀚海星辰一般有趣。在结合资料的基础上，将整个过程梳理记录一下。</p>
+<p>首先需要阐明本文使用Windows环境配置。</p>
+<h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><p>这章我们主要来讲一下 Hexo 是怎样生成 HTML 的。</p>
+<h3 id="Hexo简介"><a href="#Hexo简介" class="headerlink" title="Hexo简介"></a>Hexo简介</h3><p><a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">hexo</a>是使用nodejs开发的一个快速、简洁、高效、开源的静态博客生成器。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+<h4 id="为什么选择Hexo"><a href="#为什么选择Hexo" class="headerlink" title="为什么选择Hexo"></a>为什么选择Hexo</h4><ul>
+<li>hexo非常小巧，使用nodejs开发，下载安装时只需要几个npm命令即可。</li>
+<li>纯静态博客，不需要什么额外的mysql数据库、php环境…仅仅需要一个nodejs环境即可。</li>
+<li>由于是静态博客，所以，可以非常方便部署到github、gitcafe上(后者是国内的，速度可能更有保证)</li>
+<li>支持markdown语法、兼容windows linux mac，高可扩展性和自定义，而且有非常多的<a href="https://github.com/hexojs/hexo/wiki/themes" target="_blank" rel="noopener">hexo主题</a>…</li>
+</ul>
+<h3 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h3><h4 id="hexo文件架构"><a href="#hexo文件架构" class="headerlink" title="hexo文件架构"></a>hexo文件架构</h4><pre><code>├── node_modules：     #依赖包-安装插件及所需nodejs模块。
+├── public            #最终网页信息。即存放被解析markdown、html文件。
+├── scaffolds         #模板文件夹。即当您新建文章时，根据 scaffold生成文件。
+├── source            #资源文件夹。即存放用户资源。
+|   └── _posts        #博客文章目录。
+└── themes            #存放主题。Hexo根据主题生成静态页面。
+├── _config.yml       #网站的配置信息。标题、网站名称等。
+├── db.json：         #source解析所得到的缓存文件。
+├── package.json      # 应用程序信息。即配置Hexo运行需要js包。
+
+</code></pre><p>首先本地文件夹的source就是数据库，以.md（markdown）格式存储文章，theme文件夹是主题文件（决定页面模板）。 我们可以通过部署流程来逐步详尽分析。以下先来了解hexo有哪些部署命令，再分析部署的步骤流程</p>
+<h4 id="hexo命令总览"><a href="#hexo命令总览" class="headerlink" title="hexo命令总览"></a>hexo命令总览</h4><p>hexo可以粗略分为三个子项目，分别是:</p>
+<ul>
+<li>hexo-cli </li>
+<li>hexo (下文中用hexo core来指代) </li>
+<li>hexo plugins</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/Photo/hexois.png" style="zoom: 33%;"></p>
+<ul>
+<li><p>hexo-cli：hexo命令行，作用是： </p>
+<p>1.启动hexo命令进程和参数解析机制。每次我们输入hexo xxx命令后，都会通过node调用hexo-cli中的entry函数(比如，可以把’hexo init’视为’node hexo-cli/entry.js init’)，hexo init命令仅仅在安装时调用 </p>
+<p>2.实现hexo命令的三个初始参数：init/version/plugins </p>
+<p>3.加载hexo核心模块，并初始化</p>
+</li>
+<li><p>hexo core：hexo核心，作用是：实现hexo的new、generate、publish等功能 </p>
+</li>
+<li><p>hexo plugins: 指一些能够扩展hexo的插件。插件可以按功能分成两类: </p>
+<p>1.扩展hexo命令的参数，如hexo-server(安装这个插件以后才能使用hexo server命令) </p>
+<p>2.扩展hexo解析文件的”能力”，如增加jade模版解析功能的hexo-render-jade插件</p>
+</li>
+</ul>
+<h4 id="介绍hexo主要命令："><a href="#介绍hexo主要命令：" class="headerlink" title="介绍hexo主要命令："></a>介绍hexo主要命令：</h4><blockquote>
+<p> hexo n title #等价于 hexo new [layout] title 发布新文章<br> hexo p filename #等价于hexo publish filename 将_drafts下的文件放到_posts下，也就是发布草稿<br> hexo g #等价于hexo generate 生成静态网页<br> hexo s #等价于hexo server 启动预览服务器，开启-d选项时可以预览草稿<br> hexo d #等价于hexo deploy 发布到远程服务器，开启–generate选项可以在deploy前自动generate </p>
+<p>hexo s –debug#使用hexo s 启动本地服务后，如果修改了配置或者文章内容，需要停止服务后重新启动才能生效。这样，在调试或写文章阶段非常不方便，可以使用下面命令，以debug的方式启动，这样每次修改后就无需重启服务了。</p>
+</blockquote>
+<h4 id="部署的流程"><a href="#部署的流程" class="headerlink" title="部署的流程"></a>部署的流程</h4><ol>
+<li><p>hexo g：生成静态文件。将我们的数据和界面模板相结合生成静态文件的过程。Hexo（node.js程序）遍历主题文件中你的source目录（js、css、img等静态资源），建立索引，再根据索引生成由html、js、css、img建立的纯静态文件并放在public文件夹里。public就是你的博客了，而这些恰好能被git pages识别。</p>
+</li>
+<li><p>hexo d：部署文件。主要是根据在_config.yml中配置的git仓库或者coding的地址，将public文件通过git方式push到上传到github或coding的指定分支，然后在根据pages服务呈现出页面。当然把public文件部署至你的服务器也是OK滴。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/Photo/whatis5.png" style="zoom:67%;"></p>
+</li>
+</ol>
+<h4 id="Hexo的模板引擎"><a href="#Hexo的模板引擎" class="headerlink" title="Hexo的模板引擎"></a>Hexo的模板引擎</h4><p>模板引擎的作用，就是将<strong>界面与数据分离</strong>。最简单的原理是将模板内容中指定的地方替换成数据，实现业务代码与逻辑代码分离 </p>
+<p>1.请看Hexo文件结构，source文件夹与themes文件夹是同级的，进而我们就可以将source文件夹理解为数据库，而主题文件夹相当于界面。hexo g就将我们的数据和界面相结合生成静态文件public </p>
+<p>2.Hexo模板引擎默认使用ejs编写（本文以ejs模板举例，其他的有swig、jade）。hexo首先会解析.md文件，然后根据layout变量判断布局类型，再调用相应布局文件，这样每一块内容都是独立的，提供代码的复用性。最终生成一个html页面 </p>
+<p>3.布局模板文件位于layout文件夹下，以下将布局模板简称模板。layout文件结构在不同主题下文件排布不一，但整体框架是一样的，有： </p>
+<ul>
+<li>公共模板。里面引入了head、footer等公共组件，在其他模板下会自动引入公共模板 </li>
+<li>首页模板 </li>
+<li>文章模板 </li>
+<li>分类模板 </li>
+<li>归档模板 </li>
+<li>……</li>
+</ul>
+<blockquote>
+<p>每个模板都默认使用layout布局，您可在文章的前置申明中指定其他布局，比如“post”或者“page”或是设为false来关闭布局功能（如果不填默认是post，这个在_config.yml中可以设置默认值），您甚至可在布局中再使用其他布局来建立嵌套布局</p>
+</blockquote>
+<p>我们使用的模板。<code>hexo new [layout] &lt;title&gt;</code>就会使用对应的模板。</p>
+<h4 id="数据填充"><a href="#数据填充" class="headerlink" title="数据填充"></a>数据填充</h4><p>上面解释了界面的原理，此篇将分析数据及数据如何与界面结合。 数据的填充主要是 <code>hexo -g</code> 的时候将数据传递给 ejs 模板，然后再由 ejs 模板填充到 HTML 中。</p>
+<h5 id="配置文件中的数据"><a href="#配置文件中的数据" class="headerlink" title="配置文件中的数据"></a>配置文件中的数据</h5><p>Hexo 的配置文件 _config.yml 使用 yml语法 。例如博客的名字、副标题等等之类。这些数据项组织在 config 对象中。可以是数字、字符串、对象、数组。</p>
+<p>如果要在模板中使用某个具体的值，比如字符串、数字、逻辑变量或者对象的某个成员，可以在主题的模板文件 ejs中直接使用：</p>
+<pre><code>{% block title %} {{ page.title }} | {{ config.title }} {% endblock %}
+</code></pre><h2 id="github-pages"><a href="#github-pages" class="headerlink" title="github pages"></a>github pages</h2><p>Hexo搭建的博客项目源码托管在github，并享受github pages服务。</p>
+<p> GitHub pages简称pages服务，每个仓库都有一个pages服务，可用来展示项目，通过简单的设置项目的index.html，并以此做为入口供用户参观访问。大部分的 pages 服务都是用来搭建个人博客的。言外之意不仅能搭建博客，还能做些其他的事情~</p>
+<p>生成博客的页面有动、静态页面之分，著名的博客 wordpress ，既是动态页面生成的博客，其思路是 php + MySql 。 博客hexo生成的是静态页面，而Github pages 又支持静态页面的解析。因此二者一拍即合能够用来生成 html 拼合成博客。</p>
+<h4 id="参考文献："><a href="#参考文献：" class="headerlink" title="参考文献："></a>参考文献：</h4><p><a href="https://hexo.io/zh-cn/docs/github-pages" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/github-pages</a></p>
+<p><a href="https://juejin.im/post/598eeaff5188257d592e55bb#heading-5" target="_blank" rel="noopener">https://juejin.im/post/598eeaff5188257d592e55bb#heading-5</a></p>
+
+        </div>
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/donate/alipay.jpg"></li>
+                <li class="wechat-code"><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/donate/wechatqr.jpg"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+        
+          
+            <div class="post-nepre full next">
+          
+            <a href="/2020/05/20/Hexo运营前记/" rel="next">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/dailynotes/weiwen.png" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/dailynotes/weiwen.png">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                Hexo运营前记</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
       
-  <!-- 首页默认取最最新文章集 -->
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
+<div id="vcomments"></div>
+<script>
+  window.onload = function(){
+      var valine = new Valine();
+      valine.init({
+        el: '#vcomments',
+        appId: "4NBvruApUCpLtmlsyQLevDfx-gzGzoHsz",
+        appKey: "eTSHbT3jvLQPcVYMC7QFXQFd",
+        path: window.location.pathname,
+        placeholder: "你是我一生只会遇见一次的惊喜 ..."
+      })
+  }
+</script>
 
-  <div class="post-thumb">
-    <a href="/2020/05/20/Hexo搭建个人博客网站（原理篇）/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_hexo/hexo.png">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2020-5-20 23:05</div>
-      <a href="/2020/05/20/Hexo搭建个人博客网站（原理篇）/" class="post-title">
-        <h3>Hexo搭建个人博客网站（原理篇）</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2020/05/20/Hexo搭建个人博客网站（原理篇）/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="www.yulinblog.com" class="profile gravatar"><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/avatar.jpg" itemprop="image" alt="YUYU" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="www.yulinblog.com" itemprop="url" rel="author">YUYU</a>
+            </h3>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2020/05/20/Hexo运营前记/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/dailynotes/weiwen.png">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2020-5-20 19:05</div>
-      <a href="/2020/05/20/Hexo运营前记/" class="post-title">
-        <h3>Hexo运营前记</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/随想/">随想</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p>踏上一条漫长的路</p>
-        <div class="post-bottom">
-          <a href="/2020/05/20/Hexo运营前记/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2020/05/19/画廊/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/gallery/wallhaven-mdexoy.jpg">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2020-5-19 22:05</div>
-      <a href="/2020/05/19/画廊/" class="post-title">
-        <h3>画廊——日常</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/光影艺术/">光影艺术<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2020/05/19/画廊/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2020/05/19/SSM-Springboot商铺系统/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/project/project4.jpg">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2020-5-19 21:05</div>
-      <a href="/2020/05/19/SSM-Springboot商铺系统/" class="post-title">
-        <h3>SSM+Springboot商铺系统(一)</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/项目/">项目</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2020/05/19/SSM-Springboot商铺系统/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2020/05/19/Linux核心技术与应用笔记（一）/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/linux_note/Linuxpaper.jpg">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2020-5-19 19:05</div>
-      <a href="/2020/05/19/Linux核心技术与应用笔记（一）/" class="post-title">
-        <h3>Linux核心技术与应用笔记（一）</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/Linux/">Linux<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/笔记/">笔记</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p>Linux基础</p>
-        <div class="post-bottom">
-          <a href="/2020/05/19/Linux核心技术与应用笔记（一）/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2020/05/19/Hexo-Theme-Sakura/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/sakura/sakura01.jpg">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2020-5-19 10:05</div>
-      <a href="/2020/05/19/Hexo-Theme-Sakura/" class="post-title">
-        <h3>Sakura主题配置总结</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/Hexo/">Hexo<em>·</em></a>
-          
-            <a href="/tags/悦读/">悦读<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/技术/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p>hexo-sakura主题使用教程</p>
-        <div class="post-bottom">
-          <a href="/2020/05/19/Hexo-Theme-Sakura/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2020/05/17/Hello-World/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/whatis4.png">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2020-5-17 21:05</div>
-      <a href="/2020/05/17/Hello-World/" class="post-title">
-        <h3>Hello World</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/转载/">转载</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p>仅供测试</p>
-        <div class="post-bottom">
-          <a href="/2020/05/17/Hello-World/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-
-
-    </main>
-      <!-- 首页默认取最最新文章集 -->
-    <!--  -->
-  </div>
-  
+        <hr>
+        <p><i class="iconfont icon-write"></i>一个好奇的人</p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
 </div>
+
+
 
     </div>    
     <div class="ins-search">
