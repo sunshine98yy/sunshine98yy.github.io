@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2020-05-20T15:39:20.228Z</updated>
+  <updated>2020-05-21T12:40:22.105Z</updated>
   <id>/</id>
   
   <author>
@@ -17,11 +17,60 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>git安装配置</title>
+    <link href="/2020/05/21/git%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/"/>
+    <id>/2020/05/21/git安装配置/</id>
+    <published>2020-05-21T11:44:51.000Z</published>
+    <updated>2020-05-21T12:40:22.105Z</updated>
+    
+    <summary type="html">
+    
+      介绍git的安装流程
+    
+    </summary>
+    
+      <category term="技术" scheme="/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="git" scheme="/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>node.js安装配置</title>
+    <link href="/2020/05/21/Nodejs%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/"/>
+    <id>/2020/05/21/Nodejs安装配置/</id>
+    <published>2020-05-21T06:53:02.000Z</published>
+    <updated>2020-05-21T09:15:38.386Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;Node.js 是一个基于 Chrome V8 引擎的 JavaScript
+        
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="HEXO" scheme="/tags/HEXO/"/>
+    
+      <category term="nodejs" scheme="/tags/nodejs/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Hexo搭建个人博客网站（原理篇）</title>
     <link href="/2020/05/20/Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%EF%BC%88%E5%8E%9F%E7%90%86%E7%AF%87%EF%BC%89/"/>
     <id>/2020/05/20/Hexo搭建个人博客网站（原理篇）/</id>
     <published>2020-05-20T15:14:57.000Z</published>
-    <updated>2020-05-20T15:39:20.228Z</updated>
+    <updated>2020-05-20T15:46:44.706Z</updated>
     
     <summary type="html">
     
@@ -65,7 +114,7 @@
     <link href="/2020/05/19/%E7%94%BB%E5%BB%8A/"/>
     <id>/2020/05/19/画廊/</id>
     <published>2020-05-19T14:06:43.000Z</published>
-    <updated>2020-05-20T08:00:03.224Z</updated>
+    <updated>2020-05-21T06:14:52.200Z</updated>
     
     <summary type="html">
     
@@ -134,7 +183,7 @@
     <link href="/2020/05/19/Hexo-Theme-Sakura/"/>
     <id>/2020/05/19/Hexo-Theme-Sakura/</id>
     <published>2020-05-19T02:45:01.000Z</published>
-    <updated>2020-05-19T09:06:01.767Z</updated>
+    <updated>2020-05-20T15:44:32.309Z</updated>
     
     <summary type="html">
     
@@ -145,27 +194,9 @@
       <category term="技术" scheme="/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="Hexo" scheme="/tags/Hexo/"/>
+      <category term="HEXO" scheme="/tags/HEXO/"/>
     
-      <category term="悦读" scheme="/tags/%E6%82%A6%E8%AF%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="/2020/05/17/Hello-World/"/>
-    <id>/2020/05/17/Hello-World/</id>
-    <published>2020-05-17T13:54:11.000Z</published>
-    <updated>2020-05-20T11:18:23.347Z</updated>
-    
-    <summary type="html">
-    
-      仅供测试
-    
-    </summary>
-    
-      <category term="转载" scheme="/categories/%E8%BD%AC%E8%BD%BD/"/>
-    
+      <category term="sakura" scheme="/tags/sakura/"/>
     
   </entry>
   

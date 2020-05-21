@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">Hello World | 风中的鱼</title>
+  <title itemprop="name">node.js安装配置 | 风中的鱼</title>
   
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -331,30 +331,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
 <div class="pattern-center-blank"></div>
 
-  <div class="pattern-center single-center">
-    <!-- 有配图默认渲染第一张 -->
-    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/whatis4.png);" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/whatis4.png">
-    </div>
-    <header class="pattern-header single-header">
-      <h1 class="entry-title">
-      Hello World</h1>
-      <p class="entry-census">
-        <span>
-          <a href="">
-            <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/avatar.jpg">
-          </a>
-        </span>
-        <span>
-          <a href="">YU YU</a>
-        </span>
-        <span class="bull">
-        ·</span>
-        2020-5-17<span class="bull">
-        ·</span>
-      <span id="busuanzi_value_page_pv"></span>次阅读</p>
-    </header>
-  </div>
-
 <div id="content" class="site-content">
   <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
@@ -362,9 +338,35 @@
         <div class="toc"></div>
         <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
         
-        <div class="entry-content">
-          <p>仅供测试</p>
+          <header class="entry-header">
+            <h1 class="entry-title">node.js安装配置</h1>
+            <p class="entry-census">YUYU&nbsp;·&nbsp;2020-5-21&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p></p>
 
+            <hr>
+          </header>
+        
+        <div class="entry-content">
+          <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
+<p>Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行时</p>
+</blockquote>
+<p>Node是一个环境，只要装载了Node就能产生这个环境，它可以解析JavaScript代码，而且可以完全脱离浏览器来解析运行。</p>
+<p>Node.js 是一个基于 Chrome V8 引擎的，Node基于ChromeV8引擎，就拥有了解析JavaScript代码的能力，就可以做到脱离浏览器来解析运行JavaScript代码。</p>
+<p>Node能帮我们搭建Web服务器，例如我们想请求不同的接口，Node就像一个中间商一样，帮我们处理不同的接口，响应不同的操作与数据，例如我想请求一个首页，那么node就能在其中帮我们找到首页，然后反馈给我们，我们就能看到一个首页的页面了</p>
+<p>在Node中是没有DOM和BOM的，因为上面我们刚刚说了，它是脱离浏览器运行解析的，那么DOM和BOM是浏览器里的东西，所以就很好理解了它为什么没有DOM和BOM，自然也就不做操作DOM和BOM了。</p>
+<p>在Node这个基于JavaScript的执行环境中，提供了一系列服务器级别的操作API，我们可以通过操作各种各样的API进行响应接口的操作，服务器的管理操作</p>
+<p><strong>总结：Node不过是操作服务器端的一个工具而已</strong></p>
+<h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><p>1.<a href="https://nodejs.org/en/" target="_blank" rel="noopener">node官网</a>下载适合系统的nodejs版本,安装目录看个人喜好</p>
+<p>2.安装完毕之后，可以打开cmd测试一下，因为安装过程（勾选Add to PATH）已经帮我们自动配置好了path环境变量，所以我们可以直接在cmd命令行输入nodejs的命令</p>
+<pre><code>node -v //查看nodejs是否安装成功
+npm -v //查看npm版本号（npm 是Node 的模块管理器，功能极其强大。 它是Node 获得成功的重要原因之一。 正因为有了npm，我们只要一行命令，就能安装别人写好的模块）
+</code></pre><p>3.nodejs目录 创建两个文件夹 node_cache和node_global</p>
+<p>插入图1</p>
+<p>在cmd终端 输入 这两行代码  </p>
+<pre><code>npm config set prefix &quot;D:\nodejs\node_global&quot;
+npm config set cache &quot;D:\nodejs\node_cache&quot;
+</code></pre><p>4.设置环境变量 </p>
+<p>【此电脑】-【属性】-【高级系统设置】-【高级】-【环境变量】，打开环境变量设置窗口 </p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
         </div>
         <!-- .entry-content -->
         <div class="single-reward">
@@ -393,22 +395,39 @@
       <section class="post-squares nextprev">
         
           
-            <div class="post-nepre full previous">
+            <div class="post-nepre half previous">
           
-            <a href="/2020/05/19/Hexo-Theme-Sakura/" rel="prev">
+            <a href="/2020/05/21/git安装配置/" rel="prev">
               <div class="background">
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/sakura/sakura01.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/sakura/sakura01.jpg">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200521100712.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200521100712.jpg">
               </div>
               <span class="label">
               Previous Post</span>
               <div class="info">
                 <h3>
-                Sakura主题配置总结</h3>
+                git安装配置</h3>
                 <hr>
               </div>
             </a>
           </div>
         
+        
+          
+            <div class="post-nepre half next">
+          
+            <a href="/2020/05/20/Hexo搭建个人博客网站（原理篇）/" rel="next">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_hexo/hexo.jpeg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_hexo/hexo.jpeg">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                Hexo搭建个人博客网站（原理篇）</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
         
       </section>
       
@@ -428,11 +447,11 @@
 
       <section class="author-profile">
         <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
-          <a href="" class="profile gravatar"><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/avatar.jpg" itemprop="image" alt="YU YU" height="70" width="70"></a>
+          <a href="www.yulinblog.com" class="profile gravatar"><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/avatar.jpg" itemprop="image" alt="YUYU" height="70" width="70"></a>
           <div class="meta">
             <span class="title">Author</span>
             <h3 itemprop="name">
-            <a href="" itemprop="url" rel="author">YU YU</a>
+            <a href="www.yulinblog.com" itemprop="url" rel="author">YUYU</a>
             </h3>
           </div>
         </div>

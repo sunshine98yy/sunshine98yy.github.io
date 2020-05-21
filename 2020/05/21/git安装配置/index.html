@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">Tag: 悦读 | 风中的鱼</title>
+  <title itemprop="name">git安装配置 | 风中的鱼</title>
   
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -327,64 +327,151 @@
   </div>
 </header>
 
-      
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
 <div class="pattern-center-blank"></div>
-<div class="pattern-center ">
-  <div class="pattern-attachment-img">
-    <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/banner/reading.jpg" class="lazyload" onerror="imgError(this,3)" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200521100712.jpg);" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200521100712.jpg">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      git安装配置</h1>
+      <p class="entry-census">
+        <span>
+          <a href="www.yulinblog.com">
+            <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/avatar.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="www.yulinblog.com">YUYU</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2020-5-21<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
   </div>
-  <header class="pattern-header ">
-    <h1 class="cat-title">悦读</h1>
-  </header>
-</div>
+
 <div id="content" class="site-content">
   <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
-      
-  <!-- 首页默认取最最新文章集 -->
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/05/19/Hexo-Theme-Sakura/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+        <div class="entry-content">
+          <h2 id="Git简介"><a href="#Git简介" class="headerlink" title="Git简介"></a>Git简介</h2><p>Git是一个开源的分布式版本控制系统，可以有效、高速的处理从很小到非常大的项目版本管理。 Git 是Linus Torvalds为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。</p>
+<p>尽管最初 Git 的开发是为了辅助 Linux 内核开发的过程，但是现在很多其他自由软件项目中也使用了 Git。</p>
+<h2 id="Windows-平台上安装"><a href="#Windows-平台上安装" class="headerlink" title="Windows 平台上安装"></a>Windows 平台上安装</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>打开<a href="https://git-scm.com/" target="_blank" rel="noopener">Git 官网</a> ，点击自己需要的版本，按照提示根据自己电脑系统版本下载相应Git</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a><strong>安装</strong></h3><p>打开下载好的Git安装包后，一直点击Next，保持默认选项，直到出现Install，点击Install，安装完成后点击Finish</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a><strong>使用</strong></h3><p>安装好后，在电脑桌面或者打开某一本地磁盘，在空白位置右击鼠标会发现多了两个选项<code>Git GUI Here</code>和<code>Git Bash Here</code>，如图所示，点击<code>Git Bash Here</code>即可从当前位置打开并使用使用Git。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200521131151.jpg" style="zoom: 50%;"></p>
+<p>自己遇到的问题：git bash/gui here找不到应用程序</p>
+<p>由于移动过git的安装目录，因此选择git bash here 时windows无法访问指定设备路径或文件报错<br>解决办法：<a href="https://blog.csdn.net/weixin_39643135/article/details/79440222" target="_blank" rel="noopener">https://blog.csdn.net/weixin_39643135/article/details/79440222</a></p>
+<h2 id="配置Git环境"><a href="#配置Git环境" class="headerlink" title="配置Git环境"></a><strong>配置Git环境</strong></h2><p>1.打开<a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>官网，注册一个账号，注册好后，双击桌面上的Git Bash快捷图标，进行环境配置。</p>
+<p>2.配置用户名<br><code>git config --global user.name &quot;username&quot;</code>  ##username是自己的账户名</p>
+<p>3.配置邮箱<br><code>git config --global user.email &quot;username@email.com&quot;</code> <a href="mailto:##username@email.com">##username@email.com</a>注册账号时用的邮箱</p>
+<p>4.命令查看之前的配置是否成功</p>
+<p>键入<code>git config --global --list</code></p>
+<p>5.生成ssh秘钥</p>
+<p>键入<code>ssh-keygen -t rsa</code>生成ssh，连敲三次回车键，结束后去系统盘目录下（一般在 C:\用户\当前用户\ .ssh）查看是否生成 <code>.ssh</code> 文件夹，此文件夹中包含以下两个文件：<code>id_rsa</code>、<code>id_rsa.pub</code></p>
+<pre><code>ssh-keygen -t rsa -C &quot;你的邮箱&quot;  #邮箱是github的注册邮箱
+Generating public/private rsa key pair.
+Enter file in which to save the key (/Users/your_user_directory/.ssh/id_rsa):&lt;回车就好&gt;
+</code></pre><p>6.在 GitHub 账户中添加你的公钥</p>
+<p>运行下面命令，将公钥的内容复制到剪切板<code>clip &lt; ~/.ssh/id_rsa.pub</code></p>
+<p>打开【github】—【settings】—【SSH and GPG keys】—【new ssh key】—【把内容粘到key区域】—【add SSH key】</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200521131321.png" alt></p>
+<p>7.测试配置是否成功</p>
+<p>在Git Bash命令框中键入<code>ssh -T git@github.com</code>命令，回车后若出现下面情况，则说明环境配置成功。(连网状态下)</p>
+<pre><code>$ ssh -T git@github.com
+Hi sunshine98yy! You&#39;ve successfully authenticated, but GitHub does not provide shell access.
+</code></pre><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="https://zazdream.com/2020/02/17/Git%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/" target="_blank" rel="noopener">https://zazdream.com/2020/02/17/Git%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/</a></p>
+<p><a href="https://www.runoob.com/git/git-install-setup.html" target="_blank" rel="noopener">https://www.runoob.com/git/git-install-setup.html</a></p>
+
         </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/sakura/sakura01.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/05/19/Hexo-Theme-Sakura/">
-    Sakura主题配置总结</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-5-19</div>
-    <p>
-    hexo-sakura主题使用教程</p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/05/19/Hexo-Theme-Sakura/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/donate/alipay.jpg"></li>
+                <li class="wechat-code"><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/donate/wechatqr.jpg"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+        
+          
+            <div class="post-nepre full next">
+          
+            <a href="/2020/05/21/Nodejs安装配置/" rel="next">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                node.js安装配置</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
+      
+<div id="vcomments"></div>
+<script>
+  window.onload = function(){
+      var valine = new Valine();
+      valine.init({
+        el: '#vcomments',
+        appId: "4NBvruApUCpLtmlsyQLevDfx-gzGzoHsz",
+        appKey: "eTSHbT3jvLQPcVYMC7QFXQFd",
+        path: window.location.pathname,
+        placeholder: "你是我一生只会遇见一次的惊喜 ..."
+      })
+  }
+</script>
 
-
-      <div class="clearer">
-      </div>
-    </main>
-    <!--  -->
-    
-  </div>
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="www.yulinblog.com" class="profile gravatar"><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/avatar.jpg" itemprop="image" alt="YUYU" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="www.yulinblog.com" itemprop="url" rel="author">YUYU</a>
+            </h3>
+          </div>
+        </div>
+        <hr>
+        <p><i class="iconfont icon-write"></i>一个好奇的人</p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
 </div>
+
+
+
     </div>    
     <div class="ins-search">
     <div class="ins-search-mask"></div>
