@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">git安装配置 | 风中的鱼</title>
+  <title itemprop="name">git基础专题（一） | 风中的鱼</title>
   
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -337,7 +337,7 @@
     </div>
     <header class="pattern-header single-header">
       <h1 class="entry-title">
-      git安装配置</h1>
+      git基础专题（一）</h1>
       <p class="entry-census">
         <span>
           <a href="www.yulinblog.com">
@@ -363,19 +363,26 @@
         <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
         
         <div class="entry-content">
-          <h2 id="Git简介"><a href="#Git简介" class="headerlink" title="Git简介"></a>Git简介</h2><p>Git是一个开源的分布式版本控制系统，可以有效、高速的处理从很小到非常大的项目版本管理。 Git 是Linus Torvalds为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。</p>
+          <h2 id="Git简介"><a href="#Git简介" class="headerlink" title="Git简介"></a>Git简介</h2><p>Git是一个<span style="color:red">开源的分布式版本控制系统</span>，可以有效、高速的处理从很小到非常大的项目版本管理。 Git 是Linus Torvalds为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。</p>
 <p>尽管最初 Git 的开发是为了辅助 Linux 内核开发的过程，但是现在很多其他自由软件项目中也使用了 Git。</p>
-<h2 id="Windows-平台上安装"><a href="#Windows-平台上安装" class="headerlink" title="Windows 平台上安装"></a>Windows 平台上安装</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>打开<a href="https://git-scm.com/" target="_blank" rel="noopener">Git 官网</a> ，点击自己需要的版本，按照提示根据自己电脑系统版本下载相应Git</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200521223939.jpg" alt></p>
+<p>Workspace：工作区<br>Index / Stage：暂存区<br>Repository：仓库区（或本地仓库）<br>Remote：远程仓库</p>
+<h3 id="SVN与Git的最主要的区别"><a href="#SVN与Git的最主要的区别" class="headerlink" title="SVN与Git的最主要的区别"></a>SVN与Git的最主要的区别</h3><p>SVN是<strong>集中式版本控制系统</strong>，版本库是集中放在中央服务器的，而干活的时候，用的都是自己的电脑，所以首先要从中央服务器哪里得到最新的版本，然后干活，干完后，需要把自己做完的活推送到中央服务器。集中式版本控制系统是必须联网才能工作，如果在局域网还可以，带宽够大，速度够快，如果在互联网下，如果网速慢的话，就纳闷了。<br>Git是<strong>分布式版本控制系统</strong>，那么它就没有中央服务器的，每个人的电脑就是一个完整的版本库，这样，工作的时候就不需要联网了，因为版本都是在自己的电脑上。既然每个人的电脑都有一个完整的版本库，那多个人如何协作呢？比如说自己在电脑上改了文件A，其他人也在电脑上改了文件A，这时，你们两之间只需把各自的修改推送给对方，就可以互相看到对方的修改了。</p>
+<h2 id="Windows-平台上安装"><a href="#Windows-平台上安装" class="headerlink" title="Windows 平台上安装"></a>Windows 平台上安装</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>打开<a href="https://git-scm.com/" target="_blank" rel="noopener">Git 官网</a> ，点击自己需要的版本，按照提示根据自己电脑系统版本下载相应Git,Mysysgit t是 windows版的Git。</p>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a><strong>安装</strong></h3><p>打开下载好的Git安装包后，一直点击Next，保持默认选项，直到出现Install，点击Install，安装完成后点击Finish</p>
 <h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a><strong>使用</strong></h3><p>安装好后，在电脑桌面或者打开某一本地磁盘，在空白位置右击鼠标会发现多了两个选项<code>Git GUI Here</code>和<code>Git Bash Here</code>，如图所示，点击<code>Git Bash Here</code>即可从当前位置打开并使用使用Git。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200521131151.jpg" style="zoom: 50%;"></p>
 <p>自己遇到的问题：git bash/gui here找不到应用程序</p>
 <p>由于移动过git的安装目录，因此选择git bash here 时windows无法访问指定设备路径或文件报错<br>解决办法：<a href="https://blog.csdn.net/weixin_39643135/article/details/79440222" target="_blank" rel="noopener">https://blog.csdn.net/weixin_39643135/article/details/79440222</a></p>
 <h2 id="配置Git环境"><a href="#配置Git环境" class="headerlink" title="配置Git环境"></a><strong>配置Git环境</strong></h2><p>1.打开<a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>官网，注册一个账号，注册好后，双击桌面上的Git Bash快捷图标，进行环境配置。</p>
-<p>2.配置用户名<br><code>git config --global user.name &quot;username&quot;</code>  ##username是自己的账户名</p>
+<p>2.配置用户名<br><code>git config --global user.name &quot;username&quot;</code>  ##username是自己的账户名，global表示所有仓库都会使用这种配置，可针对某个仓库进行配置</p>
 <p>3.配置邮箱<br><code>git config --global user.email &quot;username@email.com&quot;</code> <a href="mailto:##username@email.com">##username@email.com</a>注册账号时用的邮箱</p>
+<blockquote>
+<p>因为Git是分布式版本控制系统，所以需要填写用户名和邮箱作为一个标识。<br>注意：git config –global 参数，有了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然你也可以对某个仓库指定的不同的用户名和邮箱。</p>
+</blockquote>
 <p>4.命令查看之前的配置是否成功</p>
 <p>键入<code>git config --global --list</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200521221210.png" style="zoom: 50%;"></p>
 <p>5.生成ssh秘钥</p>
 <p>键入<code>ssh-keygen -t rsa</code>生成ssh，连敲三次回车键，结束后去系统盘目录下（一般在 C:\用户\当前用户\ .ssh）查看是否生成 <code>.ssh</code> 文件夹，此文件夹中包含以下两个文件：<code>id_rsa</code>、<code>id_rsa.pub</code></p>
 <pre><code>ssh-keygen -t rsa -C &quot;你的邮箱&quot;  #邮箱是github的注册邮箱
@@ -389,8 +396,12 @@ Enter file in which to save the key (/Users/your_user_directory/.ssh/id_rsa):&lt
 <p>在Git Bash命令框中键入<code>ssh -T git@github.com</code>命令，回车后若出现下面情况，则说明环境配置成功。(连网状态下)</p>
 <pre><code>$ ssh -T git@github.com
 Hi sunshine98yy! You&#39;ve successfully authenticated, but GitHub does not provide shell access.
-</code></pre><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="https://zazdream.com/2020/02/17/Git%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/" target="_blank" rel="noopener">https://zazdream.com/2020/02/17/Git%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/</a></p>
+</code></pre><h2 id="git的图形化界面操作软件"><a href="#git的图形化界面操作软件" class="headerlink" title="git的图形化界面操作软件"></a>git的图形化界面操作软件</h2><p>选择<a href="https://www.sourcetreeapp.com/" target="_blank" rel="noopener">sourcetree</a>作为git的图形化操作软件，可以根据自己的需要选择不同的图形化操作软件。</p>
+<p>安装过程很简单。本人安装完后碰到需要注册的问题，由于是外国网站，访问可能会有问题，提供下面绕过注册的方法。</p>
+<p><a href="https://www.cnblogs.com/liuxin-673855200/p/11151835.html" target="_blank" rel="noopener">SOURCETREE 3.1.3 版本跳过BITBUCKET注册方法（亲测好用）</a>)</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="https://zazdream.com/2020/02/17/Git%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/" target="_blank" rel="noopener">https://zazdream.com/2020/02/17/Git%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/</a></p>
 <p><a href="https://www.runoob.com/git/git-install-setup.html" target="_blank" rel="noopener">https://www.runoob.com/git/git-install-setup.html</a></p>
+<p><a href="https://www.zhihu.com/question/38008771/answer/517332296" target="_blank" rel="noopener">自学Git，有哪些书籍或者好的学习资源？</a></p>
 
         </div>
         <!-- .entry-content -->
@@ -419,9 +430,26 @@ Hi sunshine98yy! You&#39;ve successfully authenticated, but GitHub does not prov
       <div class="toc" style="background: none;"></div>
       <section class="post-squares nextprev">
         
+          
+            <div class="post-nepre half previous">
+          
+            <a href="/2020/05/21/SOURCETREE-3-1-3-版本跳过BITBUCKET注册方法（亲测好用）/" rel="prev">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="//cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200521100712.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="//cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200521100712.jpg">
+              </div>
+              <span class="label">
+              Previous Post</span>
+              <div class="info">
+                <h3>
+                SOURCETREE 3.1.3 版本跳过BITBUCKET注册方法（亲测好用）</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
         
           
-            <div class="post-nepre full next">
+            <div class="post-nepre half next">
           
             <a href="/2020/05/21/Hexo搭建个人博客网站（步骤篇）/" rel="next">
               <div class="background">

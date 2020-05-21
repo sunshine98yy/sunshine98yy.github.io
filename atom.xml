@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2020-05-21T12:40:22.105Z</updated>
+  <updated>2020-05-21T14:34:00.962Z</updated>
   <id>/</id>
   
   <author>
@@ -17,19 +17,47 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>git安装配置</title>
-    <link href="/2020/05/21/git%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/"/>
-    <id>/2020/05/21/git安装配置/</id>
-    <published>2020-05-21T11:44:51.000Z</published>
-    <updated>2020-05-21T12:40:22.105Z</updated>
+    <title>SOURCETREE 3.1.3 版本跳过BITBUCKET注册方法（亲测好用）</title>
+    <link href="/2020/05/21/SOURCETREE-3-1-3-%E7%89%88%E6%9C%AC%E8%B7%B3%E8%BF%87BITBUCKET%E6%B3%A8%E5%86%8C%E6%96%B9%E6%B3%95%EF%BC%88%E4%BA%B2%E6%B5%8B%E5%A5%BD%E7%94%A8%EF%BC%89/"/>
+    <id>/2020/05/21/SOURCETREE-3-1-3-版本跳过BITBUCKET注册方法（亲测好用）/</id>
+    <published>2020-05-21T14:25:21.000Z</published>
+    <updated>2020-05-21T14:34:00.962Z</updated>
     
     <summary type="html">
     
-      介绍git的安装流程
+      
+      
+        
+        
+          &lt;p&gt;1.首先下载并安装好git程序。&lt;/p&gt;
+&lt;p&gt;2.接着下载并执行SourceTreeSetup-3.1.3.exe，会进入登录或注册bitbucket的界面，我只是想用软件，并不想去注册账号。怎么办？请往下看。&lt;/p&gt;
+&lt;p&gt;3.打开
+        
+      
     
     </summary>
     
-      <category term="技术" scheme="/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="转载" scheme="/categories/%E8%BD%AC%E8%BD%BD/"/>
+    
+    
+      <category term="git" scheme="/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git基础专题（一）</title>
+    <link href="/2020/05/21/git%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/"/>
+    <id>/2020/05/21/git安装配置/</id>
+    <published>2020-05-21T11:44:51.000Z</published>
+    <updated>2020-05-21T14:57:21.051Z</updated>
+    
+    <summary type="html">
+    
+      git的基本概念和安装配置
+    
+    </summary>
+    
+      <category term="笔记" scheme="/categories/%E7%AC%94%E8%AE%B0/"/>
     
     
       <category term="git" scheme="/tags/git/"/>
@@ -40,8 +68,8 @@
     <title>Hexo搭建个人网站(步骤篇)</title>
     <link href="/2020/05/21/Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%EF%BC%88%E6%AD%A5%E9%AA%A4%E7%AF%87%EF%BC%89/"/>
     <id>/2020/05/21/Hexo搭建个人博客网站（步骤篇）/</id>
-    <published>2020-05-21T01:20:00.000Z</published>
-    <updated>2020-05-21T12:36:15.255Z</updated>
+    <published>2020-05-21T11:20:00.000Z</published>
+    <updated>2020-05-21T13:58:07.576Z</updated>
     
     <summary type="html">
     
@@ -49,6 +77,10 @@
     
     </summary>
     
+      <category term="技术" scheme="/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="HEXO" scheme="/tags/HEXO/"/>
     
   </entry>
   
@@ -57,7 +89,7 @@
     <link href="/2020/05/20/Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%EF%BC%88%E5%8E%9F%E7%90%86%E7%AF%87%EF%BC%89/"/>
     <id>/2020/05/20/Hexo搭建个人博客网站（原理篇）/</id>
     <published>2020-05-20T15:14:57.000Z</published>
-    <updated>2020-05-20T15:46:44.706Z</updated>
+    <updated>2020-05-21T13:33:12.332Z</updated>
     
     <summary type="html">
     
