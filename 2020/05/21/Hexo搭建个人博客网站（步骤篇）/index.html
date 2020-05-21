@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">node.js安装配置 | 风中的鱼</title>
+  <title itemprop="name">Hexo搭建个人网站(步骤篇) | 风中的鱼</title>
   
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -331,6 +331,30 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
 <div class="pattern-center-blank"></div>
 
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_hexo/hexo.jpeg);" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_hexo/hexo.jpeg">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      Hexo搭建个人网站(步骤篇)</h1>
+      <p class="entry-census">
+        <span>
+          <a href="www.yulinblog.com">
+            <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/avatar.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="www.yulinblog.com">YUYU</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2020-5-21<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
+  </div>
+
 <div id="content" class="site-content">
   <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
@@ -338,35 +362,53 @@
         <div class="toc"></div>
         <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
         
-          <header class="entry-header">
-            <h1 class="entry-title">node.js安装配置</h1>
-            <p class="entry-census">YUYU&nbsp;·&nbsp;2020-5-21&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p></p>
-
-            <hr>
-          </header>
-        
         <div class="entry-content">
-          <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
-<p>Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行时</p>
-</blockquote>
-<p>Node是一个环境，只要装载了Node就能产生这个环境，它可以解析JavaScript代码，而且可以完全脱离浏览器来解析运行。</p>
-<p>Node.js 是一个基于 Chrome V8 引擎的，Node基于ChromeV8引擎，就拥有了解析JavaScript代码的能力，就可以做到脱离浏览器来解析运行JavaScript代码。</p>
-<p>Node能帮我们搭建Web服务器，例如我们想请求不同的接口，Node就像一个中间商一样，帮我们处理不同的接口，响应不同的操作与数据，例如我想请求一个首页，那么node就能在其中帮我们找到首页，然后反馈给我们，我们就能看到一个首页的页面了</p>
-<p>在Node中是没有DOM和BOM的，因为上面我们刚刚说了，它是脱离浏览器运行解析的，那么DOM和BOM是浏览器里的东西，所以就很好理解了它为什么没有DOM和BOM，自然也就不做操作DOM和BOM了。</p>
-<p>在Node这个基于JavaScript的执行环境中，提供了一系列服务器级别的操作API，我们可以通过操作各种各样的API进行响应接口的操作，服务器的管理操作</p>
-<p><strong>总结：Node不过是操作服务器端的一个工具而已</strong></p>
-<h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><p>1.<a href="https://nodejs.org/en/" target="_blank" rel="noopener">node官网</a>下载适合系统的nodejs版本,安装目录看个人喜好</p>
-<p>2.安装完毕之后，可以打开cmd测试一下，因为安装过程（勾选Add to PATH）已经帮我们自动配置好了path环境变量，所以我们可以直接在cmd命令行输入nodejs的命令</p>
-<pre><code>node -v //查看nodejs是否安装成功
-npm -v //查看npm版本号（npm 是Node 的模块管理器，功能极其强大。 它是Node 获得成功的重要原因之一。 正因为有了npm，我们只要一行命令，就能安装别人写好的模块）
-</code></pre><p>3.nodejs目录 创建两个文件夹 node_cache和node_global</p>
-<p>插入图1</p>
-<p>在cmd终端 输入 这两行代码  </p>
-<pre><code>npm config set prefix &quot;D:\nodejs\node_global&quot;
-npm config set cache &quot;D:\nodejs\node_cache&quot;
-</code></pre><p>4.设置环境变量 </p>
-<p>【此电脑】-【属性】-【高级系统设置】-【高级】-【环境变量】，打开环境变量设置窗口 </p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
+          <h2 id="环境部署"><a href="#环境部署" class="headerlink" title="环境部署"></a>环境部署</h2><h3 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h3><p><a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">Node.js官网</a> 点击自己需要的版本，一路next默认安装即可。教程可参见之前的博客</p>
+<h3 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h3><p><a href="https://git-scm.com/" target="_blank" rel="noopener">Git 官网</a> 点击自己需要的版本默认安装即可。教程可参见博客,写的很详细了<a href="https://blog.csdn.net/alnorthword/article/details/88420874?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase&amp;amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase/" target="_blank" rel="noopener">nodejs安装与环境变量配置</a></p>
+<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><p>Hexo就是我们的个人博客网站的框架， 这里需要自己在某个磁盘里创建一个文件夹，Hexo框架和以后你自己发布的网页都在这个文件夹中，我在D盘创建一个YY_Blog的文件夹。</p>
+<p>1.使用npm下载hexo：在命令行上（任意目录）使用<code>npm install -g hexo</code> 全局安装hexo；</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/Photo/hexo0202.png" style="zoom:50%;"></p>
+<p>2.安装完成后，在你喜爱的文件夹下（如D:\YY_Blog），执行以下指令<code>hexo init</code>(在D:\YY_Blog内点击鼠标右键，选择Git bash)，Hexo 即会自动在目标文件夹建立网站所需要的所有文件；（过程有点慢，耐心等待）</p>
+<p>3.安装依赖包：<code>npm install</code><br>至此，hexo博客环境已经搭建完成，执行以下命令(在H:\hexo)，然后到浏览器输入localhost:4000即可查看效果：</p>
+<pre><code>$ hexo g #等价于hexo generate 生成静态网页
+$ hexo s #等价于hexo server 启动预览服务器，开启-d选项时可以预览草稿
+</code></pre><p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_hexo/20200521195654.png" style="zoom:50%;"></p>
+<h3 id="将hexo部署到github上"><a href="#将hexo部署到github上" class="headerlink" title="将hexo部署到github上"></a>将hexo部署到github上</h3><p>上文已经在本地部署好了hexo博客系统，但<strong>仅仅本地能够访问</strong>。如果想让别人访问到你的博客，你可以租一台云主机，然后把hexo系统部署到云主机上，好处是带宽、容量可以得到保证，缺点是需要花费一笔租金。还有另一种免费的方法，就是把hexo部署到githu pages或者gitcafe pages上，本文以github为例。</p>
+<p><span>关于git的安装配置以及github添加公钥的流程可以参见我的博客</span></p>
+<p>[[git的安装配置]]: d</p>
+<h4 id="1-创建repository"><a href="#1-创建repository" class="headerlink" title="1.创建repository"></a>1.创建repository</h4><p>【your repositories】—【new】</p>
+<p>如下图所示，这里要注意，repository名称一定是<span style="color:red">github的用户名+.github.io</span>,否则github pages无法访问。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/Photo/hexo0204.png" style="zoom:67%;"></p>
+<h4 id="2-在github中添加公钥"><a href="#2-在github中添加公钥" class="headerlink" title="2.在github中添加公钥"></a>2.在github中添加公钥</h4><p>打开git bash输入以下命令</p>
+<pre><code> $ git config --global user.name &quot;你的用户名&quot;  
+ $ git config --global user.email  &quot;你的邮箱&quot;
+</code></pre><p>每次使用git命令从github上同步代码时，需要SSH连接认证。这时就需要你在本地先生成SSH KEY(命令如下)，然后把其拷贝到github上。点击Git Bash Here 输入以下命令：</p>
+<pre><code>$ ssh-keygen -t rsa -C &quot;你的邮箱&quot;  #邮箱是github的注册邮箱
+Generating public/private rsa key pair.
+Enter file in which to save the key (/Users/your_user_directory/.ssh/id_rsa):&lt;回车就好&gt;
+</code></pre><p>运行下面命令，将公钥的内容复制到剪切板</p>
+<p><code>clip &lt; ~/.ssh/id_rsa.pub</code></p>
+<p>打开github—&gt;settings—&gt;SSH and GPG keys—&gt;new ssh key—&gt;把内容粘到key区域—&gt;add SSH key</p>
+<p>如下图</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/Photo/hexo0205.png" alt></p>
+<h4 id="3-部署hexo"><a href="#3-部署hexo" class="headerlink" title="3.部署hexo"></a>3.部署hexo</h4><p>1.编辑_config.yml(在D:\YY_Blog下)，repository是在github中申请的地址。如下：</p>
+<p>注意：<span style="color:red">所有的冒号后面空一格</span></p>
+<pre><code>deploy:
+type: git
+repository: https://github.com/sunshine98yy/sunshine98yy.github.io.git 
+branch: master
+</code></pre><p>2.执行下面命令 生成、部署hexo博客到github上,这样，你就可以在<a href="https://sunshine98yy.github.io/" target="_blank" rel="noopener">sunshine98yy.github.io</a>来访问你的博客了。(后面会有专门一栏讲如何绑定自己专属域名)</p>
+<pre><code>hexo g
+hexo d
+</code></pre><p><strong>注意</strong> 在执行<code>hexo d</code>命令时，有可能会显示如下错误信息：ERROR Deployer not found : github 解决方法如下：</p>
+<ul>
+<li>在hexo的配置文件中，把deploy的type改成git</li>
+<li>运行如下命令：<code>npm install hexo-deployer-git --save</code></li>
+</ul>
+<h4 id="文献参考"><a href="#文献参考" class="headerlink" title="文献参考"></a>文献参考</h4><p><a href="https://blog.csdn.net/ParanoidYang/article/details/71436028" target="_blank" rel="noopener">https://blog.csdn.net/ParanoidYang/article/details/71436028</a></p>
+<p><a href="https://blog.csdn.net/guoxiaorui666/article/details/99623023" target="_blank" rel="noopener">https://blog.csdn.net/guoxiaorui666/article/details/99623023</a></p>
+<p><a href="https://lanjingling.github.io/2015/09/23/hexo%E7%AE%80%E4%BB%8B/" target="_blank" rel="noopener">https://lanjingling.github.io/2015/09/23/hexo%E7%AE%80%E4%BB%8B/</a></p>
+
         </div>
         <!-- .entry-content -->
         <div class="single-reward">

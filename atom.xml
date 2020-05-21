@@ -37,31 +37,18 @@
   </entry>
   
   <entry>
-    <title>node.js安装配置</title>
-    <link href="/2020/05/21/Nodejs%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/"/>
-    <id>/2020/05/21/Nodejs安装配置/</id>
-    <published>2020-05-21T06:53:02.000Z</published>
-    <updated>2020-05-21T09:15:38.386Z</updated>
+    <title>Hexo搭建个人网站(步骤篇)</title>
+    <link href="/2020/05/21/Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%EF%BC%88%E6%AD%A5%E9%AA%A4%E7%AF%87%EF%BC%89/"/>
+    <id>/2020/05/21/Hexo搭建个人博客网站（步骤篇）/</id>
+    <published>2020-05-21T01:20:00.000Z</published>
+    <updated>2020-05-21T12:36:15.255Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;Node.js 是一个基于 Chrome V8 引擎的 JavaScript
-        
-      
+      记录搭建部署博客的流程
     
     </summary>
     
-      <category term="技术" scheme="/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="HEXO" scheme="/tags/HEXO/"/>
-    
-      <category term="nodejs" scheme="/tags/nodejs/"/>
     
   </entry>
   
