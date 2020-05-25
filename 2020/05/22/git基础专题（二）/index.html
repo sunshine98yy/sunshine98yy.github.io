@@ -331,19 +331,36 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
 <div class="pattern-center-blank"></div>
 
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200521100712.jpg);" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200521100712.jpg">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+       git基础专题（二）</h1>
+      <p class="entry-census">
+        <span>
+          <a href="www.yulinblog.com">
+            <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/avatar.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="www.yulinblog.com">YUYU</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2020-5-22<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
+  </div>
+
 <div id="content" class="site-content">
   <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
       <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
         <div class="toc"></div>
         <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
-        
-          <header class="entry-header">
-            <h1 class="entry-title"> git基础专题（二）</h1>
-            <p class="entry-census">YUYU&nbsp;·&nbsp;2020-5-22&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p></p>
-
-            <hr>
-          </header>
         
         <div class="entry-content">
           <h2 id="git操作"><a href="#git操作" class="headerlink" title="git操作"></a>git操作</h2><h3 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h3><p>版本库又名仓库，英文名repository,你可以简单的理解一个目录，这个目录里面的所有文件都可以被Git管理起来，每个文件的修改，删除，Git都能跟踪，以便任何时刻都可以追踪历史，或者在将来某个时刻还可以将文件”还原”。</p>
@@ -393,11 +410,40 @@
 </tbody>
 </table>
 <p>现在我想使用版本回退操作，我想把当前的版本回退到上一个版本，要使用什么命令呢？可以使用如下2种命令，第一种是：<code>git reset --hard HEAD^</code> 那么如果要回退到上上个版本只需把<code>HEAD^</code> 改成<code>HEAD^^</code> 以此类推。那如果要回退到前100个版本的话，使用上面的方法肯定不方便，我们可以使用下面的简便命令操作：<code>git reset --hard HEAD~100</code> 即可。</p>
-<p>文本中的内容会回退到对应版本的内容。此时<code>git log</code>显示的最新的版本是回退的版本。后面新的版本不会显示。如下图，对于的second add 不会显示，</p>
+<p>文本中的内容会回退到对应版本的内容。此时<code>git log</code>显示的最新的版本是回退的版本。后面新的版本不会显示。如下图，最新的second add 不会显示</p>
 <p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200522230141.jpg" style="zoom:50%;"></p>
-<p>此时我又想回退到最新的版本second add。内容要如何恢复呢？我们可以通过版本号回退，使用命令方法如下：<br>git reset –hard 版本号 ，但是现在的问题假如我已经关掉过一次命令行或者second add内容的版本号我并不知道呢？要如何知道增加second add内容的版本号呢？可以通过如下命令即可获取到版本号：<code>git reflog</code>演示如下：</p>
+<p>此时我又想回退到最新的版本second add。内容要如何恢复呢？<span style="color:red">我们可以通过版本号回退</span>，使用命令方法如下：<br>git reset –hard 版本号 ，但是现在的问题假如我已经关掉过一次命令行或者second add内容的版本号我并不知道呢？要如何知道增加second add内容的版本号呢？可以通过如下命令即可获取到版本号：<code>git reflog</code>演示如下：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200522230959.jpg" style="zoom:67%;"></p>
-<p>通过上面的显示我们可以知道，增加内容second add的版本号是 6665c2d7。我们现在可以命令<br>git reset –hard 6665c2d7来恢复了。演示如下：</p>
+<p>通过上面的显示我们可以知道，增加内容second add的版本号是 b65c2d7。我们现在可以命令<br><code>git reset --hard b65c2d7</code>来恢复了。</p>
+<h3 id="工作区与暂存区的区别"><a href="#工作区与暂存区的区别" class="headerlink" title="工作区与暂存区的区别"></a>工作区与暂存区的区别</h3><p><strong>工作区</strong>：就是你在电脑上看到的目录，比如目录下demo1里的文件(.git隐藏目录版本库除外)。或者以后需要再新建的目录文件等等都属于工作区范畴。<br>版本库(Repository)：工作区有一个隐藏目录.git,这个不属于工作区，这是版本库。其中版本库里面存了很多东西，其中最重要的就是stage(<strong>暂存区</strong>)，还有Git为我们自动创建了第一个分支master,以及指向master的一个指针HEAD。<br>我们前面说过使用Git提交文件到版本库有两步：<br>第一步：是使用 git add 把文件添加进去，实际上就是<strong>把文件添加到暂存区</strong>。<br>第二步：使用git commit提交更改，实际上就是<strong>把暂存区的所有内容提交到当前分支上</strong>。</p>
+<h3 id="Git撤销修改和删除文件操作"><a href="#Git撤销修改和删除文件操作" class="headerlink" title="Git撤销修改和删除文件操作"></a>Git撤销修改和删除文件操作</h3><h4 id="一：撤销修改"><a href="#一：撤销修改" class="headerlink" title="一：撤销修改"></a>一：撤销修改</h4><p>工作区做了改动并添加到暂存区，未提交。此时需要恢复到改动前的版本:</p>
+<p>第一：如果我知道要删掉哪那些内容的话，直接手动更改去掉那些需要的文件，然后<strong>add添加到暂存区，最后commit掉。</strong><br>第二：我可以按以前的方法直接恢复到上一个版本。使用 git reset –hard HEAD^</p>
+<p>只是工作区做了改动，此时需要恢复到改动前的版本：</p>
+<p><code>git checkout -- file</code> 可以丢弃工作区的修改，如下命令：<code>git checkout -- test.txt</code>,</p>
+<p>把test.txt文件在工作区做的修改全部撤销，这里有2种情况，如下：<br>1.test.txt自动修改后，还没有放到暂存区，使用 撤销修改就回到和版本库一模一样的状态。<br>2.另外一种是test.txt已经放入暂存区了，接着又作了修改，撤销修改就回到添加暂存区后的状态。<br>对于第二种情况，我想我们继续做demo来看下，假如现在我对test.txt添加一行 内容为1111，我git add 增加到暂存区后，接着添加内容2222，我想通过撤销命令让其回到暂存区后的状态。如下所示：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200523140043.jpg" style="zoom:50%;"></p>
+<p>注意：命令git checkout <span style="color:red">–</span> test.txt 中的 – 很重要，如果没有 – 的话，那么命令变成创建分支了。</p>
+<h4 id="二：删除文件。"><a href="#二：删除文件。" class="headerlink" title="二：删除文件。"></a>二：删除文件。</h4><p>在版本库demo1目录添加一个文件b.txt,提交,然后删除</p>
+<pre><code>git add b.txt
+git commit -m &#39;添加b.txt文件&#39;
+rm b.txt #可以直接在目录下删除b.txt文件或者使用命令rm b.txt
+</code></pre><p>执行完上述步骤后，此时有两个选择:</p>
+<p>1.我想彻底从版本库中删掉此文件，可以再执行commit命令 提交掉</p>
+<p>2.如果我想在版本库中恢复此文件，使用命令<code>git checkout -- b.txt</code></p>
+<h3 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h3><p>目前使用的git命令都是在本地执行，如果想通过git分享我们的代码，或者想与其他开发人员合作，就需要将数据放到一台其他人员能连接的服务器上。</p>
+<p>在了解之前，先注册github账号，由于你的本地Git仓库和github仓库之间的传输是通过SSH加密的，所以需要先设置SSH,步骤见《git基础专题（二）》。</p>
+<h3 id="如何添加远程仓库"><a href="#如何添加远程仓库" class="headerlink" title="如何添加远程仓库"></a>如何添加远程仓库</h3><p>我们已经在本地创建了一个Git仓库后，又想在github创建一个Git仓库，并且希望这两个仓库进行远程同步，这样github的仓库可以作为备份，又可以让其他人通过该仓库来协作。</p>
+<p>新建一个名为testgit的仓库，效果如下</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200523144352.jpg" style="zoom: 33%;"></p>
+<p>GitHub告诉我们，可以从这个仓库克隆出新的仓库，也可以把一个已有的本地仓库与之关联，然后，把本地仓库的内容推送到GitHub仓库。</p>
+<p>运行如下命令</p>
+<pre><code>git remote add origin https://github.com/sunshine98yy/testgit.git #本地仓库与远程仓库关联命令
+git push -u origin master #推到远程仓库上命令
+</code></pre><p>执行git remote就是先将本地仓库与远程仓库建立一个连接，origin是你为远端仓库所起的名字，一般都叫orign,后接远端仓库真实地址。我们第一次推送master分支时，加上了 –u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。</p>
+<p>注意master是你要上传的分支的名字，如果当前所在的分支不叫master，会提示错误<br><code>git show-ref</code>显示远端的相关分支</p>
+<p>从现在起，只要本地作了提交，就可以通过如下命令：<code>git push origin master</code><br>把本地master分支的最新修改推送到github上了，现在你就拥有了真正的分布式版本库了。</p>
+<h3 id="如何克隆远程仓库"><a href="#如何克隆远程仓库" class="headerlink" title="如何克隆远程仓库"></a>如何克隆远程仓库</h3><p>实际开发中需要多人合作，所以需要将远程仓库的代码克隆到本地，然后在本地进行开发，开发完成后需要推送到远程仓库中，方便协作。（远程代码拷贝一份到本地，基于本地的代码进行开发）</p>
+<p><code>git clone git@github.com:sunshine98yy/clone_demo.git  #（远程代码拷贝到本地）</code><br>–&gt;提交改动到本地仓库–&gt;本地仓库push到远程仓库<br>克隆仓库默认跟远程仓库分支绑定！！直接命令git push到远程仓库</p>
 
         </div>
         <!-- .entry-content -->
@@ -426,9 +472,26 @@
       <div class="toc" style="background: none;"></div>
       <section class="post-squares nextprev">
         
+          
+            <div class="post-nepre half previous">
+          
+            <a href="/2020/05/23/git基础专题（三）/" rel="prev">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200521100712.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200521100712.jpg">
+              </div>
+              <span class="label">
+              Previous Post</span>
+              <div class="info">
+                <h3>
+                git基础专题（三）</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
         
           
-            <div class="post-nepre full next">
+            <div class="post-nepre half next">
           
             <a href="/2020/05/21/SOURCETREE-3-1-3-版本跳过BITBUCKET注册方法（亲测好用）/" rel="next">
               <div class="background">
