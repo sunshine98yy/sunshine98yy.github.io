@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">Tag: Python | 风中的鱼</title>
+  <title itemprop="name">Python入门与进阶（三） | 风中的鱼</title>
   
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -327,130 +327,380 @@
   </div>
 </header>
 
-      
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
 <div class="pattern-center-blank"></div>
-<div class="pattern-center ">
-  <div class="pattern-attachment-img">
-    <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="Python.img" class="lazyload" onerror="imgError(this,3)" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200529212115.jpg);" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200529212115.jpg">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      Python入门与进阶（三）</h1>
+      <p class="entry-census">
+        <span>
+          <a href="www.yulinblog.com">
+            <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/avatar.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="www.yulinblog.com">YUYU</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2020-5-29<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
   </div>
-  <header class="pattern-header ">
-    <h1 class="cat-title">Python</h1>
-  </header>
-</div>
+
 <div id="content" class="site-content">
   <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+        <div class="entry-content">
+          <h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><h4 id="变量命名规则"><a href="#变量命名规则" class="headerlink" title="变量命名规则"></a>变量命名规则</h4><ul>
+<li>系统关键字不能用在变量名中。</li>
+<li>Python中的变量名区分大小写。</li>
+<li>变量名由字母，数字，下划线构成，开头不能是数字。</li>
+<li>python中不存在变量的定义，变量本身没有类型，一般说把X赋值给变量，不说定义变量为X（动态性语言）</li>
+</ul>
+<pre><code class="python">a = 1
+a = &#39;1&#39;
+a = [1,2,3]
+</code></pre>
+<h4 id="值类型和引用类型"><a href="#值类型和引用类型" class="headerlink" title="值类型和引用类型"></a>值类型和引用类型</h4><pre><code class="python">a = 1;
+b = a;
+a = 3;
+print(b) #b=1,b的值并没有改变
+**********************************
+a = [1,2,3,4,5]
+b = a
+a[0] = &#39;1&#39;
+print(a) #[&#39;1&#39;,2,3,4,5]
+print(b) #[&#39;1&#39;,2,3,4,5],此时b改变了
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200529210716.jpg" style="zoom:50%;"></p>
+<p>引用类型是可变的，值类型是不可变的</p>
+<p><code>int</code> <code>str</code> <code>tuple</code>值类型(不可改变) <code>list</code> <code>set</code> <code>dict</code>引用类型(可变)</p>
+<pre><code class="python">a = &#39;hello&#39;
+id(a) #
+a = a + &#39;python&#39;
+id(a) #
+******a有不同的id，说明相加后得到的a是新的变量python******
+&#39;python&#39;[0] #显示p
+&#39;python&#39;[0] = a #报错，值类型不可改变
+</code></pre>
+<h4 id="列表和元组的对比"><a href="#列表和元组的对比" class="headerlink" title="列表和元组的对比"></a>列表和元组的对比</h4><p>元组定义好后就无法改变，列表可更改。</p>
+<p>建议用元组 。避免合作开发过程中对方更改造成的报错。</p>
+<pre><code class="python">a = (1,2,3,[1,2,4]) #如何访问4
+a[3][2]
+a = (1,2,3,[1,2,[&#39;a&#39;,&#39;b&#39;,&#39;c&#39;]]) #访问c
+a[3][2][2]
+</code></pre>
+<h4 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h4><h5 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h5><p>python中算符运算符并不是只能对数字做运算</p>
+<p><code>+</code>加、<code>-</code>减、<code>*</code>乘、<code>/</code>除、<code>//</code>取整除、<code>%</code>取余、<code>**</code>幂</p>
+<h5 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符"></a>赋值运算符</h5><p><code>=</code> <code>+=</code>、<code>-=</code>、<code>*=</code>、<code>/=</code>、<code>//=</code>、<code>%=</code>、<code>**=</code><br><em>注意：python中没有自增/自减运算符</em></p>
+<p><code>c=1 c=c+1</code>等效于<code>c+=1</code>  用法同其他语言</p>
+<h5 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h5><p><code>and</code>与、<code>or</code>或、 <code>not</code>非</p>
+<p>主要操作布尔类型</p>
+<p>非布尔类型参与运算的结果要根据计算机的运算流程判断</p>
+<pre><code class="python">1 and 2 #返回2 ，计算机的运算流程，需要2才能给出结果
+1 or 0  #返回1   到1即可给出结果
+</code></pre>
+<h5 id="比较（关系）运算符"><a href="#比较（关系）运算符" class="headerlink" title="比较（关系）运算符"></a>比较（关系）运算符</h5><p><code>==</code> <code>!=</code> <code>&gt;</code> <code>&lt;</code> <code>&gt;=</code> <code>&lt;=</code>  产生布尔值的运算结果</p>
+<p>字符串、列表等均可进行比较</p>
+<h5 id="身份运算符"><a href="#身份运算符" class="headerlink" title="身份运算符"></a>身份运算符</h5><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>用法</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>is</code></td>
+<td><code>元素 is 序列</code></td>
+<td>检测两个变量身份(内存地址)是否全等</td>
+</tr>
+<tr>
+<td><code>not is</code></td>
+<td><code>元素 not is 序列</code></td>
+<td>检测两个变量身份(内存地址)是否不等</td>
+</tr>
+</tbody>
+</table>
+<p>== 比较<strong>值</strong>，is 比较<strong>身份</strong>，<strong>类型</strong> type判断</p>
+<p>对象三个特征 id 、value、type</p>
+<pre><code class="python">******is和==的区别********
+a = 1
+b = 1.0
+a == b #true
+a is b #false
+==比较值是否相等，is比较两个变量的身份（内存地址）是否相等 id(a)和id(b)不等
+a = {1,2,3}
+b = {2,1,3}
+a == b #True 集合是无序的，所以不会影响最终取值
+a is b #False 地址不同
+----------------
+c = (1,2,3) 
+d = (2,1,3) 
+c == d #False 元组是序列，有序
+c is d #False 内存地址不同
+----------------
+判断变量的类型
+isinstance(a,str) #判断a是否是str类型
+isinstance(a,(int,str,float)) #判断a是否是下面的三种类型之一
+</code></pre>
+<p>注意：python中没有<code>===</code>运算符*</p>
+<h5 id="成员运算符"><a href="#成员运算符" class="headerlink" title="成员运算符"></a>成员运算符</h5><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>用法</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>in</code></td>
+<td><code>元素 in 序列</code></td>
+<td>检测序列中是否包含指定元素</td>
+</tr>
+<tr>
+<td><code>not in</code></td>
+<td><code>元素 not in 序列</code></td>
+<td>检测序列中是否不包含指定元素</td>
+</tr>
+</tbody>
+</table>
+<p><em>注意：字典的成员运算符是针对键</em></p>
+<pre><code class="python">b = &#39;c&#39;
+b in {&#39;c&#39;:1} #true
+</code></pre>
+<h5 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h5><p><code>&amp;</code>按位与 <code>|</code>按位与 <code>^</code>按位异或 <code>-</code>按位取反 <code>&lt;&lt;</code> 左移动<code>&gt;&gt;</code>右移动  </p>
+<p>都是把数字当做二进制数进行运算</p>
+<h3 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h3><p><a href="https://juejin.im/post/5db6ff88f265da4d525fce6b" target="_blank" rel="noopener">运算符优先级</a></p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{ }</td>
+<td>括号（分组）</td>
+</tr>
+<tr>
+<td>f(args…)</td>
+<td>函数调用</td>
+</tr>
+<tr>
+<td>x[index:index]</td>
+<td>切片</td>
+</tr>
+<tr>
+<td>x[index]</td>
+<td>索引值</td>
+</tr>
+<tr>
+<td>x.attribute</td>
+<td>属性</td>
+</tr>
+<tr>
+<td>**</td>
+<td>指数</td>
+</tr>
+<tr>
+<td>~x</td>
+<td>取反</td>
+</tr>
+<tr>
+<td>+x,-x</td>
+<td>正、负值</td>
+</tr>
+<tr>
+<td>*、/、%</td>
+<td>乘、除、求余</td>
+</tr>
+<tr>
+<td>+、-</td>
+<td>加、减</td>
+</tr>
+<tr>
+<td>&lt;&lt;、&gt;&gt;</td>
+<td>左移、右移</td>
+</tr>
+<tr>
+<td>&amp;</td>
+<td>按位 AND</td>
+</tr>
+<tr>
+<td>^</td>
+<td>按位 XOR</td>
+</tr>
+<tr>
+<td>\</td>
+<td></td>
+<td>按位 OR</td>
+</tr>
+<tr>
+<td>is、not、in、is、is not、&lt; 、&lt;=、&gt;、&gt;=、&lt;&gt;、!=、==</td>
+<td>比较、算数、身份</td>
+</tr>
+<tr>
+<td>not x</td>
+<td>布尔 NOT</td>
+</tr>
+<tr>
+<td>and</td>
+<td>布尔 AND</td>
+</tr>
+<tr>
+<td>or</td>
+<td>布尔 OR</td>
+</tr>
+<tr>
+<td>lambda</td>
+<td>lambda 表达式</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python">******可以通过括号使先后顺序更清楚或强行改变顺序********
+not a or b + 2 == c   #(not a) or ((b+2) == c)
+a or b and c #a or (b and c)
+</code></pre>
+<h3 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h3><p><strong><em>python中语句不用括号，依据空格和换行分隔。</em></strong></p>
+<p><strong><em>python没有switch</em></strong></p>
+<h4 id="条件控制"><a href="#条件控制" class="headerlink" title="条件控制"></a>条件控制</h4><pre><code class="python">if 条件1:
+    语句
+elif 条件2:
+    语句
+else:
+    语句
+</code></pre>
+<p><em><code>pass</code>空语句/占位语句</em>，保持代码结构域的完整性</p>
+<h4 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h4><pre><code class="python">while 条件：
+    语句
+else:
+    语句
+</code></pre>
+<p><em>说明：在条件语句为 false 时，执行 else 的语句块</em></p>
+<h4 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h4><pre><code class="python"># 第一种情况
+#主要用来遍历/循环
+for 元素 in 序列/集合/字典:
+    语句
+else:
+    语句
+
+# 第二种情况
+for 变量 in range(范围):
+    语句
+else:
+    语句
+</code></pre>
+<p>break跳出循环（内循环），continue停止当前操作，直接继续下面的循环</p>
+<p>说明：在for语句遍历完毕时，执行 else 的语句块*，并不要求强行使用else<br><code>range()</code>的参数说明：</p>
+<ul>
+<li>range(x)：从0遍历到x，默认偏移量为1（遍历到x之前的数，取不到x,下同）</li>
+<li>range(x,y)：从x遍历到y，默认偏移量为1</li>
+<li>range(x,y,z)：从x遍历到y，偏移量为z。若x&gt;y，则为递减，反之递增</li>
+</ul>
+<pre><code class="python">a = [1,2,3,4,5,6,7,8]
+for i in range(1,len(a),2)
+    print(a[i],end=&#39;|&#39;)
+*******等效于***********
+b = a[0:len(a):2]
+print(b)
+</code></pre>
+
+        </div>
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/donate/alipay.jpg"></li>
+                <li class="wechat-code"><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/donate/wechatqr.jpg"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+        
+          
+            <div class="post-nepre full next">
+          
+            <a href="/2020/05/26/Python入门与进阶（二）/" rel="next">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200526010538.png" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200526010538.png">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                Python入门与进阶（二）</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
       
-  <!-- 首页默认取最最新文章集 -->
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/05/29/Python入门与进阶（三）/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200529212115.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/05/29/Python入门与进阶（三）/">
-    Python入门与进阶（三）</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-5-29</div>
-    <p>
-    变量与运算符 语句</p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/05/29/Python入门与进阶（三）/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/05/26/Python入门与进阶（二）/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200526010538.png" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/05/26/Python入门与进阶（二）/">
-    Python入门与进阶（二）</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-5-26</div>
-    <p>
-    Python的基本类型</p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/05/26/Python入门与进阶（二）/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/05/26/Python入门与进阶（一）/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200526010538.png" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/05/26/Python入门与进阶（一）/">
-    Python入门与进阶（一）</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-5-26</div>
-    <p>
-    Python入门导学</p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/05/26/Python入门与进阶（一）/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
+<div id="vcomments"></div>
+<script>
+  window.onload = function(){
+      var valine = new Valine();
+      valine.init({
+        el: '#vcomments',
+        appId: "4NBvruApUCpLtmlsyQLevDfx-gzGzoHsz",
+        appKey: "eTSHbT3jvLQPcVYMC7QFXQFd",
+        path: window.location.pathname,
+        placeholder: "你是我一生只会遇见一次的惊喜 ..."
+      })
+  }
+</script>
 
-
-      <div class="clearer">
-      </div>
-    </main>
-    <!--  -->
-    
-  </div>
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="www.yulinblog.com" class="profile gravatar"><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/avatar.jpg" itemprop="image" alt="YUYU" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="www.yulinblog.com" itemprop="url" rel="author">YUYU</a>
+            </h3>
+          </div>
+        </div>
+        <hr>
+        <p><i class="iconfont icon-write"></i>一个好奇的人</p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
 </div>
+
+
+
     </div>    
     <div class="ins-search">
     <div class="ins-search-mask"></div>

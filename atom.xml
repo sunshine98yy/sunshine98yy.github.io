@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2020-05-27T05:17:52.007Z</updated>
+  <updated>2020-05-29T13:21:42.502Z</updated>
   <id>/</id>
   
   <author>
@@ -17,11 +17,31 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Python入门与进阶（三）</title>
+    <link href="/2020/05/29/Python%E5%85%A5%E9%97%A8%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E4%B8%89%EF%BC%89/"/>
+    <id>/2020/05/29/Python入门与进阶（三）/</id>
+    <published>2020-05-29T13:08:41.000Z</published>
+    <updated>2020-05-29T13:21:42.502Z</updated>
+    
+    <summary type="html">
+    
+      变量与运算符 语句
+    
+    </summary>
+    
+      <category term="笔记" scheme="/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Python" scheme="/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Python入门与进阶（二）</title>
     <link href="/2020/05/26/Python%E5%85%A5%E9%97%A8%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E4%BA%8C%EF%BC%89/"/>
     <id>/2020/05/26/Python入门与进阶（二）/</id>
     <published>2020-05-26T14:17:38.000Z</published>
-    <updated>2020-05-27T05:17:52.007Z</updated>
+    <updated>2020-05-27T06:26:32.880Z</updated>
     
     <summary type="html">
     
