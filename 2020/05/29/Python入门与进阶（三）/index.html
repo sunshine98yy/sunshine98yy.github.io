@@ -367,7 +367,7 @@
 <li>系统关键字不能用在变量名中。</li>
 <li>Python中的变量名区分大小写。</li>
 <li>变量名由字母，数字，下划线构成，开头不能是数字。</li>
-<li>python中不存在变量的定义，变量本身没有类型，一般说把X赋值给变量，不说定义变量为X（动态性语言）</li>
+<li>python中不存在变量的定义，变量本身没有类型，一般说把X赋值给变量，不说定义变量为X（动态性语言的特性体现）</li>
 </ul>
 <pre><code class="python">a = 1
 a = &#39;1&#39;
@@ -378,13 +378,13 @@ b = a;
 a = 3;
 print(b) #b=1,b的值并没有改变
 **********************************
-a = [1,2,3,4,5]
+a = [1,2,3]
 b = a
 a[0] = &#39;1&#39;
 print(a) #[&#39;1&#39;,2,3,4,5]
 print(b) #[&#39;1&#39;,2,3,4,5],此时b改变了
 </code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200529210716.jpg" style="zoom:50%;"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200529210716.jpg" style="zoom:50% ;text-align:center;"></p>
 <p>引用类型是可变的，值类型是不可变的</p>
 <p><code>int</code> <code>str</code> <code>tuple</code>值类型(不可改变) <code>list</code> <code>set</code> <code>dict</code>引用类型(可变)</p>
 <pre><code class="python">a = &#39;hello&#39;
@@ -457,7 +457,7 @@ c is d #False 内存地址不同
 isinstance(a,str) #判断a是否是str类型
 isinstance(a,(int,str,float)) #判断a是否是下面的三种类型之一
 </code></pre>
-<p>注意：python中没有<code>===</code>运算符*</p>
+<p>注意：python中没有<code>===</code>运算符</p>
 <h5 id="成员运算符"><a href="#成员运算符" class="headerlink" title="成员运算符"></a>成员运算符</h5><table>
 <thead>
 <tr>
@@ -489,87 +489,87 @@ b in {&#39;c&#39;:1} #true
 <table>
 <thead>
 <tr>
-<th>运算符</th>
-<th>用法</th>
+<th style="text-align:center">运算符</th>
+<th style="text-align:center">用法</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>{ }</td>
-<td>括号（分组）</td>
+<td style="text-align:center">{ }</td>
+<td style="text-align:center">括号（分组）</td>
 </tr>
 <tr>
-<td>f(args…)</td>
-<td>函数调用</td>
+<td style="text-align:center">f(args…)</td>
+<td style="text-align:center">函数调用</td>
 </tr>
 <tr>
-<td>x[index:index]</td>
-<td>切片</td>
+<td style="text-align:center">x[index:index]</td>
+<td style="text-align:center">切片</td>
 </tr>
 <tr>
-<td>x[index]</td>
-<td>索引值</td>
+<td style="text-align:center">x[index]</td>
+<td style="text-align:center">索引值</td>
 </tr>
 <tr>
-<td>x.attribute</td>
-<td>属性</td>
+<td style="text-align:center">x.attribute</td>
+<td style="text-align:center">属性</td>
 </tr>
 <tr>
-<td>**</td>
-<td>指数</td>
+<td style="text-align:center">**</td>
+<td style="text-align:center">指数</td>
 </tr>
 <tr>
-<td>~x</td>
-<td>取反</td>
+<td style="text-align:center">~x</td>
+<td style="text-align:center">取反</td>
 </tr>
 <tr>
-<td>+x,-x</td>
-<td>正、负值</td>
+<td style="text-align:center">+x,-x</td>
+<td style="text-align:center">正、负值</td>
 </tr>
 <tr>
-<td>*、/、%</td>
-<td>乘、除、求余</td>
+<td style="text-align:center">*、/、%</td>
+<td style="text-align:center">乘、除、求余</td>
 </tr>
 <tr>
-<td>+、-</td>
-<td>加、减</td>
+<td style="text-align:center">+、-</td>
+<td style="text-align:center">加、减</td>
 </tr>
 <tr>
-<td>&lt;&lt;、&gt;&gt;</td>
-<td>左移、右移</td>
+<td style="text-align:center">&lt;&lt;、&gt;&gt;</td>
+<td style="text-align:center">左移、右移</td>
 </tr>
 <tr>
-<td>&amp;</td>
-<td>按位 AND</td>
+<td style="text-align:center">&amp;</td>
+<td style="text-align:center">按位 AND</td>
 </tr>
 <tr>
-<td>^</td>
-<td>按位 XOR</td>
+<td style="text-align:center">^</td>
+<td style="text-align:center">按位 XOR</td>
 </tr>
 <tr>
-<td>\</td>
-<td></td>
+<td style="text-align:center">\</td>
+<td style="text-align:center"></td>
 <td>按位 OR</td>
 </tr>
 <tr>
-<td>is、not、in、is、is not、&lt; 、&lt;=、&gt;、&gt;=、&lt;&gt;、!=、==</td>
-<td>比较、算数、身份</td>
+<td style="text-align:center">in、is、is not、&lt; 、&lt;=、&gt;、&gt;=、&lt;&gt;、!=、==</td>
+<td style="text-align:center">比较、算数、身份</td>
 </tr>
 <tr>
-<td>not x</td>
-<td>布尔 NOT</td>
+<td style="text-align:center">not x</td>
+<td style="text-align:center">布尔 NOT</td>
 </tr>
 <tr>
-<td>and</td>
-<td>布尔 AND</td>
+<td style="text-align:center">and</td>
+<td style="text-align:center">布尔 AND</td>
 </tr>
 <tr>
-<td>or</td>
-<td>布尔 OR</td>
+<td style="text-align:center">or</td>
+<td style="text-align:center">布尔 OR</td>
 </tr>
 <tr>
-<td>lambda</td>
-<td>lambda 表达式</td>
+<td style="text-align:center">lambda</td>
+<td style="text-align:center">lambda 表达式</td>
 </tr>
 </tbody>
 </table>
@@ -607,7 +607,7 @@ else:
     语句
 </code></pre>
 <p>break跳出循环（内循环），continue停止当前操作，直接继续下面的循环</p>
-<p>说明：在for语句遍历完毕时，执行 else 的语句块*，并不要求强行使用else<br><code>range()</code>的参数说明：</p>
+<p>说明：在for语句遍历完毕时，执行 else 的语句块，并不要求强行使用else<br><code>range()</code>的参数说明：</p>
 <ul>
 <li>range(x)：从0遍历到x，默认偏移量为1（遍历到x之前的数，取不到x,下同）</li>
 <li>range(x,y)：从x遍历到y，默认偏移量为1</li>
@@ -648,9 +648,26 @@ print(b)
       <div class="toc" style="background: none;"></div>
       <section class="post-squares nextprev">
         
+          
+            <div class="post-nepre half previous">
+          
+            <a href="/2020/05/30/Python入门与进阶（四）/" rel="prev">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200529212115.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200529212115.jpg">
+              </div>
+              <span class="label">
+              Previous Post</span>
+              <div class="info">
+                <h3>
+                Python入门与进阶（四）</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
         
           
-            <div class="post-nepre full next">
+            <div class="post-nepre half next">
           
             <a href="/2020/05/26/Python入门与进阶（二）/" rel="next">
               <div class="background">
