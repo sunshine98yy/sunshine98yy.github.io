@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2020-05-31T02:37:59.641Z</updated>
+  <updated>2020-05-31T02:40:33.499Z</updated>
   <id>/</id>
   
   <author>
@@ -21,19 +21,15 @@
     <link href="/2020/05/31/Python%E5%85%A5%E9%97%A8%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E4%BA%94%EF%BC%89/"/>
     <id>/2020/05/31/Python入门与进阶（五）/</id>
     <published>2020-05-31T02:37:59.000Z</published>
-    <updated>2020-05-31T02:37:59.641Z</updated>
+    <updated>2020-05-31T02:40:33.499Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h2 id=&quot;面向对象&quot;&gt;&lt;a href=&quot;#面向对象&quot; class=&quot;headerlink&quot;
-        
-      
+      面向对象
     
     </summary>
+    
+      <category term="笔记" scheme="/categories/%E7%AC%94%E8%AE%B0/"/>
     
     
       <category term="Python" scheme="/tags/Python/"/>
