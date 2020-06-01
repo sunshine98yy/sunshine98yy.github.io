@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">Tag: Python | 风中的鱼</title>
+  <title itemprop="name">Python入门与进阶（五） | 风中的鱼</title>
   
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -327,229 +327,528 @@
   </div>
 </header>
 
-      
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
 <div class="pattern-center-blank"></div>
-<div class="pattern-center ">
-  <div class="pattern-attachment-img">
-    <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="Python.img" class="lazyload" onerror="imgError(this,3)" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200529212115.jpg);" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200529212115.jpg">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      Python入门与进阶（五）</h1>
+      <p class="entry-census">
+        <span>
+          <a href="www.yulinblog.com">
+            <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/avatar.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="www.yulinblog.com">YUYU</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2020-6-1<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
   </div>
-  <header class="pattern-header ">
-    <h1 class="cat-title">Python</h1>
-  </header>
-</div>
+
 <div id="content" class="site-content">
   <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+        <div class="entry-content">
+          <p>正则表达式也是文本解析中非常重要的知识点。本章我们将讲解什如何在Python中编写正则表达式与常见的正则表达式。此外，JSON作为非常重要的数据格式，我们会重点讲解，包括JSON对象，JSON字符串，Python类型与JSON的转换。</p>
+<h3 id="正则表达式初识"><a href="#正则表达式初识" class="headerlink" title="正则表达式初识"></a>正则表达式初识</h3><p>正则表达式是一个特殊的字符序列，检测一个字符串是否与我们所设定的这样的字符序列相匹配。如果匹配，帮助我们快速检索文本，实现一些替换文本的操作。可以用正则表达式来1.检测一串数字是否是电话号码2.检测一个字符串是都符合email3.把一个文本里指定的单词替换为另一个单词等等</p>
+<p><strong>例：判断A中是否含python</strong></p>
+<pre><code class="python">A = &#39;C|C++|Java|Python|Javascript&#39; 
+#我们可以采用python中的内置函数,优先考虑内置函数
+print(A.index(&#39;Python&#39;)&gt;-1) #True
+print(&#39;Python&#39; in A) #True
+</code></pre>
+<p><strong>采用正则表达式</strong></p>
+<pre><code class="python">import re
+A = &#39;C|C++|Java|Python|Javascript&#39; 
+#re.findall(&#39;正则表达式&#39;, A) #A是要匹配的字符串
+r = re.findall(&#39;Python&#39;, A) #A是要匹配的字符串,r是列表
+#print(r) #返回结果是一个列表
+
+if len(r) &gt; 0
+    print(&#39;字符串中包含Python&#39;)
+</code></pre>
+<h3 id="元字符与普通字符"><a href="#元字符与普通字符" class="headerlink" title="元字符与普通字符"></a>元字符与普通字符</h3><p>普通字符：正常文本字符，如上例中的’python’</p>
+<p>元字符：在正则表达式中具有特殊意义的专用字符,如‘\d’。</p>
+<p><strong>示例：</strong></p>
+<pre><code class="python">#找出A中的所有数字
+import re
+A = &#39;C0C++34Java5Python56Javascript&#39; 
+r = re.findall(&#39;\d&#39;, A) #A是要匹配的字符串
+print(r) #返回结果是一个列表
+</code></pre>
+<p><a href="https://baike.baidu.com/item/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F" target="_blank" rel="noopener">正则表达式全集</a></p>
+<h3 id="字符集"><a href="#字符集" class="headerlink" title="字符集"></a>字符集</h3><pre><code class="python">#找出中间字母是c到f的单词
+import re
+S = &#39;abc,acc,adc,aec,afc,ahc&#39;
+r = re.findall(&#39;a[c-f]c&#39;, S) #A是要匹配的字符串
+print(r) #返回结果是一个列表
+</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">字符</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>[]</code></td>
+<td style="text-align:center">或</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>()</code></td>
+<td style="text-align:center">分组，且</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>[^]</code></td>
+<td style="text-align:center">非</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>^</code></td>
+<td style="text-align:center">开头</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>$</code></td>
+<td style="text-align:center">结尾</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>[a-b]</code></td>
+<td style="text-align:center">数字或字母范围</td>
+</tr>
+</tbody>
+</table>
+<h3 id="概括字符集"><a href="#概括字符集" class="headerlink" title="概括字符集"></a>概括字符集</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">字符</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>.</code></td>
+<td style="text-align:center">除换行之外的所有字符</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\d</code></td>
+<td style="text-align:center">数字</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\D</code></td>
+<td style="text-align:center">非数字</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\s</code></td>
+<td style="text-align:center">空白字符</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\S</code></td>
+<td style="text-align:center">非空白字符</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\w</code></td>
+<td style="text-align:center">下划线、字母、数字</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\W</code></td>
+<td style="text-align:center">非下划线、字母、数字</td>
+</tr>
+</tbody>
+</table>
+<p>\w即<code>[0-9A-Za-z_]</code>，\W匹配任何非单词字符。等价于<code>[^A-Za-z0-9_]</code>。概括字符集表述更加简洁</p>
+<h3 id="数量词"><a href="#数量词" class="headerlink" title="数量词"></a>数量词</h3><pre><code class="python">import re
+S = &#39;python 1111java6784php&#39;
+#提取3个单词
+#r = re.findall(&#39;[a-z]{3}&#39;, S) #匹配a-z的数量是固定的3个
+r = re.findall(&#39;[a-z]{3,6}&#39;, S)
+print(r) #返回结果是一个列表，[&#39;python&#39;, &#39;java&#39;, &#39;php&#39;]
+#问题：为什么匹配到3字符的时候不输出pyt,而是到python?
+#解：贪婪
+</code></pre>
+<h4 id="贪婪与非贪婪"><a href="#贪婪与非贪婪" class="headerlink" title="贪婪与非贪婪"></a>贪婪与非贪婪</h4><p>数量词有贪婪和非贪婪之分，默认情况下是贪婪的方式</p>
+<p>贪婪：数量词限定在一个区间之内，python倾向于尽可能多的取最大的值，一直到某个字符不满足条件时停止</p>
+<p>非贪婪：<code>[a-z]{3,6}?</code></p>
+<h4 id="匹配0次1次或者无限多次"><a href="#匹配0次1次或者无限多次" class="headerlink" title="匹配0次1次或者无限多次"></a>匹配0次1次或者无限多次</h4><pre><code class="python">import re
+S = &#39;pytho1python6pythonn&#39;
+#*匹配0次或者无限多次  [&#39;pytho&#39;, &#39;python&#39;, &#39;pythonn&#39;]
+#+匹配1次或者无限多次  [&#39;python&#39;, &#39;pythonn&#39;]
+#？匹配0次或者1次  [&#39;pytho&#39;, &#39;python&#39;, &#39;python&#39;] 会把正确的匹配结果纳入（可用来去重）
+r = re.findall(&#39;python*&#39;, S)
+print(r) #返回结果是一个列表
+</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">字符</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>{a,b}</code></td>
+<td style="text-align:center">指定前<strong>一个</strong>字符的出现次数(贪婪)</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>*</code></td>
+<td style="text-align:center">前面的<strong>一个</strong>字符出现0到n次</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>+</code></td>
+<td style="text-align:center">前面的一个字符出现1到n次</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>?</code></td>
+<td style="text-align:center">前面的一个字符出现0到1次</td>
+</tr>
+</tbody>
+</table>
+<h3 id="边界匹配符"><a href="#边界匹配符" class="headerlink" title="边界匹配符"></a>边界匹配符</h3><p><code>^</code> <code>$</code></p>
+<pre><code class="python">import re
+qq = &#39;10000013332&#39;
+#要求qq在4-8位
+r = re.findall(&#39;^\d{4,8}$&#39;, qq) #^从字符串的开始匹配，$从字符串的末尾开始匹配
+print(r) #返回结果是一个列表
+</code></pre>
+<h3 id="组"><a href="#组" class="headerlink" title="组"></a>组</h3><pre><code class="python">import re
+A = &#39;PythonPythonPythonPythonPython&#39;
+#要求判断字符串里是否包含3个python
+r = re.findall(&#39;(Python){3}&#39;, A) #括号括起来成为组，一组的字符重复3次
+print(r) #返回结果是一个列表
+</code></pre>
+<p>[abc]或关系，（ABC）组关系</p>
+<h3 id="匹配模式参数"><a href="#匹配模式参数" class="headerlink" title="匹配模式参数"></a>匹配模式参数</h3><p><code>r = re.findall(&#39;正则表达式&#39;, 字符串，模式1|模式2)</code>多个模式用|连在一起</p>
+<h5 id="匹配-findall"><a href="#匹配-findall" class="headerlink" title="匹配 findall"></a>匹配 findall</h5><blockquote>
+<p>格式：<code>re.findall(子串,主串[,模式|模式2...])</code><br>功能：匹配<br>返回：以列表形式，返回匹配到的子串<br>说明：模式中<code>\|</code>表示且</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">字符</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>re.I</code></td>
+<td style="text-align:center">忽视大小写</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>re.S</code></td>
+<td style="text-align:center">使 . 匹配包括换行在内的所有字符，改变.号的行为</td>
+</tr>
+</tbody>
+</table>
+<h3 id="re模块下的其他正则表达式"><a href="#re模块下的其他正则表达式" class="headerlink" title="re模块下的其他正则表达式"></a>re模块下的其他正则表达式</h3><h4 id="re-sub"><a href="#re-sub" class="headerlink" title="re.sub"></a>re.sub</h4><p>格式：<code>re.sub(原内容，新内容/函数，主串，替换次数)</code><br>功能：替换<br>返回：返回新的主串<br>说明：替换次数为0表全体换，为n表示替换n个</p>
+<pre><code class="python">#示例
+import re
+language = &#39;PythonC#JavaPHPC#&#39;
+r = re.sub(&#39;C#&#39;,&#39;Go&#39;,language,1) 
+print(r) #PythonGoJavaPHPC#
+</code></pre>
+<p>进阶：</p>
+<p>动态替换，根据不同的匹配结果进行不同的替换</p>
+<p>&lt;re.Match object; span=(6, 8), match=’C#’&gt;  返回的第一个C#之前有6个字符，自己占7,8</p>
+<pre><code class="python">import re
+
+def convert(value):
+    #print(value)  
+    matched = value.group()
+    return &#39;!!&#39; + matched + &#39;!!&#39;
+language = &#39;PythonC#JavaPHPC#&#39;
+r = re.sub(&#39;C#&#39;,convert,language)
+print(r)
+#Python!!C#!!JavaPHP!!C#!!
+</code></pre>
+<h4 id="把函数作为参数传递的作用"><a href="#把函数作为参数传递的作用" class="headerlink" title="把函数作为参数传递的作用"></a>把函数作为参数传递的作用</h4><pre><code class="python">import re
+a = &#39;A8C3721D86&#39;
+#找出所有数字，&gt;=6的统一替换成9,&lt;6替换成0
+def convert(value):
+    matched = value.group()
+    if int(matched) &gt;= 6: #默认字符串形式存储
+        return &#39;9&#39;
+    else:
+        return &#39;0&#39;
+r = re.sub(&#39;\d&#39;, convert, a)
+print(r) # A9C0900D99
+</code></pre>
+<h4 id="search与match函数"><a href="#search与match函数" class="headerlink" title="search与match函数"></a>search与match函数</h4><p><a href="https://blog.csdn.net/weixin_43059645/article/details/82047665?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase" target="_blank" rel="noopener">match、search、findall用法区别</a></p>
+<p><strong>match</strong></p>
+<blockquote>
+<p>格式：<code>re.match(子串,主串)</code><br>功能：匹配（仅匹配一个）<br>说明：从首字符开始匹配，若没找到对应的结果返回空,若想获取返回Match对象转为值，则用group()方法 </p>
+</blockquote>
+<p><strong>search</strong></p>
+<blockquote>
+<p>格式：<code>re.search(子串,主串)</code><br>功能：匹配到一个结果（仅匹配一个），就返回结果.若想获取返回Match对象转为值，则用group()方法 </p>
+</blockquote>
+<p><em>match、search的比较示例代码：</em></p>
+<pre><code class="python">import re
+a = &#39;A8C3721D86&#39;
+
+r1 = re.match(&#39;\d&#39;, a)
+print(r1)
+
+r2 = re.search(&#39;\d&#39;, a)
+print(r2)
+
+# 输出结果
+None
+&lt;re.Match object; span=(1, 2), match=&#39;8&#39;&gt;
+</code></pre>
+<p><em>match、search、findall的比较示例代码：</em></p>
+<pre><code class="python">import re
+a = &#39;8C3721D86&#39;
+
+r1 = re.match(&#39;\d&#39;, a)
+print(r1)
+
+r2 = re.search(&#39;\d&#39;, a)
+print(r2)
+
+r3 = re.findall(&#39;\d&#39;, a)
+print(r3)
+
+# 输出结果
+&lt;re.Match object; span=(0, 1), match=&#39;8&#39;&gt;
+&lt;re.Match object; span=(0, 1), match=&#39;8&#39;&gt;
+[&#39;8&#39;, &#39;3&#39;, &#39;7&#39;, &#39;2&#39;, &#39;1&#39;, &#39;8&#39;, &#39;6&#39;]
+</code></pre>
+<h3 id="group分组"><a href="#group分组" class="headerlink" title="group分组"></a>group分组</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">函数</th>
+<th style="text-align:center">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>.group()</code></td>
+<td style="text-align:center">用来提取出分组截获的字符串</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>.span()</code></td>
+<td style="text-align:center">返回匹配到的子串在主串中的位置</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python">import re
+
+s = &#39;life is short,i use python&#39;
+r = re.search(&#39;life(.*)python&#39;,s)
+print(r.group(1)) #获取分组的匹配
+#0永远记录正则表达式的完整匹配结果
+</code></pre>
+<p>用findall</p>
+<pre><code class="python">import re
+
+s = &#39;life is short,i use python&#39;
+r = re.findall(&#39;life(.*)python&#39;,s)
+print(r) #获取分组的匹配
+
+</code></pre>
+<h3 id="理解JSON"><a href="#理解JSON" class="headerlink" title="理解JSON"></a>理解JSON</h3><p>JavaScript Object Notation  JavaScript对象标记</p>
+<blockquote>
+<p>JSON是一种<strong>轻量级</strong>的<strong>数据交换格式</strong>。</p>
+<ul>
+<li>JSON载体：JSON字符串，字符串是json的表现形式</li>
+<li>JSON优势：易于阅读、易于解析、网络传输效率高，适合跨语言交换数据</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>JSON字符串：是指符合JSON格式的字符串</p>
+</blockquote>
+<p><em>注意：JSON中只能使用双引号</em>，轻量相对于xml而言，符合JSON格式的字符串叫做JSON字符串</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200601203759.jpg" style="zoom:50%;"></p>
+<p><strong>json是一种数据格式，适合跨语言交换数据</strong></p>
+<h4 id="反序列化和序列化"><a href="#反序列化和序列化" class="headerlink" title="反序列化和序列化"></a><strong>反序列化和序列化</strong></h4><p>由字符串到语言下的某一数据结构叫反序列化</p>
+<p>python字典转化为字符串</p>
+<p> <strong>JSON函数</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数</th>
+<th style="text-align:center">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>json.loads(json字符串)</code></td>
+<td style="text-align:center">反序列化，JSON字符串转Python对象</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>json.dumps(python对象)</code></td>
+<td style="text-align:center">序列化，Python对象转JSON字符串</td>
+</tr>
+</tbody>
+</table>
+<p><strong>JSON与Python类型的对照</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">JSON</th>
+<th style="text-align:center">Python</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>object</code></td>
+<td style="text-align:center"><code>dict</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>array</code></td>
+<td style="text-align:center"><code>list</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>string</code></td>
+<td style="text-align:center"><code>str</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>number(int)</code></td>
+<td style="text-align:center"><code>int</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>number(real)</code></td>
+<td style="text-align:center"><code>float</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>true</code></td>
+<td style="text-align:center"><code>True</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>flase</code></td>
+<td style="text-align:center"><code>False</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>null</code></td>
+<td style="text-align:center"><code>None</code></td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python">#反序列化
+import json
+json_str = &#39;{&quot;name&quot;:&quot;qiyue&quot;, &quot;age&quot;:18}&#39; #数字不用加引号
+#json有很多数据类型，如数组&#39;[{&quot;name&quot;:&quot;qiyue&quot;, &quot;age&quot;:18，“},{&quot;name&quot;:&quot;qiyue&quot;, &quot;age&quot;:18}]&#39; 
+#把json字符串转换成python自己的数据类型(字典)
+student = json.loads(json_str)
+print(type(student))  #dict字典类型
+print(student)
+print(student[&quot;name&quot;])
+print(student[&quot;age&quot;])
+
+********************
+json_str = &#39;[{&quot;name&quot;:&quot;qiyue&quot;, &quot;age&quot;:18}&#39;,{&quot;name&quot;:&quot;qiyue&quot;, &quot;age&quot;:18}&#39;]
+</code></pre>
+<pre><code class="python">#序列化
+import json
+student = [
+            {&#39;name&#39;:&#39;qiyue&#39;, &#39;age&#39;:18 ,&#39;flag&#39;:False},
+            {&#39;name&#39;:&#39;qiyue&#39;, &#39;age&#39;:18}
+          ]
+
+#把json字符串转换成对应的python结构(字典)
+json_str = json.dumps(student)
+print(type(json_str))
+print(json_str) 
+</code></pre>
+<p>JSON对象，JSON，JSON字符串？</p>
+<p>JSON对象在JavaScript中概念成立</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200601213959.jpg" style="zoom:50%;"></p>
+<p>JSON有自己的数据类型，虽然它和JavaScript的数据类型有些相似</p>
+<p>REST服务的标准格式：JSON</p>
+
+        </div>
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/donate/alipay.jpg"></li>
+                <li class="wechat-code"><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/donate/wechatqr.jpg"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+        
+          
+            <div class="post-nepre full next">
+          
+            <a href="/2020/05/31/Python入门与进阶（五）/" rel="next">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200529212115.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200529212115.jpg">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                Python入门与进阶（五）</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
       
-  <!-- 首页默认取最最新文章集 -->
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/06/01/Python入门与进阶（六）/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200529212115.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/06/01/Python入门与进阶（六）/">
-    Python入门与进阶（五）</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-6-1</div>
-    <p>
-    正则表达式与JSON</p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/06/01/Python入门与进阶（六）/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/05/31/Python入门与进阶（五）/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200529212115.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/05/31/Python入门与进阶（五）/">
-    Python入门与进阶（五）</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-5-31</div>
-    <p>
-    面向对象</p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/05/31/Python入门与进阶（五）/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/05/30/Python入门与进阶（四）/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200529212115.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/05/30/Python入门与进阶（四）/">
-    Python入门与进阶（四）</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-5-30</div>
-    <p>
-    包、模块、函数</p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/05/30/Python入门与进阶（四）/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/05/29/Python入门与进阶（三）/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200529212115.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/05/29/Python入门与进阶（三）/">
-    Python入门与进阶（三）</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-5-29</div>
-    <p>
-    变量与运算符 语句</p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/05/29/Python入门与进阶（三）/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/05/26/Python入门与进阶（二）/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200526010538.png" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/05/26/Python入门与进阶（二）/">
-    Python入门与进阶（二）</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-5-26</div>
-    <p>
-    Python的基本类型</p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/05/26/Python入门与进阶（二）/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/05/26/Python入门与进阶（一）/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200526010538.png" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/05/26/Python入门与进阶（一）/">
-    Python入门与进阶（一）</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-5-26</div>
-    <p>
-    Python入门导学</p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/05/26/Python入门与进阶（一）/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
+<div id="vcomments"></div>
+<script>
+  window.onload = function(){
+      var valine = new Valine();
+      valine.init({
+        el: '#vcomments',
+        appId: "4NBvruApUCpLtmlsyQLevDfx-gzGzoHsz",
+        appKey: "eTSHbT3jvLQPcVYMC7QFXQFd",
+        path: window.location.pathname,
+        placeholder: "你是我一生只会遇见一次的惊喜 ..."
+      })
+  }
+</script>
 
-
-      <div class="clearer">
-      </div>
-    </main>
-    <!--  -->
-    
-  </div>
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="www.yulinblog.com" class="profile gravatar"><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/avatar.jpg" itemprop="image" alt="YUYU" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="www.yulinblog.com" itemprop="url" rel="author">YUYU</a>
+            </h3>
+          </div>
+        </div>
+        <hr>
+        <p><i class="iconfont icon-write"></i>一个好奇的人</p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
 </div>
+
+
+
     </div>    
     <div class="ins-search">
     <div class="ins-search-mask"></div>
