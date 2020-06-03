@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">风中的鱼</title>
+  <title itemprop="name">Python入门与进阶（七） | 风中的鱼</title>
   
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -327,495 +327,505 @@
   </div>
 </header>
 
-      <div class="blank" style="padding-top: 0px;"></div>
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+<div class="pattern-center-blank"></div>
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url(//cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200529212115.jpg);" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="//cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200529212115.jpg">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      Python入门与进阶（七）</h1>
+      <p class="entry-census">
+        <span>
+          <a href="www.yulinblog.com">
+            <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/avatar.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="www.yulinblog.com">YUYU</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2020-6-3<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
+  </div>
+
 <div id="content" class="site-content">
-  
-  <div class="notice" style="margin-top:60px">
-    <i class="iconfont icon-notification">
-    </i>
-    <div class="notice-content">起风了，请继续完成理想吧，不留下遗憾地去完成</div>
-  </div>
-  
-  <div class="top-feature-row">
-  <h1 class="fes-title" style="font-family: 'Ubuntu', sans-serif;">
-  <i class="fa fa-anchor" aria-hidden="true">
-  </i>
-  相遇</h1>
-  
-  <div class="top-feature-v2">
-    <div class="the-feature square from_left_and_right">
-      <a href="/categories/笔记/" target="_blank">
-        <div class="img">
-          <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/startdash/1w.jpg">
-        </div>
-        <div class="info">
-          <h3>NOTES</h3>
-          <p>温故而知新</p>
-        </div>
-      </a>
-    </div>
-  </div>
-  
-  <div class="top-feature-v2">
-    <div class="the-feature square from_left_and_right">
-      <a href="/categories/项目/" target="_blank">
-        <div class="img">
-          <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/startdash/2w.jpg">
-        </div>
-        <div class="info">
-          <h3>Program</h3>
-          <p>代码使我快乐</p>
-        </div>
-      </a>
-    </div>
-  </div>
-  
-  <div class="top-feature-v2">
-    <div class="the-feature square from_left_and_right">
-      <a href="/" target="_blank">
-        <div class="img">
-          <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/startdash/wangshiwu.jpg">
-        </div>
-        <div class="info">
-          <h3>鱼鱼的万事屋</h3>
-          <p>技术服务</p>
-        </div>
-      </a>
-    </div>
-  </div>
-  
-</div>
   <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
-      <h1 class="main-title" style="font-family: 'Ubuntu', sans-serif;">
-      <i class="fa fa-envira" aria-hidden="true"></i>
-      Discovery</h1>
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+        <div class="entry-content">
+          <p>本章节我们揭开Python进阶部分的高级特性，详细讲解枚举、闭包，并对函数式编程做出介绍</p>
+<h3 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h3><h4 id="枚举是一个类"><a href="#枚举是一个类" class="headerlink" title="枚举是一个类"></a>枚举是一个类</h4><pre><code class="python">from enum import Enum
+class VIP(Enum): #继承Enum类
+    YELLOW = 1 #数字可以替换成任意数据类型，只要不同就行
+    GREEN = 2
+    BLACK = 3
+    RED = 4
+
+print(VIP.YELLOW) #VIP.YELLOW 打印出的是名字，类型是enum VIP
+VIP.YELLOW = 6 #会报错 ，不可更改
+
+for v in VIP
+#for v in VIP.__members__: 把标签的别名也遍历得到
+    print(v) #枚举的遍历
+</code></pre>
+<p><strong>枚举和普通类相比的优势</strong></p>
+<p>如果没有枚举类,在模块中通过变量表示枚举类型</p>
+<pre><code class="python">yellow = 1 #法一
+green = 2  
+{&#39;yellow&#39;:1,&#39;green:2&#39;} #法二
+
+class TypeDiamond(): #法三
+    yellow = 1 
+    green = 2
+</code></pre>
+<p>字典和类都是可变的。没有防止相同值的功能</p>
+<h4 id="枚举类型、枚举名称与枚举值"><a href="#枚举类型、枚举名称与枚举值" class="headerlink" title="枚举类型、枚举名称与枚举值"></a>枚举类型、枚举名称与枚举值</h4><p><code>print(VIP.YELLOW.value)</code>获取枚举值  #6</p>
+<p><code>print(VIP.YELLOW.name)</code> 获取枚举名字  #YELLOW</p>
+<p><code>print(VIP[&#39;GREEN&#39;])</code>  获取枚举类型 #VIP.GREEN</p>
+<h4 id="枚举-比较运算"><a href="#枚举-比较运算" class="headerlink" title="枚举 比较运算"></a>枚举 比较运算</h4><pre><code class="python">from enum import Enum
+class VIP(Enum): #继承Enum类
+    YELLOW = 1 #数字可以替换成任意数据类型，只要不同就行
+    GREEN = 2
+    BLACK = 3
+    RED = 4
+
+result = VIP.GREEN == VIP.BLACK  #False
+result = VIP.GREEN == 2 #虽然不报错，但显示False
+</code></pre>
+<p>枚举类型直接不能做大小比较</p>
+<h4 id="枚举注意事项"><a href="#枚举注意事项" class="headerlink" title="枚举注意事项"></a>枚举注意事项</h4><ul>
+<li>其标签值不可修改</li>
+<li>其不允许相同标签</li>
+<li>其标签不支持大于小于比较符</li>
+<li>其若有多个标签是同值的，则后续的都看做第一个标签的别名。在遍历枚举类时，别名不会被打印出来</li>
+<li>其不允许实例化</li>
+<li><code>@unique</code> 装饰器，则不允许标签同值</li>
+</ul>
+<h4 id="枚举转换"><a href="#枚举转换" class="headerlink" title="枚举转换"></a>枚举转换</h4><p>数据库中存储枚举类型最好采用值（数字）</p>
+<p>代码中不建议用数值，建议用枚举类<code>if a == VIP.YELLOW</code></p>
+<pre><code class="python">from enum import Enum
+class VIP(Enum): #继承Enum类
+    YELLOW = 1 #数字可以替换成任意数据类型，只要不同就行
+    GREEN = 2
+    BLACK = 3
+    RED = 4
+</code></pre>
+<p>把数字转为枚举数据类型</p>
+<pre><code class="python">a = 1
+print(VIP(a)) 
+</code></pre>
+<pre><code class="python">from enum import Enum, unique
+
+# 如果枚举类继承的是IntEnum，则标签值只允许为int类型
+from enum import IntEnum  
+
+# @unique 加上这个，则不允许标签同值
+class VIP(Enum):
+    Yellow = 1
+    Yellow_ALIAS = 1
+    # Yellow = 2 # 报错，枚举类不允许相同标签
+    Green = 2
+    Black = 3
+
+
+class VIP1(Enum):
+    Yellow = 1
+    Yellow_ALIAS = 1
+    Green = 2
+    Black = 3
+
+
+class Common:
+    Yellow = 1
+    Black = 3
+    Red = 4
+
+print(&#39;-------枚举类型及值-------&#39;)
+print(VIP.Yellow)
+print(VIP[&#39;Yellow&#39;])
+print(VIP.Yellow.name)
+
+print(type(VIP.Yellow))
+print(type(VIP[&#39;Yellow&#39;]))
+print(type(VIP.Yellow.name))
+
+print(&#39;-------枚举类型与普通类对比-------&#39;)
+print(VIP.Yellow.value)
+print(Common.Yellow)
+
+Common.Yellow = 2
+# VIP.Yellow=2 # 报错，枚举类不可修改
+
+# 遍历枚举类——Yellow_ALIAS不会被打印
+print(&#39;-------for v in VIP-------&#39;)
+for v in VIP:
+    print(v)
+
+# Yellow_ALIAS会被打印
+print(&#39;-------for v in VIP.__members__-------&#39;)
+for v in VIP.__members__:
+    print(v)
+
+print(&#39;-------for v in VIP.__members__.items()-------&#39;)
+for v in VIP.__members__.items():
+    print(v)
+
+print(&#39;-------成员变量的别名及比较运算符-------&#39;)
+print(VIP.Yellow_ALIAS)
+print(VIP.Yellow is VIP.Yellow_ALIAS)
+print(VIP.Yellow == VIP.Yellow_ALIAS)
+print(VIP.Yellow == VIP1.Yellow_ALIAS)
+# print(VIP.Yellow&lt;VIP.Black) # 报错，枚举类不支持大于小于运算符
+
+print(&#39;-------枚举转换-------&#39;)
+a = 1
+print(VIP(a))
+
+# 输出结果
+-------枚举类型及值-------
+VIP.Yellow
+VIP.Yellow
+Yellow
+&lt;enum &#39;VIP&#39;&gt;
+&lt;enum &#39;VIP&#39;&gt;
+&lt;class &#39;str&#39;&gt;
+-------枚举类型与普通类对比-------
+1
+1
+-------for v in VIP-------
+VIP.Yellow
+VIP.Green
+VIP.Black
+-------for v in VIP.__members__-------
+Yellow
+Yellow_ALIAS
+Green
+Black
+-------for v in VIP.__members__.items()-------
+(&#39;Yellow&#39;, &lt;VIP.Yellow: 1&gt;)
+(&#39;Yellow_ALIAS&#39;, &lt;VIP.Yellow: 1&gt;)
+(&#39;Green&#39;, &lt;VIP.Green: 2&gt;)
+(&#39;Black&#39;, &lt;VIP.Black: 3&gt;)
+-------成员变量的别名及比较运算符-------
+VIP.Yellow
+True
+True
+False
+-------枚举转换-------
+VIP.Yellow
+
+</code></pre>
+<p>扩展：</p>
+<pre><code class="python">from enum import IntEnum，unique #强制要求值是数字,限制值不能相同
+</code></pre>
+<p>加强<a href="https://www.cnblogs.com/pony1223/p/7608955.html" target="_blank" rel="noopener">设计模式</a>的学习,进阶学习</p>
+<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p>函数：其他语言中，函数只是一段可执行的代码，并不是对象，不能实例化。</p>
+<p>在python中，一切皆对象。可以把函数赋给一个变量，可以把一个函数当做另一个函数的参数</p>
+<p>示例：</p>
+<pre><code class="python">def curve_pre(): #调用curve_pre函数，拿到的是一个函数结果
+    a = 25
+    def curve(x):
+        return a*x*x      
+    return curve #把curve函数作为结果返回给curve_pre
+f = curve_pre()
+print(f(2))  #100
+</code></pre>
+<pre><code class="python">def curve_pre(): #调用curve_pre函数，拿到的是一个函数结果
+    a = 25
+    def curve(x):
+        return a*x*x      
+    return curve #把curve函数作为结果返回给curve_pre实际是返回了闭包
+
+a = 10
+f = curve_pre()
+print(f(2)) #100 没有取a=10来运算（闭包的取值）
+</code></pre>
+<p><a href="https://www.zhihu.com/question/34210214" target="_blank" rel="noopener">闭包定义</a></p>
+<p>闭包 = 函数 + 环境变量</p>
+<p>（环境变量必须函数定义时的外部变量，且不为全局变量）</p>
+<p>闭包的意义：把函数调用的现场保护起来了，不受外部变量的影响</p>
+<h4 id="闭包的经典误区"><a href="#闭包的经典误区" class="headerlink" title="闭包的经典误区"></a>闭包的经典误区</h4><pre><code class="python">def f1():
+    a = 10 
+    def f2():
+        a = 20 #a被ptython认为是一个局部变量，此时并不引用外面的环境变量，因此不是闭包
+        print(a) #20
+    print(a) #10 第一次打印
+    f2()  #执行f2,a=20
+    print(a) #10内部的a(局部变量)不会影响外部的a 
+
+f1()  #1.执行 f1,开始调用f1函数
+</code></pre>
+<p>结论：如果没有在函数中引用全局变量，或者仅引用局部变量，都不会形成闭包</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200602220100.png" style="zoom:67%;"></p>
+<p><strong>练习：</strong></p>
+<p>编写函数，得到旅行者的位置（关键需要保存上一次函数调用的结果状态）</p>
+<p>非闭包方法</p>
+<p>代码质量不高，在函数内部定义全局变量，代码自封性不强（因为可能其他代码段也会改变全局变量）</p>
+<pre><code class="python">#编写函数，得到旅行者的位置
+#关键需要保存上一次函数调用的结果状态
+origin = 0
+
+def go(step):
+    global origin #声明origin是全局变量
+    new_pos = origin + step
+    origin = new_pos #python认为等号左边origin此时是局部变量，是存在的，
+                    #不会在外面引用,解决方法：增加global origin
+
+    return new_pos
+print(go(2))
+print(go(3))
+print(go(6))
+</code></pre>
+<p>闭包方法：</p>
+<pre><code class="python">origin = 0
+#这是工厂模式
+def factory(pos): #参数是当前旅行者正处于的位置,pos是环境变量，有保存现场功能
+    def go(step):
+        nonlocal pos #强制让pos不是局部变量
+        new_pos = pos +step
+        pos = new_pos #pos此时会认为是局部变量
+        return new_pos
+    return go
+
+tourist = factory(origin)
+print(tourist(2))
+print(tourist(3))
+print(tourist(5))
+</code></pre>
+<h3 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h3><p>本章节进一步介绍函数式编程的lambda、mapeduce、filter以及装饰器</p>
+<p>匿名函数：lambda表达式</p>
+<pre><code class="python">def add(x, y):
+    return x+y
+---------用匿名函数实现--------------
+#lambda parameter_list: expression #不能再表达式中用代码块（如赋值语句等）
+f = lambda x,y: x+y
+f(1,2) #匿名函数的调用
+--------配合正则表达式使用会更方便------
+</code></pre>
+<h4 id="三元表达式"><a href="#三元表达式" class="headerlink" title="三元表达式"></a>三元表达式</h4><p>其他语言：a &gt; y ? x : y 判断条件？结果1：结果2</p>
+<p>python:条件为真时返回的结果 if 条件判断 else 条件为假时返回的结果</p>
+<p><code>x if x&gt;y else y</code></p>
+<h4 id="map"><a href="#map" class="headerlink" title="map"></a>map</h4><p>闭包不建议在业务代码使用，在架构编写方面可以推荐。</p>
+<p>map推荐在python中多使用</p>
+<pre><code class="python">list_x = [1,2,3,4,5,6,7,8]
+
+def square(x):
+    return x*x
+
+-------使用for循环------
+for x in list_x:
+    square(x)
+
+--------使用map------
+r = map(square,list_x)
+print(r) #map对象
+print(list(r))
+map函数映射，把原来集合元素通过函数关系映射到另一个集合。
+
+--------使用map和lambda精简--------
+r = map(lambda x: x*x,list_x)
+
+#map多参数的传入， #x,y参数个数要相等，否则结果有缺失
+list_x = [1,2,3,4,5,6,7,8]
+list_y = [1,2,3,4,5,6,7,8]
+r = map(lambda x,y: x*x+y,list_x,list_y)
+</code></pre>
+<h4 id="reduce"><a href="#reduce" class="headerlink" title="reduce"></a>reduce</h4><pre><code class="python">from functools import reduce
+
+#连续计算，连续调用lambda
+每一次lamnda的计算结果将作为下一次表达式的参数作为运算，直至遍历结果
+list_x = [1,2,3,4,5,6,7,8]
+r = reduce(lambda x,y: x+y,list_x)
+print(r)
+
+1+2
+3（上一次表达式的结果）+3
+6+4
+((((1+2)+3)+4)+5)
+...
+</code></pre>
+<p>lambda是联系计算，计算操作表达式内定义</p>
+<p>扩展：大数据计算模型（map/reduce） 映射 规约 并行计算</p>
+<h4 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h4><pre><code class="python">#filter
+list_x = [1, 0, 1, 0, 0, 1]
+r = filter(lambda x:True if x == 1 else False, list_x)
+print(list(r))
+</code></pre>
+<h4 id="命令式编程vs函数式编程"><a href="#命令式编程vs函数式编程" class="headerlink" title="命令式编程vs函数式编程"></a>命令式编程vs函数式编程</h4><p>命令式编程关键点：</p>
+<p>def  if else  for</p>
+<p>函数式编程：</p>
+<p>map reduce filter lambda算子</p>
+<p>lisp 函数式编程的鼻祖</p>
+<h3 id="装饰器"><a href="#装饰器" class="headerlink" title="装饰器"></a>装饰器</h3><pre><code class="python">import time
+def f1():
+    print(time.time()) #结果是unix时间戳，1591168510.2112603
+    print(&#39;This is a function&#39;)
+
+#如果有100个函数，都需要自带打印时间的功能。
+#原则：当需求产生变更的时候，尽量不改变函数、对象或类下面的具体实现
+#对修改是封闭的，对扩展是开放的
+f1()
+</code></pre>
+<p>解决方案：</p>
+<pre><code class="python">import time
+def f1():
+    print(&#39;This is a function&#39;)
+
+#如果有100个函数，都需要自带打印时间的功能。
+#原则：当需求产生变更的时候，尽量不改变函数、对象或类下面的具体实现
+#对修改是封闭的，对扩展是开放的
+def f2():
+    print(&#39;This is a function&#39;)
+
+def print_current_time(func):
+    print(time.time()) 
+    func()
+
+print_current_time(f1)
+print_current_time(f2)
+</code></pre>
+<p>上述缺点：新增的功能是属于每个函数的，最好能和原来的函数绑定</p>
+<p>改进：</p>
+<pre><code class="python">import time 
+#装饰器结构
+def decorator(func):
+    def wrapper():
+        print(time.time())
+        func()
+    return wrapper
+
+def f1():
+    print(&#39;this is a function&#39;)
+
+f = decorator(f1) #改变了调用方式
+f()
+</code></pre>
+<p>改进：</p>
+<pre><code class="python">import time 
+#装饰器结构
+def decorator(func):
+    def wrapper():
+        print(time.time())
+        func()
+    return wrapper
+
+@decorator    #语法糖，不改变原来的调用方式
+def f1():
+    print(&#39;this is a function&#39;)
+
+f1() #不改变原来的调用方式
+</code></pre>
+<p>体现了AOP的设计思想</p>
+<p>支持不同参数：</p>
+<pre><code class="python">import time 
+#装饰器结构
+def decorator(func):
+    def wrapper(*args): #支持不同参数的个数
+        print(time.time())
+        func(*args)
+    return wrapper
+
+@decorator    #不改变原来的调用方式
+def f1(func_name):
+    print(&#39;this is a function&#39;+func_name)
+
+@decorator    #不改变原来的调用方式
+def f2(func_name1,func_name2):
+    print(&#39;this is a function&#39;+func_name1)
+
+f1(&#39;test func&#39;)
+f2(&#39;test func1&#39;,&#39;test func2&#39;)
+</code></pre>
+
+        </div>
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/donate/alipay.jpg"></li>
+                <li class="wechat-code"><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/donate/wechatqr.jpg"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+        
+          
+            <div class="post-nepre full next">
+          
+            <a href="/2020/06/01/Python入门与进阶（六）/" rel="next">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200529212115.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200529212115.jpg">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                Python入门与进阶（六）</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
       
-  <!-- 首页默认取最最新文章集 -->
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
+<div id="vcomments"></div>
+<script>
+  window.onload = function(){
+      var valine = new Valine();
+      valine.init({
+        el: '#vcomments',
+        appId: "4NBvruApUCpLtmlsyQLevDfx-gzGzoHsz",
+        appKey: "eTSHbT3jvLQPcVYMC7QFXQFd",
+        path: window.location.pathname,
+        placeholder: "你是我一生只会遇见一次的惊喜 ..."
+      })
+  }
+</script>
 
-  <div class="post-thumb">
-    <a href="/2020/06/03/Python入门与进阶（七）/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="//cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200529212115.jpg">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2020-6-3 19:06</div>
-      <a href="/2020/06/03/Python入门与进阶（七）/" class="post-title">
-        <h3>Python入门与进阶（七）</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/Python/">Python<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/笔记/">笔记</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p>Python高级语法和用法</p>
-        <div class="post-bottom">
-          <a href="/2020/06/03/Python入门与进阶（七）/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="www.yulinblog.com" class="profile gravatar"><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/avatar.jpg" itemprop="image" alt="YUYU" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="www.yulinblog.com" itemprop="url" rel="author">YUYU</a>
+            </h3>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2020/06/01/Python入门与进阶（六）/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200529212115.jpg">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2020-6-1 22:06</div>
-      <a href="/2020/06/01/Python入门与进阶（六）/" class="post-title">
-        <h3>Python入门与进阶（六）</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/Python/">Python<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/笔记/">笔记</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p>正则表达式与JSON</p>
-        <div class="post-bottom">
-          <a href="/2020/06/01/Python入门与进阶（六）/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2020/05/31/Python入门与进阶（五）/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200529212115.jpg">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2020-5-31 10:05</div>
-      <a href="/2020/05/31/Python入门与进阶（五）/" class="post-title">
-        <h3>Python入门与进阶（五）</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/Python/">Python<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/笔记/">笔记</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p>面向对象</p>
-        <div class="post-bottom">
-          <a href="/2020/05/31/Python入门与进阶（五）/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2020/05/30/Python入门与进阶（四）/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200529212115.jpg">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2020-5-30 13:05</div>
-      <a href="/2020/05/30/Python入门与进阶（四）/" class="post-title">
-        <h3>Python入门与进阶（四）</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/Python/">Python<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p>包、模块、函数</p>
-        <div class="post-bottom">
-          <a href="/2020/05/30/Python入门与进阶（四）/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2020/05/29/Python入门与进阶（三）/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200529212115.jpg">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2020-5-29 21:05</div>
-      <a href="/2020/05/29/Python入门与进阶（三）/" class="post-title">
-        <h3>Python入门与进阶（三）</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/Python/">Python<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/笔记/">笔记</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p>变量与运算符 语句</p>
-        <div class="post-bottom">
-          <a href="/2020/05/29/Python入门与进阶（三）/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2020/05/26/Python入门与进阶（二）/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200526010538.png">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2020-5-26 22:05</div>
-      <a href="/2020/05/26/Python入门与进阶（二）/" class="post-title">
-        <h3>Python入门与进阶（二）</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/Python/">Python<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/笔记/">笔记</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p>Python的基本类型</p>
-        <div class="post-bottom">
-          <a href="/2020/05/26/Python入门与进阶（二）/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2020/05/26/Python入门与进阶（一）/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200526010538.png">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2020-5-26 01:05</div>
-      <a href="/2020/05/26/Python入门与进阶（一）/" class="post-title">
-        <h3>Python入门与进阶（一）</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/Python/">Python<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/笔记/">笔记</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p>Python入门导学</p>
-        <div class="post-bottom">
-          <a href="/2020/05/26/Python入门与进阶（一）/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2020/05/25/git基础专题（四）/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200521100712.jpg">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2020-5-25 19:05</div>
-      <a href="/2020/05/25/git基础专题（四）/" class="post-title">
-        <h3>git基础专题（四）</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/git/">git<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/笔记/">笔记</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p>git命令集</p>
-        <div class="post-bottom">
-          <a href="/2020/05/25/git基础专题（四）/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2020/05/23/git基础专题（三）/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200521100712.jpg">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2020-5-23 16:05</div>
-      <a href="/2020/05/23/git基础专题（三）/" class="post-title">
-        <h3>git基础专题（三）</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/git/">git<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/笔记/">笔记</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p>git分支管理 标签管理</p>
-        <div class="post-bottom">
-          <a href="/2020/05/23/git基础专题（三）/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2020/05/22/git基础专题（二）/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200521100712.jpg">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2020-5-22 21:05</div>
-      <a href="/2020/05/22/git基础专题（二）/" class="post-title">
-        <h3> git基础专题（二）</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/git/">git<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/笔记/">笔记</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p>git命令使用 git工作流</p>
-        <div class="post-bottom">
-          <a href="/2020/05/22/git基础专题（二）/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-
-
-    </main>
-      <!-- 首页默认取最最新文章集 -->
-    <!-- 
-      <nav class="navigator">
-        
-        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="iconfont icon-right"></i></a>
-      </nav>
-     -->
-  </div>
-  
-    <div id="pagination"><a href="/page/2/" class="">Previous</a></div>
-  
+        <hr>
+        <p><i class="iconfont icon-write"></i>一个好奇的人</p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
 </div>
+
+
 
     </div>    
     <div class="ins-search">
