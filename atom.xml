@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2020-06-10T04:35:55.843Z</updated>
+  <updated>2020-06-10T16:31:03.437Z</updated>
   <id>/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java教程笔记之Maven基础</title>
+    <link href="/2020/06/11/Java%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0%E4%B9%8BMaven%E5%9F%BA%E7%A1%80/"/>
+    <id>/2020/06/11/Java教程笔记之Maven基础/</id>
+    <published>2020-06-10T16:28:11.000Z</published>
+    <updated>2020-06-10T16:31:03.437Z</updated>
+    
+    <summary type="html">
+    
+      Maven基础
+    
+    </summary>
+    
+      <category term="笔记" scheme="/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Java" scheme="/tags/Java/"/>
+    
+  </entry>
   
   <entry>
     <title>Java教程笔记之面向对象编程</title>
@@ -412,28 +432,6 @@
     
     
       <category term="Linux" scheme="/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Sakura主题配置总结</title>
-    <link href="/2020/05/19/Hexo-Theme-Sakura/"/>
-    <id>/2020/05/19/Hexo-Theme-Sakura/</id>
-    <published>2020-05-19T02:45:01.000Z</published>
-    <updated>2020-05-20T15:44:32.309Z</updated>
-    
-    <summary type="html">
-    
-      hexo-sakura主题使用教程
-    
-    </summary>
-    
-      <category term="技术" scheme="/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="HEXO" scheme="/tags/HEXO/"/>
-    
-      <category term="sakura" scheme="/tags/sakura/"/>
     
   </entry>
   
