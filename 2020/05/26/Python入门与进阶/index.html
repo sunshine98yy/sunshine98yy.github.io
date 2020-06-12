@@ -1,0 +1,2623 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  
+  <title itemprop="name">Python入门与进阶 | 风中的鱼</title>
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  <meta http-equiv="x-dns-prefetch-control" content="on">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+SerifMerriweather|Merriweather+Sans|Source+Code+Pro|Ubuntu:400,700|Noto+Serif+SC" media="all">
+  <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+  <link rel="stylesheet" id="saukra_css-css" href="/css/style.css" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/lib.min.css" media="all">
+  <link rel="stylesheet" href="/css/font.css" media="all">
+  <link rel="stylesheet" href="/css/insight.css" media="all">
+  <link rel="stylesheet" href="/css/jquery.fancybox.min.css" media="all">
+  <link rel="stylesheet" href="/css/zoom.css" media="all">
+  <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<!--   <link rel="stylesheet" id="saukra_css-css" href="https://2heng.xin/wp-content/cache/autoptimize/css/autoptimize_ad42a61f4c7d4bdd9f91afcff6b5dda5.css
+" type="text/css" media="all"> -->
+  <script>
+  /*Initial Variables*/
+  var mashiro_option = new Object();
+  var mashiro_global = new Object();
+  mashiro_option.NProgressON = true;
+  /* 
+   * 邮箱信息之类的东西可以填在这里，这些js变量基本都作用于sakura-app.js
+   * 这样的设置仅是为了方便在基于PHP开发的主题中设置js变量，既然移植到了Node上，我想或许可以精简这一逻辑吧
+   */
+  mashiro_option.email_domain = "";
+  mashiro_option.email_name = "";
+  mashiro_option.cookie_version_control = "";
+  mashiro_option.qzone_autocomplete = false;
+  mashiro_option.site_name = "ひみつきちYUYU";
+  mashiro_option.author_name = "YUYU";
+  mashiro_option.site_url = "www.yulinblog.com";
+  mashiro_option.v_appId = "4NBvruApUCpLtmlsyQLevDfx-gzGzoHsz";
+  mashiro_option.v_appKey = "eTSHbT3jvLQPcVYMC7QFXQFd";
+  mashiro_option.mathjax = "0";
+  mashiro_option.qq_api_url = "https://api.mashiro.top/qqinfo/"; 
+  mashiro_option.qq_avatar_api_url = "https://api.mashiro.top/qqinfo/";
+
+  // mashiro_option.jsdelivr_css_src = "https://cdn.jsdelivr.net/gh/moezx/cdn@3.4.5/css/lib.min.css";
+  // mashiro_option.float_player_on = true;
+
+  /*End of Initial Variables*/
+  </script>
+  <script type="text/javascript">
+  var bg = "https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/cover/5.jpg,https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/cover/3.jpg,https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/cover/4.jpg,https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/cover/6.jpg".split(",");
+  var bgindex = Math.floor(Math.random()*bg.length);
+  if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
+    alert('朋友，IE浏览器未适配哦~');
+  }
+  </script>
+  <style type="text/css">
+  .hljs-ln{border-collapse:collapse}.hljs-ln td{padding:0}.hljs-ln-n:before{content:attr(data-line-number)}
+  </style>
+  <style type="text/css">.site-top .lower nav{display:block !important;}.author-profile i,.post-like a,.post-share .show-share,.sub-text,.we-info a,span.sitename,.post-more i:hover,#pagination a:hover,.post-content a:hover,.float-content i:hover{color:#FE9600}.feature i,.download,.navigator i:hover,.links ul li:before,.ar-time i,span.ar-circle,.object,.comment .comment-reply-link,.siren-checkbox-radio:checked + .siren-checkbox-radioInput:after{background:#FE9600}::-webkit-scrollbar-thumb{background:#FE9600}.download,.navigator i:hover,.link-title,.links ul li:hover,#pagination a:hover,.comment-respond input[type='submit']:hover{border-color:#FE9600}.entry-content a:hover,.site-info a:hover,.comment h4 a,#comments-navi a.prev,#comments-navi a.next,.comment h4 a:hover,.site-top ul li a:hover,.entry-title a:hover,#archives-temp h3,span.page-numbers.current,.sorry li a:hover,.site-title a:hover,i.iconfont.js-toggle-search.iconsearch:hover,.comment-respond input[type='submit']:hover{color:#FE9600}.comments .comments-main{display:block !important;}.comments .comments-hidden{display:none !important;}background-position:center center;background-attachment:inherit;}
+  </style>
+</head>
+</html>
+<body class="page-template page-template-user page-template-page-analytics page-template-userpage-analytics-php page page-id-1297 chinese-font serif isWebKit">
+  <div class="scrollbar" id="bar">
+  </div>
+  <a href="#" class="cd-top faa-float animated"></a>
+  <section id="main-container">
+    <div class="headertop ">
+  <div id="banner_wave_1"></div>
+  <div id="banner_wave_2"></div>
+  <figure id="centerbg" class="centerbg">
+    <div class="focusinfo no-select">
+      <div class="header-tou">
+        <a href="www.yulinblog.com">
+          <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/avatar.jpg">
+        </a>
+      </div>
+      <div class="header-info">
+        <p>在海边捡贝壳的孩子</p>
+        <div class="top-social_v2">
+          <li id="bg-pre">
+            <img class="flipx" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/other/next-b.svg">
+          </li>
+          
+            
+              
+                <li>
+                  <a href="https://github.com/sunshine98yy" target="_blank" class="social-github" title="github">
+                    <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/social/github1.png">
+                  </a>
+                </li>
+              
+            
+              
+                <li>
+                  <a href="mailto:sunshine98yy@163.com" target="_blank" class="social-github" title="email">
+                    <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/social/email.svg">
+                  </a>
+                </li>
+              
+            
+              
+                <li class="wechat">
+                  <a href="/#">
+                    <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/social/wechat.png">
+                  </a>
+                  <div class="wechatInner">
+                    <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/whchat.jpg">
+                  </div>
+                </li>
+              
+            
+          
+          <li id="bg-next">
+            <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/other/next-b.svg">
+          </li>
+        </div>
+      </div>
+    </div>
+  </figure>
+  <div id="video-container" style="">
+    <video style="object-fit: fill" id="bgvideo" class="video" video-name="" src="" width="auto" preload="auto">
+    </video>
+    <div id="video-btn" class="loadvideo videolive">
+    </div>
+    <div id="video-add">
+    </div>
+    <div class="video-stu">
+    </div>
+  </div>
+  <div class="headertop-down faa-float animated" onclick="headertop_down()">
+    <span>
+      <i class="fa fa-chevron-down" aria-hidden="true">
+      </i>
+    </span>
+  </div>
+</div>
+    <div id="page" class="site wrapper">
+      <header class="site-header no-select gizle sabit" role="banner">
+  <div class="site-top">
+    <div class="site-branding">
+      <span class="site-title">
+        <span class="logolink moe-mashiro">
+          <a href="/">
+            <span class="sakurasono">ひみつきち</span>
+            <span class="shironeko">YUYU</span>
+          </a>
+        </span>
+      </span>
+    </div>
+    <div class="searchbox search-form-submit">
+      <i class="iconfont js-toggle-search iconsearch icon-search">
+      </i>
+    </div>
+    <div id="show-nav" class="showNav mobile-fit">
+      <div class="line line1">
+      </div>
+      <div class="line line2">
+      </div>
+      <div class="line line3">
+      </div>
+    </div>
+    <div class="lower-cantiner">
+      <div class="lower">
+        <nav class="mobile-fit-control hide">
+          <ul id="menu-new" class="menu">
+            
+              <li>
+                <a href="/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fas fa-home" aria-hidden="true"></i>
+                    首页
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-archive faa-shake" aria-hidden="true"></i>
+                    归档
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/categories/技术/">
+                          <i class="fa fa-code" aria-hidden="true"></i>
+                          技术
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/笔记/">
+                          <i class="fa fa-book" aria-hidden="true"></i>
+                          笔记
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/项目/">
+                          <i class="fa fa-git" aria-hidden="true"></i>
+                          项目
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/随想/">
+                          <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                          随想
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/转载/">
+                          <i class="fa fa-share" aria-hidden="true"></i>
+                          转载
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="javascript:;">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
+                    清单
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/bangumi/">
+                          <i class="fa fa-th-list faa-bounce" aria-hidden="true"></i>
+                          书单
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/music/">
+                          <i class="fa fa-headphones" aria-hidden="true"></i>
+                          歌单
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/tags/光影艺术/">
+                          <i class="fa fa-photo" aria-hidden="true"></i>
+                          摄影
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="/tags/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-tag" aria-hidden="true"></i>
+                    标签
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/categories/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-bookmark" aria-hidden="true"></i>
+                    分类
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/comment/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-pencil-square-o faa-tada" aria-hidden="true"></i>
+                    留言板
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/links/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
+                    友人帐
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/donate/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-heart faa-pulse" aria-hidden="true"></i>
+                    赞赏
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/atom.xml">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-rss faa-pulse" aria-hidden="true"></i>
+                    RSS
+                  </span>
+                </a>
+                
+              </li>
+            
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+<div class="pattern-center-blank"></div>
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200526010538.png);" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200526010538.png">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      Python入门与进阶</h1>
+      <p class="entry-census">
+        <span>
+          <a href="www.yulinblog.com">
+            <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/avatar.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="www.yulinblog.com">YUYU</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2020-5-26<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
+  </div>
+
+<div id="content" class="site-content">
+  <div id="primary" class="content-area">
+    <main id="main" class="site-main" role="main">
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+        <div class="entry-content">
+          <h3 id="Python特点"><a href="#Python特点" class="headerlink" title="Python特点"></a>Python特点</h3><p>1.Python是一门编程语言，它只是众多编程语言中的一种。</p>
+<p>2.语言简洁、优雅，编写的程序容易阅读。</p>
+<p>3.跨平台，可以运行在Windows、Linux以及MacOS</p>
+<p>4.易于学习。如果把编程语言当作解决问题的工具，python确实比C++、Java、JavaScript等语言要易于学习和掌握。</p>
+<p>5.极为强大而丰富的标准库与第三方库，比如电子邮件，比如GUI界面。</p>
+<p>6.Python是面向对象的语言。面向对象是一种思想。</p>
+<blockquote>
+<p>个人理解（供参考）：面向对象理解成代码的体制和构建的方式。由面向对象来组织代码，让整个工程或项目更佳清晰，组织方式合理，源代码更易阅读和管理。项目足够庞大时，面向过程的思想不易于代码的管理。</p>
+</blockquote>
+<h3 id="个人喜欢Python原因"><a href="#个人喜欢Python原因" class="headerlink" title="个人喜欢Python原因"></a>个人喜欢Python原因</h3><p>1.简洁，灵活，优雅，哲学</p>
+<blockquote>
+<p>简洁胜于复杂。</p>
+<p>做也许好过不做，但不假思索就动手还不如不做。</p>
+</blockquote>
+<p>2.易于上手难于精通</p>
+<p>3.Python既有动态脚本的特性，又有面向对象的特性，非常具有自己的特点。</p>
+<h3 id="Python的缺点"><a href="#Python的缺点" class="headerlink" title="Python的缺点"></a>Python的缺点</h3><p>相较于C、C++、Java，运行效率较慢</p>
+<p>主流语言分两大类，编译型语言（C、C++）、解释型语言（JavaScript、Python）。</p>
+<p>编译型语言在程序执行前会预先编译，将源代码编译成机器码，执行效率高。</p>
+<p>解释型语言没有编译过程，执行时解释。</p>
+<p>Java和C #没有严格的划分。有编译过程，编译成中间代码（非机器码）</p>
+<p>运行效率与开发效率，鱼与熊掌不可兼得。适合的才是最好的。</p>
+<h3 id="一个学习编程的经典误区"><a href="#一个学习编程的经典误区" class="headerlink" title="一个学习编程的经典误区"></a>一个学习编程的经典误区</h3><p>不要把思维局限在web编程，这只是编程的一个应用方向。</p>
+<h3 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h3><p>爬虫、大数据与数据分析（Spark）、自动化运维与测试、web开发(Flask、Django等)、机器学习(Tensor Flow)、胶水语言（混合其他语言来编程，能够把其他语言制作的各种模块很轻松的连接在一起）。</p>
+<h2 id="Python环境安装"><a href="#Python环境安装" class="headerlink" title="Python环境安装"></a>Python环境安装</h2><h3 id="1-Windows下一键环境安装包"><a href="#1-Windows下一键环境安装包" class="headerlink" title="1.Windows下一键环境安装包"></a>1.Windows下一键环境安装包</h3><p>【Python官网】—【downloads】—【Windows】</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200526003056.jpg" style="zoom: 33%;"></p>
+<h3 id="2-安装Python"><a href="#2-安装Python" class="headerlink" title="2.安装Python"></a>2.安装Python</h3><p>1.打开安装包，按下图方式安装。推荐自定义安装</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200526004405.jpg" style="zoom: 33%;"></p>
+<p>2.默认勾选，pip一定要选</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200526004748.jpg" style="zoom:33%;"></p>
+<p>3.下一步，选择安装位置</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200526005218.jpg" style="zoom:33%;"></p>
+<p>4.完成安装，阅读官方使用说明文档documentation</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200526005302.jpg" style="zoom:33%;"></p>
+<h3 id="3-IDLE与第一段Python代码"><a href="#3-IDLE与第一段Python代码" class="headerlink" title="3.IDLE与第一段Python代码"></a>3.IDLE与第一段Python代码</h3><p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200526010114.jpg" style="zoom:33%;"></p>
+<h2 id="代码与写代码"><a href="#代码与写代码" class="headerlink" title="代码与写代码"></a>代码与写代码</h2><p>代码是现实世界事物在计算机世界中的映射</p>
+<p>写代码是将现实世界中的事物用计算机语言来描述</p>
+<p>计算机语言的基本数据类型是构成代码的基础。</p>
+<h2 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h2><p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200527131146.jpg" style="zoom:80%;"></p>
+<h3 id="Number-数字"><a href="#Number-数字" class="headerlink" title="Number:数字"></a>Number:数字</h3><p>整数：int</p>
+<p>浮点数：float</p>
+<p>布尔类型：bool 表示真、假 <code>True</code>、<code>False</code></p>
+<p>复数：complex</p>
+<p>其他语言：浮点数有单精度float,双精度double的分别。<strong>python中只有float代表浮点数</strong></p>
+<p>​                    整数有short,int,long的分别，<strong>python只有int</strong> </p>
+<h4 id="数值运算"><a href="#数值运算" class="headerlink" title="数值运算"></a><strong>数值运算</strong></h4><ul>
+<li>在加减乘计算时，如果有浮点数参与运算，Python会把结果转换成为浮点数。</li>
+<li>除法中， <code>/</code> 返回浮点数，<code>//</code> 返回整数(只保留整数部分)。</li>
+</ul>
+<h4 id="进制"><a href="#进制" class="headerlink" title="进制"></a><strong>进制</strong></h4><p>二进制<code>0b</code>开头，八进制<code>0o</code>开头，十六进制<code>0x</code>开头</p>
+<p><strong>不同进制间的转换</strong></p>
+<pre><code class="python">bin(10) #十进制转二进制
+bin(0o7) #八进制转二进制
+int(0b111) #二进制转十进制
+int(0o77) #八进制转十进制
+hex(888) #十进制转十六进制
+oct(0x777) #十六进制转八进制
+······
+</code></pre>
+<p><strong>只要是非0的数都表示布尔真，只有0、空值表示布尔假</strong></p>
+<pre><code class="python">bool(2) #True
+bool(2.2) #True
+bool(-1.1) #True
+bool(&#39;abc&#39;) #True
+bool(0) #False
+bool(&#39;&#39;) #False
+bool([]) #False
+bool(None) #False
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>int()</code></td>
+<td>转十进制</td>
+</tr>
+<tr>
+<td><code>bin()</code></td>
+<td>转二进制</td>
+</tr>
+<tr>
+<td><code>oct()</code></td>
+<td>转八进制</td>
+</tr>
+<tr>
+<td><code>hex()</code></td>
+<td>转十六进制</td>
+</tr>
+<tr>
+<td><code>ord()</code></td>
+<td>转ascii</td>
+</tr>
+<tr>
+<td><code>bool()</code></td>
+<td>转bool（非空、非0、非None，则为True）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="String字符串"><a href="#String字符串" class="headerlink" title="String字符串"></a>String字符串</h3><h4 id="单引号、双引号、多行字符串"><a href="#单引号、双引号、多行字符串" class="headerlink" title="单引号、双引号、多行字符串"></a>单引号、双引号、多行字符串</h4><p>注意引号必须成对出现</p>
+<pre><code class="python">&#39;hello world&#39;
+&quot;hello world&quot; 
+&quot;let&#39;s  go&quot; #单双引号是为了在引号中引用引号
+&#39;&#39;&#39;
+hello 
+world
+&#39;&#39;&#39;   #三（单双）引号可以显示多行字符串，print(&quot;hello\nworld&quot;)有同样效果
+&#39;1&#39; #str类型
+</code></pre>
+<h4 id="转移字符"><a href="#转移字符" class="headerlink" title="转移字符"></a>转移字符</h4><p>特殊的字符：表示无法“看见”的字符、与语言本身语法有冲突的字符</p>
+<pre><code class="python">\n  #换行
+\r  #回车
+\&#39;  #单引号
+\t  #横向制表符
+print(&#39;c:\northwind\northwest&#39;) #输出结果会换行
+print(&#39;c:\\northwind\\northwest&#39;)
+或print(r&#39;c:\northwind\northwest&#39;) #输出结果c:\northwind\northwest
+#加上r后不是一个普通的字符串，而是一个原始字符串（所见即所得）
+······
+</code></pre>
+<h4 id="字符串运算"><a href="#字符串运算" class="headerlink" title="字符串运算"></a>字符串运算</h4><p><strong>字符串拼接</strong></p>
+<pre><code class="python">&quot;hello&quot;+&quot;world&quot; #输出helloworld
+</code></pre>
+<p><strong>字符串复制</strong></p>
+<pre><code class="python">&quot;hello&quot;*n #hello拼接n次
+</code></pre>
+<p><strong>字符串访问</strong></p>
+<pre><code class="python">&quot;hello world&quot;[下标a:下标b] #从左往右以0开始，从右往左以-1开始,截取序列的[a,b)
+&quot;hello world&quot;[n] #从左往右以0开始，反之以-1开始,访问单个字符
+#输出world的方法
+&quot;hello world&quot;[6:]
+&quot;hello world&quot;[-5:]
+</code></pre>
+<h3 id="组"><a href="#组" class="headerlink" title="组"></a>组</h3><h4 id="列表list"><a href="#列表list" class="headerlink" title="列表list"></a>列表list</h4><pre><code class="python">[1,2,3,4]
+[&quot;hello&quot;,1.9,True,[1,2]] #列表内部元素的类型不是固定的
+</code></pre>
+<p><strong>列表的基本操作</strong></p>
+<pre><code class="python">[&quot;apple&quot;,&quot;orange&quot;,&quot;peach&quot;,&quot;grape&quot;][n] #方法同string
+[&quot;apple&quot;,&quot;orange&quot;,&quot;peach&quot;,&quot;grape&quot;][a:b] #方法同上
+[&quot;apple&quot;,&quot;orange&quot;,&quot;peach&quot;,&quot;grape&quot;]+[&quot;pear&quot;,&quot;lemon&quot;] #两个列表合并
+[&quot;apple&quot;,&quot;orange&quot;,&quot;peach&quot;,&quot;grape&quot;]*3 #重复3次
+</code></pre>
+<h4 id="元组tuple"><a href="#元组tuple" class="headerlink" title="元组tuple"></a>元组tuple</h4><pre><code class="python">(1,2,3,4)
+(&quot;hello&quot;,1.9,True,(1,2)) #元组内部元素的类型不是固定的
+</code></pre>
+<p><strong>元组的基本操作</strong></p>
+<pre><code class="python">(1,2,3,4)[0] #方法同上
+(1,2,3,4)[0:2]
+(1,2,3)+(4,5,6)
+(1,2,3)*3
+</code></pre>
+<p><strong>元组和列表的区别</strong><br><span style="color:red">元组的元素不能修改，列表的元素可以修改。</span></p>
+<p>注意：当元组内只有一个元素时，其类型是单个元素对应的类型。如（1）为int，（‘asd’）为str。而当列表内只有一个元素时，仍然是list类型。</p>
+<p>type((1)) 只有一个元素时，内部的（）做成运算符号处理。若要定义一个只有一个元素的元组，（1，）</p>
+<p>Python中，str,list,typle都是<strong>序列</strong></p>
+<p><strong>序列共有特征</strong></p>
+<pre><code class="python">#根据序号找值
+#根据切片（范围）找值
+# *复制
+# a not in [序列] 判断元素a是否（不）在序列中
+#len(序列) 序列的元素长度
+#max(序列)
+</code></pre>
+<h3 id="集合set"><a href="#集合set" class="headerlink" title="集合set"></a>集合set</h3><p><strong>① 格式</strong><br><code>{元素1，元素2...}</code>或<code>set(&#39;元素1元素2元素3...&#39;)</code></p>
+<p><strong>② 特性</strong><br>集合是无序的，且元素不重复。</p>
+<p>注意：创建空集合必须用 <code>set()</code>而不是 <code>{ }</code>，因为 <code>{ }</code> 是用来创建一个空字典。</p>
+<pre><code class="python">{1,1,1,2,2,3}  #最后显示{1,2,3}
+</code></pre>
+<p><strong>③ 操作集合</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">运算符</th>
+<th style="text-align:center">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">-</td>
+<td style="text-align:center">差集</td>
+</tr>
+<tr>
+<td style="text-align:center">\</td>
+<td style="text-align:center"></td>
+<td>并集</td>
+</tr>
+<tr>
+<td style="text-align:center">&amp;</td>
+<td style="text-align:center">交集</td>
+</tr>
+<tr>
+<td style="text-align:center">a ^ b</td>
+<td style="text-align:center">a和b不同时存在的元素</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python">{1,2,3,4,5,6}-{3,4} #{1,2,5,6}
+{1,2,3,4,5,6}&amp;{3,4} #{3,4}
+{1,2,3,4,5,6}|{3,4} #{1,2,3,4,5,6,7}
+</code></pre>
+<h3 id="字典Dictionary"><a href="#字典Dictionary" class="headerlink" title="字典Dictionary"></a>字典Dictionary</h3><p><strong>① 格式</strong><br>{‘键1’:’值1’,’键2’:’值2’…}   </p>
+<p><code>{&#39;w&#39;:&#39;上&#39;,&#39;a&#39;:&#39;左&#39;,&#39;s&#39;:&#39;下&#39;,&#39;d&#39;:&#39;右&#39;}</code></p>
+<p><strong>② 特性</strong></p>
+<p>键名不可以重复，若重复，后面的值会替换前面相同的键名；<br><span style="color:red">键名为不可变类型</span>，可以为number、string、tuple类型。</p>
+<p><strong>③ 操作字典</strong></p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>字典[键名]</code></td>
+<td>访问字典中的某个元素值</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python">{&#39;w&#39;:&#39;上&#39;,&#39;a&#39;:&#39;左&#39;,&#39;s&#39;:&#39;下&#39;,&#39;d&#39;:&#39;右&#39;}[&#39;w&#39;]  #访问得到上
+{1:&#39;上&#39;,&#39;1&#39;:&#39;左&#39;,&#39;s&#39;:&#39;下&#39;,&#39;d&#39;:&#39;右&#39;}[1] #显示上
+{1:&#39;上&#39;,&#39;1&#39;:&#39;左&#39;,&#39;s&#39;:&#39;下&#39;,&#39;d&#39;:&#39;右&#39;}[&#39;1&#39;] #显示左
+</code></pre>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><h4 id="变量命名规则"><a href="#变量命名规则" class="headerlink" title="变量命名规则"></a>变量命名规则</h4><ul>
+<li>系统关键字不能用在变量名中。</li>
+<li>Python中的变量名区分大小写。</li>
+<li>变量名由字母，数字，下划线构成，开头不能是数字。</li>
+<li>python中不存在变量的定义，变量本身没有类型，一般说把X赋值给变量，不说定义变量为X（动态性语言的特性体现）</li>
+</ul>
+<pre><code class="python">a = 1
+a = &#39;1&#39;
+a = [1,2,3]
+</code></pre>
+<h4 id="值类型和引用类型"><a href="#值类型和引用类型" class="headerlink" title="值类型和引用类型"></a>值类型和引用类型</h4><pre><code class="python">a = 1;
+b = a;
+a = 3;
+print(b) #b=1,b的值并没有改变
+**********************************
+a = [1,2,3]
+b = a
+a[0] = &#39;1&#39;
+print(a) #[&#39;1&#39;,2,3,4,5]
+print(b) #[&#39;1&#39;,2,3,4,5],此时b改变了
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200529210716.jpg" style="zoom:50% ;text-align:center;"></p>
+<p>引用类型是可变的，值类型是不可变的</p>
+<p><code>int</code> <code>str</code> <code>tuple</code>值类型(不可改变) <code>list</code> <code>set</code> <code>dict</code>引用类型(可变)</p>
+<pre><code class="python">a = &#39;hello&#39;
+id(a) #
+a = a + &#39;python&#39;
+id(a) #
+******a有不同的id，说明相加后得到的a是新的变量python******
+&#39;python&#39;[0] #显示p
+&#39;python&#39;[0] = a #报错，值类型不可改变
+</code></pre>
+<h4 id="列表和元组的对比"><a href="#列表和元组的对比" class="headerlink" title="列表和元组的对比"></a>列表和元组的对比</h4><p>元组定义好后就无法改变，列表可更改。</p>
+<p>建议用元组 。避免合作开发过程中对方更改造成的报错。</p>
+<pre><code class="python">a = (1,2,3,[1,2,4]) #如何访问4
+a[3][2]
+a = (1,2,3,[1,2,[&#39;a&#39;,&#39;b&#39;,&#39;c&#39;]]) #访问c
+a[3][2][2]
+</code></pre>
+<h4 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h4><h5 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h5><p>python中算符运算符并不是只能对数字做运算</p>
+<p><code>+</code>加、<code>-</code>减、<code>*</code>乘、<code>/</code>除、<code>//</code>取整除、<code>%</code>取余、<code>**</code>幂</p>
+<h5 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符"></a>赋值运算符</h5><p><code>=</code> <code>+=</code>、<code>-=</code>、<code>*=</code>、<code>/=</code>、<code>//=</code>、<code>%=</code>、<code>**=</code><br><em>注意：python中没有自增/自减运算符</em></p>
+<p><code>c=1 c=c+1</code>等效于<code>c+=1</code>  用法同其他语言</p>
+<h5 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h5><p><code>and</code>与、<code>or</code>或、 <code>not</code>非</p>
+<p>主要操作布尔类型</p>
+<p>非布尔类型参与运算的结果要根据计算机的运算流程判断</p>
+<pre><code class="python">1 and 2 #返回2 ，计算机的运算流程，需要2才能给出结果
+1 or 0  #返回1   到1即可给出结果
+</code></pre>
+<h5 id="比较（关系）运算符"><a href="#比较（关系）运算符" class="headerlink" title="比较（关系）运算符"></a>比较（关系）运算符</h5><p><code>==</code> <code>!=</code> <code>&gt;</code> <code>&lt;</code> <code>&gt;=</code> <code>&lt;=</code>  产生布尔值的运算结果</p>
+<p>字符串、列表等均可进行比较</p>
+<h5 id="身份运算符"><a href="#身份运算符" class="headerlink" title="身份运算符"></a>身份运算符</h5><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>用法</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>is</code></td>
+<td><code>元素 is 序列</code></td>
+<td>检测两个变量身份(内存地址)是否全等</td>
+</tr>
+<tr>
+<td><code>not is</code></td>
+<td><code>元素 not is 序列</code></td>
+<td>检测两个变量身份(内存地址)是否不等</td>
+</tr>
+</tbody>
+</table>
+<p>== 比较<strong>值</strong>，is 比较<strong>身份</strong>，<strong>类型</strong> type判断</p>
+<p>对象三个特征 id 、value、type</p>
+<pre><code class="python">******is和==的区别********
+a = 1
+b = 1.0
+a == b #true
+a is b #false
+==比较值是否相等，is比较两个变量的身份（内存地址）是否相等 id(a)和id(b)不等
+a = {1,2,3}
+b = {2,1,3}
+a == b #True 集合是无序的，所以不会影响最终取值
+a is b #False 地址不同
+----------------
+c = (1,2,3) 
+d = (2,1,3) 
+c == d #False 元组是序列，有序
+c is d #False 内存地址不同
+----------------
+判断变量的类型
+isinstance(a,str) #判断a是否是str类型
+isinstance(a,(int,str,float)) #判断a是否是下面的三种类型之一
+</code></pre>
+<p>注意：python中没有<code>===</code>运算符</p>
+<h5 id="成员运算符"><a href="#成员运算符" class="headerlink" title="成员运算符"></a>成员运算符</h5><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>用法</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>in</code></td>
+<td><code>元素 in 序列</code></td>
+<td>检测序列中是否包含指定元素</td>
+</tr>
+<tr>
+<td><code>not in</code></td>
+<td><code>元素 not in 序列</code></td>
+<td>检测序列中是否不包含指定元素</td>
+</tr>
+</tbody>
+</table>
+<p><em>注意：字典的成员运算符是针对键</em></p>
+<pre><code class="python">b = &#39;c&#39;
+b in {&#39;c&#39;:1} #true
+</code></pre>
+<h5 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h5><p><code>&amp;</code>按位与 <code>|</code>按位与 <code>^</code>按位异或 <code>-</code>按位取反 <code>&lt;&lt;</code> 左移动<code>&gt;&gt;</code>右移动  </p>
+<p>都是把数字当做二进制数进行运算</p>
+<h3 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h3><p><a href="https://juejin.im/post/5db6ff88f265da4d525fce6b" target="_blank" rel="noopener">运算符优先级</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">运算符</th>
+<th style="text-align:center">用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">{ }</td>
+<td style="text-align:center">括号（分组）</td>
+</tr>
+<tr>
+<td style="text-align:center">f(args…)</td>
+<td style="text-align:center">函数调用</td>
+</tr>
+<tr>
+<td style="text-align:center">x[index:index]</td>
+<td style="text-align:center">切片</td>
+</tr>
+<tr>
+<td style="text-align:center">x[index]</td>
+<td style="text-align:center">索引值</td>
+</tr>
+<tr>
+<td style="text-align:center">x.attribute</td>
+<td style="text-align:center">属性</td>
+</tr>
+<tr>
+<td style="text-align:center">**</td>
+<td style="text-align:center">指数</td>
+</tr>
+<tr>
+<td style="text-align:center">~x</td>
+<td style="text-align:center">取反</td>
+</tr>
+<tr>
+<td style="text-align:center">+x,-x</td>
+<td style="text-align:center">正、负值</td>
+</tr>
+<tr>
+<td style="text-align:center">*、/、%</td>
+<td style="text-align:center">乘、除、求余</td>
+</tr>
+<tr>
+<td style="text-align:center">+、-</td>
+<td style="text-align:center">加、减</td>
+</tr>
+<tr>
+<td style="text-align:center">&lt;&lt;、&gt;&gt;</td>
+<td style="text-align:center">左移、右移</td>
+</tr>
+<tr>
+<td style="text-align:center">&amp;</td>
+<td style="text-align:center">按位 AND</td>
+</tr>
+<tr>
+<td style="text-align:center">^</td>
+<td style="text-align:center">按位 XOR</td>
+</tr>
+<tr>
+<td style="text-align:center">\</td>
+<td style="text-align:center"></td>
+<td>按位 OR</td>
+</tr>
+<tr>
+<td style="text-align:center">in、is、is not、&lt; 、&lt;=、&gt;、&gt;=、&lt;&gt;、!=、==</td>
+<td style="text-align:center">比较、算数、身份</td>
+</tr>
+<tr>
+<td style="text-align:center">not x</td>
+<td style="text-align:center">布尔 NOT</td>
+</tr>
+<tr>
+<td style="text-align:center">and</td>
+<td style="text-align:center">布尔 AND</td>
+</tr>
+<tr>
+<td style="text-align:center">or</td>
+<td style="text-align:center">布尔 OR</td>
+</tr>
+<tr>
+<td style="text-align:center">lambda</td>
+<td style="text-align:center">lambda 表达式</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python">******可以通过括号使先后顺序更清楚或强行改变顺序********
+not a or b + 2 == c   #(not a) or ((b+2) == c)
+a or b and c #a or (b and c)
+</code></pre>
+<h3 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h3><p><strong><em>python中语句不用括号，依据空格和换行分隔。</em></strong></p>
+<p><strong><em>python没有switch</em></strong></p>
+<h4 id="条件控制"><a href="#条件控制" class="headerlink" title="条件控制"></a>条件控制</h4><pre><code class="python">if 条件1:
+    语句
+elif 条件2:
+    语句
+else:
+    语句
+</code></pre>
+<p><em><code>pass</code>空语句/占位语句</em>，保持代码结构域的完整性</p>
+<h4 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h4><pre><code class="python">while 条件：
+    语句
+else:
+    语句
+</code></pre>
+<p><em>说明：在条件语句为 false 时，执行 else 的语句块</em></p>
+<h4 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h4><pre><code class="python"># 第一种情况
+#主要用来遍历/循环
+for 元素 in 序列/集合/字典:
+    语句
+else:
+    语句
+
+# 第二种情况
+for 变量 in range(范围):
+    语句
+else:
+    语句
+</code></pre>
+<p>break跳出循环（内循环），continue停止当前操作，直接继续下面的循环</p>
+<p>说明：在for语句遍历完毕时，执行 else 的语句块，并不要求强行使用else<br><code>range()</code>的参数说明：</p>
+<ul>
+<li>range(x)：从0遍历到x，默认偏移量为1（遍历到x之前的数，取不到x,下同）</li>
+<li>range(x,y)：从x遍历到y，默认偏移量为1</li>
+<li>range(x,y,z)：从x遍历到y，偏移量为z。若x&gt;y，则为递减，反之递增</li>
+</ul>
+<pre><code class="python">a = [1,2,3,4,5,6,7,8]
+for i in range(1,len(a),2)
+    print(a[i],end=&#39;|&#39;)
+*******等效于***********
+b = a[0:len(a):2]
+print(b)
+</code></pre>
+<h3 id="包、模块"><a href="#包、模块" class="headerlink" title="包、模块"></a>包、模块</h3><h4 id="python项目的组织结构"><a href="#python项目的组织结构" class="headerlink" title="python项目的组织结构"></a>python项目的组织结构</h4><p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200529220504.jpg" style="zoom: 67%;"></p>
+<h4 id="Python包与模块的名字"><a href="#Python包与模块的名字" class="headerlink" title="Python包与模块的名字"></a>Python包与模块的名字</h4><p>包的名字就是文件夹的名字，模块的名字就是文件的名字</p>
+<p>不同包下两个同名的模块区分：<code>包名.模块名</code></p>
+<p>包下面可以包含子包</p>
+<p>python如何区分一个普通的文件夹和包：在文件夹下面有一个特殊的文件<code>_init_.py</code></p>
+<p><code>_init_.py</code>这个模块的名字就是包名。</p>
+<h4 id="模块导入import"><a href="#模块导入import" class="headerlink" title="模块导入import"></a>模块导入import</h4><p>模块导入的意义是引用别的模块的组织资源<code>import module_name</code></p>
+<p>python导入一个模块时，会执行该模块的代码</p>
+<table>
+<thead>
+<tr>
+<th>语句</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>import 模块</code></td>
+<td>引入模块</td>
+</tr>
+<tr>
+<td><code>from 包 import 模块/*</code></td>
+<td>引入指定/全部模块</td>
+</tr>
+<tr>
+<td><code>from 模块 import 部分/*</code></td>
+<td>引入模块的指定/全部部分</td>
+</tr>
+</tbody>
+</table>
+<p>说明：可以设置星号<code>*</code>所涵盖的内容，在被导入的文件中，设置<code>__all__=[&#39;name1&#39;,&#39;name2&#39;...]</code></p>
+<pre><code class="python">import t.c7  #需要引用不同包（t包）下C7模块的a变量
+print(t.c7.a)
+******************
+import c7  #需要同包下C7模块的a变量
+print(c7.a)
+******************
+import t.t1.t2.c7 as m #如果命名空间过长，可以用m（自定义）代替命名，简化引用名
+print(m.a)
+************************************
+from t.c7 import a
+print(a) #不需要加全部的命名空间
+******************
+from t import c7
+print(c7.a) 
+******************
+from t.c7 import *  #*引入全部部分或指定部分(在被导入的文件中，设置了`__all__=[&#39;name1&#39;,&#39;name2&#39;...]`)
+print(a) 
+print(b) 
+</code></pre>
+<h4 id="init-py-的用法"><a href="#init-py-的用法" class="headerlink" title="__init__.py 的用法"></a><code>__init__.py</code> 的用法</h4><p><a href="https://www.cnblogs.com/tp1226/p/8453854.html" target="_blank" rel="noopener">Python杂谈: <strong>init</strong>.py的作用</a></p>
+<p>包和模块是不会被重复导入的</p>
+<p>避免循环导入（互相导入（形成环）对方的内容）</p>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><ol>
+<li>功能性</li>
+<li>隐藏细节</li>
+<li>避免编写重复的代码</li>
+</ol>
+<h4 id="函数定义"><a href="#函数定义" class="headerlink" title="函数定义"></a>函数定义</h4><pre><code class="python">    def 函数名(参数列表):
+        ...
+        return 返回值1,返回值2....
+</code></pre>
+<ul>
+<li><em>参数列表可以没有</em></li>
+<li><em>若没写return，则返回None</em></li>
+<li><em>若return返回多个值，则返回类型为元组</em></li>
+<li><em>推荐使用<code>变量1,变量2...=函数()</code>的形式获取返回值<strong>（序列解包）</strong>，不推荐使用<code>元组[索引]</code>获取，会降低代码可读性</em></li>
+</ul>
+<h4 id="序列解包"><a href="#序列解包" class="headerlink" title="序列解包"></a>序列解包</h4><pre><code class="python">a = 1
+b = 2
+c = 3
+#等价于  
+a,b,c = 1,2,3
+d = 1,2,3 #d是tuple类型
+a,b,c = d #序列解包。需要注意的是元素的个数要相等
+</code></pre>
+<h4 id="函数参数"><a href="#函数参数" class="headerlink" title="函数参数"></a>函数参数</h4><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>格式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>必须参数</td>
+<td>调用时<code>函数(实参)</code></td>
+<td>形参和实参顺序要求一致</td>
+</tr>
+<tr>
+<td>关键字参数</td>
+<td>调用时<code>函数(形参=实参)</code></td>
+<td>形参和实参顺序可以不一致</td>
+</tr>
+<tr>
+<td>默认参数</td>
+<td>函数定义时<code>def 函数名(形参=值)</code></td>
+<td>实参可覆盖默认参数。<em>注意：默认参数需写在形参列表的最后</em></td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python">def add(x, y): #x,y是形参
+    ······
+add(3,2) #3,2是实参 x=3,y=2
+add(y=3,x=2) #关键字参数
+</code></pre>
+<h4 id="内置函数"><a href="#内置函数" class="headerlink" title="内置函数"></a>内置函数</h4><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>len()</code></td>
+<td>返回元素个数</td>
+</tr>
+<tr>
+<td><code>id()</code></td>
+<td>查看变量内存地址</td>
+</tr>
+<tr>
+<td><code>type()</code></td>
+<td>类型判断</td>
+</tr>
+<tr>
+<td>isinstance(变量名,(类型1，类型2..))</td>
+<td>变量是否属于其中的一个类型</td>
+</tr>
+<tr>
+<td>input([‘提示语’])</td>
+<td>接收用户输入的信息，返回为 string 类型</td>
+</tr>
+<tr>
+<td>round(数值,保留位数)</td>
+<td>四舍五入</td>
+</tr>
+<tr>
+<td>字符串.index(子串,起始位置,结束位置)</td>
+<td>返回开始的索引值，没找到则抛出异常。</td>
+</tr>
+<tr>
+<td>主串.replace(‘旧子串’,’新子串’,匹配次数)</td>
+<td>替换</td>
+</tr>
+<tr>
+<td>字典.get(键名, 默认值)</td>
+<td>返回指定键的值，如果不存在则返回默认值</td>
+</tr>
+</tbody>
+</table>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<li><code>None</code>不是<code>False</code>、<code>&#39;&#39;</code>、<code>0</code>、<code>[]</code>，尤其在判空时需要注意</li>
+<li>对象存在不代表其一定为<code>True</code>，对象的bool值由<code>__bool__</code>或<code>__len__</code>内置函数决定</li>
+<li>使用<code>\</code>或<code>()</code>可实现跨行书写</li>
+</ul>
+<p>讲解面向对象的概念。包括面向对象的三大特性（继承、封装、多态）、类的基本构成元素、python的内置类属性、方法重写、运算符重载、静态方法等</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200531105112.jpg" style="zoom: 50%;"></p>
+<h3 id="类的定义"><a href="#类的定义" class="headerlink" title="类的定义"></a>类的定义</h3><pre><code class="python">class 类名:   #类命名建议第一个字母大写，驼峰命名
+    pass
+</code></pre>
+<pre><code class="python">class Student():
+    name = &#39;&#39;
+    age = 0
+
+    def print_file(self): #加固定的参数self，否则会报错,后面会解释
+        print(&#39;name:&#39; + self.name)
+        print(&#39;age:&#39; + str(self.age))
+</code></pre>
+<h4 id="类实例化"><a href="#类实例化" class="headerlink" title="类实例化"></a><strong>类实例化</strong></h4><pre><code class="python">对象名=类名([实参])  # 形参写在类的构造函数中
+</code></pre>
+<p>演示（在另外一个模块中引用类）：</p>
+<pre><code class="python">from c1 import Student
+student1 = Student()  #类的实例化
+student1.print_file() #调用类下面的方法
+</code></pre>
+<h4 id="note"><a href="#note" class="headerlink" title="note:"></a>note:</h4><p>类的基本作用是封装代码。</p>
+<p>方法要加参数self,访问实例变量方式是<code>self.变量</code></p>
+<p>类内部只做定义，不推荐在类内部实例化和调用方法</p>
+<p>类中的变量称谓数据成员</p>
+<p>方法：设计层面来讲  函数：程序运行，过程式的一种称谓</p>
+<h4 id="变量："><a href="#变量：" class="headerlink" title="变量："></a>变量：</h4><table>
+<thead>
+<tr>
+<th style="text-align:center">变量</th>
+<th style="text-align:center">访问</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">实例变量</td>
+<td style="text-align:center">通过<code>self.变量名</code>访问</td>
+</tr>
+<tr>
+<td style="text-align:center">类变量</td>
+<td style="text-align:center">通过<code>cls.变量</code>访问</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>如果在实例化对象中找不到变量，则会去相应的类中寻找，若也没有，则去所在类的父类中寻找…</li>
+<li>在构造函数内，直接通过<code>变量名</code>访问的是形参，而非实例对象。</li>
+</ul>
+<h3 id="类与对象"><a href="#类与对象" class="headerlink" title="类与对象"></a>类与对象</h3><p><strong>类的定义</strong></p>
+<blockquote>
+<p>类是现实世界或思维世界中的实体在计算机中的反映，它将数据以及这些数据上的操作封装在一起</p>
+</blockquote>
+<p><strong>对象的定义</strong></p>
+<blockquote>
+<p>对象是实例化的类</p>
+</blockquote>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><pre><code class="python">def __init__(self):
+    #构造函数
+    pass
+</code></pre>
+<p>作用:生成不同的对象</p>
+<ul>
+<li>构造函数<code>__init__</code>在实例化类时，将自动调用</li>
+<li>构造函数是个实例方法</li>
+<li>构造函数只能返回<code>None</code></li>
+<li>对象的参数由构造函数接收，构造函数的第一个参数为<code>self</code></li>
+</ul>
+<p>在构造函数内部，通常初始化类的特征值</p>
+<pre><code class="python">class Student():
+    name = &#39;&#39;
+    age = 0
+
+    def __init__(self,name,age):
+        #构造函数
+        #初始化对象的属性
+        name = name #wrong
+        age = age  
+        print(name) #在构造函数内，直接通过变量名访问的是形参，而非实例对象。
+    #行为与特征
+    def print_file(self): #加固定的参数，否则会报错
+        print(&#39;name:&#39; + self.name)
+        print(&#39;age:&#39; + str(self.age))
+</code></pre>
+<pre><code class="python">student1 = Student(&#39;石敢当&#39;，18)
+print(student1.name)  #这里输出结果是空值，说明构造函数里的赋值并没有改变变量name的取值
+</code></pre>
+<p>释疑：</p>
+<pre><code class="python">student1 = Student(&#39;石敢当&#39;，18)
+#print(student1.name)
+print(student1.__dict__) #__dict__作用保存对象下的所有变量
+#输出结果是空子典{}，说明不存在实例变量
+</code></pre>
+<h4 id="类变量和实例变量"><a href="#类变量和实例变量" class="headerlink" title="类变量和实例变量"></a>类变量和实例变量</h4><p>实例变量和对象相关联。</p>
+<pre><code class="python">class Student():
+    name = &#39;yuyu&#39;    #类变量
+    age = 0
+
+    def __init__(self,name,age): #注意是两条下划线
+        #构造函数
+        #初始化对象的属性
+        self.name = name #定义实例变量，和对象相关，与类无关
+        self.age = age
+        print(name) #在构造函数内，直接通过变量名访问的是形参，而非实例对象。
+        print(self.name) #实例对象的name
+</code></pre>
+<pre><code class="python">student1 = Student(&#39;yanglin&#39;, 18)
+student2 = Student(&#39;yu&#39;, 20)
+print(student1.name)  #此时输出正确结果 yanglin
+print(student2.name)  #yu
+print(Student.name)   #yuyu
+</code></pre>
+<p><strong>类与对象的变量查找顺序</strong></p>
+<p>机制：访问一个实例变量，先在对象的实例列表里查找有没有该变量，没有则会去相应的类中寻找，若也没有，则去类的父类中查找……</p>
+<h4 id="self与实例方法"><a href="#self与实例方法" class="headerlink" title="self与实例方法"></a>self与实例方法</h4><p>定义实例方法时，需要参数,调用实例方法时，不需要传参  </p>
+<pre><code class="python">def __init__(self,name,age): #self可以自己更改，python中建议使用self
+        #构造方法
+        #初始化对象的属性
+        self.name = name
+        self.age = age  
+#行为与特征
+def print_file(self): #加固定的参数，否则会报错
+    print(&#39;name:&#39; + self.name)
+    print(&#39;age:&#39; + str(self.age))
+</code></pre>
+<p><span style="color:red">self就是当前调用方法的对象,self代表的是实例不是类</span></p>
+<p>如：<code>sutdent1.print_file()</code>  self代表student1</p>
+<p><strong>实例方法</strong></p>
+<pre><code class="python"># 定义
+def funcname(self):
+    pass
+# 调用
+实例.方法()
+</code></pre>
+<h4 id="在实例方法中访问实例变量与类变量"><a href="#在实例方法中访问实例变量与类变量" class="headerlink" title="在实例方法中访问实例变量与类变量"></a>在实例方法中访问实例变量与类变量</h4><p>方法代表类的行为，变量代表刻画类的特征。方法需要对变量对运算和逻辑上的操作，改变类的特征。</p>
+<p>实例方法操作实例变量 <code>self.变量名访问</code></p>
+<pre><code class="python"> def __init__(self,name,age): #注意是两条下划线
+        #构造函数
+        #初始化对象的属性
+        self.name = name #定义实例变量，和对象相关，与类无关
+        self.age = age
+        print(name) #在构造函数内，直接通过变量名访问的是形参，而非实例对象。
+        print(self.name) #实例对象的name
+</code></pre>
+<p>实例方法访问类变量：</p>
+<pre><code class="python"> class Student():
+    total = 0
+
+    def __init__(self): #注意是两条下划线
+        print(total)    #访问错误
+        ******正确访问类变量的方式1*******
+        print(Student.total)  #访问成功
+         ******正确访问类变量的方式2*******
+        print(self.__class__.total)  #访问成功
+</code></pre>
+<h4 id="类方法"><a href="#类方法" class="headerlink" title="类方法"></a>类方法</h4><p>下面是实例方法改变类变量的例子</p>
+<pre><code class="python">class Student():
+    sum = 0
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+        self.__class__.sum += 1
+        print(&quot;当前班级学生总数为：&quot;+ str(self.__class__.sum))
+        #每当创建一个学生对象，班级学生总数加一
+
+student1 = Student(&quot;yu&quot;, 18)
+student2 = Student(&quot;yu1&quot;, 18)
+student3 = Student(&quot;yu2&quot;, 18)
+print(Student.sum)
+</code></pre>
+<p><strong>类方法的定义：</strong></p>
+<pre><code class="python">@classmethod
+def plus_sum(cls):
+    pass
+# 调用
+类.方法()
+</code></pre>
+<p>上述方法用类方法操作改进:</p>
+<pre><code class="python">class Student():
+    sum = 0
+    name = &#39;&#39;
+    age = 0
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    @classmethod   #类方法
+    def plus_sum(cls):
+        cls.sum += 1
+        print(cls.sum)
+
+student1 = Student(&quot;yu&quot;, 18)
+Student.plus_sum()
+student2 = Student(&quot;yu1&quot;, 18)
+Student.plus_sum()
+student3 = Student(&quot;yu2&quot;, 18)
+Student.plus_sum()
+</code></pre>
+<p>类方法和实例方法的区别：关联的对象不同，一个是类，一个是对象</p>
+<p>类方法不能访问实例变量</p>
+<h4 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h4><pre><code class="python">  @staticmethod
+    def funcname(parameter_list):
+        pass
+    # 调用
+    类.方法()或实例.方法()
+</code></pre>
+<p>静态方法可以被对象和类调用</p>
+<p>静态方法的内部可以访问类变量</p>
+<p>静态方法不能访问实例变量</p>
+<p>建议不要经常使用静态方法，和普通的函数基本没有区别</p>
+<p>和C#，java中的静态方法有区别</p>
+<h4 id="成员可见性：公开与私有"><a href="#成员可见性：公开与私有" class="headerlink" title="成员可见性：公开与私有"></a>成员可见性：公开与私有</h4><blockquote>
+<p>在变量或方法名前加__，则变为私有</p>
+</blockquote>
+<p>细节理解：在创建私有的实例变量时，实际python会把变量名改为<code>_类名__变量名</code>，所以在外部访问私有变量<code>__变量名</code>时，实际是创建了新变量<code>__变量名</code>。但是通过<code>_类名__变量名</code>可以修改和访问！</p>
+<p><strong>建议：</strong>对类变量，建议不要直接修改，而是通过方法来修改，这样有利于保护变量</p>
+<h4 id="内建属性"><a href="#内建属性" class="headerlink" title="内建属性"></a>内建属性</h4><table>
+<thead>
+<tr>
+<th style="text-align:center">内建属性</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>__class__</code></td>
+<td style="text-align:center">表示实例所在的类</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>__dict__</code></td>
+<td style="text-align:center">查看类或实例的自定义属性</td>
+</tr>
+</tbody>
+</table>
+<h4 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h4><h4 id="继承-1"><a href="#继承-1" class="headerlink" title="继承"></a>继承</h4><pre><code class="python">from 文件 import 父类
+# 子类的定义
+class 子类(父类):
+    pass
+</code></pre>
+<ul>
+<li><strong>建议</strong>：一个文件夹只写一个类，那么只需在子类文件上写<code>from 文件 import 父类</code>*</li>
+<li><strong>多继承</strong>：一个子类继承多个父类。python支持多继承</li>
+</ul>
+<p><strong>调用父类构造函数</strong></p>
+<p>父类：</p>
+<pre><code class="python">class Human():
+    sum = 0
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def get_name(self):
+        print(self.name)
+</code></pre>
+<p>子类：</p>
+<pre><code class="python">from c2 import Human
+class Student(Human):
+    def __init__(self, school, name, age): #注意：这里包含了子类形参和父类形参
+        self.school = school #self.子类变量=值    
+       # Human.__init__(self, name, age) #子类构造函数中调用父类的构造函数
+        #父类.__init__(self[,父类形参]) # 注意：这里包含了父类的self及父类形参
+        #为什么要传self:
+        #上面语句是一个类调用一个实例方法(不合规的)。对象实例化中调用构造函数时，python会自己         #帮我们补全，而普通方法的调用，需要传去全部的参数
+        super(Student,self).__init__(name,age) #推荐使用
+student1 = Student(&#39;china&#39;,&#39;yuyu&#39;, 18)
+print(student1.name)
+print(student1.age)
+print(student1.sum)
+print(Student.sum)
+student1.get_name()
+</code></pre>
+<p>细节理解：为什么在上述代码中，父类的构造函数调用需要写self形参，但是实例化父类时，参数中却不需要写self？<br>原因：实例化父类过程中，对于self的指向，会由python帮我们自动完成。而上述代码，并没有实例化父类，python不会帮我们自动完成，而需要我们显式地写出self。</p>
+<p><strong>推荐</strong></p>
+<pre><code>class 子类(父类):
+    def __init__(self[,子类及父类形参]): 
+        self.子类成员变量=值    
+        super(子类,self).__init__(父类形参)
+</code></pre><p><strong>父子方法同名问题</strong><br>若父类和子类具有同名的实例方法，则在调用的是子类的。<br>如果想调用父类同名实例方法，需要在定义子类方法时，加上<code>super(子类,self).方法()</code></p>
+<p>#### </p>
+<p>正则表达式也是文本解析中非常重要的知识点。本章我们将讲解什如何在Python中编写正则表达式与常见的正则表达式。此外，JSON作为非常重要的数据格式，我们会重点讲解，包括JSON对象，JSON字符串，Python类型与JSON的转换。</p>
+<h3 id="正则表达式初识"><a href="#正则表达式初识" class="headerlink" title="正则表达式初识"></a>正则表达式初识</h3><p>正则表达式是一个特殊的字符序列，检测一个字符串是否与我们所设定的这样的字符序列相匹配。如果匹配，帮助我们快速检索文本，实现一些替换文本的操作。可以用正则表达式来1.检测一串数字是否是电话号码2.检测一个字符串是都符合email3.把一个文本里指定的单词替换为另一个单词等等</p>
+<p><strong>例：判断A中是否含python</strong></p>
+<pre><code class="python">A = &#39;C|C++|Java|Python|Javascript&#39; 
+#我们可以采用python中的内置函数,优先考虑内置函数
+print(A.index(&#39;Python&#39;)&gt;-1) #True
+print(&#39;Python&#39; in A) #True
+</code></pre>
+<p><strong>采用正则表达式</strong></p>
+<pre><code class="python">import re
+A = &#39;C|C++|Java|Python|Javascript&#39; 
+#re.findall(&#39;正则表达式&#39;, A) #A是要匹配的字符串
+r = re.findall(&#39;Python&#39;, A) #A是要匹配的字符串,r是列表
+#print(r) #返回结果是一个列表
+
+if len(r) &gt; 0
+    print(&#39;字符串中包含Python&#39;)
+</code></pre>
+<h3 id="元字符与普通字符"><a href="#元字符与普通字符" class="headerlink" title="元字符与普通字符"></a>元字符与普通字符</h3><p>普通字符：正常文本字符，如上例中的’python’</p>
+<p>元字符：在正则表达式中具有特殊意义的专用字符,如‘\d’。</p>
+<p><strong>示例：</strong></p>
+<pre><code class="python">#找出A中的所有数字
+import re
+A = &#39;C0C++34Java5Python56Javascript&#39; 
+r = re.findall(&#39;\d&#39;, A) #A是要匹配的字符串
+print(r) #返回结果是一个列表
+</code></pre>
+<p><a href="https://baike.baidu.com/item/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F" target="_blank" rel="noopener">正则表达式全集</a></p>
+<h3 id="字符集"><a href="#字符集" class="headerlink" title="字符集"></a>字符集</h3><pre><code class="python">#找出中间字母是c到f的单词
+import re
+S = &#39;abc,acc,adc,aec,afc,ahc&#39;
+r = re.findall(&#39;a[c-f]c&#39;, S) #A是要匹配的字符串
+print(r) #返回结果是一个列表
+</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">字符</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>[]</code></td>
+<td style="text-align:center">或</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>()</code></td>
+<td style="text-align:center">分组，且</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>[^]</code></td>
+<td style="text-align:center">非</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>^</code></td>
+<td style="text-align:center">开头</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>$</code></td>
+<td style="text-align:center">结尾</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>[a-b]</code></td>
+<td style="text-align:center">数字或字母范围</td>
+</tr>
+</tbody>
+</table>
+<h3 id="概括字符集"><a href="#概括字符集" class="headerlink" title="概括字符集"></a>概括字符集</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">字符</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>.</code></td>
+<td style="text-align:center">除换行之外的所有字符</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\d</code></td>
+<td style="text-align:center">数字</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\D</code></td>
+<td style="text-align:center">非数字</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\s</code></td>
+<td style="text-align:center">空白字符</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\S</code></td>
+<td style="text-align:center">非空白字符</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\w</code></td>
+<td style="text-align:center">下划线、字母、数字</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\W</code></td>
+<td style="text-align:center">非下划线、字母、数字</td>
+</tr>
+</tbody>
+</table>
+<p>\w即<code>[0-9A-Za-z_]</code>，\W匹配任何非单词字符。等价于<code>[^A-Za-z0-9_]</code>。概括字符集表述更加简洁</p>
+<h3 id="数量词"><a href="#数量词" class="headerlink" title="数量词"></a>数量词</h3><pre><code class="python">import re
+S = &#39;python 1111java6784php&#39;
+#提取3个单词
+#r = re.findall(&#39;[a-z]{3}&#39;, S) #匹配a-z的数量是固定的3个
+r = re.findall(&#39;[a-z]{3,6}&#39;, S)
+print(r) #返回结果是一个列表，[&#39;python&#39;, &#39;java&#39;, &#39;php&#39;]
+#问题：为什么匹配到3字符的时候不输出pyt,而是到python?
+#解：贪婪
+</code></pre>
+<h4 id="贪婪与非贪婪"><a href="#贪婪与非贪婪" class="headerlink" title="贪婪与非贪婪"></a>贪婪与非贪婪</h4><p>数量词有贪婪和非贪婪之分，默认情况下是贪婪的方式</p>
+<p>贪婪：数量词限定在一个区间之内，python倾向于尽可能多的取最大的值，一直到某个字符不满足条件时停止</p>
+<p>非贪婪：<code>[a-z]{3,6}?</code></p>
+<h4 id="匹配0次1次或者无限多次"><a href="#匹配0次1次或者无限多次" class="headerlink" title="匹配0次1次或者无限多次"></a>匹配0次1次或者无限多次</h4><pre><code class="python">import re
+S = &#39;pytho1python6pythonn&#39;
+#*匹配0次或者无限多次  [&#39;pytho&#39;, &#39;python&#39;, &#39;pythonn&#39;]
+#+匹配1次或者无限多次  [&#39;python&#39;, &#39;pythonn&#39;]
+#？匹配0次或者1次  [&#39;pytho&#39;, &#39;python&#39;, &#39;python&#39;] 会把正确的匹配结果纳入（可用来去重）
+r = re.findall(&#39;python*&#39;, S)
+print(r) #返回结果是一个列表
+</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">字符</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>{a,b}</code></td>
+<td style="text-align:center">指定前<strong>一个</strong>字符的出现次数(贪婪)</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>*</code></td>
+<td style="text-align:center">前面的<strong>一个</strong>字符出现0到n次</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>+</code></td>
+<td style="text-align:center">前面的一个字符出现1到n次</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>?</code></td>
+<td style="text-align:center">前面的一个字符出现0到1次</td>
+</tr>
+</tbody>
+</table>
+<h3 id="边界匹配符"><a href="#边界匹配符" class="headerlink" title="边界匹配符"></a>边界匹配符</h3><p><code>^</code> <code>$</code></p>
+<pre><code class="python">import re
+qq = &#39;10000013332&#39;
+#要求qq在4-8位
+r = re.findall(&#39;^\d{4,8}$&#39;, qq) #^从字符串的开始匹配，$从字符串的末尾开始匹配
+print(r) #返回结果是一个列表
+</code></pre>
+<h3 id="组-1"><a href="#组-1" class="headerlink" title="组"></a>组</h3><pre><code class="python">import re
+A = &#39;PythonPythonPythonPythonPython&#39;
+#要求判断字符串里是否包含3个python
+r = re.findall(&#39;(Python){3}&#39;, A) #括号括起来成为组，一组的字符重复3次
+print(r) #返回结果是一个列表
+</code></pre>
+<p>[abc]或关系，（ABC）组关系</p>
+<h3 id="匹配模式参数"><a href="#匹配模式参数" class="headerlink" title="匹配模式参数"></a>匹配模式参数</h3><p><code>r = re.findall(&#39;正则表达式&#39;, 字符串，模式1|模式2)</code>多个模式用|连在一起</p>
+<h5 id="匹配-findall"><a href="#匹配-findall" class="headerlink" title="匹配 findall"></a>匹配 findall</h5><blockquote>
+<p>格式：<code>re.findall(子串,主串[,模式|模式2...])</code><br>功能：匹配<br>返回：以列表形式，返回匹配到的子串<br>说明：模式中<code>\|</code>表示且</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">字符</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>re.I</code></td>
+<td style="text-align:center">忽视大小写</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>re.S</code></td>
+<td style="text-align:center">使 . 匹配包括换行在内的所有字符，改变.号的行为</td>
+</tr>
+</tbody>
+</table>
+<h3 id="re模块下的其他正则表达式"><a href="#re模块下的其他正则表达式" class="headerlink" title="re模块下的其他正则表达式"></a>re模块下的其他正则表达式</h3><h4 id="re-sub"><a href="#re-sub" class="headerlink" title="re.sub"></a>re.sub</h4><p>格式：<code>re.sub(原内容，新内容/函数，主串，替换次数)</code><br>功能：替换<br>返回：返回新的主串<br>说明：替换次数为0表全体换，为n表示替换n个</p>
+<pre><code class="python">#示例
+import re
+language = &#39;PythonC#JavaPHPC#&#39;
+r = re.sub(&#39;C#&#39;,&#39;Go&#39;,language,1) 
+print(r) #PythonGoJavaPHPC#
+</code></pre>
+<p>进阶：</p>
+<p>动态替换，根据不同的匹配结果进行不同的替换</p>
+<p>&lt;re.Match object; span=(6, 8), match=’C#’&gt;  返回的第一个C#之前有6个字符，自己占7,8</p>
+<pre><code class="python">import re
+
+def convert(value):
+    #print(value)  
+    matched = value.group()
+    return &#39;!!&#39; + matched + &#39;!!&#39;
+language = &#39;PythonC#JavaPHPC#&#39;
+r = re.sub(&#39;C#&#39;,convert,language)
+print(r)
+#Python!!C#!!JavaPHP!!C#!!
+</code></pre>
+<h4 id="把函数作为参数传递的作用"><a href="#把函数作为参数传递的作用" class="headerlink" title="把函数作为参数传递的作用"></a>把函数作为参数传递的作用</h4><pre><code class="python">import re
+a = &#39;A8C3721D86&#39;
+#找出所有数字，&gt;=6的统一替换成9,&lt;6替换成0
+def convert(value):
+    matched = value.group()
+    if int(matched) &gt;= 6: #默认字符串形式存储
+        return &#39;9&#39;
+    else:
+        return &#39;0&#39;
+r = re.sub(&#39;\d&#39;, convert, a)
+print(r) # A9C0900D99
+</code></pre>
+<h4 id="search与match函数"><a href="#search与match函数" class="headerlink" title="search与match函数"></a>search与match函数</h4><p><a href="https://blog.csdn.net/weixin_43059645/article/details/82047665?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase" target="_blank" rel="noopener">match、search、findall用法区别</a></p>
+<p><strong>match</strong></p>
+<blockquote>
+<p>格式：<code>re.match(子串,主串)</code><br>功能：匹配（仅匹配一个）<br>说明：从首字符开始匹配，若没找到对应的结果返回空,若想获取返回Match对象转为值，则用group()方法 </p>
+</blockquote>
+<p><strong>search</strong></p>
+<blockquote>
+<p>格式：<code>re.search(子串,主串)</code><br>功能：匹配到一个结果（仅匹配一个），就返回结果.若想获取返回Match对象转为值，则用group()方法 </p>
+</blockquote>
+<p><em>match、search的比较示例代码：</em></p>
+<pre><code class="python">import re
+a = &#39;A8C3721D86&#39;
+
+r1 = re.match(&#39;\d&#39;, a)
+print(r1)
+
+r2 = re.search(&#39;\d&#39;, a)
+print(r2)
+
+# 输出结果
+None
+&lt;re.Match object; span=(1, 2), match=&#39;8&#39;&gt;
+</code></pre>
+<p><em>match、search、findall的比较示例代码：</em></p>
+<pre><code class="python">import re
+a = &#39;8C3721D86&#39;
+
+r1 = re.match(&#39;\d&#39;, a)
+print(r1)
+
+r2 = re.search(&#39;\d&#39;, a)
+print(r2)
+
+r3 = re.findall(&#39;\d&#39;, a)
+print(r3)
+
+# 输出结果
+&lt;re.Match object; span=(0, 1), match=&#39;8&#39;&gt;
+&lt;re.Match object; span=(0, 1), match=&#39;8&#39;&gt;
+[&#39;8&#39;, &#39;3&#39;, &#39;7&#39;, &#39;2&#39;, &#39;1&#39;, &#39;8&#39;, &#39;6&#39;]
+</code></pre>
+<h3 id="group分组"><a href="#group分组" class="headerlink" title="group分组"></a>group分组</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">函数</th>
+<th style="text-align:center">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>.group()</code></td>
+<td style="text-align:center">用来提取出分组截获的字符串</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>.span()</code></td>
+<td style="text-align:center">返回匹配到的子串在主串中的位置</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python">import re
+
+s = &#39;life is short,i use python&#39;
+r = re.search(&#39;life(.*)python&#39;,s)
+print(r.group(1)) #获取分组的匹配
+#0永远记录正则表达式的完整匹配结果
+</code></pre>
+<p>用findall</p>
+<pre><code class="python">import re
+
+s = &#39;life is short,i use python&#39;
+r = re.findall(&#39;life(.*)python&#39;,s)
+print(r) #获取分组的匹配
+
+</code></pre>
+<h3 id="理解JSON"><a href="#理解JSON" class="headerlink" title="理解JSON"></a>理解JSON</h3><p>JavaScript Object Notation  JavaScript对象标记</p>
+<blockquote>
+<p>JSON是一种<strong>轻量级</strong>的<strong>数据交换格式</strong>。</p>
+<ul>
+<li>JSON载体：JSON字符串，字符串是json的表现形式</li>
+<li>JSON优势：易于阅读、易于解析、网络传输效率高，适合跨语言交换数据</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>JSON字符串：是指符合JSON格式的字符串</p>
+</blockquote>
+<p><em>注意：JSON中只能使用双引号</em>，轻量相对于xml而言，符合JSON格式的字符串叫做JSON字符串</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200601203759.jpg" style="zoom:50%;"></p>
+<p><strong>json是一种数据格式，适合跨语言交换数据</strong></p>
+<h4 id="反序列化和序列化"><a href="#反序列化和序列化" class="headerlink" title="反序列化和序列化"></a><strong>反序列化和序列化</strong></h4><p>由字符串到语言下的某一数据结构叫反序列化</p>
+<p>python字典转化为字符串</p>
+<p> <strong>JSON函数</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数</th>
+<th style="text-align:center">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>json.loads(json字符串)</code></td>
+<td style="text-align:center">反序列化，JSON字符串转Python对象</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>json.dumps(python对象)</code></td>
+<td style="text-align:center">序列化，Python对象转JSON字符串</td>
+</tr>
+</tbody>
+</table>
+<p><strong>JSON与Python类型的对照</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">JSON</th>
+<th style="text-align:center">Python</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>object</code></td>
+<td style="text-align:center"><code>dict</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>array</code></td>
+<td style="text-align:center"><code>list</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>string</code></td>
+<td style="text-align:center"><code>str</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>number(int)</code></td>
+<td style="text-align:center"><code>int</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>number(real)</code></td>
+<td style="text-align:center"><code>float</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>true</code></td>
+<td style="text-align:center"><code>True</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>flase</code></td>
+<td style="text-align:center"><code>False</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>null</code></td>
+<td style="text-align:center"><code>None</code></td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python">#反序列化
+import json
+json_str = &#39;{&quot;name&quot;:&quot;qiyue&quot;, &quot;age&quot;:18}&#39; #数字不用加引号
+#json有很多数据类型，如数组&#39;[{&quot;name&quot;:&quot;qiyue&quot;, &quot;age&quot;:18，“},{&quot;name&quot;:&quot;qiyue&quot;, &quot;age&quot;:18}]&#39; 
+#把json字符串转换成python自己的数据类型(字典)
+student = json.loads(json_str)
+print(type(student))  #dict字典类型
+print(student)
+print(student[&quot;name&quot;])
+print(student[&quot;age&quot;])
+
+********************
+json_str = &#39;[{&quot;name&quot;:&quot;qiyue&quot;, &quot;age&quot;:18}&#39;,{&quot;name&quot;:&quot;qiyue&quot;, &quot;age&quot;:18}&#39;]
+</code></pre>
+<pre><code class="python">#序列化
+import json
+student = [
+            {&#39;name&#39;:&#39;qiyue&#39;, &#39;age&#39;:18 ,&#39;flag&#39;:False},
+            {&#39;name&#39;:&#39;qiyue&#39;, &#39;age&#39;:18}
+          ]
+
+#把json字符串转换成对应的python结构(字典)
+json_str = json.dumps(student)
+print(type(json_str))
+print(json_str) 
+</code></pre>
+<p>JSON对象，JSON，JSON字符串？</p>
+<p>JSON对象在JavaScript中概念成立</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200601213959.jpg" style="zoom:50%;"></p>
+<p>JSON有自己的数据类型，虽然它和JavaScript的数据类型有些相似</p>
+<p>REST服务的标准格式：JSON</p>
+<p>本章节我们揭开Python进阶部分的高级特性，详细讲解枚举、闭包，并对函数式编程做出介绍</p>
+<h3 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h3><h4 id="枚举是一个类"><a href="#枚举是一个类" class="headerlink" title="枚举是一个类"></a>枚举是一个类</h4><pre><code class="python">from enum import Enum
+class VIP(Enum): #继承Enum类
+    YELLOW = 1 #数字可以替换成任意数据类型，只要不同就行
+    GREEN = 2
+    BLACK = 3
+    RED = 4
+
+print(VIP.YELLOW) #VIP.YELLOW 打印出的是名字，类型是enum VIP
+VIP.YELLOW = 6 #会报错 ，不可更改
+
+for v in VIP
+#for v in VIP.__members__: 把标签的别名也遍历得到
+    print(v) #枚举的遍历
+</code></pre>
+<p><strong>枚举和普通类相比的优势</strong></p>
+<p>如果没有枚举类,在模块中通过变量表示枚举类型</p>
+<pre><code class="python">yellow = 1 #法一
+green = 2  
+{&#39;yellow&#39;:1,&#39;green:2&#39;} #法二
+
+class TypeDiamond(): #法三
+    yellow = 1 
+    green = 2
+</code></pre>
+<p>字典和类都是可变的。没有防止相同值的功能</p>
+<h4 id="枚举类型、枚举名称与枚举值"><a href="#枚举类型、枚举名称与枚举值" class="headerlink" title="枚举类型、枚举名称与枚举值"></a>枚举类型、枚举名称与枚举值</h4><p><code>print(VIP.YELLOW.value)</code>获取枚举值  #6</p>
+<p><code>print(VIP.YELLOW.name)</code> 获取枚举名字  #YELLOW</p>
+<p><code>print(VIP[&#39;GREEN&#39;])</code>  获取枚举类型 #VIP.GREEN</p>
+<h4 id="枚举-比较运算"><a href="#枚举-比较运算" class="headerlink" title="枚举 比较运算"></a>枚举 比较运算</h4><pre><code class="python">from enum import Enum
+class VIP(Enum): #继承Enum类
+    YELLOW = 1 #数字可以替换成任意数据类型，只要不同就行
+    GREEN = 2
+    BLACK = 3
+    RED = 4
+
+result = VIP.GREEN == VIP.BLACK  #False
+result = VIP.GREEN == 2 #虽然不报错，但显示False
+</code></pre>
+<p>枚举类型直接不能做大小比较</p>
+<h4 id="枚举注意事项"><a href="#枚举注意事项" class="headerlink" title="枚举注意事项"></a>枚举注意事项</h4><ul>
+<li>其标签值不可修改</li>
+<li>其不允许相同标签</li>
+<li>其标签不支持大于小于比较符</li>
+<li>其若有多个标签是同值的，则后续的都看做第一个标签的别名。在遍历枚举类时，别名不会被打印出来</li>
+<li>其不允许实例化</li>
+<li><code>@unique</code> 装饰器，则不允许标签同值</li>
+</ul>
+<h4 id="枚举转换"><a href="#枚举转换" class="headerlink" title="枚举转换"></a>枚举转换</h4><p>数据库中存储枚举类型最好采用值（数字）</p>
+<p>代码中不建议用数值，建议用枚举类<code>if a == VIP.YELLOW</code></p>
+<pre><code class="python">from enum import Enum
+class VIP(Enum): #继承Enum类
+    YELLOW = 1 #数字可以替换成任意数据类型，只要不同就行
+    GREEN = 2
+    BLACK = 3
+    RED = 4
+</code></pre>
+<p>把数字转为枚举数据类型</p>
+<pre><code class="python">a = 1
+print(VIP(a)) 
+</code></pre>
+<pre><code class="python">from enum import Enum, unique
+
+# 如果枚举类继承的是IntEnum，则标签值只允许为int类型
+from enum import IntEnum  
+
+# @unique 加上这个，则不允许标签同值
+class VIP(Enum):
+    Yellow = 1
+    Yellow_ALIAS = 1
+    # Yellow = 2 # 报错，枚举类不允许相同标签
+    Green = 2
+    Black = 3
+
+
+class VIP1(Enum):
+    Yellow = 1
+    Yellow_ALIAS = 1
+    Green = 2
+    Black = 3
+
+
+class Common:
+    Yellow = 1
+    Black = 3
+    Red = 4
+
+print(&#39;-------枚举类型及值-------&#39;)
+print(VIP.Yellow)
+print(VIP[&#39;Yellow&#39;])
+print(VIP.Yellow.name)
+
+print(type(VIP.Yellow))
+print(type(VIP[&#39;Yellow&#39;]))
+print(type(VIP.Yellow.name))
+
+print(&#39;-------枚举类型与普通类对比-------&#39;)
+print(VIP.Yellow.value)
+print(Common.Yellow)
+
+Common.Yellow = 2
+# VIP.Yellow=2 # 报错，枚举类不可修改
+
+# 遍历枚举类——Yellow_ALIAS不会被打印
+print(&#39;-------for v in VIP-------&#39;)
+for v in VIP:
+    print(v)
+
+# Yellow_ALIAS会被打印
+print(&#39;-------for v in VIP.__members__-------&#39;)
+for v in VIP.__members__:
+    print(v)
+
+print(&#39;-------for v in VIP.__members__.items()-------&#39;)
+for v in VIP.__members__.items():
+    print(v)
+
+print(&#39;-------成员变量的别名及比较运算符-------&#39;)
+print(VIP.Yellow_ALIAS)
+print(VIP.Yellow is VIP.Yellow_ALIAS)
+print(VIP.Yellow == VIP.Yellow_ALIAS)
+print(VIP.Yellow == VIP1.Yellow_ALIAS)
+# print(VIP.Yellow&lt;VIP.Black) # 报错，枚举类不支持大于小于运算符
+
+print(&#39;-------枚举转换-------&#39;)
+a = 1
+print(VIP(a))
+
+# 输出结果
+-------枚举类型及值-------
+VIP.Yellow
+VIP.Yellow
+Yellow
+&lt;enum &#39;VIP&#39;&gt;
+&lt;enum &#39;VIP&#39;&gt;
+&lt;class &#39;str&#39;&gt;
+-------枚举类型与普通类对比-------
+1
+1
+-------for v in VIP-------
+VIP.Yellow
+VIP.Green
+VIP.Black
+-------for v in VIP.__members__-------
+Yellow
+Yellow_ALIAS
+Green
+Black
+-------for v in VIP.__members__.items()-------
+(&#39;Yellow&#39;, &lt;VIP.Yellow: 1&gt;)
+(&#39;Yellow_ALIAS&#39;, &lt;VIP.Yellow: 1&gt;)
+(&#39;Green&#39;, &lt;VIP.Green: 2&gt;)
+(&#39;Black&#39;, &lt;VIP.Black: 3&gt;)
+-------成员变量的别名及比较运算符-------
+VIP.Yellow
+True
+True
+False
+-------枚举转换-------
+VIP.Yellow
+
+</code></pre>
+<p>扩展：</p>
+<pre><code class="python">from enum import IntEnum，unique #强制要求值是数字,限制值不能相同
+</code></pre>
+<p>加强<a href="https://www.cnblogs.com/pony1223/p/7608955.html" target="_blank" rel="noopener">设计模式</a>的学习,进阶学习</p>
+<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p>函数：其他语言中，函数只是一段可执行的代码，并不是对象，不能实例化。</p>
+<p>在python中，一切皆对象。可以把函数赋给一个变量，可以把一个函数当做另一个函数的参数</p>
+<p>示例：</p>
+<pre><code class="python">def curve_pre(): #调用curve_pre函数，拿到的是一个函数结果
+    a = 25
+    def curve(x):
+        return a*x*x      
+    return curve #把curve函数作为结果返回给curve_pre
+f = curve_pre()
+print(f(2))  #100
+</code></pre>
+<pre><code class="python">def curve_pre(): #调用curve_pre函数，拿到的是一个函数结果
+    a = 25
+    def curve(x):
+        return a*x*x      
+    return curve #把curve函数作为结果返回给curve_pre实际是返回了闭包
+
+a = 10
+f = curve_pre()
+print(f(2)) #100 没有取a=10来运算（闭包的取值）
+</code></pre>
+<p><a href="https://www.zhihu.com/question/34210214" target="_blank" rel="noopener">闭包定义</a></p>
+<p>闭包 = 函数 + 环境变量</p>
+<p>（环境变量必须函数定义时的外部变量，且不为全局变量）</p>
+<p>闭包的意义：把函数调用的现场保护起来了，不受外部变量的影响</p>
+<h4 id="闭包的经典误区"><a href="#闭包的经典误区" class="headerlink" title="闭包的经典误区"></a>闭包的经典误区</h4><pre><code class="python">def f1():
+    a = 10 
+    def f2():
+        a = 20 #a被ptython认为是一个局部变量，此时并不引用外面的环境变量，因此不是闭包
+        print(a) #20
+    print(a) #10 第一次打印
+    f2()  #执行f2,a=20
+    print(a) #10内部的a(局部变量)不会影响外部的a 
+
+f1()  #1.执行 f1,开始调用f1函数
+</code></pre>
+<p>结论：如果没有在函数中引用全局变量，或者仅引用局部变量，都不会形成闭包</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200602220100.png" style="zoom:67%;"></p>
+<p><strong>练习：</strong></p>
+<p>编写函数，得到旅行者的位置（关键需要保存上一次函数调用的结果状态）</p>
+<p>非闭包方法</p>
+<p>代码质量不高，在函数内部定义全局变量，代码自封性不强（因为可能其他代码段也会改变全局变量）</p>
+<pre><code class="python">#编写函数，得到旅行者的位置
+#关键需要保存上一次函数调用的结果状态
+origin = 0
+
+def go(step):
+    global origin #声明origin是全局变量
+    new_pos = origin + step
+    origin = new_pos #python认为等号左边origin此时是局部变量，是存在的，
+                    #不会在外面引用,解决方法：增加global origin
+
+    return new_pos
+print(go(2))
+print(go(3))
+print(go(6))
+</code></pre>
+<p>闭包方法：</p>
+<pre><code class="python">origin = 0
+#这是工厂模式
+def factory(pos): #参数是当前旅行者正处于的位置,pos是环境变量，有保存现场功能
+    def go(step):
+        nonlocal pos #强制让pos不是局部变量
+        new_pos = pos +step
+        pos = new_pos #pos此时会认为是局部变量
+        return new_pos
+    return go
+
+tourist = factory(origin)
+print(tourist(2))
+print(tourist(3))
+print(tourist(5))
+</code></pre>
+<h3 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h3><p>本章节进一步介绍函数式编程的lambda、mapeduce、filter以及装饰器</p>
+<p>匿名函数：lambda表达式</p>
+<pre><code class="python">def add(x, y):
+    return x+y
+---------用匿名函数实现--------------
+#lambda parameter_list: expression #不能再表达式中用代码块（如赋值语句等）
+f = lambda x,y: x+y
+f(1,2) #匿名函数的调用
+--------配合正则表达式使用会更方便------
+</code></pre>
+<h4 id="三元表达式"><a href="#三元表达式" class="headerlink" title="三元表达式"></a>三元表达式</h4><p>其他语言：a &gt; y ? x : y 判断条件？结果1：结果2</p>
+<p>python:条件为真时返回的结果 if 条件判断 else 条件为假时返回的结果</p>
+<p><code>x if x&gt;y else y</code></p>
+<h4 id="map"><a href="#map" class="headerlink" title="map"></a>map</h4><p>闭包不建议在业务代码使用，在架构编写方面可以推荐。</p>
+<p>map推荐在python中多使用</p>
+<pre><code class="python">list_x = [1,2,3,4,5,6,7,8]
+
+def square(x):
+    return x*x
+
+-------使用for循环------
+for x in list_x:
+    square(x)
+
+--------使用map------
+r = map(square,list_x)
+print(r) #map对象
+print(list(r))
+map函数映射，把原来集合元素通过函数关系映射到另一个集合。
+
+--------使用map和lambda精简--------
+r = map(lambda x: x*x,list_x)
+
+#map多参数的传入， #x,y参数个数要相等，否则结果有缺失
+list_x = [1,2,3,4,5,6,7,8]
+list_y = [1,2,3,4,5,6,7,8]
+r = map(lambda x,y: x*x+y,list_x,list_y)
+</code></pre>
+<h4 id="reduce"><a href="#reduce" class="headerlink" title="reduce"></a>reduce</h4><pre><code class="python">from functools import reduce
+
+#连续计算，连续调用lambda
+每一次lamnda的计算结果将作为下一次表达式的参数作为运算，直至遍历结果
+list_x = [1,2,3,4,5,6,7,8]
+r = reduce(lambda x,y: x+y,list_x)
+print(r)
+
+1+2
+3（上一次表达式的结果）+3
+6+4
+((((1+2)+3)+4)+5)
+...
+</code></pre>
+<p>lambda是联系计算，计算操作表达式内定义</p>
+<p>扩展：大数据计算模型（map/reduce） 映射 规约 并行计算</p>
+<h4 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h4><pre><code class="python">#filter
+list_x = [1, 0, 1, 0, 0, 1]
+r = filter(lambda x:True if x == 1 else False, list_x)
+print(list(r))
+</code></pre>
+<h4 id="命令式编程vs函数式编程"><a href="#命令式编程vs函数式编程" class="headerlink" title="命令式编程vs函数式编程"></a>命令式编程vs函数式编程</h4><p>命令式编程关键点：</p>
+<p>def  if else  for</p>
+<p>函数式编程：</p>
+<p>map reduce filter lambda算子</p>
+<p>lisp 函数式编程的鼻祖</p>
+<h3 id="装饰器"><a href="#装饰器" class="headerlink" title="装饰器"></a>装饰器</h3><pre><code class="python">import time
+def f1():
+    print(time.time()) #结果是unix时间戳，1591168510.2112603
+    print(&#39;This is a function&#39;)
+
+#如果有100个函数，都需要自带打印时间的功能。
+#原则：当需求产生变更的时候，尽量不改变函数、对象或类下面的具体实现
+#对修改是封闭的，对扩展是开放的
+f1()
+</code></pre>
+<p>解决方案：</p>
+<pre><code class="python">import time
+def f1():
+    print(&#39;This is a function&#39;)
+
+#如果有100个函数，都需要自带打印时间的功能。
+#原则：当需求产生变更的时候，尽量不改变函数、对象或类下面的具体实现
+#对修改是封闭的，对扩展是开放的
+def f2():
+    print(&#39;This is a function&#39;)
+
+def print_current_time(func):
+    print(time.time()) 
+    func()
+
+print_current_time(f1)
+print_current_time(f2)
+</code></pre>
+<p>上述缺点：新增的功能是属于每个函数的，最好能和原来的函数绑定</p>
+<p>改进：</p>
+<pre><code class="python">import time 
+#装饰器结构
+def decorator(func):
+    def wrapper():
+        print(time.time())
+        func()
+    return wrapper
+
+def f1():
+    print(&#39;this is a function&#39;)
+
+f = decorator(f1) #改变了调用方式
+f()
+</code></pre>
+<p>改进：</p>
+<pre><code class="python">import time 
+#装饰器结构
+def decorator(func):
+    def wrapper():
+        print(time.time())
+        func()
+    return wrapper
+
+@decorator    #语法糖，不改变原来的调用方式
+def f1():
+    print(&#39;this is a function&#39;)
+
+f1() #不改变原来的调用方式
+</code></pre>
+<p>体现了AOP的设计思想</p>
+<p>支持不同参数：</p>
+<pre><code class="python">import time 
+#装饰器结构
+def decorator(func):
+    def wrapper(*args): #支持不同参数的个数
+        print(time.time())
+        func(*args)
+    return wrapper
+
+@decorator    #不改变原来的调用方式
+def f1(func_name):
+    print(&#39;this is a function&#39;+func_name)
+
+@decorator    #不改变原来的调用方式
+def f2(func_name1,func_name2):
+    print(&#39;this is a function&#39;+func_name1)
+
+f1(&#39;test func&#39;)
+f2(&#39;test func1&#39;,&#39;test func2&#39;)
+</code></pre>
+
+        </div>
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/donate/alipay.jpg"></li>
+                <li class="wechat-code"><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/donate/wechatqr.jpg"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+          
+            <div class="post-nepre half previous">
+          
+            <a href="/2020/06/09/Java教程笔记之面向对象编程/" rel="prev">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/20200610123509.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/20200610123509.jpg">
+              </div>
+              <span class="label">
+              Previous Post</span>
+              <div class="info">
+                <h3>
+                Java教程笔记之面向对象编程</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+        
+          
+            <div class="post-nepre half next">
+          
+            <a href="/2020/05/21/SOURCETREE-3-1-3-版本跳过BITBUCKET注册方法（亲测好用）/" rel="next">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="//cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200521100712.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="//cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200521100712.jpg">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                SOURCETREE 3.1.3 版本跳过BITBUCKET注册方法（亲测好用）</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
+      
+<div id="vcomments"></div>
+<script>
+  window.onload = function(){
+      var valine = new Valine();
+      valine.init({
+        el: '#vcomments',
+        appId: "4NBvruApUCpLtmlsyQLevDfx-gzGzoHsz",
+        appKey: "eTSHbT3jvLQPcVYMC7QFXQFd",
+        path: window.location.pathname,
+        placeholder: "你是我一生只会遇见一次的惊喜 ..."
+      })
+  }
+</script>
+
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="www.yulinblog.com" class="profile gravatar"><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/avatar.jpg" itemprop="image" alt="YUYU" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="www.yulinblog.com" itemprop="url" rel="author">YUYU</a>
+            </h3>
+          </div>
+        </div>
+        <hr>
+        <p><i class="iconfont icon-write"></i>一个好奇的人</p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
+</div>
+
+
+
+    </div>    
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="请输入关键词..."/>
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            // PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+    <!-- <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 YU YU<br>
+      powered_by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer> -->
+<footer id="colophon" class="site-footer" role="contentinfo">
+  <div class="site-info">
+    <div class="footertext">
+      <div class="img-preload">
+        <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/wordpress-rotating-ball-o.svg">
+        <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/disqus-preloader.svg">
+      </div>
+
+       <!-- 不蒜子统计 -->
+       <div><i class="iconfont icon-sakura rotating" style="color: #ffc0cb;display:inline-block"></i>
+        <span id="busuanzi_container_site_pv" >
+             <i class="fa fa-eye" aria-hidden="true"></i><span id="busuanzi_value_site_pv"></span>
+        </span>
+        <span class="post-meta-divider">|</span>
+
+        <span id="busuanzi_container_site_uv" style='display:none'>
+            <i class="fa fa-user-o" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+        </span>
+        <i class="iconfont icon-sakura rotating" style="color: #ffc0cb;display:inline-block"></i>
+        </div>
+
+
+      <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span><script>
+  var now = new Date();
+  function createtime() {
+    var grt= new Date("05/19/2020 22:00:00");//此处修改你的建站时间或者网站上线时间
+    now.setTime(now.getTime()+250);
+    days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+    hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+    if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+    mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+    seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+    snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+    document.getElementById("timeDate").innerHTML = "博客已悄悄运行 "+dnum+" 天 ";
+    document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+  }
+  setInterval("createtime()",250);</script>
+  
+      
+      
+</div>
+
+    <div class="footer-device" style="font-family: 'Ubuntu', sans-serif;">
+   
+        <span style="color: #b9b9b9;"></i>&copy 2020 <i class="fa fa-heart" aria-hidden="true" style="color: pink;"></i> YUYU 
+
+        </span>
+  </div><!-- .site-info -->
+</footer>
+
+
+
+<!-- <script src="/js/tocbot.js"></script> -->
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?5b4b3bde9daad1e9f0023976853b7793";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript" src="/js/lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/InsightSearch.js"></script>
+<script type="text/javascript" src="/js/jquery.fancybox.min.js"></script>
+<script type="text/javascript" src="/js/zoom.min.js"></script>
+<script type="text/javascript" src="/js/sakura-app.js"></script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine@1.3.4/dist/Valine.min.js'></script>
+<script src="/js/botui.js"></script>
+
+<script type="text/javascript" src="/js/funnytitle.js"></script>
+<script type="text/javascript" src="/js/loveclick.js"></script>
+
+
+
+<!-- 不蒜子 网页计数器 -->
+<script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script> -->
+<script type="text/javascript">
+/* <![CDATA[ */
+if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  var Poi = {"pjax":"1","movies":{"url": "https://cdn.jsdelivr.net/gh/honjun/hojun@1.2","name":"Unbroken.mp4","live":"close"},"windowheight":"fixed","codelamp":"close","ajaxurl":"","order":"asc","formpostion":"bottom"};
+} else {
+  var Poi = {"pjax":"1","movies":{"url": "https://cdn.jsdelivr.net/gh/honjun/hojun@1.2","name":"Unbroken.mp4","live":"open"},"windowheight":"auto","codelamp":"close","ajaxurl":"","order":"asc","formpostion":"bottom"};
+}
+/* ]]> */
+
+</script>
+<script>
+$(document).ready(function() {
+  if ($(".toc").length > 0 && document.body.clientWidth > 1200) {
+    if ($(".pattern-center").length > 0) { //有图的情况
+      tocbot.init({
+          // Where to render the table of contents.
+          tocSelector: '.toc', // 放置目录的容器
+          // Where to grab the headings to build the table of contents.
+          contentSelector: '.entry-content', // 正文内容所在
+          // Which headings to grab inside of the contentSelector element.
+          scrollSmooth: true,
+          headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+          headingsOffset: -400,
+          scrollSmoothOffset: -85
+      });
+    } else {
+      tocbot.init({
+          // Where to render the table of contents.
+          tocSelector: '.toc', // 放置目录的容器
+          // Where to grab the headings to build the table of contents.
+          contentSelector: '.entry-content', // 正文内容所在
+          // Which headings to grab inside of the contentSelector element.
+          scrollSmooth: true,
+          headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+          headingsOffset: -85,
+          scrollSmoothOffset: -85
+      });
+    }
+    var offsetTop = $('.toc').offset().top - 95;
+    window.onscroll = function() {
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+      if (scrollTop >= offsetTop) {
+        $('.toc').addClass('toc-fixed');
+      } else {
+        $('.toc').removeClass('toc-fixed');
+      }
+    }
+  }
+});
+</script>
+
+    <div class="openNav no-select" style="height: 50px;">
+      <div class="iconflat no-select" style="width: 50px; height: 50px;">
+        <div class="icon"></div>
+      </div>
+      <div class="site-branding search-form-submit">
+        <i class="iconfont js-toggle-search iconsearch icon-search"></i>
+      </div>
+    </div>
+  </section>
+
+
+ 
+<div class="skin-menu no-select" id="mainskin"  style="position: fixed">
+    <div class="theme-controls row-container">
+        <ul class="menu-list">
+            <li id="white-bg"> <i class="fa fa-television" aria-hidden="true"></i></li>
+            <li id="sakura-bg"> <i class="iconfont icon-sakura"></i></li>
+            <li id="gribs-bg"> <i class="fa fa-slack" aria-hidden="true"></i></li>
+            <li id="KAdots-bg"> <i class="iconfont icon-dots"></i></li>
+            <li id="totem-bg"> <i class="fa fa-optin-monster" aria-hidden="true"></i></li>
+            <li id="pixiv-bg"> <i class="iconfont icon-pixiv"></i></li>
+            <li id="bing-bg"> <i class="iconfont icon-bing"></i></li>
+            <li id="dark-bg"> <i class="fa fa-moon-o" aria-hidden="true"></i></li>
+        </ul>
+    </div>
+</div>   
+<canvas id="night-mode-cover"></canvas>
+ 
+  
+
+<div class="changeSkin-gear no-select">
+    <div class="keys" id="setbtn"> <span id="open-skinMenu"> 切换主题 | SCHEME TOOL &nbsp;<i
+                class="iconfont icon-gear inline-block rotating"></i> </span></div>
+</div>
+
+  
+  <div id="mo-nav" class="">
+  <div class="m-avatar">
+    <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/avatar.jpg">
+  </div>
+  <p style="text-align: center; color: #333; font-weight: 900; font-family: 'Ubuntu', sans-serif; letter-spacing: 1.5px">ひみつきちYUYU</p>
+  <p style="text-align: center; word-spacing: 20px;">
+    
+      
+        <a href="http://github.com/sunshine98yy" class="fa fa-github" target="_blank" style="color: #25c6fe; margin-left:20px"></a>
+      
+        <a href="mailto:sunshine98yy@163.com" class="fa fa-envelope" target="_blank" style="color: #dd4b39; margin-left:20px"></a>
+      
+    
+  </p>
+  <ul id="menu-new-1" class="menu">
+    
+      <li>
+        <a href="/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fas fa-home" aria-hidden="true"></i>
+            首页
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/archives">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-archive faa-shake" aria-hidden="true"></i>
+            归档
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/categories/技术/">
+                  <i class="fa fa-code" aria-hidden="true"></i>
+                  技术
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/笔记/">
+                  <i class="fa fa-book" aria-hidden="true"></i>
+                  笔记
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/项目/">
+                  <i class="fa fa-git" aria-hidden="true"></i>
+                  项目
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/随想/">
+                  <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                  随想
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/转载/">
+                  <i class="fa fa-share" aria-hidden="true"></i>
+                  转载
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="javascript:;">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
+            清单
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/bangumi/">
+                  <i class="fa fa-th-list faa-bounce" aria-hidden="true"></i>
+                  书单
+                </a>
+              </li>
+            
+              <li>
+                <a href="/music/">
+                  <i class="fa fa-headphones" aria-hidden="true"></i>
+                  歌单
+                </a>
+              </li>
+            
+              <li>
+                <a href="/tags/光影艺术/">
+                  <i class="fa fa-photo" aria-hidden="true"></i>
+                  摄影
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="/tags/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-tag" aria-hidden="true"></i>
+            标签
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/categories/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-bookmark" aria-hidden="true"></i>
+            分类
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/comment/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-pencil-square-o faa-tada" aria-hidden="true"></i>
+            留言板
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/links/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
+            友人帐
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/donate/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-heart faa-pulse" aria-hidden="true"></i>
+            赞赏
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/atom.xml">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-rss faa-pulse" aria-hidden="true"></i>
+            RSS
+          </span>
+        </a>
+        
+      </li>
+    
+  </ul>
+  <p style="text-align: center; font-size: 13px; color: #b9b9b9;">&copy 2019 hexo-sakura</p>
+</div>
+<button onclick="topFunction()" class="mobile-cd-top" id="moblieGoTop" title="Go to top" style="display: none;"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<style>
+  .aplayer .aplayer-lrc {
+    height: 35px;
+  }
+  .aplayer .aplayer-lrc p{
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 18px !important;
+  }
+  .aplayer .aplayer-lrc p.aplayer-lrc-current{
+    color: #FF1493;
+  }
+  .aplayer.aplayer-narrow .aplayer-body{
+    left: -66px !important;
+  }
+  .aplayer.aplayer-fixed .aplayer-lrc {
+    display: none;
+  }
+  .aplayer .aplayer-lrc.aplayer-lrc-hide {
+      display:none !important;
+  }
+  .aplayer.aplayer-fixed .lrc-show {
+    display: block;
+    background: rgba(255, 255, 255, 0.8);
+  }
+</style>
+<meting-js
+
+    id="980618283"
+
+    server="netease"
+
+    type="playlist"
+
+    fixed="true"
+
+    autoplay="false"
+
+    loop="all"
+
+    order="random"
+
+    preload="auto"
+
+    volume="0.7"
+
+    mutex="true"
+
+</meting-js>
+<script>
+  $(function(){
+    $('body').on('click', '.aplayer', function(){
+      if($('.aplayer-button').hasClass('aplayer-play')) {
+        $('.aplayer-lrc').removeClass('lrc-show');
+      } else {
+        $('.aplayer-lrc').addClass('lrc-show');
+      }
+    })
+  });
+</script>
+  <script type="text/javascript" src="source/js/loveclick.js"></script>
+  
+</body>
+</html>
