@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  
+  <title itemprop="name">Java教程笔记之异常处理 | 风中的鱼</title>
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  <meta http-equiv="x-dns-prefetch-control" content="on">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+SerifMerriweather|Merriweather+Sans|Source+Code+Pro|Ubuntu:400,700|Noto+Serif+SC" media="all">
+  <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+  <link rel="stylesheet" id="saukra_css-css" href="/css/style.css" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/lib.min.css" media="all">
+  <link rel="stylesheet" href="/css/font.css" media="all">
+  <link rel="stylesheet" href="/css/insight.css" media="all">
+  <link rel="stylesheet" href="/css/jquery.fancybox.min.css" media="all">
+  <link rel="stylesheet" href="/css/zoom.css" media="all">
+  <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<!--   <link rel="stylesheet" id="saukra_css-css" href="https://2heng.xin/wp-content/cache/autoptimize/css/autoptimize_ad42a61f4c7d4bdd9f91afcff6b5dda5.css
+" type="text/css" media="all"> -->
+  <script>
+  /*Initial Variables*/
+  var mashiro_option = new Object();
+  var mashiro_global = new Object();
+  mashiro_option.NProgressON = true;
+  /* 
+   * 邮箱信息之类的东西可以填在这里，这些js变量基本都作用于sakura-app.js
+   * 这样的设置仅是为了方便在基于PHP开发的主题中设置js变量，既然移植到了Node上，我想或许可以精简这一逻辑吧
+   */
+  mashiro_option.email_domain = "";
+  mashiro_option.email_name = "";
+  mashiro_option.cookie_version_control = "";
+  mashiro_option.qzone_autocomplete = false;
+  mashiro_option.site_name = "ひみつきちYUYU";
+  mashiro_option.author_name = "YUYU";
+  mashiro_option.site_url = "www.yulinblog.com";
+  mashiro_option.v_appId = "4NBvruApUCpLtmlsyQLevDfx-gzGzoHsz";
+  mashiro_option.v_appKey = "eTSHbT3jvLQPcVYMC7QFXQFd";
+  mashiro_option.mathjax = "0";
+  mashiro_option.qq_api_url = "https://api.mashiro.top/qqinfo/"; 
+  mashiro_option.qq_avatar_api_url = "https://api.mashiro.top/qqinfo/";
+
+  // mashiro_option.jsdelivr_css_src = "https://cdn.jsdelivr.net/gh/moezx/cdn@3.4.5/css/lib.min.css";
+  // mashiro_option.float_player_on = true;
+
+  /*End of Initial Variables*/
+  </script>
+  <script type="text/javascript">
+  var bg = "https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/cover/5.jpg,https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/cover/3.jpg,https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/cover/4.jpg,https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/cover/6.jpg".split(",");
+  var bgindex = Math.floor(Math.random()*bg.length);
+  if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
+    alert('朋友，IE浏览器未适配哦~');
+  }
+  </script>
+  <style type="text/css">
+  .hljs-ln{border-collapse:collapse}.hljs-ln td{padding:0}.hljs-ln-n:before{content:attr(data-line-number)}
+  </style>
+  <style type="text/css">.site-top .lower nav{display:block !important;}.author-profile i,.post-like a,.post-share .show-share,.sub-text,.we-info a,span.sitename,.post-more i:hover,#pagination a:hover,.post-content a:hover,.float-content i:hover{color:#FE9600}.feature i,.download,.navigator i:hover,.links ul li:before,.ar-time i,span.ar-circle,.object,.comment .comment-reply-link,.siren-checkbox-radio:checked + .siren-checkbox-radioInput:after{background:#FE9600}::-webkit-scrollbar-thumb{background:#FE9600}.download,.navigator i:hover,.link-title,.links ul li:hover,#pagination a:hover,.comment-respond input[type='submit']:hover{border-color:#FE9600}.entry-content a:hover,.site-info a:hover,.comment h4 a,#comments-navi a.prev,#comments-navi a.next,.comment h4 a:hover,.site-top ul li a:hover,.entry-title a:hover,#archives-temp h3,span.page-numbers.current,.sorry li a:hover,.site-title a:hover,i.iconfont.js-toggle-search.iconsearch:hover,.comment-respond input[type='submit']:hover{color:#FE9600}.comments .comments-main{display:block !important;}.comments .comments-hidden{display:none !important;}background-position:center center;background-attachment:inherit;}
+  </style>
+</head>
+</html>
+<body class="page-template page-template-user page-template-page-analytics page-template-userpage-analytics-php page page-id-1297 chinese-font serif isWebKit">
+  <div class="scrollbar" id="bar">
+  </div>
+  <a href="#" class="cd-top faa-float animated"></a>
+  <section id="main-container">
+    <div class="headertop ">
+  <div id="banner_wave_1"></div>
+  <div id="banner_wave_2"></div>
+  <figure id="centerbg" class="centerbg">
+    <div class="focusinfo no-select">
+      <div class="header-tou">
+        <a href="www.yulinblog.com">
+          <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/avatar.jpg">
+        </a>
+      </div>
+      <div class="header-info">
+        <p>在海边捡贝壳的孩子</p>
+        <div class="top-social_v2">
+          <li id="bg-pre">
+            <img class="flipx" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/other/next-b.svg">
+          </li>
+          
+            
+              
+                <li>
+                  <a href="https://github.com/sunshine98yy" target="_blank" class="social-github" title="github">
+                    <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/social/github1.png">
+                  </a>
+                </li>
+              
+            
+              
+                <li>
+                  <a href="mailto:sunshine98yy@163.com" target="_blank" class="social-github" title="email">
+                    <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/social/email.svg">
+                  </a>
+                </li>
+              
+            
+              
+                <li class="wechat">
+                  <a href="/#">
+                    <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/social/wechat.png">
+                  </a>
+                  <div class="wechatInner">
+                    <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/whchat.jpg">
+                  </div>
+                </li>
+              
+            
+          
+          <li id="bg-next">
+            <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/other/next-b.svg">
+          </li>
+        </div>
+      </div>
+    </div>
+  </figure>
+  <div id="video-container" style="">
+    <video style="object-fit: fill" id="bgvideo" class="video" video-name="" src="" width="auto" preload="auto">
+    </video>
+    <div id="video-btn" class="loadvideo videolive">
+    </div>
+    <div id="video-add">
+    </div>
+    <div class="video-stu">
+    </div>
+  </div>
+  <div class="headertop-down faa-float animated" onclick="headertop_down()">
+    <span>
+      <i class="fa fa-chevron-down" aria-hidden="true">
+      </i>
+    </span>
+  </div>
+</div>
+    <div id="page" class="site wrapper">
+      <header class="site-header no-select gizle sabit" role="banner">
+  <div class="site-top">
+    <div class="site-branding">
+      <span class="site-title">
+        <span class="logolink moe-mashiro">
+          <a href="/">
+            <span class="sakurasono">ひみつきち</span>
+            <span class="shironeko">YUYU</span>
+          </a>
+        </span>
+      </span>
+    </div>
+    <div class="searchbox search-form-submit">
+      <i class="iconfont js-toggle-search iconsearch icon-search">
+      </i>
+    </div>
+    <div id="show-nav" class="showNav mobile-fit">
+      <div class="line line1">
+      </div>
+      <div class="line line2">
+      </div>
+      <div class="line line3">
+      </div>
+    </div>
+    <div class="lower-cantiner">
+      <div class="lower">
+        <nav class="mobile-fit-control hide">
+          <ul id="menu-new" class="menu">
+            
+              <li>
+                <a href="/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fas fa-home" aria-hidden="true"></i>
+                    首页
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-archive faa-shake" aria-hidden="true"></i>
+                    归档
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/categories/技术/">
+                          <i class="fa fa-code" aria-hidden="true"></i>
+                          技术
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/笔记/">
+                          <i class="fa fa-book" aria-hidden="true"></i>
+                          笔记
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/项目/">
+                          <i class="fa fa-git" aria-hidden="true"></i>
+                          项目
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/随想/">
+                          <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                          随想
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/转载/">
+                          <i class="fa fa-share" aria-hidden="true"></i>
+                          转载
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="javascript:;">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
+                    清单
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/bangumi/">
+                          <i class="fa fa-th-list faa-bounce" aria-hidden="true"></i>
+                          书单
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/music/">
+                          <i class="fa fa-headphones" aria-hidden="true"></i>
+                          歌单
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/tags/光影艺术/">
+                          <i class="fa fa-photo" aria-hidden="true"></i>
+                          摄影
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="/tags/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-tag" aria-hidden="true"></i>
+                    标签
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/categories/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-bookmark" aria-hidden="true"></i>
+                    分类
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/comment/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-pencil-square-o faa-tada" aria-hidden="true"></i>
+                    留言板
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/links/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
+                    友人帐
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/donate/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-heart faa-pulse" aria-hidden="true"></i>
+                    赞赏
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/atom.xml">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-rss faa-pulse" aria-hidden="true"></i>
+                    RSS
+                  </span>
+                </a>
+                
+              </li>
+            
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+<div class="pattern-center-blank"></div>
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/20200610123509.jpg);" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/20200610123509.jpg">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      Java教程笔记之异常处理</h1>
+      <p class="entry-census">
+        <span>
+          <a href="www.yulinblog.com">
+            <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/avatar.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="www.yulinblog.com">YUYU</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2020-6-18<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
+  </div>
+
+<div id="content" class="site-content">
+  <div id="primary" class="content-area">
+    <main id="main" class="site-main" role="main">
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+        <div class="entry-content">
+          <h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><h3 id="Java的异常"><a href="#Java的异常" class="headerlink" title="Java的异常"></a>Java的异常</h3><p>一个健壮的程序必须处理各种各样的错误。Java内置了一套异常处理机制，总是使用异常来表示错误。</p>
+<p>异常是一种<code>class</code>，因此它本身带有类型信息。异常可以在任何地方抛出，但只需要在上层捕获，这样就和方法调用分离了</p>
+<pre><code class="java">try {
+    String s = processFile(“C:\\test.txt”);
+    // ok:
+} catch (FileNotFoundException e) {
+    // file not found:
+} catch (SecurityException e) {
+    // no read permission:
+} catch (IOException e) {
+    // io error:
+} catch (Exception e) {
+    // other error:
+}
+</code></pre>
+<p>因为Java的异常是<code>class</code>，它的继承关系如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_chat0617_001.jpg" style="zoom: 67%;"></p>
+<p>从继承关系可知：<code>Throwable</code>是异常体系的根，它继承自<code>Object</code>。<code>Throwable</code>有两个体系：<code>Error</code>和<code>Exception</code>，<code>Error</code>表示严重的错误，程序对此一般无能为力，例如：</p>
+<ul>
+<li><code>OutOfMemoryError</code>：内存耗尽</li>
+<li><code>NoClassDefFoundError</code>：无法加载某个Class</li>
+<li><code>StackOverflowError</code>：栈溢出</li>
+</ul>
+<p><strong>而<code>Exception</code>则是运行时的错误，它可以被捕获并处理。</strong></p>
+<p>某些异常是<strong>应用程序逻辑处理</strong>的一部分，应该捕获并处理。例如：</p>
+<ul>
+<li><code>NumberFormatException</code>：数值类型的格式错误</li>
+<li><code>FileNotFoundException</code>：未找到文件</li>
+<li><code>SocketException</code>：读取网络失败</li>
+</ul>
+<p>还有一些异常是<strong>程序逻辑</strong>编写不对造成的，应该修复程序本身。例如：</p>
+<ul>
+<li><code>NullPointerException</code>：对某个<code>null</code>的对象调用方法或字段</li>
+<li><code>IndexOutOfBoundsException</code>：数组索引越界</li>
+</ul>
+<p><code>Exception</code>又分为两大类：</p>
+<ol>
+<li><code>RuntimeException</code>（（运行时异常））以及它的子类；</li>
+<li>非<code>RuntimeException</code>（包括<code>IOException</code>、<code>ReflectiveOperationException</code>等等）</li>
+</ol>
+<p><strong>Java规定</strong>：</p>
+<ul>
+<li><p>必须捕获的异常，包括<code>Exception</code>及其子类，但不包括<code>RuntimeException</code>及其子类，这种类型的异常称为Checked Exception。</p>
+</li>
+<li><p>不需要捕获的异常，包括<code>Error</code>及其子类，<code>RuntimeException</code>及其子类。</p>
+<p>除了RuntimeException及其子类以外，其他的Exception类及其子类都属于可查异常。这种异常编译器要求强制处置，要么try-cathch,要么在方法名后面抛出。<br>不可查异常(编译器不要求强制处置的异常):包括运行时异常（RuntimeException与其子类）和错误（Error）。</p>
+</li>
+</ul>
+<h4 id="捕获异常"><a href="#捕获异常" class="headerlink" title="捕获异常"></a>捕获异常</h4><p>捕获异常使用<code>try...catch</code>语句，把可能发生异常的代码放到<code>try {...}</code>中，然后使用<code>catch</code>捕获对应的<code>Exception</code>及其子类：</p>
+<pre><code class="java">public class Main {
+    public static void main(String[] args) {
+        byte[] bs = toGBK(&quot;中文&quot;); //在main()方法中，调用toGBK()，没有捕获它声明的可能抛出的异常,因此会报错
+        System.out.println(Arrays.toString(bs));
+    }
+
+    static byte[] toGBK(String s) {
+        try {
+            // 用指定编码转换String为byte[]:
+            return s.getBytes(&quot;GBK&quot;);
+        } catch (UnsupportedEncodingException e) {
+            // 如果系统不支持GBK编码，会捕获到UnsupportedEncodingException:
+            System.out.println(e); // 打印异常信息
+            return s.getBytes(); // 尝试使用用默认编码
+        }
+    }
+}
+//method_2
+ static byte[] toGBK(String s) throws UnsupportedEncodingException {
+        return s.getBytes(&quot;GBK&quot;);
+    }
+</code></pre>
+<p>如果我们不捕获<code>UnsupportedEncodingException</code>，会出现编译失败的问题这样的Checked Exception，必须被捕获。</p>
+<p>这是因为<code>String.getBytes(String)</code>方法定义是：</p>
+<pre><code class="java">public byte[] getBytes(String charsetName) throws UnsupportedEncodingException {
+    ...
+}
+</code></pre>
+<p><strong>在方法定义的时候，使用<code>throws xxx</code>表示该方法可能抛出的异常类型。调用方在调用的时候，必须强制捕获这些异常，否则编译器会报错。</strong></p>
+<p>在<code>toGBK()</code>方法中，因为调用了<code>String.getBytes(String)</code>方法，就必须捕获<code>UnsupportedEncodingException</code>。我们也可以不捕获它，而是在方法定义处用throws表示<code>toGBK()</code>方法可能会抛出<code>UnsupportedEncodingException</code>，就可以让<code>toGBK()</code>方法通过编译器检查。</p>
+<p>上述代码仍然会得到编译错误，但这一次，编译器提示的不是调用<code>return s.getBytes(&quot;GBK&quot;);</code>的问题，而是<code>byte[] bs = toGBK(&quot;中文&quot;);</code>。因为在<code>main()</code>方法中，调用<code>toGBK()</code>，没有捕获它声明的可能抛出的<code>UnsupportedEncodingException</code>。</p>
+<p>修复方法是在<code>main()</code>方法中捕获异常并处理。</p>
+<pre><code class="java">public class Main {
+    public static void main(String[] args) {
+        try {
+            byte[] bs = toGBK(&quot;中文&quot;);
+            System.out.println(Arrays.toString(bs));
+        } catch (UnsupportedEncodingException e) {
+            System.out.println(e);
+        }
+    }
+
+    static byte[] toGBK(String s) throws UnsupportedEncodingException {
+        // 用指定编码转换String为byte[]:
+        return s.getBytes(&quot;GBK&quot;);
+    }
+}
+
+</code></pre>
+<p>可见，只要是方法声明的Checked Exception，不在调用层捕获，也必须在更高的调用层捕获。<strong>所有未捕获的异常，最终也必须在<code>main()</code>方法中捕获</strong>，不会出现漏写<code>try</code>的情况。这是由编译器保证的。<code>main()</code>方法也是最后捕获<code>Exception</code>的机会。</p>
+<p>如果是测试代码，上面的写法就略显麻烦。如果不想写任何<code>try</code>代码，可以直接把<code>main()</code>方法定义为<code>throws Exception</code></p>
+<pre><code class="java">public class Main {
+    public static void main(String[] args) throws Exception {
+        byte[] bs = toGBK(&quot;中文&quot;);
+        System.out.println(Arrays.toString(bs));
+    }
+
+    static byte[] toGBK(String s) throws UnsupportedEncodingException {
+        // 用指定编码转换String为byte[]:
+        return s.getBytes(&quot;GBK&quot;);
+    }
+}
+
+</code></pre>
+<p>因为<code>main()</code>方法声明了可能抛出<code>Exception</code>，也就声明了可能抛出所有的<code>Exception</code>，因此在内部就无需捕获了。代价就是一旦发生异常，程序会立刻退出。</p>
+<p>还有一些童鞋喜欢在<code>toGBK()</code>内部“消化”异常：</p>
+<pre><code class="java">static byte[] toGBK(String s) {
+    try {
+        return s.getBytes(&quot;GBK&quot;);
+    } catch (UnsupportedEncodingException e) {
+        // 什么也不干
+    }
+    return null;
+</code></pre>
+<p>这种捕获后不处理的方式是非常不好的，即使真的什么也做不了，也要先把异常记录下来：</p>
+<pre><code class="java">static byte[] toGBK(String s) {
+    try {
+        return s.getBytes(&quot;GBK&quot;);
+    } catch (UnsupportedEncodingException e) {
+        // 先记下来再说:
+        e.printStackTrace();
+    }
+    return null;
+</code></pre>
+<p>所有异常都可以调用<code>printStackTrace()</code>方法打印异常栈，这是一个简单有用的快速打印异常的方法。</p>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>Java使用异常来表示错误，并通过<code>try ... catch</code>捕获异常；</p>
+<p>Java的异常是<code>class</code>，并且从<code>Throwable</code>继承；</p>
+<p><code>Error</code>是无需捕获的严重错误，<code>Exception</code>是应该捕获的可处理的错误；</p>
+<p><code>RuntimeException</code>无需强制捕获，非<code>RuntimeException</code>（Checked Exception）需强制捕获，或者用<code>throws</code>声明；</p>
+<p>不推荐捕获了异常但不进行任何处理。</p>
+<h3 id="捕获异常-1"><a href="#捕获异常-1" class="headerlink" title="捕获异常"></a>捕获异常</h3><p>在Java中，凡是可能抛出异常的语句，都可以用<code>try ... catch</code>捕获。把可能发生异常的语句放在<code>try { ... }</code>中，然后使用<code>catch</code>捕获对应的<code>Exception</code>及其子类。</p>
+<h4 id="多catch语句"><a href="#多catch语句" class="headerlink" title="多catch语句"></a>多catch语句</h4><p>可以使用多个<code>catch</code>语句，每个<code>catch</code>分别捕获对应的<code>Exception</code>及其子类。JVM在捕获到异常后，会从上到下匹配<code>catch</code>语句，匹配到某个<code>catch</code>后，执行<code>catch</code>代码块，然后<em>不再</em>继续匹配。</p>
+<p>简单地说就是：<strong>多个<code>catch</code>语句只有一个能被执行</strong>。例如：</p>
+<pre><code class="java">public static void main(String[] args) {
+    try {
+        process1();
+        process2();
+        process3();
+    } catch (IOException e) {
+        System.out.println(e);
+    } catch (NumberFormatException e) {
+        System.out.println(e);
+    }
+}
+</code></pre>
+<p>存在多个<code>catch</code>的时候，<code>catch</code>的顺序非常重要：<strong>子类必须写在前面</strong>。例如：</p>
+<pre><code class="java">public static void main(String[] args) {
+    try {
+        process1();
+        process2();
+        process3();
+    } catch (IOException e) {
+        System.out.println(&quot;IO error&quot;);
+    } catch (UnsupportedEncodingException e) { // 永远捕获不到
+        System.out.println(&quot;Bad encoding&quot;);
+    }
+}
+</code></pre>
+<p>对于上面的代码，<code>UnsupportedEncodingException</code>异常是永远捕获不到的，因为它是<code>IOException</code>的子类。当抛出<code>UnsupportedEncodingException</code>异常时，会被<code>catch (IOException e) { ... }</code>捕获并执行。</p>
+<p>因此，正确的写法是把子类放到前面。</p>
+<h4 id="finally语句"><a href="#finally语句" class="headerlink" title="finally语句"></a>finally语句</h4><p>无论是否有异常发生，如果我们都希望执行一些语句，例如清理工作，怎么写？</p>
+<p>可以把执行语句写若干遍：正常执行的放到<code>try</code>中，每个<code>catch</code>再写一遍。例如：</p>
+<pre><code class="java">public static void main(String[] args) {
+    try {
+        process1();
+        process2();
+        process3();
+        System.out.println(&quot;END&quot;);
+    } catch (UnsupportedEncodingException e) {
+        System.out.println(&quot;Bad encoding&quot;);
+        System.out.println(&quot;END&quot;);
+    } catch (IOException e) {
+        System.out.println(&quot;IO error&quot;);
+        System.out.println(&quot;END&quot;);
+    }
+}
+</code></pre>
+<p>上述代码无论是否发生异常，都会执行<code>System.out.println(&quot;END&quot;);</code>这条语句。</p>
+<p>那么如何消除这些重复的代码？Java的<code>try ... catch</code>机制还提供了<code>finally</code>语句，<code>finally</code>语句块保证有无错误都会执行。上述代码可以改写如下：</p>
+<pre><code class="java">public static void main(String[] args) {
+    try {
+        process1();
+        process2();
+        process3();
+    } catch (UnsupportedEncodingException e) {
+        System.out.println(&quot;Bad encoding&quot;);
+    } catch (IOException e) {
+        System.out.println(&quot;IO error&quot;);
+    } finally {
+        System.out.println(&quot;END&quot;);
+    }
+}
+</code></pre>
+<p>注意<code>finally</code>有几个特点：</p>
+<ol>
+<li><code>finally</code>语句不是必须的，可写可不写；</li>
+<li><code>finally</code>总是最后执行。</li>
+</ol>
+<p>如果没有发生异常，就正常执行<code>try { ... }</code>语句块，然后执行<code>finally</code>。如果发生了异常，就中断执行<code>try { ... }</code>语句块，然后跳转执行匹配的<code>catch</code>语句块，最后执行<code>finally</code>。</p>
+<p>可见，<strong><code>finally</code>是用来保证一些代码必须执行的</strong>。</p>
+<p>某些情况下，可以没有<code>catch</code>，只使用<code>try ... finally</code>结构。例如：</p>
+<pre><code>void process(String file) throws IOException {
+    try {
+        ...
+    } finally {
+        System.out.println(&quot;END&quot;);
+    }
+}
+</code></pre><p>因为方法声明了可能抛出的异常，所以可以不写<code>catch</code>。</p>
+<h4 id="捕获多种异常"><a href="#捕获多种异常" class="headerlink" title="捕获多种异常"></a>捕获多种异常</h4><p>如果某些异常的处理逻辑相同，但是异常本身不存在继承关系，那么就得编写多条<code>catch</code>子句：</p>
+<pre><code class="java">public static void main(String[] args) {
+    try {
+        process1();
+        process2();
+        process3();
+    } catch (IOException e) {
+        System.out.println(&quot;Bad input&quot;);
+    } catch (NumberFormatException e) {
+        System.out.println(&quot;Bad input&quot;);
+    } catch (Exception e) {
+        System.out.println(&quot;Unknown error&quot;);
+    }
+}
+</code></pre>
+<p>因为处理<code>IOException</code>和<code>NumberFormatException</code>的代码是相同的，所以我们可以把它两用<code>|</code>合并到一起：</p>
+<pre><code class="java">public static void main(String[] args) {
+    try {
+        process1();
+        process2();
+        process3();
+    } catch (IOException | NumberFormatException e) { // IOException或NumberFormatException
+        System.out.println(&quot;Bad input&quot;);
+    } catch (Exception e) {
+        System.out.println(&quot;Unknown error&quot;);
+    }
+}
+</code></pre>
+<h4 id="小结-1"><a href="#小结-1" class="headerlink" title="小结"></a>小结</h4><p>使用<code>try ... catch ... finally</code>时：</p>
+<ul>
+<li>多个<code>catch</code>语句的匹配顺序非常重要，子类必须放在前面；</li>
+<li><code>finally</code>语句保证了有无异常都会执行，它是可选的；</li>
+<li>一个<code>catch</code>语句也可以匹配多个非继承关系的异常。</li>
+</ul>
+<h3 id="抛出异常"><a href="#抛出异常" class="headerlink" title="抛出异常"></a>抛出异常</h3><h4 id="异常的传播"><a href="#异常的传播" class="headerlink" title="异常的传播"></a>异常的传播</h4><p>当某个方法抛出了异常时，如果当前方法没有捕获异常，异常就会被抛到上层调用方法，直到遇到某个<code>try ... catch</code>被捕获为止</p>
+<pre><code class="java">public class Main {
+    public static void main(String[] args) {
+        try {
+            process1();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    static void process1() {
+        process2();
+    }
+    static void process2() {
+        Integer.parseInt(null); // 会抛出NumberFormatException
+    }
+}
+</code></pre>
+<p>通过<code>printStackTrace()</code>可以打印出方法的调用栈，类似：</p>
+<pre><code class="java">java.lang.NumberFormatException: null
+    at java.base/java.lang.Integer.parseInt(Integer.java:614)
+    at java.base/java.lang.Integer.parseInt(Integer.java:770)
+    at Main.process2(Main.java:16)
+    at Main.process1(Main.java:12)
+    at Main.main(Main.java:5)
+</code></pre>
+<p><code>printStackTrace()</code>对于调试错误非常有用，上述信息表示：<code>NumberFormatException</code>是在<code>java.lang.Integer.parseInt</code>方法中被抛出的，<strong>从下往上看</strong>，调用层次依次是：</p>
+<pre><code class="java">1. `main()`调用`process1()`；
+2. `process1()`调用`process2()`；
+3. `process2()`调用`Integer.parseInt(String)`；
+4. `Integer.parseInt(String)`调用`Integer.parseInt(String, int)`。
+</code></pre>
+<p>查看<code>Integer.java</code>源码可知，抛出异常的方法代码如下：</p>
+<pre><code>public static int parseInt(String s, int radix) throws NumberFormatException {
+    if (s == null) {
+        throw new NumberFormatException(&quot;null&quot;);
+    }
+    ...
+}
+</code></pre><p>并且，每层调用均给出了源代码的行号，可直接定位。</p>
+<h4 id="抛出异常-1"><a href="#抛出异常-1" class="headerlink" title="抛出异常"></a>抛出异常</h4><p>当发生错误时，例如，用户输入了非法的字符，我们就可以抛出异常。</p>
+<p>如何抛出异常？参考<code>Integer.parseInt()</code>方法，抛出异常分两步：</p>
+<ol>
+<li>创建某个<code>Exception</code>的实例；</li>
+<li>用<code>throw</code>语句抛出。</li>
+</ol>
+<p>下面是一个例子：</p>
+<pre><code class="java">void process2(String s) {
+    if (s==null) {
+        NullPointerException e = new NullPointerException();
+        throw e;
+    }
+}
+</code></pre>
+<p>实际上，绝大部分抛出异常的代码都会合并写成一行：</p>
+<pre><code class="java">void process2(String s) {
+    if (s==null) {
+        throw new NullPointerException();
+    }
+}
+</code></pre>
+<p>如果一个方法捕获了某个异常后，又在<code>catch</code>子句中抛出新的异常，就相当于把抛出的异常类型“转换”了：</p>
+<pre><code class="java">void process1(String s) {
+    try {
+        process2();
+    } catch (NullPointerException e) {
+        throw new IllegalArgumentException();
+    }
+}
+
+void process2(String s) {
+    if (s==null) {
+        throw new NullPointerException();
+    }
+}
+</code></pre>
+<p>当<code>process2()</code>抛出<code>NullPointerException</code>后，被<code>process1()</code>捕获，然后抛出<code>IllegalArgumentException()</code>。</p>
+<p>如果在<code>main()</code>中捕获<code>IllegalArgumentException</code>，我们看看打印的异常栈：</p>
+<pre><code class="java">public class Main {
+    public static void main(String[] args) {
+        try {
+            process1();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    static void process1() {
+        try {
+            process2();
+        } catch (NullPointerException e) {
+            throw new IllegalArgumentException(); //
+        }
+    }
+
+    static void process2() {
+        throw new NullPointerException();
+    }
+}
+</code></pre>
+<p>打印出的异常栈类似：</p>
+<pre><code>java.lang.IllegalArgumentException
+    at Main.process1(Main.java:15)
+    at Main.main(Main.java:5)
+</code></pre><p>这说明新的异常丢失了原始异常信息，我们已经看不到原始异常<code>NullPointerException</code>的信息了。</p>
+<p>为了能追踪到完整的异常栈，<strong>在构造异常的时候，把原始的<code>Exception</code>实例传进去，新的<code>Exception</code>就可以持有原始<code>Exception</code>信息</strong>。对上述代码改进如下：</p>
+<pre><code class="java">public class Main {
+    public static void main(String[] args) {
+        try {
+            process1();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    static void process1() {
+        try {
+            process2();
+        } catch (NullPointerException e) {
+            throw new IllegalArgumentException(e);\\把原始的`Exception`实例传进去
+        }
+    }
+    static void process2() {
+        throw new NullPointerException();
+    }
+}
+
+</code></pre>
+<p>运行上述代码，打印出的异常栈类似：</p>
+<pre><code class="java">java.lang.IllegalArgumentException: java.lang.NullPointerException
+    at Main.process1(Main.java:15)
+    at Main.main(Main.java:5)
+Caused by: java.lang.NullPointerException
+    at Main.process2(Main.java:20)
+    at Main.process1(Main.java:13)
+</code></pre>
+<p>注意到<code>Caused by: Xxx</code>，说明捕获的<code>IllegalArgumentException</code>并不是造成问题的根源，根源在于<code>NullPointerException</code>，是在<code>Main.process2()</code>方法抛出的。</p>
+<p>在<code>catch</code>中抛出异常，不会影响<code>finally</code>的执行。JVM会先执行<code>finally</code>，然后抛出异常。</p>
+<h4 id="异常屏蔽"><a href="#异常屏蔽" class="headerlink" title="异常屏蔽"></a>异常屏蔽</h4><p>如果在执行<code>finally</code>语句时抛出异常，那么，<code>catch</code>语句的异常还能否继续抛出？例如：</p>
+<pre><code class="java">public class Main {
+    public static void main(String[] args) {
+        try {
+            Integer.parseInt(&quot;abc&quot;);
+        } catch (Exception e) {
+            System.out.println(&quot;catched&quot;);
+            throw new RuntimeException(e);
+        } finally {
+            System.out.println(&quot;finally&quot;);
+            throw new IllegalArgumentException();
+        }
+    }
+}
+</code></pre>
+<p>执行上述代码，发现异常信息如下：</p>
+<pre><code class="java">catched
+finally
+Exception in thread &quot;main&quot; java.lang.IllegalArgumentException
+    at Main.main(Main.java:11)
+</code></pre>
+<p>这<strong>说明<code>finally</code>抛出异常后，原来在<code>catch</code>中准备抛出的异常就“消失”了，因为只能抛出一个异常。</strong>没有被抛出的异常称为“被屏蔽”的异常（Suppressed Exception）。</p>
+<p>在极少数的情况下，我们需要获知所有的异常。如何保存所有的异常信息？方法是先用<code>origin</code>变量保存原始异常，然后调用<code>Throwable.addSuppressed()</code>，把原始异常添加进来，最后在<code>finally</code>抛出：</p>
+<pre><code class="java">public static void main(String[] args) throws Exception {
+    Exception origin = null;
+    try {
+        System.out.println(Integer.parseInt(&quot;abc&quot;));
+    } catch (Exception e) {
+        origin = e;
+        throw e;
+    } finally {
+        Exception e = new IllegalArgumentException();
+        if (origin != null) {
+            e.addSuppressed(origin);
+        }
+        throw e;
+    }
+}
+</code></pre>
+<p>当<code>catch</code>和<code>finally</code>都抛出了异常时，虽然<code>catch</code>的异常被屏蔽了，但是，<code>finally</code>抛出的异常仍然包含了它：</p>
+<pre><code class="java">Exception in thread &quot;main&quot; java.lang.IllegalArgumentException
+    at Main.main(Main.java:11)
+Suppressed: java.lang.NumberFormatException: For input string: &quot;abc&quot;
+    at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+    at java.base/java.lang.Integer.parseInt(Integer.java:652)
+    at java.base/java.lang.Integer.parseInt(Integer.java:770)
+    at Main.main(Main.java:6)
+</code></pre>
+<p>通过<code>Throwable.getSuppressed()</code>可以获取所有的<code>Suppressed Exception</code>。</p>
+<p>绝大多数情<strong>况下，在<code>finally</code>中不要抛出异常</strong>。因此，我们通常不需要关心<code>Suppressed Exception</code>。</p>
+<h4 id="小结-2"><a href="#小结-2" class="headerlink" title="小结"></a>小结</h4><p>调用<code>printStackTrace()</code>可以打印异常的传播栈，对于调试非常有用；</p>
+<p>捕获异常并再次抛出新的异常时，应该持有原始异常信息；</p>
+<p>通常不要在<code>finally</code>中抛出异常。如果在<code>finally</code>中抛出异常，应该原始异常加入到原有异常中。调用方可通过<code>Throwable.getSuppressed()</code>获取所有添加的<code>Suppressed Exception</code>。</p>
+<h3 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h3><p>Java标准库定义的常用异常包括：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_chatjava0618_001.jpg" style="zoom:50%;"></p>
+<p>当我们在代码中需要抛出异常时，<strong>尽量使用JDK已定义的异常类型</strong>。例如，参数检查不合法，应该抛出<code>IllegalArgumentException</code>：</p>
+<pre><code class="java">static void process1(int age) {
+    if (age &lt;= 0) {
+        throw new IllegalArgumentException();
+    }
+}
+</code></pre>
+<p>在一个大型项目中，可以自定义新的异常类型，但是，保持一个合理的异常继承体系是非常重要的。</p>
+<p>一个常见的做法是自定义一个<code>BaseException</code>作为“根异常”，然后，派生出各种业务类型的异常。</p>
+<p><code>BaseException</code>需要从一个适合的<code>Exception</code>派生，通常建议从<code>RuntimeException</code>派生：</p>
+<pre><code class="java">public class BaseException extends RuntimeException {
+}
+</code></pre>
+<p>其他业务类型的异常就可以从<code>BaseException</code>派生：</p>
+<pre><code class="java">public class UserNotFoundException extends BaseException {
+}
+
+public class LoginFailedException extends BaseException {
+}
+
+...
+</code></pre>
+<p>自定义的<code>BaseException</code>应该提供多个构造方法：</p>
+<pre><code class="java">public class BaseException extends RuntimeException {
+    public BaseException() {
+        super();
+    }
+
+    public BaseException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public BaseException(String message) {
+        super(message);
+    }
+
+    public BaseException(Throwable cause) {
+        super(cause);
+    }
+}
+</code></pre>
+<p>上述构造方法实际上都是原样照抄<code>RuntimeException</code>。这样，抛出异常的时候，就可以选择合适的构造方法。通过IDE可以根据父类快速生成子类的构造方法。</p>
+<h3 id="NullPointerException"><a href="#NullPointerException" class="headerlink" title="NullPointerException"></a>NullPointerException</h3><p>在所有的<code>RuntimeException</code>异常中，Java程序员最熟悉的恐怕就是<code>NullPointerException</code>了。</p>
+<p><code>NullPointerException</code>即空指针异常，俗称NPE。如果一个对象为<code>null</code>，调用其方法或访问其字段就会产生<code>NullPointerException</code>，<strong>这个异常通常是由JVM抛出的</strong>。</p>
+<pre><code class="java">public class Main {
+    public static void main(String[] args) {
+        String s = null;
+        System.out.println(s.toLowerCase());//NullPointerException
+    }
+}
+</code></pre>
+<h4 id="处理NullPointerException"><a href="#处理NullPointerException" class="headerlink" title="处理NullPointerException"></a>处理NullPointerException</h4><p>如果遇到<code>NullPointerException</code>，我们应该如何处理？首先，必须明确，<code>NullPointerException</code>是一种代码逻辑错误，遇到<code>NullPointerException</code>，遵循原则是早暴露，早修复，严禁使用<code>catch</code>来隐藏这种编码错误。即调试发现有错后直接修改程序。</p>
+<p>好的编码习惯可以极大地降低<code>NullPointerException</code>的产生：</p>
+<p>1.<strong>成员变量在定义时初始化</strong>：使用空字符串<code>&quot;&quot;</code>而不是默认的<code>null</code>可避免很多<code>NullPointerException</code>，编写业务逻辑时，用空字符串<code>&quot;&quot;</code>表示未填写比<code>null</code>安全得多。</p>
+<pre><code class="java">public class Person {
+    private String name = &quot;&quot;;
+}
+</code></pre>
+<p>2.<strong>返回空字符串<code>&quot;&quot;</code>、空数组</strong>而不是<code>null</code>：</p>
+<pre><code class="java">public String[] readLinesFromFile(String file) {
+    if (getFileSize(file) == 0) {
+        // 返回空数组而不是null:
+        return new String[0];
+    }
+    ...
+}
+</code></pre>
+<p>如果调用方一定要根据<code>null</code>判断，比如返回<code>null</code>表示文件不存在，那么考虑返回<code>Optional</code>：</p>
+<pre><code>public Optional&lt;String&gt; readFromFile(String file) {
+    if (!fileExist(file)) {
+        return Optional.empty();
+    }
+    ...
+}
+</code></pre><p>这样调用方必须通过<code>Optional.isPresent()</code>判断是否有结果。</p>
+<h4 id="定位NullPointerException"><a href="#定位NullPointerException" class="headerlink" title="定位NullPointerException"></a>定位NullPointerException</h4><p>如果产生了<code>NullPointerException</code>，例如，调用<code>a.b.c.x()</code>时产生了<code>NullPointerException</code>，原因可能是：</p>
+<ul>
+<li><code>a</code>是<code>null</code>；</li>
+<li><code>a.b</code>是<code>null</code>；</li>
+<li><code>a.b.c</code>是<code>null</code>；</li>
+</ul>
+<p>确定到底是哪个对象是<code>null</code>以前只能打印这样的日志：</p>
+<pre><code class="java">System.out.println(a);
+System.out.println(a.b);
+System.out.println(a.b.c);
+</code></pre>
+<p>从Java 14开始，如果产生了<code>NullPointerException</code>，JVM可以给出详细的信息告诉我们<code>null</code>对象到底是谁,详细信息是Java 14新增的功能，但默认是关闭的，我们可以给JVM添加一个<code>-XX:+ShowCodeDetailsInExceptionMessages</code>参数启用它：</p>
+<pre><code class="java">java -XX:+ShowCodeDetailsInExceptionMessages Main.java
+</code></pre>
+<h3 id="使用断言"><a href="#使用断言" class="headerlink" title="*使用断言"></a>*使用断言</h3><p>断言（Assertion）是一种调试程序的方式。在Java中，使用<code>assert</code>关键字来实现断言。</p>
+<p>我们先看一个例子：</p>
+<pre><code class="java">public static void main(String[] args) {
+    double x = Math.abs(-123.45);
+    assert x &gt;= 0;
+    System.out.println(x);
+}
+</code></pre>
+<p>语句<code>assert x &gt;= 0;</code>即为断言，断言条件<code>x &gt;= 0</code>预期为<code>true</code>。如果计算结果为<code>false</code>，则断言失败，抛出<code>AssertionError</code>。</p>
+<p>使用<code>assert</code>语句时，还可以添加一个可选的断言消息：</p>
+<pre><code>assert x &gt;= 0 : &quot;x must &gt;= 0&quot;;
+</code></pre><p>这样，断言失败的时候，<code>AssertionError</code>会带上消息<code>x must &gt;= 0</code>，更加便于调试。</p>
+<p>Java断言的特点是：断言失败时会抛出<code>AssertionError</code>，导致程序结束退出。因此，<strong>断言不能用于可恢复的程序错误，只应该用于开发和测试阶段。</strong></p>
+<p>对于可恢复的程序错误，不应该使用断言。例如：</p>
+<pre><code>void sort(int[] arr) {
+    assert arr != null;
+}
+</code></pre><p>应该抛出异常并在上层捕获：</p>
+<pre><code>void sort(int[] arr) {
+    if (x == null) {
+        throw new IllegalArgumentException(&quot;array cannot be null&quot;);
+    }
+}
+</code></pre><p>当我们在程序中使用<code>assert</code>时，例如，一个简单的断言：</p>
+<pre><code class="java">// assert
+public class Main {
+    public static void main(String[] args) {
+        int x = -1;
+        assert x &gt; 0;
+        System.out.println(x);
+    }
+}
+
+</code></pre>
+<p>断言<code>x</code>必须大于<code>0</code>，实际上<code>x</code>为<code>-1</code>，断言肯定失败。执行上述代码，发现程序并未抛出<code>AssertionError</code>，而是正常打印了<code>x</code>的值。</p>
+<p>为什么<code>assert</code>语句不起作用？</p>
+<p><strong>这是因为JVM默认关闭断言指令</strong>，即遇到<code>assert</code>语句就自动忽略了，不执行。</p>
+<p>要执行<code>assert</code>语句，必须给Java虚拟机传递<code>-enableassertions</code>（可简写为<code>-ea</code>）参数启用断言。所以，上述程序必须在命令行下运行才有效果：</p>
+<pre><code class="cmd">$ java -ea Main.java
+Exception in thread &quot;main&quot; java.lang.AssertionError
+    at Main.main(Main.java:5)
+</code></pre>
+<p>还可以有选择地对特定地类启用断言，命令行参数是：<code>-ea:com.itranswarp.sample.Main</code>，表示只对<code>com.itranswarp.sample.Main</code>这个类启用断言。</p>
+<p>或者对特定地包启用断言，命令行参数是：<code>-ea:com.itranswarp.sample...</code>（注意结尾有3个<code>.</code>），表示对<code>com.itranswarp.sample</code>这个包启动断言。</p>
+<p>实际开发中，很少使用断言。更好的方法是编写单元测试，后续我们会讲解<code>JUnit</code>的使用。</p>
+<h4 id="小结-3"><a href="#小结-3" class="headerlink" title="小结"></a>小结</h4><p>断言是一种调试方式，断言失败会抛出<code>AssertionError</code>，只能在开发和测试阶段启用断言；</p>
+<p>对可恢复的错误不能使用断言，而应该抛出异常；</p>
+<p>断言很少被使用，更好的方法是编写单元测试。</p>
+<h3 id="使用JDK-Logging"><a href="#使用JDK-Logging" class="headerlink" title="*使用JDK Logging"></a>*使用JDK Logging</h3><p>在编写程序的过程中，发现程序运行结果与预期不符，怎么办？当然是用<code>System.out.println()</code>打印出执行过程中的某些变量，观察每一步的结果与代码逻辑是否符合，然后有针对性地修改代码。</p>
+<p>代码改好了怎么办？当然是删除没有用的<code>System.out.println()</code>语句了。</p>
+<p>如果改代码又改出问题怎么办？再加上<code>System.out.println()</code>。</p>
+<p>反复这么搞几次，很快大家就发现使用<code>System.out.println()</code>非常麻烦。</p>
+<p>怎么办？</p>
+<p><strong>解决方法是使用日志。</strong></p>
+<p>那什么是日志？日志就是Logging，它的目的是为了取代<code>System.out.println()</code>。</p>
+<p>输出日志，而不是用<code>System.out.println()</code>，有以下几个好处：</p>
+<ol>
+<li>可以设置输出样式，避免自己每次都写<code>&quot;ERROR: &quot; + var</code>；</li>
+<li>可以设置输出级别，禁止某些级别输出。例如，只输出错误日志；</li>
+<li>可以被重定向到文件，这样可以在程序运行结束后查看日志；</li>
+<li>可以按包名控制日志级别，只输出某些包打的日志；</li>
+<li>……</li>
+</ol>
+<p>如何使用日志？</p>
+<p>因为Java标准库内置了日志包<code>java.util.logging</code>，我们可以直接用。</p>
+<pre><code class="java">public class Hello {
+    public static void main(String[] args) {
+        Logger logger = Logger.getGlobal();
+        logger.info(&quot;start process...&quot;);
+        logger.warning(&quot;memory is running out...&quot;);
+        logger.fine(&quot;ignored.&quot;);
+        logger.severe(&quot;process will be terminated...&quot;);
+    }
+}
+</code></pre>
+<p>使用日志最大的好处是，它自动打印了时间、调用类、调用方法等很多有用的信息。</p>
+<p>4条日志，只打印了3条，<code>logger.fine()</code>没有打印。这是因为，日志的输出可以设定级别。JDK的Logging定义了7个日志级别，从严重到普通：</p>
+<ul>
+<li>SEVERE</li>
+<li>WARNING</li>
+<li>INFO</li>
+<li>CONFIG</li>
+<li>FINE</li>
+<li>FINER</li>
+<li>FINEST</li>
+</ul>
+<p>因为默认级别是INFO，因此，INFO级别以下的日志，不会被打印出来。使用日志级别的好处在于，调整级别，就可以屏蔽掉很多调试相关的日志输出。</p>
+<p>使用Java标准库内置的Logging有以下局限：</p>
+<p>Logging系统在JVM启动时读取配置文件并完成初始化，一旦开始运行<code>main()</code>方法，就无法修改配置；</p>
+<p>配置不太方便，需要在JVM启动时传递参数<code>-Djava.util.logging.config.file=</code>。</p>
+<p>因此，Java标准库内置的Logging使用并不是非常广泛。更方便的日志系统我们稍后介绍。</p>
+<h3 id="使用Commons-Logging"><a href="#使用Commons-Logging" class="headerlink" title="使用Commons Logging"></a>使用Commons Logging</h3><p>和Java标准库提供的日志不同，Commons Logging是一个第三方日志库，它是由Apache创建的日志模块。</p>
+<p>Commons Logging的特色是，它可以挂接不同的日志系统，并通过配置文件指定挂接的日志系统。默认情况下，Commons Loggin自动搜索并使用Log4j（Log4j是另一个流行的日志系统），如果没有找到Log4j，再使用JDK Logging。</p>
+<p>使用Commons Logging只需要和两个类打交道，并且只有两步：</p>
+<p>第一步，通过<code>LogFactory</code>获取<code>Log</code>类的实例； 第二步，使用<code>Log</code>实例的方法打日志。</p>
+<pre><code class="java">import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+public class Main {
+    public static void main(String[] args) {
+        Log log = LogFactory.getLog(Main.class);
+        log.info(&quot;start...&quot;);
+        log.warn(&quot;end.&quot;);
+    }
+}
+</code></pre>
+<p>运行上述代码，肯定会得到编译错误，。因为Commons Logging是一个第三方提供的库，所以，必须先把它<a href="https://commons.apache.org/proper/commons-logging/download_logging.cgi" target="_blank" rel="noopener">下载</a>下来。下载后，解压，找到<code>commons-logging-1.2.jar</code>这个文件，再把Java源码<code>Main.java</code>放到一个目录下，例如<code>work</code>目录：</p>
+<pre><code class="ascii">work
+│
+├─ commons-logging-1.2.jar
+│
+└─ Main.java
+</code></pre>
+<p>运行结果如下：</p>
+<pre><code>Mar 02, 2019 7:15:31 PM Main main
+INFO: start...
+Mar 02, 2019 7:15:31 PM Main main
+WARNING: end.
+</code></pre><p>Commons Logging定义了6个日志级别：</p>
+<ul>
+<li>FATAL</li>
+<li>ERROR</li>
+<li>WARNING</li>
+<li>INFO</li>
+<li>DEBUG</li>
+<li>TRACE</li>
+</ul>
+<p>默认级别是<code>INFO</code>。</p>
+<p>在实例方法中引用<code>Log</code>，通常定义一个实例变量：</p>
+<pre><code class="java">// 在实例方法中引用Log:
+public class Person {
+    protected final Log log = LogFactory.getLog(getClass());
+
+    void foo() {
+        log.info(&quot;foo&quot;);
+    }
+}
+</code></pre>
+<p>注意到实例变量log的获取方式是<code>LogFactory.getLog(getClass())</code>，虽然也可以用<code>LogFactory.getLog(Person.class)</code>，但是前一种方式有个非常大的好处，就是子类可以直接使用该<code>log</code>实例。</p>
+<pre><code class="java">// 在子类中使用父类实例化的log:
+public class Student extends Person {
+    void bar() {
+        log.info(&quot;bar&quot;);
+    }
+}
+</code></pre>
+<p>此外，Commons Logging的日志方法，例如<code>info()</code>，除了标准的<code>info(String)</code>外，还提供了一个非常有用的重载方法：<code>info(String, Throwable)</code>，这使得记录异常更加简单：</p>
+<pre><code class="java">try {
+    ...
+} catch (Exception e) {
+    log.error(&quot;got exception!&quot;, e);
+}
+</code></pre>
+<h4 id="小结-4"><a href="#小结-4" class="headerlink" title="小结"></a>小结</h4><p>Commons Logging是使用最广泛的日志模块；</p>
+<p>Commons Logging的API非常简单；</p>
+<p>Commons Logging可以自动检测并使用其他日志模块。</p>
+<h3 id="使用Log4j"><a href="#使用Log4j" class="headerlink" title="使用Log4j"></a>使用Log4j</h3><p>Commons Logging，可以作为“日志接口”来使用。而真正的“日志实现”可以使用Log4j。</p>
+<p>Log4j是一种非常流行的日志框架，最新版本是2.x。</p>
+<p>Log4j是一个组件化设计的日志系统，它的架构大致如下：</p>
+<pre><code class="ascii">log.info(&quot;User signed in.&quot;);
+ │
+ │   ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐
+ ├──&gt;│ Appender │───&gt;│  Filter  │───&gt;│  Layout  │───&gt;│ Console  │
+ │   └──────────┘    └──────────┘    └──────────┘    └──────────┘
+ │
+ │   ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐
+ ├──&gt;│ Appender │───&gt;│  Filter  │───&gt;│  Layout  │───&gt;│   File   │
+ │   └──────────┘    └──────────┘    └──────────┘    └──────────┘
+ │
+ │   ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐
+ └──&gt;│ Appender │───&gt;│  Filter  │───&gt;│  Layout  │───&gt;│  Socket  │
+     └──────────┘    └──────────┘    └──────────┘    └──────────┘
+</code></pre>
+<p>当我们使用Log4j输出一条日志时，Log4j自动通过不同的Appender把同一条日志输出到不同的目的地。例如：</p>
+<ul>
+<li>console：输出到屏幕；</li>
+<li>file：输出到文件；</li>
+<li>socket：通过网络输出到远程计算机；</li>
+<li>jdbc：输出到数据库</li>
+</ul>
+<p>在输出日志的过程中，通过Filter来过滤哪些log需要被输出，哪些log不需要被输出。例如，仅输出<code>ERROR</code>级别的日志。</p>
+<p>最后，通过Layout来格式化日志信息，例如，自动添加日期、时间、方法名称等信息。</p>
+<p>上述结构虽然复杂，但我们在实际使用的时候，并不需要关心Log4j的API，而是通过配置文件来配置它。</p>
+<p>以XML配置为例，使用Log4j的时候，我们把一个<code>log4j2.xml</code>的文件放到<code>classpath</code>下就可以让Log4j读取配置文件并按照我们的配置来输出日志。下面是一个配置文件的例子：</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;Configuration&gt;
+    &lt;Properties&gt;
+        &lt;!-- 定义日志格式 --&gt;
+        &lt;Property name=&quot;log.pattern&quot;&gt;%d{MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36}%n%msg%n%n&lt;/Property&gt;
+        &lt;!-- 定义文件名变量 --&gt;
+        &lt;Property name=&quot;file.err.filename&quot;&gt;log/err.log&lt;/Property&gt;
+        &lt;Property name=&quot;file.err.pattern&quot;&gt;log/err.%i.log.gz&lt;/Property&gt;
+    &lt;/Properties&gt;
+    &lt;!-- 定义Appender，即目的地 --&gt;
+    &lt;Appenders&gt;
+        &lt;!-- 定义输出到屏幕 --&gt;
+        &lt;Console name=&quot;console&quot; target=&quot;SYSTEM_OUT&quot;&gt;
+            &lt;!-- 日志格式引用上面定义的log.pattern --&gt;
+            &lt;PatternLayout pattern=&quot;${log.pattern}&quot; /&gt;
+        &lt;/Console&gt;
+        &lt;!-- 定义输出到文件,文件名引用上面定义的file.err.filename --&gt;
+        &lt;RollingFile name=&quot;err&quot; bufferedIO=&quot;true&quot; fileName=&quot;${file.err.filename}&quot; filePattern=&quot;${file.err.pattern}&quot;&gt;
+            &lt;PatternLayout pattern=&quot;${log.pattern}&quot; /&gt;
+            &lt;Policies&gt;
+                &lt;!-- 根据文件大小自动切割日志 --&gt;
+                &lt;SizeBasedTriggeringPolicy size=&quot;1 MB&quot; /&gt;
+            &lt;/Policies&gt;
+            &lt;!-- 保留最近10份 --&gt;
+            &lt;DefaultRolloverStrategy max=&quot;10&quot; /&gt;
+        &lt;/RollingFile&gt;
+    &lt;/Appenders&gt;
+    &lt;Loggers&gt;
+        &lt;Root level=&quot;info&quot;&gt;
+            &lt;!-- 对info级别的日志，输出到console --&gt;
+            &lt;AppenderRef ref=&quot;console&quot; level=&quot;info&quot; /&gt;
+            &lt;!-- 对error级别的日志，输出到err，即上面定义的RollingFile --&gt;
+            &lt;AppenderRef ref=&quot;err&quot; level=&quot;error&quot; /&gt;
+        &lt;/Root&gt;
+    &lt;/Loggers&gt;
+&lt;/Configuration&gt;
+</code></pre>
+<p>虽然配置Log4j比较繁琐，但一旦配置完成，使用起来就非常方便。对上面的配置文件，凡是<code>INFO</code>级别的日志，会自动输出到屏幕，而<code>ERROR</code>级别的日志，不但会输出到屏幕，还会同时输出到文件。并且，一旦日志文件达到指定大小（1MB），Log4j就会自动切割新的日志文件，并最多保留10份。</p>
+<p>有了配置文件还不够，因为Log4j也是一个第三方库，我们需要从<a href="https://logging.apache.org/log4j/2.x/download.html" target="_blank" rel="noopener">这里</a>下载Log4j，解压后，把以下3个jar包放到<code>classpath</code>中：</p>
+<ul>
+<li>log4j-api-2.x.jar</li>
+<li>log4j-core-2.x.jar</li>
+<li>log4j-jcl-2.x.jar</li>
+</ul>
+<p>因为Commons Logging会自动发现并使用Log4j，所以，把上一节下载的<code>commons-logging-1.2.jar</code>也放到<code>classpath</code>中。</p>
+<p>要打印日志，<strong>只需要按Commons Logging的写法写</strong>，不需要改动任何代码，就可以得到Log4j的日志输出</p>
+<h4 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h4><p>在开发阶段，始终使用Commons Logging接口来写入日志，并且开发阶段无需引入Log4j。如果需要把日志写入文件， 只需要把正确的配置文件和Log4j相关的jar包放入<code>classpath</code>，就可以自动把日志切换成使用Log4j写入，无需修改任何代码。</p>
+<h4 id="小结-5"><a href="#小结-5" class="headerlink" title="小结"></a>小结</h4><p>通过Commons Logging实现日志，不需要修改代码即可使用Log4j；</p>
+<p>使用Log4j只需要把log4j2.xml和相关jar放入classpath；</p>
+<p>如果要更换Log4j，只需要移除log4j2.xml和相关jar；</p>
+<p>只有扩展Log4j时，才需要引用Log4j的接口（例如，将日志加密写入数据库的功能，需要自己开发）。</p>
+
+        </div>
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/donate/alipay.jpg"></li>
+                <li class="wechat-code"><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/donate/wechatqr.jpg"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+        
+          
+            <div class="post-nepre full next">
+          
+            <a href="/2020/06/11/Java教程笔记之Maven基础/" rel="next">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_maven20200611003015.png" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_maven20200611003015.png">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                Java教程笔记之Maven基础</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
+      
+<div id="vcomments"></div>
+<script>
+  window.onload = function(){
+      var valine = new Valine();
+      valine.init({
+        el: '#vcomments',
+        appId: "4NBvruApUCpLtmlsyQLevDfx-gzGzoHsz",
+        appKey: "eTSHbT3jvLQPcVYMC7QFXQFd",
+        path: window.location.pathname,
+        placeholder: "你是我一生只会遇见一次的惊喜 ..."
+      })
+  }
+</script>
+
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="www.yulinblog.com" class="profile gravatar"><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/avatar.jpg" itemprop="image" alt="YUYU" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="www.yulinblog.com" itemprop="url" rel="author">YUYU</a>
+            </h3>
+          </div>
+        </div>
+        <hr>
+        <p><i class="iconfont icon-write"></i>一个好奇的人</p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
+</div>
+
+
+
+    </div>    
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="请输入关键词..."/>
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            // PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+    <!-- <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 YU YU<br>
+      powered_by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer> -->
+<footer id="colophon" class="site-footer" role="contentinfo">
+  <div class="site-info">
+    <div class="footertext">
+      <div class="img-preload">
+        <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/wordpress-rotating-ball-o.svg">
+        <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/disqus-preloader.svg">
+      </div>
+
+       <!-- 不蒜子统计 -->
+       <div><i class="iconfont icon-sakura rotating" style="color: #ffc0cb;display:inline-block"></i>
+        <span id="busuanzi_container_site_pv" >
+             <i class="fa fa-eye" aria-hidden="true"></i><span id="busuanzi_value_site_pv"></span>
+        </span>
+        <span class="post-meta-divider">|</span>
+
+        <span id="busuanzi_container_site_uv" style='display:none'>
+            <i class="fa fa-user-o" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+        </span>
+        <i class="iconfont icon-sakura rotating" style="color: #ffc0cb;display:inline-block"></i>
+        </div>
+
+
+      <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span><script>
+  var now = new Date();
+  function createtime() {
+    var grt= new Date("05/19/2020 22:00:00");//此处修改你的建站时间或者网站上线时间
+    now.setTime(now.getTime()+250);
+    days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+    hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+    if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+    mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+    seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+    snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+    document.getElementById("timeDate").innerHTML = "博客已悄悄运行 "+dnum+" 天 ";
+    document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+  }
+  setInterval("createtime()",250);</script>
+  
+      
+      
+</div>
+
+    <div class="footer-device" style="font-family: 'Ubuntu', sans-serif;">
+   
+        <span style="color: #b9b9b9;"></i>&copy 2020 <i class="fa fa-heart" aria-hidden="true" style="color: pink;"></i> YUYU 
+
+        </span>
+  </div><!-- .site-info -->
+</footer>
+
+
+
+<!-- <script src="/js/tocbot.js"></script> -->
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?5b4b3bde9daad1e9f0023976853b7793";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript" src="/js/lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/InsightSearch.js"></script>
+<script type="text/javascript" src="/js/jquery.fancybox.min.js"></script>
+<script type="text/javascript" src="/js/zoom.min.js"></script>
+<script type="text/javascript" src="/js/sakura-app.js"></script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine@1.3.4/dist/Valine.min.js'></script>
+<script src="/js/botui.js"></script>
+
+<script type="text/javascript" src="/js/funnytitle.js"></script>
+<script type="text/javascript" src="/js/loveclick.js"></script>
+
+
+
+<!-- 不蒜子 网页计数器 -->
+<script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script> -->
+<script type="text/javascript">
+/* <![CDATA[ */
+if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  var Poi = {"pjax":"1","movies":{"url": "https://cdn.jsdelivr.net/gh/honjun/hojun@1.2","name":"Unbroken.mp4","live":"close"},"windowheight":"fixed","codelamp":"close","ajaxurl":"","order":"asc","formpostion":"bottom"};
+} else {
+  var Poi = {"pjax":"1","movies":{"url": "https://cdn.jsdelivr.net/gh/honjun/hojun@1.2","name":"Unbroken.mp4","live":"open"},"windowheight":"auto","codelamp":"close","ajaxurl":"","order":"asc","formpostion":"bottom"};
+}
+/* ]]> */
+
+</script>
+<script>
+$(document).ready(function() {
+  if ($(".toc").length > 0 && document.body.clientWidth > 1200) {
+    if ($(".pattern-center").length > 0) { //有图的情况
+      tocbot.init({
+          // Where to render the table of contents.
+          tocSelector: '.toc', // 放置目录的容器
+          // Where to grab the headings to build the table of contents.
+          contentSelector: '.entry-content', // 正文内容所在
+          // Which headings to grab inside of the contentSelector element.
+          scrollSmooth: true,
+          headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+          headingsOffset: -400,
+          scrollSmoothOffset: -85
+      });
+    } else {
+      tocbot.init({
+          // Where to render the table of contents.
+          tocSelector: '.toc', // 放置目录的容器
+          // Where to grab the headings to build the table of contents.
+          contentSelector: '.entry-content', // 正文内容所在
+          // Which headings to grab inside of the contentSelector element.
+          scrollSmooth: true,
+          headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+          headingsOffset: -85,
+          scrollSmoothOffset: -85
+      });
+    }
+    var offsetTop = $('.toc').offset().top - 95;
+    window.onscroll = function() {
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+      if (scrollTop >= offsetTop) {
+        $('.toc').addClass('toc-fixed');
+      } else {
+        $('.toc').removeClass('toc-fixed');
+      }
+    }
+  }
+});
+</script>
+
+    <div class="openNav no-select" style="height: 50px;">
+      <div class="iconflat no-select" style="width: 50px; height: 50px;">
+        <div class="icon"></div>
+      </div>
+      <div class="site-branding search-form-submit">
+        <i class="iconfont js-toggle-search iconsearch icon-search"></i>
+      </div>
+    </div>
+  </section>
+
+
+ 
+<div class="skin-menu no-select" id="mainskin"  style="position: fixed">
+    <div class="theme-controls row-container">
+        <ul class="menu-list">
+            <li id="white-bg"> <i class="fa fa-television" aria-hidden="true"></i></li>
+            <li id="sakura-bg"> <i class="iconfont icon-sakura"></i></li>
+            <li id="gribs-bg"> <i class="fa fa-slack" aria-hidden="true"></i></li>
+            <li id="KAdots-bg"> <i class="iconfont icon-dots"></i></li>
+            <li id="totem-bg"> <i class="fa fa-optin-monster" aria-hidden="true"></i></li>
+            <li id="pixiv-bg"> <i class="iconfont icon-pixiv"></i></li>
+            <li id="bing-bg"> <i class="iconfont icon-bing"></i></li>
+            <li id="dark-bg"> <i class="fa fa-moon-o" aria-hidden="true"></i></li>
+        </ul>
+    </div>
+</div>   
+<canvas id="night-mode-cover"></canvas>
+ 
+  
+
+<div class="changeSkin-gear no-select">
+    <div class="keys" id="setbtn"> <span id="open-skinMenu"> 切换主题 | SCHEME TOOL &nbsp;<i
+                class="iconfont icon-gear inline-block rotating"></i> </span></div>
+</div>
+
+  
+  <div id="mo-nav" class="">
+  <div class="m-avatar">
+    <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/avatar.jpg">
+  </div>
+  <p style="text-align: center; color: #333; font-weight: 900; font-family: 'Ubuntu', sans-serif; letter-spacing: 1.5px">ひみつきちYUYU</p>
+  <p style="text-align: center; word-spacing: 20px;">
+    
+      
+        <a href="http://github.com/sunshine98yy" class="fa fa-github" target="_blank" style="color: #25c6fe; margin-left:20px"></a>
+      
+        <a href="mailto:sunshine98yy@163.com" class="fa fa-envelope" target="_blank" style="color: #dd4b39; margin-left:20px"></a>
+      
+    
+  </p>
+  <ul id="menu-new-1" class="menu">
+    
+      <li>
+        <a href="/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fas fa-home" aria-hidden="true"></i>
+            首页
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/archives">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-archive faa-shake" aria-hidden="true"></i>
+            归档
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/categories/技术/">
+                  <i class="fa fa-code" aria-hidden="true"></i>
+                  技术
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/笔记/">
+                  <i class="fa fa-book" aria-hidden="true"></i>
+                  笔记
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/项目/">
+                  <i class="fa fa-git" aria-hidden="true"></i>
+                  项目
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/随想/">
+                  <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                  随想
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/转载/">
+                  <i class="fa fa-share" aria-hidden="true"></i>
+                  转载
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="javascript:;">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
+            清单
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/bangumi/">
+                  <i class="fa fa-th-list faa-bounce" aria-hidden="true"></i>
+                  书单
+                </a>
+              </li>
+            
+              <li>
+                <a href="/music/">
+                  <i class="fa fa-headphones" aria-hidden="true"></i>
+                  歌单
+                </a>
+              </li>
+            
+              <li>
+                <a href="/tags/光影艺术/">
+                  <i class="fa fa-photo" aria-hidden="true"></i>
+                  摄影
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="/tags/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-tag" aria-hidden="true"></i>
+            标签
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/categories/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-bookmark" aria-hidden="true"></i>
+            分类
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/comment/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-pencil-square-o faa-tada" aria-hidden="true"></i>
+            留言板
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/links/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
+            友人帐
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/donate/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-heart faa-pulse" aria-hidden="true"></i>
+            赞赏
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/atom.xml">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-rss faa-pulse" aria-hidden="true"></i>
+            RSS
+          </span>
+        </a>
+        
+      </li>
+    
+  </ul>
+  <p style="text-align: center; font-size: 13px; color: #b9b9b9;">&copy 2019 hexo-sakura</p>
+</div>
+<button onclick="topFunction()" class="mobile-cd-top" id="moblieGoTop" title="Go to top" style="display: none;"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<style>
+  .aplayer .aplayer-lrc {
+    height: 35px;
+  }
+  .aplayer .aplayer-lrc p{
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 18px !important;
+  }
+  .aplayer .aplayer-lrc p.aplayer-lrc-current{
+    color: #FF1493;
+  }
+  .aplayer.aplayer-narrow .aplayer-body{
+    left: -66px !important;
+  }
+  .aplayer.aplayer-fixed .aplayer-lrc {
+    display: none;
+  }
+  .aplayer .aplayer-lrc.aplayer-lrc-hide {
+      display:none !important;
+  }
+  .aplayer.aplayer-fixed .lrc-show {
+    display: block;
+    background: rgba(255, 255, 255, 0.8);
+  }
+</style>
+<meting-js
+
+    id="980618283"
+
+    server="netease"
+
+    type="playlist"
+
+    fixed="true"
+
+    autoplay="false"
+
+    loop="all"
+
+    order="random"
+
+    preload="auto"
+
+    volume="0.7"
+
+    mutex="true"
+
+</meting-js>
+<script>
+  $(function(){
+    $('body').on('click', '.aplayer', function(){
+      if($('.aplayer-button').hasClass('aplayer-play')) {
+        $('.aplayer-lrc').removeClass('lrc-show');
+      } else {
+        $('.aplayer-lrc').addClass('lrc-show');
+      }
+    })
+  });
+</script>
+  <script type="text/javascript" src="source/js/loveclick.js"></script>
+  
+</body>
+</html>

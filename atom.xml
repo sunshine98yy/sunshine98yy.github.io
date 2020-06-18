@@ -1,281 +1,298 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>风中的鱼</title>
+  <title>{{ config.title }}</title>
   
   
-  <link href="/atom.xml" rel="self"/>
+  <link href="{{ feed_url | uriencode }}" rel="self"/>
   
-  <link href="/"/>
-  <updated>2020-06-10T16:31:03.437Z</updated>
-  <id>/</id>
+  <link href="{{ url | uriencode }}"/>
+  <updated>{{ posts.first().updated.toISOString() }}</updated>
+  <id>{{ url }}</id>
   
   <author>
-    <name>YU YU</name>
+    <name>{{ config.author }}</name>
     
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Java教程笔记之Maven基础</title>
-    <link href="/2020/06/11/Java%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0%E4%B9%8BMaven%E5%9F%BA%E7%A1%80/"/>
-    <id>/2020/06/11/Java教程笔记之Maven基础/</id>
-    <published>2020-06-10T16:28:11.000Z</published>
-    <updated>2020-06-10T16:31:03.437Z</updated>
+    <title>{{ post.title }}</title>
+    <link href="{{ (url + post.path) | uriencode }}"/>
+    <id>{{ url + post.path }}</id>
+    <published>{{ post.date.toISOString() }}</published>
+    <updated>{{ post.updated.toISOString() }}</updated>
     
     <summary type="html">
     
-      Maven基础
+      {{ post.description }}
     
     </summary>
     
-      <category term="笔记" scheme="/categories/%E7%AC%94%E8%AE%B0/"/>
+      <category term="{{ category.name }}" scheme="{{ (url + category.path) | uriencode }}"/>
     
     
-      <category term="Java" scheme="/tags/Java/"/>
+      <category term="{{ tag.name }}" scheme="{{ (url + tag.path) | uriencode }}"/>
     
   </entry>
   
   <entry>
-    <title>Java教程笔记之面向对象编程</title>
-    <link href="/2020/06/09/Java%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/"/>
-    <id>/2020/06/09/Java教程笔记之面向对象编程/</id>
-    <published>2020-06-09T14:24:27.000Z</published>
-    <updated>2020-06-10T04:35:55.843Z</updated>
+    <title>{{ post.title }}</title>
+    <link href="{{ (url + post.path) | uriencode }}"/>
+    <id>{{ url + post.path }}</id>
+    <published>{{ post.date.toISOString() }}</published>
+    <updated>{{ post.updated.toISOString() }}</updated>
     
     <summary type="html">
     
-      面向对象基础 JAVA核心类
+      {{ post.description }}
     
     </summary>
     
-      <category term="笔记" scheme="/categories/%E7%AC%94%E8%AE%B0/"/>
+      <category term="{{ category.name }}" scheme="{{ (url + category.path) | uriencode }}"/>
     
     
-      <category term="Java" scheme="/tags/Java/"/>
+      <category term="{{ tag.name }}" scheme="{{ (url + tag.path) | uriencode }}"/>
     
   </entry>
   
   <entry>
-    <title>Python入门与进阶</title>
-    <link href="/2020/05/26/Python%E5%85%A5%E9%97%A8%E4%B8%8E%E8%BF%9B%E9%98%B6/"/>
-    <id>/2020/05/26/Python入门与进阶/</id>
-    <published>2020-05-25T17:04:11.000Z</published>
-    <updated>2020-06-12T05:45:11.373Z</updated>
+    <title>{{ post.title }}</title>
+    <link href="{{ (url + post.path) | uriencode }}"/>
+    <id>{{ url + post.path }}</id>
+    <published>{{ post.date.toISOString() }}</published>
+    <updated>{{ post.updated.toISOString() }}</updated>
     
     <summary type="html">
     
-      Python教程
+      {{ post.description }}
     
     </summary>
     
-      <category term="笔记" scheme="/categories/%E7%AC%94%E8%AE%B0/"/>
+      <category term="{{ category.name }}" scheme="{{ (url + category.path) | uriencode }}"/>
     
     
-      <category term="Python" scheme="/tags/Python/"/>
+      <category term="{{ tag.name }}" scheme="{{ (url + tag.path) | uriencode }}"/>
     
   </entry>
   
   <entry>
-    <title>SOURCETREE 3.1.3 版本跳过BITBUCKET注册方法（亲测好用）</title>
-    <link href="/2020/05/21/SOURCETREE-3-1-3-%E7%89%88%E6%9C%AC%E8%B7%B3%E8%BF%87BITBUCKET%E6%B3%A8%E5%86%8C%E6%96%B9%E6%B3%95%EF%BC%88%E4%BA%B2%E6%B5%8B%E5%A5%BD%E7%94%A8%EF%BC%89/"/>
-    <id>/2020/05/21/SOURCETREE-3-1-3-版本跳过BITBUCKET注册方法（亲测好用）/</id>
-    <published>2020-05-21T14:25:21.000Z</published>
-    <updated>2020-05-21T14:34:00.962Z</updated>
+    <title>{{ post.title }}</title>
+    <link href="{{ (url + post.path) | uriencode }}"/>
+    <id>{{ url + post.path }}</id>
+    <published>{{ post.date.toISOString() }}</published>
+    <updated>{{ post.updated.toISOString() }}</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;1.首先下载并安装好git程序。&lt;/p&gt;
-&lt;p&gt;2.接着下载并执行SourceTreeSetup-3.1.3.exe，会进入登录或注册bitbucket的界面，我只是想用软件，并不想去注册账号。怎么办？请往下看。&lt;/p&gt;
-&lt;p&gt;3.打开
-        
-      
+      {{ post.description }}
     
     </summary>
     
-      <category term="转载" scheme="/categories/%E8%BD%AC%E8%BD%BD/"/>
+      <category term="{{ category.name }}" scheme="{{ (url + category.path) | uriencode }}"/>
     
     
-      <category term="git" scheme="/tags/git/"/>
+      <category term="{{ tag.name }}" scheme="{{ (url + tag.path) | uriencode }}"/>
     
   </entry>
   
   <entry>
-    <title>git教程</title>
-    <link href="/2020/05/21/git%E6%95%99%E7%A8%8B/"/>
-    <id>/2020/05/21/git教程/</id>
-    <published>2020-05-21T11:44:51.000Z</published>
-    <updated>2020-06-12T05:26:39.082Z</updated>
+    <title>{{ post.title }}</title>
+    <link href="{{ (url + post.path) | uriencode }}"/>
+    <id>{{ url + post.path }}</id>
+    <published>{{ post.date.toISOString() }}</published>
+    <updated>{{ post.updated.toISOString() }}</updated>
     
     <summary type="html">
     
-      git的基本使用
+      
+      
+        
+        
+          {{ short_content.substring(0, delim_pos) }}
+        
+      
     
     </summary>
     
-      <category term="笔记" scheme="/categories/%E7%AC%94%E8%AE%B0/"/>
+      <category term="{{ category.name }}" scheme="{{ (url + category.path) | uriencode }}"/>
     
     
-      <category term="git" scheme="/tags/git/"/>
+      <category term="{{ tag.name }}" scheme="{{ (url + tag.path) | uriencode }}"/>
     
   </entry>
   
   <entry>
-    <title>Hexo搭建个人网站(步骤篇)</title>
-    <link href="/2020/05/21/Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%EF%BC%88%E6%AD%A5%E9%AA%A4%E7%AF%87%EF%BC%89/"/>
-    <id>/2020/05/21/Hexo搭建个人博客网站（步骤篇）/</id>
-    <published>2020-05-21T11:20:00.000Z</published>
-    <updated>2020-05-21T13:58:07.576Z</updated>
+    <title>{{ post.title }}</title>
+    <link href="{{ (url + post.path) | uriencode }}"/>
+    <id>{{ url + post.path }}</id>
+    <published>{{ post.date.toISOString() }}</published>
+    <updated>{{ post.updated.toISOString() }}</updated>
     
     <summary type="html">
     
-      记录搭建部署博客的流程
+      {{ post.description }}
     
     </summary>
     
-      <category term="技术" scheme="/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="{{ category.name }}" scheme="{{ (url + category.path) | uriencode }}"/>
     
     
-      <category term="HEXO" scheme="/tags/HEXO/"/>
+      <category term="{{ tag.name }}" scheme="{{ (url + tag.path) | uriencode }}"/>
     
   </entry>
   
   <entry>
-    <title>Hexo搭建个人博客网站（原理篇）</title>
-    <link href="/2020/05/20/Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%EF%BC%88%E5%8E%9F%E7%90%86%E7%AF%87%EF%BC%89/"/>
-    <id>/2020/05/20/Hexo搭建个人博客网站（原理篇）/</id>
-    <published>2020-05-20T15:14:57.000Z</published>
-    <updated>2020-05-21T13:33:12.332Z</updated>
+    <title>{{ post.title }}</title>
+    <link href="{{ (url + post.path) | uriencode }}"/>
+    <id>{{ url + post.path }}</id>
+    <published>{{ post.date.toISOString() }}</published>
+    <updated>{{ post.updated.toISOString() }}</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;
-        
-      
+      {{ post.description }}
     
     </summary>
     
-      <category term="技术" scheme="/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="{{ category.name }}" scheme="{{ (url + category.path) | uriencode }}"/>
     
     
-      <category term="HEXO" scheme="/tags/HEXO/"/>
+      <category term="{{ tag.name }}" scheme="{{ (url + tag.path) | uriencode }}"/>
     
   </entry>
   
   <entry>
-    <title>Hexo运营前记</title>
-    <link href="/2020/05/20/Hexo%E8%BF%90%E8%90%A5%E5%89%8D%E8%AE%B0/"/>
-    <id>/2020/05/20/Hexo运营前记/</id>
-    <published>2020-05-20T11:30:23.000Z</published>
-    <updated>2020-05-20T11:19:52.510Z</updated>
+    <title>{{ post.title }}</title>
+    <link href="{{ (url + post.path) | uriencode }}"/>
+    <id>{{ url + post.path }}</id>
+    <published>{{ post.date.toISOString() }}</published>
+    <updated>{{ post.updated.toISOString() }}</updated>
     
     <summary type="html">
     
-      踏上一条漫长的路
+      
+      
+        
+        
+          {{ short_content.substring(0, delim_pos) }}
+        
+      
     
     </summary>
     
-      <category term="随想" scheme="/categories/%E9%9A%8F%E6%83%B3/"/>
+      <category term="{{ category.name }}" scheme="{{ (url + category.path) | uriencode }}"/>
     
+    
+      <category term="{{ tag.name }}" scheme="{{ (url + tag.path) | uriencode }}"/>
     
   </entry>
   
   <entry>
-    <title>画廊——日常</title>
-    <link href="/2020/05/19/%E7%94%BB%E5%BB%8A/"/>
-    <id>/2020/05/19/画廊/</id>
-    <published>2020-05-19T14:06:43.000Z</published>
-    <updated>2020-05-21T06:14:52.200Z</updated>
+    <title>{{ post.title }}</title>
+    <link href="{{ (url + post.path) | uriencode }}"/>
+    <id>{{ url + post.path }}</id>
+    <published>{{ post.date.toISOString() }}</published>
+    <updated>{{ post.updated.toISOString() }}</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;a href=&quot;https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/gallery/gallery_daliy01.jpg&quot; data-fancybox=&quot;images&quot; data-caption=&quot;sakura&quot;
-        
-      
+      {{ post.description }}
     
     </summary>
     
-    
-      <category term="光影艺术" scheme="/tags/%E5%85%89%E5%BD%B1%E8%89%BA%E6%9C%AF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SSM+Springboot商铺系统(一)</title>
-    <link href="/2020/05/19/SSM-Springboot%E5%95%86%E9%93%BA%E7%B3%BB%E7%BB%9F/"/>
-    <id>/2020/05/19/SSM-Springboot商铺系统/</id>
-    <published>2020-05-19T13:21:08.000Z</published>
-    <updated>2020-05-19T13:31:48.298Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;待更~&lt;/p&gt;
-
-        
-      
-    
-    </summary>
-    
-      <category term="项目" scheme="/categories/%E9%A1%B9%E7%9B%AE/"/>
+      <category term="{{ category.name }}" scheme="{{ (url + category.path) | uriencode }}"/>
     
     
   </entry>
   
   <entry>
-    <title>Linux核心技术与应用笔记（一）</title>
-    <link href="/2020/05/19/Linux%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/"/>
-    <id>/2020/05/19/Linux核心技术与应用笔记（一）/</id>
-    <published>2020-05-19T11:24:34.000Z</published>
-    <updated>2020-05-19T11:42:58.713Z</updated>
+    <title>{{ post.title }}</title>
+    <link href="{{ (url + post.path) | uriencode }}"/>
+    <id>{{ url + post.path }}</id>
+    <published>{{ post.date.toISOString() }}</published>
+    <updated>{{ post.updated.toISOString() }}</updated>
     
     <summary type="html">
     
-      Linux基础
+      
+      
+        
+        
+          {{ short_content.substring(0, delim_pos) }}
+        
+      
     
     </summary>
     
-      <category term="笔记" scheme="/categories/%E7%AC%94%E8%AE%B0/"/>
     
-    
-      <category term="Linux" scheme="/tags/Linux/"/>
+      <category term="{{ tag.name }}" scheme="{{ (url + tag.path) | uriencode }}"/>
     
   </entry>
   
   <entry>
-    <title>Sakura主题配置总结</title>
-    <link href="/2020/05/19/Hexo-Theme-Sakura/"/>
-    <id>/2020/05/19/Hexo-Theme-Sakura/</id>
-    <published>2020-05-19T02:45:01.000Z</published>
-    <updated>2020-05-20T15:44:32.309Z</updated>
+    <title>{{ post.title }}</title>
+    <link href="{{ (url + post.path) | uriencode }}"/>
+    <id>{{ url + post.path }}</id>
+    <published>{{ post.date.toISOString() }}</published>
+    <updated>{{ post.updated.toISOString() }}</updated>
     
     <summary type="html">
     
-      hexo-sakura主题使用教程
+      
+      
+        
+        
+          {{ short_content }}
+        
+      
     
     </summary>
     
-      <category term="技术" scheme="/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="{{ category.name }}" scheme="{{ (url + category.path) | uriencode }}"/>
     
     
-      <category term="HEXO" scheme="/tags/HEXO/"/>
+  </entry>
+  
+  <entry>
+    <title>{{ post.title }}</title>
+    <link href="{{ (url + post.path) | uriencode }}"/>
+    <id>{{ url + post.path }}</id>
+    <published>{{ post.date.toISOString() }}</published>
+    <updated>{{ post.updated.toISOString() }}</updated>
     
-      <category term="sakura" scheme="/tags/sakura/"/>
+    <summary type="html">
+    
+      {{ post.description }}
+    
+    </summary>
+    
+      <category term="{{ category.name }}" scheme="{{ (url + category.path) | uriencode }}"/>
+    
+    
+      <category term="{{ tag.name }}" scheme="{{ (url + tag.path) | uriencode }}"/>
+    
+  </entry>
+  
+  <entry>
+    <title>{{ post.title }}</title>
+    <link href="{{ (url + post.path) | uriencode }}"/>
+    <id>{{ url + post.path }}</id>
+    <published>{{ post.date.toISOString() }}</published>
+    <updated>{{ post.updated.toISOString() }}</updated>
+    
+    <summary type="html">
+    
+      {{ post.description }}
+    
+    </summary>
+    
+      <category term="{{ category.name }}" scheme="{{ (url + category.path) | uriencode }}"/>
+    
+    
+      <category term="{{ tag.name }}" scheme="{{ (url + tag.path) | uriencode }}"/>
+    
+      <category term="{{ tag.name }}" scheme="{{ (url + tag.path) | uriencode }}"/>
     
   </entry>
   
