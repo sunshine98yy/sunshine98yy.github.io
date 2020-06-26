@@ -376,7 +376,7 @@ $ hexo s #等价于hexo server 启动预览服务器，开启-d选项时可以�
 <h3 id="将hexo部署到github上"><a href="#将hexo部署到github上" class="headerlink" title="将hexo部署到github上"></a>将hexo部署到github上</h3><p>上文已经在本地部署好了hexo博客系统，但<strong>仅仅本地能够访问</strong>。如果想让别人访问到你的博客，你可以租一台云主机，然后把hexo系统部署到云主机上，好处是带宽、容量可以得到保证，缺点是需要花费一笔租金。还有另一种免费的方法，就是把hexo部署到githu pages或者gitcafe pages上，本文以github为例。</p>
 <p><span>关于git的安装配置以及github添加公钥的流程可以参见我的博客</span></p>
 <p>[[git的安装配置]]: d</p>
-<h4 id="1-创建repository"><a href="#1-创建repository" class="headerlink" title="1.创建repository"></a>1.创建repository</h4><p>【your repositories】—【new】</p>
+<h4 id="1-创建repository"><a href="#1-创建repository" class="headerlink" title="1.创建repository"></a>1.创建repository</h4><p>【your repositories】—-【new】</p>
 <p>如下图所示，这里要注意，repository名称一定是<span style="color:red">github的用户名+.github.io</span>,否则github pages无法访问。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/Photo/hexo0204.png" style="zoom:67%;"></p>
 <h4 id="2-在github中添加公钥"><a href="#2-在github中添加公钥" class="headerlink" title="2.在github中添加公钥"></a>2.在github中添加公钥</h4><p>打开git bash输入以下命令</p>
@@ -388,7 +388,7 @@ Generating public/private rsa key pair.
 Enter file in which to save the key (/Users/your_user_directory/.ssh/id_rsa):&lt;回车就好&gt;
 </code></pre><p>运行下面命令，将公钥的内容复制到剪切板</p>
 <p><code>clip &lt; ~/.ssh/id_rsa.pub</code></p>
-<p>打开github—&gt;settings—&gt;SSH and GPG keys—&gt;new ssh key—&gt;把内容粘到key区域—&gt;add SSH key</p>
+<p>打开github—-&gt;settings—-&gt;SSH and GPG keys—-&gt;new ssh key—-&gt;把内容粘到key区域—-&gt;add SSH key</p>
 <p>如下图</p>
 <p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/Photo/hexo0205.png" alt></p>
 <h4 id="3-部署hexo"><a href="#3-部署hexo" class="headerlink" title="3.部署hexo"></a>3.部署hexo</h4><p>1.编辑_config.yml(在D:\YY_Blog下)，repository是在github中申请的地址。如下：</p>

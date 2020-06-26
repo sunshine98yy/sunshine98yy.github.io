@@ -386,7 +386,7 @@
 <p>这些就是一个Maven项目的标准目录结构。</p>
 <p>所有的目录结构都是约定好的标准结构，我们不要随意修改目录结构。使用标准结构不需要做任何配置，Maven就可以正常使用。</p>
 <p>我们再来看最关键的一个项目描述文件<code>pom.xml</code>，它的内容长得像下面：</p>
-<pre><code class="xml">&lt;project ...&gt;
+<pre><code class="lang-xml">&lt;project ...&gt;
     &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
     &lt;groupId&gt;com.itranswarp.learnjava&lt;/groupId&gt;
     &lt;artifactId&gt;hello&lt;/artifactId&gt;
@@ -423,14 +423,14 @@
 <p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_maven20200610193416.jpg" style="zoom:50%;"></p>
 <p>当我们声明了<code>abc</code>的依赖时，Maven自动把<code>abc</code>和<code>xyz</code>都加入了我们的项目依赖，不需要我们自己去研究<code>abc</code>是否需要依赖<code>xyz</code>。</p>
 <p>因此，<strong>Maven的第一个作用就是解决依赖管理</strong>。我们声明了自己的项目需要<code>abc</code>，Maven会自动导入<code>abc</code>的jar包，再判断出<code>abc</code>需要<code>xyz</code>，又会自动导入<code>xyz</code>的jar包，这样，最终我们的项目会依赖<code>abc</code>和<code>xyz</code>两个jar包。我们来看一个复杂依赖示例：</p>
-<pre><code class="xml">&lt;dependency&gt;
+<pre><code class="lang-xml">&lt;dependency&gt;
     &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
     &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
     &lt;version&gt;1.4.2.RELEASE&lt;/version&gt;
 &lt;/dependency&gt;
 </code></pre>
 <p>当我们声明一个<code>spring-boot-starter-web</code>依赖时，Maven会自动解析并判断最终需要大概二三十个其他依赖：</p>
-<pre><code class="xml">spring-boot-starter-web
+<pre><code class="lang-xml">spring-boot-starter-web
   spring-boot-starter
     spring-boot
     sprint-boot-autoconfigure
@@ -456,6 +456,7 @@
 </code></pre>
 <p>如果我们自己去手动管理这些依赖是非常费时费力的，而且出错的概率很大。</p>
 <h4 id="依赖关系"><a href="#依赖关系" class="headerlink" title="依赖关系"></a>依赖关系</h4><p>Maven定义了几种依赖关系，分别是<code>compile</code>、<code>test</code>、<code>runtime</code>和<code>provided</code>：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -487,9 +488,10 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>默认的<code>compile</code>是最常用的，Maven会把这种类型的依赖直接放入classpath。</p>
 <p><code>test</code>依赖表示仅在测试时使用，正常运行时并不需要。最常用的<code>test</code>依赖就是JUnit：</p>
-<pre><code class="xml">&lt;dependency&gt;
+<pre><code class="lang-xml">&lt;dependency&gt;
     &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;
     &lt;artifactId&gt;junit-jupiter-api&lt;/artifactId&gt;
     &lt;version&gt;5.3.2&lt;/version&gt;
@@ -497,7 +499,7 @@
 &lt;/dependency&gt;
 </code></pre>
 <p><code>runtime</code>依赖表示编译时不需要，但运行时需要。最典型的<code>runtime</code>依赖是JDBC驱动，例如MySQL驱动：</p>
-<pre><code class="xml">&lt;dependency&gt;
+<pre><code class="lang-xml">&lt;dependency&gt;
     &lt;groupId&gt;mysql&lt;/groupId&gt;
     &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
     &lt;version&gt;5.1.48&lt;/version&gt;
@@ -505,7 +507,7 @@
 &lt;/dependency&gt;
 </code></pre>
 <p><code>provided</code>依赖表示编译时需要，但运行时不需要。最典型的<code>provided</code>依赖是Servlet API，编译的时候需要，但是运行时，Servlet服务器内置了相关的jar，所以运行期不需要：</p>
-<pre><code class="xml">&lt;dependency&gt;
+<pre><code class="lang-xml">&lt;dependency&gt;
     &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
     &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;
     &lt;version&gt;4.0.0&lt;/version&gt;
@@ -525,7 +527,7 @@
 <p>注：只有以<code>-SNAPSHOT</code>结尾的版本号会被Maven视为开发版本，开发版本每次都会重复下载，这种SNAPSHOT版本只能用于内部私有的Maven repo，公开发布的版本不允许出现SNAPSHOT。</p>
 <h4 id="Maven镜像"><a href="#Maven镜像" class="headerlink" title="Maven镜像"></a>Maven镜像</h4><p>除了可以从Maven的中央仓库下载外，还可以从Maven的镜像仓库下载。如果访问Maven的中央仓库非常慢，我们可以选择一个速度较快的Maven的镜像仓库。Maven镜像仓库定期从中央仓库同步：</p>
 <p>中国区用户可以使用阿里云提供的Maven镜像仓库。使用Maven镜像仓库需要一个配置，在用户主目录(Window : C:\Users\xxx.m2)下进入<code>.m2</code>目录，创建一个<code>settings.xml</code>配置文件，内容如下：</p>
-<pre><code class="xml">&lt;settings&gt;
+<pre><code class="lang-xml">&lt;settings&gt;
     &lt;mirrors&gt;
         &lt;mirror&gt;
             &lt;id&gt;aliyun&lt;/id&gt;
@@ -584,6 +586,7 @@
 <li>package：打包</li>
 </ul>
 <h4 id="Goal"><a href="#Goal" class="headerlink" title="Goal"></a>Goal</h4><p>执行一个phase又会触发一个或多个goal：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -602,6 +605,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>goal的命名总是<code>abc:xyz</code>这种形式。</p>
 <ul>
 <li>lifecycle相当于Java的package，它包含一个或多个phase；</li>
@@ -626,6 +630,7 @@
 <p>实际上，<strong>执行每个phase，都是通过某个插件（plugin）来执行的</strong>，Maven本身其实并不知道如何执行<code>compile</code>，它只是负责找到对应的<code>compiler</code>插件，然后执行默认的<code>compiler:compile</code>这个goal来完成编译。</p>
 <p>所以，<strong>使用Maven，实际上就是配置好需要使用的插件，然后通过phase调用它们</strong>。</p>
 <p>Maven已经内置了一些常用的标准插件：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -652,8 +657,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>如果标准插件无法满足需求，我们还可以使用自定义插件。使用自定义插件的时候，需要声明。例如，使用<code>maven-shade-plugin</code>可以创建一个可执行的jar，要使用这个插件，需要在<code>pom.xml</code>中声明它：</p>
-<pre><code class="xml">&lt;project&gt;
+<pre><code class="lang-xml">&lt;project&gt;
     ...
     &lt;build&gt;
         &lt;plugins&gt;
@@ -678,7 +684,7 @@
 &lt;/project&gt;
 </code></pre>
 <p>自定义插件往往需要一些配置，例如，<code>maven-shade-plugin</code>需要指定Java程序的入口，它的配置是：</p>
-<pre><code class="xml">&lt;configuration&gt;
+<pre><code class="lang-xml">&lt;configuration&gt;
     &lt;transformers&gt;
         &lt;transformer implementation=&quot;org.apache.maven.plugins.shade.resource.ManifestResourceTransformer&quot;&gt;
             &lt;mainClass&gt;com.itranswarp.learnjava.Main&lt;/mainClass&gt;
@@ -700,7 +706,7 @@
 <p>现在可以分拆成3个模块：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_maven20200610231640.jpg" style="zoom:67%;"></p>
 <p>Maven可以有效地管理多个模块，我们只需要把每个模块当作一个独立的Maven项目，它们有各自独立的<code>pom.xml</code>。例如，模块A的<code>pom.xml</code></p>
-<pre><code class="xml">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+<pre><code class="lang-xml">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
     xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
     xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
     &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
@@ -742,7 +748,7 @@
 &lt;/project&gt;
 </code></pre>
 <p>模块B的<code>pom.xml</code>：</p>
-<pre><code class="xml">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+<pre><code class="lang-xml">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
     xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
     xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
     &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
@@ -784,7 +790,7 @@
 &lt;/project&gt;
 </code></pre>
 <p>可以看出来，模块A和模块B的<code>pom.xml</code>高度相似，因此，我们可以提取出共同部分作为<code>parent</code>：</p>
-<pre><code class="xml">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+<pre><code class="lang-xml">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
     xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
     xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
     &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
@@ -825,9 +831,9 @@
     &lt;/dependencies&gt;
 &lt;/project&gt;
 </code></pre>
-<p>注意到parent的<code></code>是<code>pom</code>而不是<code>jar</code>，因为<code>parent</code>本身不含任何Java代码。编写<code>parent</code>的<code>pom.xml</code>只是为了在各个模块中减少重复的配置。现在我们的整个工程结构如下：</p>
+<p>注意到parent的<code>`是</code>pom<code>而不是</code>jar<code>，因为</code>parent<code>本身不含任何Java代码。编写</code>parent<code>的</code>pom.xml`只是为了在各个模块中减少重复的配置。现在我们的整个工程结构如下：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_maven20200610233235.jpg" style="zoom:67%;"></p>
-<pre><code class="java">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+<pre><code class="lang-java">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
     xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
     xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
     &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
@@ -846,7 +852,7 @@
 </code></pre>
 <p>模块B、模块C都可以直接从<code>parent</code>继承，大幅简化了<code>pom.xml</code>的编写。</p>
 <p>如果模块A依赖模块B，则模块A需要模块B的jar包才能正常编译，我们需要在模块A中引入模块B：</p>
-<pre><code class="xml">    ...
+<pre><code class="lang-xml">    ...
     &lt;dependencies&gt;
         &lt;dependency&gt;
             &lt;groupId&gt;com.itranswarp.learnjava&lt;/groupId&gt;
@@ -856,7 +862,7 @@
     &lt;/dependencies&gt;
 </code></pre>
 <p>最后，在编译的时候，需要在根目录创建一个<code>pom.xml</code>统一编译：</p>
-<pre><code class="xml">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+<pre><code class="lang-xml">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
     xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
     xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
 
@@ -875,7 +881,7 @@
     &lt;/modules&gt;
 &lt;/project&gt;
 </code></pre>
-<p>这样，在根目录执行<code>mvn clean package</code>时，Maven根据根目录的<code>pom.xml</code>找到包括<code>parent</code>在内的共4个<code></code>，一次性全部编译。</p>
+<p>这样，在根目录执行<code>mvn clean package</code>时，Maven根据根目录的<code>pom.xml</code>找到包括<code>parent</code>在内的共4个``，一次性全部编译。</p>
 <h4 id="中央仓库"><a href="#中央仓库" class="headerlink" title="中央仓库"></a>中央仓库</h4><p>其实我们使用的大多数第三方模块都是这个用法，例如，我们使用commons logging、log4j这些第三方模块，就是第三方模块的开发者自己把编译好的jar包发布到Maven的中央仓库中。</p>
 <h4 id="私有仓库"><a href="#私有仓库" class="headerlink" title="私有仓库"></a>私有仓库</h4><p>私有仓库是指公司内部如果不希望把源码和jar包放到公网上，那么可以搭建私有仓库。私有仓库总是在公司内部使用，它只需要在本地的<code>~/.m2/settings.xml</code>中配置好，使用方式和中央仓位没有任何区别。</p>
 <h4 id="本地仓库"><a href="#本地仓库" class="headerlink" title="本地仓库"></a>本地仓库</h4><p>本地仓库是指把本地开发的项目“发布”在本地，这样其他项目可以通过本地仓库引用它。但是我们不推荐把自己的模块安装到Maven的本地仓库，因为每次修改某个模块的源码，都需要重新安装，非常容易出现版本不一致的情况。更好的方法是使用模块化编译，在编译的时候，告诉Maven几个模块之间存在依赖关系，需要一块编译，Maven就会自动按依赖顺序编译这些模块。</p>

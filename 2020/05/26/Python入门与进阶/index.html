@@ -387,7 +387,7 @@
 <p>运行效率与开发效率，鱼与熊掌不可兼得。适合的才是最好的。</p>
 <h3 id="一个学习编程的经典误区"><a href="#一个学习编程的经典误区" class="headerlink" title="一个学习编程的经典误区"></a>一个学习编程的经典误区</h3><p>不要把思维局限在web编程，这只是编程的一个应用方向。</p>
 <h3 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h3><p>爬虫、大数据与数据分析（Spark）、自动化运维与测试、web开发(Flask、Django等)、机器学习(Tensor Flow)、胶水语言（混合其他语言来编程，能够把其他语言制作的各种模块很轻松的连接在一起）。</p>
-<h2 id="Python环境安装"><a href="#Python环境安装" class="headerlink" title="Python环境安装"></a>Python环境安装</h2><h3 id="1-Windows下一键环境安装包"><a href="#1-Windows下一键环境安装包" class="headerlink" title="1.Windows下一键环境安装包"></a>1.Windows下一键环境安装包</h3><p>【Python官网】—【downloads】—【Windows】</p>
+<h2 id="Python环境安装"><a href="#Python环境安装" class="headerlink" title="Python环境安装"></a>Python环境安装</h2><h3 id="1-Windows下一键环境安装包"><a href="#1-Windows下一键环境安装包" class="headerlink" title="1.Windows下一键环境安装包"></a>1.Windows下一键环境安装包</h3><p>【Python官网】—-【downloads】—-【Windows】</p>
 <p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200526003056.jpg" style="zoom: 33%;"></p>
 <h3 id="2-安装Python"><a href="#2-安装Python" class="headerlink" title="2.安装Python"></a>2.安装Python</h3><p>1.打开安装包，按下图方式安装。推荐自定义安装</p>
 <p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_git/20200526004405.jpg" style="zoom: 33%;"></p>
@@ -414,7 +414,7 @@
 </ul>
 <h4 id="进制"><a href="#进制" class="headerlink" title="进制"></a><strong>进制</strong></h4><p>二进制<code>0b</code>开头，八进制<code>0o</code>开头，十六进制<code>0x</code>开头</p>
 <p><strong>不同进制间的转换</strong></p>
-<pre><code class="python">bin(10) #十进制转二进制
+<pre><code class="lang-python">bin(10) #十进制转二进制
 bin(0o7) #八进制转二进制
 int(0b111) #二进制转十进制
 int(0o77) #八进制转十进制
@@ -423,7 +423,7 @@ oct(0x777) #十六进制转八进制
 ······
 </code></pre>
 <p><strong>只要是非0的数都表示布尔真，只有0、空值表示布尔假</strong></p>
-<pre><code class="python">bool(2) #True
+<pre><code class="lang-python">bool(2) #True
 bool(2.2) #True
 bool(-1.1) #True
 bool(&#39;abc&#39;) #True
@@ -432,6 +432,7 @@ bool(&#39;&#39;) #False
 bool([]) #False
 bool(None) #False
 </code></pre>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -466,8 +467,9 @@ bool(None) #False
 </tr>
 </tbody>
 </table>
+</div>
 <h3 id="String字符串"><a href="#String字符串" class="headerlink" title="String字符串"></a>String字符串</h3><h4 id="单引号、双引号、多行字符串"><a href="#单引号、双引号、多行字符串" class="headerlink" title="单引号、双引号、多行字符串"></a>单引号、双引号、多行字符串</h4><p>注意引号必须成对出现</p>
-<pre><code class="python">&#39;hello world&#39;
+<pre><code class="lang-python">&#39;hello world&#39;
 &quot;hello world&quot; 
 &quot;let&#39;s  go&quot; #单双引号是为了在引号中引用引号
 &#39;&#39;&#39;
@@ -477,7 +479,7 @@ world
 &#39;1&#39; #str类型
 </code></pre>
 <h4 id="转移字符"><a href="#转移字符" class="headerlink" title="转移字符"></a>转移字符</h4><p>特殊的字符：表示无法“看见”的字符、与语言本身语法有冲突的字符</p>
-<pre><code class="python">\n  #换行
+<pre><code class="lang-python">\n  #换行
 \r  #回车
 \&#39;  #单引号
 \t  #横向制表符
@@ -488,32 +490,32 @@ print(&#39;c:\\northwind\\northwest&#39;)
 ······
 </code></pre>
 <h4 id="字符串运算"><a href="#字符串运算" class="headerlink" title="字符串运算"></a>字符串运算</h4><p><strong>字符串拼接</strong></p>
-<pre><code class="python">&quot;hello&quot;+&quot;world&quot; #输出helloworld
+<pre><code class="lang-python">&quot;hello&quot;+&quot;world&quot; #输出helloworld
 </code></pre>
 <p><strong>字符串复制</strong></p>
-<pre><code class="python">&quot;hello&quot;*n #hello拼接n次
+<pre><code class="lang-python">&quot;hello&quot;*n #hello拼接n次
 </code></pre>
 <p><strong>字符串访问</strong></p>
-<pre><code class="python">&quot;hello world&quot;[下标a:下标b] #从左往右以0开始，从右往左以-1开始,截取序列的[a,b)
+<pre><code class="lang-python">&quot;hello world&quot;[下标a:下标b] #从左往右以0开始，从右往左以-1开始,截取序列的[a,b)
 &quot;hello world&quot;[n] #从左往右以0开始，反之以-1开始,访问单个字符
 #输出world的方法
 &quot;hello world&quot;[6:]
 &quot;hello world&quot;[-5:]
 </code></pre>
-<h3 id="组"><a href="#组" class="headerlink" title="组"></a>组</h3><h4 id="列表list"><a href="#列表list" class="headerlink" title="列表list"></a>列表list</h4><pre><code class="python">[1,2,3,4]
+<h3 id="组"><a href="#组" class="headerlink" title="组"></a>组</h3><h4 id="列表list"><a href="#列表list" class="headerlink" title="列表list"></a>列表list</h4><pre><code class="lang-python">[1,2,3,4]
 [&quot;hello&quot;,1.9,True,[1,2]] #列表内部元素的类型不是固定的
 </code></pre>
 <p><strong>列表的基本操作</strong></p>
-<pre><code class="python">[&quot;apple&quot;,&quot;orange&quot;,&quot;peach&quot;,&quot;grape&quot;][n] #方法同string
+<pre><code class="lang-python">[&quot;apple&quot;,&quot;orange&quot;,&quot;peach&quot;,&quot;grape&quot;][n] #方法同string
 [&quot;apple&quot;,&quot;orange&quot;,&quot;peach&quot;,&quot;grape&quot;][a:b] #方法同上
 [&quot;apple&quot;,&quot;orange&quot;,&quot;peach&quot;,&quot;grape&quot;]+[&quot;pear&quot;,&quot;lemon&quot;] #两个列表合并
 [&quot;apple&quot;,&quot;orange&quot;,&quot;peach&quot;,&quot;grape&quot;]*3 #重复3次
 </code></pre>
-<h4 id="元组tuple"><a href="#元组tuple" class="headerlink" title="元组tuple"></a>元组tuple</h4><pre><code class="python">(1,2,3,4)
+<h4 id="元组tuple"><a href="#元组tuple" class="headerlink" title="元组tuple"></a>元组tuple</h4><pre><code class="lang-python">(1,2,3,4)
 (&quot;hello&quot;,1.9,True,(1,2)) #元组内部元素的类型不是固定的
 </code></pre>
 <p><strong>元组的基本操作</strong></p>
-<pre><code class="python">(1,2,3,4)[0] #方法同上
+<pre><code class="lang-python">(1,2,3,4)[0] #方法同上
 (1,2,3,4)[0:2]
 (1,2,3)+(4,5,6)
 (1,2,3)*3
@@ -523,7 +525,7 @@ print(&#39;c:\\northwind\\northwest&#39;)
 <p>type((1)) 只有一个元素时，内部的（）做成运算符号处理。若要定义一个只有一个元素的元组，（1，）</p>
 <p>Python中，str,list,typle都是<strong>序列</strong></p>
 <p><strong>序列共有特征</strong></p>
-<pre><code class="python">#根据序号找值
+<pre><code class="lang-python">#根据序号找值
 #根据切片（范围）找值
 # *复制
 # a not in [序列] 判断元素a是否（不）在序列中
@@ -533,9 +535,10 @@ print(&#39;c:\\northwind\\northwest&#39;)
 <h3 id="集合set"><a href="#集合set" class="headerlink" title="集合set"></a>集合set</h3><p><strong>① 格式</strong><br><code>{元素1，元素2...}</code>或<code>set(&#39;元素1元素2元素3...&#39;)</code></p>
 <p><strong>② 特性</strong><br>集合是无序的，且元素不重复。</p>
 <p>注意：创建空集合必须用 <code>set()</code>而不是 <code>{ }</code>，因为 <code>{ }</code> 是用来创建一个空字典。</p>
-<pre><code class="python">{1,1,1,2,2,3}  #最后显示{1,2,3}
+<pre><code class="lang-python">{1,1,1,2,2,3}  #最后显示{1,2,3}
 </code></pre>
 <p><strong>③ 操作集合</strong></p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -563,7 +566,8 @@ print(&#39;c:\\northwind\\northwest&#39;)
 </tr>
 </tbody>
 </table>
-<pre><code class="python">{1,2,3,4,5,6}-{3,4} #{1,2,5,6}
+</div>
+<pre><code class="lang-python">{1,2,3,4,5,6}-{3,4} #{1,2,5,6}
 {1,2,3,4,5,6}&amp;{3,4} #{3,4}
 {1,2,3,4,5,6}|{3,4} #{1,2,3,4,5,6,7}
 </code></pre>
@@ -572,6 +576,7 @@ print(&#39;c:\\northwind\\northwest&#39;)
 <p><strong>② 特性</strong></p>
 <p>键名不可以重复，若重复，后面的值会替换前面相同的键名；<br><span style="color:red">键名为不可变类型</span>，可以为number、string、tuple类型。</p>
 <p><strong>③ 操作字典</strong></p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -586,7 +591,8 @@ print(&#39;c:\\northwind\\northwest&#39;)
 </tr>
 </tbody>
 </table>
-<pre><code class="python">{&#39;w&#39;:&#39;上&#39;,&#39;a&#39;:&#39;左&#39;,&#39;s&#39;:&#39;下&#39;,&#39;d&#39;:&#39;右&#39;}[&#39;w&#39;]  #访问得到上
+</div>
+<pre><code class="lang-python">{&#39;w&#39;:&#39;上&#39;,&#39;a&#39;:&#39;左&#39;,&#39;s&#39;:&#39;下&#39;,&#39;d&#39;:&#39;右&#39;}[&#39;w&#39;]  #访问得到上
 {1:&#39;上&#39;,&#39;1&#39;:&#39;左&#39;,&#39;s&#39;:&#39;下&#39;,&#39;d&#39;:&#39;右&#39;}[1] #显示上
 {1:&#39;上&#39;,&#39;1&#39;:&#39;左&#39;,&#39;s&#39;:&#39;下&#39;,&#39;d&#39;:&#39;右&#39;}[&#39;1&#39;] #显示左
 </code></pre>
@@ -596,11 +602,11 @@ print(&#39;c:\\northwind\\northwest&#39;)
 <li>变量名由字母，数字，下划线构成，开头不能是数字。</li>
 <li>python中不存在变量的定义，变量本身没有类型，一般说把X赋值给变量，不说定义变量为X（动态性语言的特性体现）</li>
 </ul>
-<pre><code class="python">a = 1
+<pre><code class="lang-python">a = 1
 a = &#39;1&#39;
 a = [1,2,3]
 </code></pre>
-<h4 id="值类型和引用类型"><a href="#值类型和引用类型" class="headerlink" title="值类型和引用类型"></a>值类型和引用类型</h4><pre><code class="python">a = 1;
+<h4 id="值类型和引用类型"><a href="#值类型和引用类型" class="headerlink" title="值类型和引用类型"></a>值类型和引用类型</h4><pre><code class="lang-python">a = 1;
 b = a;
 a = 3;
 print(b) #b=1,b的值并没有改变
@@ -614,7 +620,7 @@ print(b) #[&#39;1&#39;,2,3,4,5],此时b改变了
 <p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200529210716.jpg" style="zoom:50% ;text-align:center;"></p>
 <p>引用类型是可变的，值类型是不可变的</p>
 <p><code>int</code> <code>str</code> <code>tuple</code>值类型(不可改变) <code>list</code> <code>set</code> <code>dict</code>引用类型(可变)</p>
-<pre><code class="python">a = &#39;hello&#39;
+<pre><code class="lang-python">a = &#39;hello&#39;
 id(a) #
 a = a + &#39;python&#39;
 id(a) #
@@ -624,7 +630,7 @@ id(a) #
 </code></pre>
 <h4 id="列表和元组的对比"><a href="#列表和元组的对比" class="headerlink" title="列表和元组的对比"></a>列表和元组的对比</h4><p>元组定义好后就无法改变，列表可更改。</p>
 <p>建议用元组 。避免合作开发过程中对方更改造成的报错。</p>
-<pre><code class="python">a = (1,2,3,[1,2,4]) #如何访问4
+<pre><code class="lang-python">a = (1,2,3,[1,2,4]) #如何访问4
 a[3][2]
 a = (1,2,3,[1,2,[&#39;a&#39;,&#39;b&#39;,&#39;c&#39;]]) #访问c
 a[3][2][2]
@@ -636,12 +642,13 @@ a[3][2][2]
 <h5 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h5><p><code>and</code>与、<code>or</code>或、 <code>not</code>非</p>
 <p>主要操作布尔类型</p>
 <p>非布尔类型参与运算的结果要根据计算机的运算流程判断</p>
-<pre><code class="python">1 and 2 #返回2 ，计算机的运算流程，需要2才能给出结果
+<pre><code class="lang-python">1 and 2 #返回2 ，计算机的运算流程，需要2才能给出结果
 1 or 0  #返回1   到1即可给出结果
 </code></pre>
 <h5 id="比较（关系）运算符"><a href="#比较（关系）运算符" class="headerlink" title="比较（关系）运算符"></a>比较（关系）运算符</h5><p><code>==</code> <code>!=</code> <code>&gt;</code> <code>&lt;</code> <code>&gt;=</code> <code>&lt;=</code>  产生布尔值的运算结果</p>
 <p>字符串、列表等均可进行比较</p>
-<h5 id="身份运算符"><a href="#身份运算符" class="headerlink" title="身份运算符"></a>身份运算符</h5><table>
+<h5 id="身份运算符"><a href="#身份运算符" class="headerlink" title="身份运算符"></a>身份运算符</h5><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>运算符</th>
@@ -662,9 +669,10 @@ a[3][2][2]
 </tr>
 </tbody>
 </table>
+</div>
 <p>== 比较<strong>值</strong>，is 比较<strong>身份</strong>，<strong>类型</strong> type判断</p>
 <p>对象三个特征 id 、value、type</p>
-<pre><code class="python">******is和==的区别********
+<pre><code class="lang-python">******is和==的区别********
 a = 1
 b = 1.0
 a == b #true
@@ -685,7 +693,8 @@ isinstance(a,str) #判断a是否是str类型
 isinstance(a,(int,str,float)) #判断a是否是下面的三种类型之一
 </code></pre>
 <p>注意：python中没有<code>===</code>运算符</p>
-<h5 id="成员运算符"><a href="#成员运算符" class="headerlink" title="成员运算符"></a>成员运算符</h5><table>
+<h5 id="成员运算符"><a href="#成员运算符" class="headerlink" title="成员运算符"></a>成员运算符</h5><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>运算符</th>
@@ -706,13 +715,15 @@ isinstance(a,(int,str,float)) #判断a是否是下面的三种类型之一
 </tr>
 </tbody>
 </table>
+</div>
 <p><em>注意：字典的成员运算符是针对键</em></p>
-<pre><code class="python">b = &#39;c&#39;
+<pre><code class="lang-python">b = &#39;c&#39;
 b in {&#39;c&#39;:1} #true
 </code></pre>
 <h5 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h5><p><code>&amp;</code>按位与 <code>|</code>按位与 <code>^</code>按位异或 <code>-</code>按位取反 <code>&lt;&lt;</code> 左移动<code>&gt;&gt;</code>右移动  </p>
 <p>都是把数字当做二进制数进行运算</p>
 <h3 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h3><p><a href="https://juejin.im/post/5db6ff88f265da4d525fce6b" target="_blank" rel="noopener">运算符优先级</a></p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -800,13 +811,14 @@ b in {&#39;c&#39;:1} #true
 </tr>
 </tbody>
 </table>
-<pre><code class="python">******可以通过括号使先后顺序更清楚或强行改变顺序********
+</div>
+<pre><code class="lang-python">******可以通过括号使先后顺序更清楚或强行改变顺序********
 not a or b + 2 == c   #(not a) or ((b+2) == c)
 a or b and c #a or (b and c)
 </code></pre>
 <h3 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h3><p><strong><em>python中语句不用括号，依据空格和换行分隔。</em></strong></p>
 <p><strong><em>python没有switch</em></strong></p>
-<h4 id="条件控制"><a href="#条件控制" class="headerlink" title="条件控制"></a>条件控制</h4><pre><code class="python">if 条件1:
+<h4 id="条件控制"><a href="#条件控制" class="headerlink" title="条件控制"></a>条件控制</h4><pre><code class="lang-python">if 条件1:
     语句
 elif 条件2:
     语句
@@ -814,13 +826,13 @@ else:
     语句
 </code></pre>
 <p><em><code>pass</code>空语句/占位语句</em>，保持代码结构域的完整性</p>
-<h4 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h4><pre><code class="python">while 条件：
+<h4 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h4><pre><code class="lang-python">while 条件：
     语句
 else:
     语句
 </code></pre>
 <p><em>说明：在条件语句为 false 时，执行 else 的语句块</em></p>
-<h4 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h4><pre><code class="python"># 第一种情况
+<h4 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h4><pre><code class="lang-python"># 第一种情况
 #主要用来遍历/循环
 for 元素 in 序列/集合/字典:
     语句
@@ -840,7 +852,7 @@ else:
 <li>range(x,y)：从x遍历到y，默认偏移量为1</li>
 <li>range(x,y,z)：从x遍历到y，偏移量为z。若x&gt;y，则为递减，反之递增</li>
 </ul>
-<pre><code class="python">a = [1,2,3,4,5,6,7,8]
+<pre><code class="lang-python">a = [1,2,3,4,5,6,7,8]
 for i in range(1,len(a),2)
     print(a[i],end=&#39;|&#39;)
 *******等效于***********
@@ -855,6 +867,7 @@ print(b)
 <p><code>_init_.py</code>这个模块的名字就是包名。</p>
 <h4 id="模块导入import"><a href="#模块导入import" class="headerlink" title="模块导入import"></a>模块导入import</h4><p>模块导入的意义是引用别的模块的组织资源<code>import module_name</code></p>
 <p>python导入一个模块时，会执行该模块的代码</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -877,8 +890,9 @@ print(b)
 </tr>
 </tbody>
 </table>
+</div>
 <p>说明：可以设置星号<code>*</code>所涵盖的内容，在被导入的文件中，设置<code>__all__=[&#39;name1&#39;,&#39;name2&#39;...]</code></p>
-<pre><code class="python">import t.c7  #需要引用不同包（t包）下C7模块的a变量
+<pre><code class="lang-python">import t.c7  #需要引用不同包（t包）下C7模块的a变量
 print(t.c7.a)
 ******************
 import c7  #需要同包下C7模块的a变量
@@ -895,7 +909,7 @@ print(c7.a)
 ******************
 from t.c7 import *  #*引入全部部分或指定部分(在被导入的文件中，设置了`__all__=[&#39;name1&#39;,&#39;name2&#39;...]`)
 print(a) 
-print(b) 
+print(b)
 </code></pre>
 <h4 id="init-py-的用法"><a href="#init-py-的用法" class="headerlink" title="__init__.py 的用法"></a><code>__init__.py</code> 的用法</h4><p><a href="https://www.cnblogs.com/tp1226/p/8453854.html" target="_blank" rel="noopener">Python杂谈: <strong>init</strong>.py的作用</a></p>
 <p>包和模块是不会被重复导入的</p>
@@ -905,7 +919,7 @@ print(b)
 <li>隐藏细节</li>
 <li>避免编写重复的代码</li>
 </ol>
-<h4 id="函数定义"><a href="#函数定义" class="headerlink" title="函数定义"></a>函数定义</h4><pre><code class="python">    def 函数名(参数列表):
+<h4 id="函数定义"><a href="#函数定义" class="headerlink" title="函数定义"></a>函数定义</h4><pre><code class="lang-python">    def 函数名(参数列表):
         ...
         return 返回值1,返回值2....
 </code></pre>
@@ -915,7 +929,7 @@ print(b)
 <li><em>若return返回多个值，则返回类型为元组</em></li>
 <li><em>推荐使用<code>变量1,变量2...=函数()</code>的形式获取返回值<strong>（序列解包）</strong>，不推荐使用<code>元组[索引]</code>获取，会降低代码可读性</em></li>
 </ul>
-<h4 id="序列解包"><a href="#序列解包" class="headerlink" title="序列解包"></a>序列解包</h4><pre><code class="python">a = 1
+<h4 id="序列解包"><a href="#序列解包" class="headerlink" title="序列解包"></a>序列解包</h4><pre><code class="lang-python">a = 1
 b = 2
 c = 3
 #等价于  
@@ -923,7 +937,8 @@ a,b,c = 1,2,3
 d = 1,2,3 #d是tuple类型
 a,b,c = d #序列解包。需要注意的是元素的个数要相等
 </code></pre>
-<h4 id="函数参数"><a href="#函数参数" class="headerlink" title="函数参数"></a>函数参数</h4><table>
+<h4 id="函数参数"><a href="#函数参数" class="headerlink" title="函数参数"></a>函数参数</h4><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>类型</th>
@@ -949,12 +964,14 @@ a,b,c = d #序列解包。需要注意的是元素的个数要相等
 </tr>
 </tbody>
 </table>
-<pre><code class="python">def add(x, y): #x,y是形参
+</div>
+<pre><code class="lang-python">def add(x, y): #x,y是形参
     ······
 add(3,2) #3,2是实参 x=3,y=2
 add(y=3,x=2) #关键字参数
 </code></pre>
-<h4 id="内置函数"><a href="#内置函数" class="headerlink" title="内置函数"></a>内置函数</h4><table>
+<h4 id="内置函数"><a href="#内置函数" class="headerlink" title="内置函数"></a>内置函数</h4><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>函数</th>
@@ -1000,6 +1017,7 @@ add(y=3,x=2) #关键字参数
 </tr>
 </tbody>
 </table>
+</div>
 <h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
 <li><code>None</code>不是<code>False</code>、<code>&#39;&#39;</code>、<code>0</code>、<code>[]</code>，尤其在判空时需要注意</li>
 <li>对象存在不代表其一定为<code>True</code>，对象的bool值由<code>__bool__</code>或<code>__len__</code>内置函数决定</li>
@@ -1007,10 +1025,10 @@ add(y=3,x=2) #关键字参数
 </ul>
 <p>讲解面向对象的概念。包括面向对象的三大特性（继承、封装、多态）、类的基本构成元素、python的内置类属性、方法重写、运算符重载、静态方法等</p>
 <p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_python/20200531105112.jpg" style="zoom: 50%;"></p>
-<h3 id="类的定义"><a href="#类的定义" class="headerlink" title="类的定义"></a>类的定义</h3><pre><code class="python">class 类名:   #类命名建议第一个字母大写，驼峰命名
+<h3 id="类的定义"><a href="#类的定义" class="headerlink" title="类的定义"></a>类的定义</h3><pre><code class="lang-python">class 类名:   #类命名建议第一个字母大写，驼峰命名
     pass
 </code></pre>
-<pre><code class="python">class Student():
+<pre><code class="lang-python">class Student():
     name = &#39;&#39;
     age = 0
 
@@ -1018,10 +1036,10 @@ add(y=3,x=2) #关键字参数
         print(&#39;name:&#39; + self.name)
         print(&#39;age:&#39; + str(self.age))
 </code></pre>
-<h4 id="类实例化"><a href="#类实例化" class="headerlink" title="类实例化"></a><strong>类实例化</strong></h4><pre><code class="python">对象名=类名([实参])  # 形参写在类的构造函数中
+<h4 id="类实例化"><a href="#类实例化" class="headerlink" title="类实例化"></a><strong>类实例化</strong></h4><pre><code class="lang-python">对象名=类名([实参])  # 形参写在类的构造函数中
 </code></pre>
 <p>演示（在另外一个模块中引用类）：</p>
-<pre><code class="python">from c1 import Student
+<pre><code class="lang-python">from c1 import Student
 student1 = Student()  #类的实例化
 student1.print_file() #调用类下面的方法
 </code></pre>
@@ -1030,7 +1048,8 @@ student1.print_file() #调用类下面的方法
 <p>类内部只做定义，不推荐在类内部实例化和调用方法</p>
 <p>类中的变量称谓数据成员</p>
 <p>方法：设计层面来讲  函数：程序运行，过程式的一种称谓</p>
-<h4 id="变量："><a href="#变量：" class="headerlink" title="变量："></a>变量：</h4><table>
+<h4 id="变量："><a href="#变量：" class="headerlink" title="变量："></a>变量：</h4><div class="table-container">
+<table>
 <thead>
 <tr>
 <th style="text-align:center">变量</th>
@@ -1048,6 +1067,7 @@ student1.print_file() #调用类下面的方法
 </tr>
 </tbody>
 </table>
+</div>
 <ul>
 <li>如果在实例化对象中找不到变量，则会去相应的类中寻找，若也没有，则去所在类的父类中寻找…</li>
 <li>在构造函数内，直接通过<code>变量名</code>访问的是形参，而非实例对象。</li>
@@ -1060,7 +1080,7 @@ student1.print_file() #调用类下面的方法
 <blockquote>
 <p>对象是实例化的类</p>
 </blockquote>
-<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><pre><code class="python">def __init__(self):
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><pre><code class="lang-python">def __init__(self):
     #构造函数
     pass
 </code></pre>
@@ -1072,7 +1092,7 @@ student1.print_file() #调用类下面的方法
 <li>对象的参数由构造函数接收，构造函数的第一个参数为<code>self</code></li>
 </ul>
 <p>在构造函数内部，通常初始化类的特征值</p>
-<pre><code class="python">class Student():
+<pre><code class="lang-python">class Student():
     name = &#39;&#39;
     age = 0
 
@@ -1087,17 +1107,17 @@ student1.print_file() #调用类下面的方法
         print(&#39;name:&#39; + self.name)
         print(&#39;age:&#39; + str(self.age))
 </code></pre>
-<pre><code class="python">student1 = Student(&#39;石敢当&#39;，18)
+<pre><code class="lang-python">student1 = Student(&#39;石敢当&#39;，18)
 print(student1.name)  #这里输出结果是空值，说明构造函数里的赋值并没有改变变量name的取值
 </code></pre>
 <p>释疑：</p>
-<pre><code class="python">student1 = Student(&#39;石敢当&#39;，18)
+<pre><code class="lang-python">student1 = Student(&#39;石敢当&#39;，18)
 #print(student1.name)
 print(student1.__dict__) #__dict__作用保存对象下的所有变量
 #输出结果是空子典{}，说明不存在实例变量
 </code></pre>
 <h4 id="类变量和实例变量"><a href="#类变量和实例变量" class="headerlink" title="类变量和实例变量"></a>类变量和实例变量</h4><p>实例变量和对象相关联。</p>
-<pre><code class="python">class Student():
+<pre><code class="lang-python">class Student():
     name = &#39;yuyu&#39;    #类变量
     age = 0
 
@@ -1109,7 +1129,7 @@ print(student1.__dict__) #__dict__作用保存对象下的所有变量
         print(name) #在构造函数内，直接通过变量名访问的是形参，而非实例对象。
         print(self.name) #实例对象的name
 </code></pre>
-<pre><code class="python">student1 = Student(&#39;yanglin&#39;, 18)
+<pre><code class="lang-python">student1 = Student(&#39;yanglin&#39;, 18)
 student2 = Student(&#39;yu&#39;, 20)
 print(student1.name)  #此时输出正确结果 yanglin
 print(student2.name)  #yu
@@ -1118,7 +1138,7 @@ print(Student.name)   #yuyu
 <p><strong>类与对象的变量查找顺序</strong></p>
 <p>机制：访问一个实例变量，先在对象的实例列表里查找有没有该变量，没有则会去相应的类中寻找，若也没有，则去类的父类中查找……</p>
 <h4 id="self与实例方法"><a href="#self与实例方法" class="headerlink" title="self与实例方法"></a>self与实例方法</h4><p>定义实例方法时，需要参数,调用实例方法时，不需要传参  </p>
-<pre><code class="python">def __init__(self,name,age): #self可以自己更改，python中建议使用self
+<pre><code class="lang-python">def __init__(self,name,age): #self可以自己更改，python中建议使用self
         #构造方法
         #初始化对象的属性
         self.name = name
@@ -1131,7 +1151,7 @@ def print_file(self): #加固定的参数，否则会报错
 <p><span style="color:red">self就是当前调用方法的对象,self代表的是实例不是类</span></p>
 <p>如：<code>sutdent1.print_file()</code>  self代表student1</p>
 <p><strong>实例方法</strong></p>
-<pre><code class="python"># 定义
+<pre><code class="lang-python"># 定义
 def funcname(self):
     pass
 # 调用
@@ -1139,7 +1159,7 @@ def funcname(self):
 </code></pre>
 <h4 id="在实例方法中访问实例变量与类变量"><a href="#在实例方法中访问实例变量与类变量" class="headerlink" title="在实例方法中访问实例变量与类变量"></a>在实例方法中访问实例变量与类变量</h4><p>方法代表类的行为，变量代表刻画类的特征。方法需要对变量对运算和逻辑上的操作，改变类的特征。</p>
 <p>实例方法操作实例变量 <code>self.变量名访问</code></p>
-<pre><code class="python"> def __init__(self,name,age): #注意是两条下划线
+<pre><code class="lang-python"> def __init__(self,name,age): #注意是两条下划线
         #构造函数
         #初始化对象的属性
         self.name = name #定义实例变量，和对象相关，与类无关
@@ -1148,7 +1168,7 @@ def funcname(self):
         print(self.name) #实例对象的name
 </code></pre>
 <p>实例方法访问类变量：</p>
-<pre><code class="python"> class Student():
+<pre><code class="lang-python"> class Student():
     total = 0
 
     def __init__(self): #注意是两条下划线
@@ -1159,7 +1179,7 @@ def funcname(self):
         print(self.__class__.total)  #访问成功
 </code></pre>
 <h4 id="类方法"><a href="#类方法" class="headerlink" title="类方法"></a>类方法</h4><p>下面是实例方法改变类变量的例子</p>
-<pre><code class="python">class Student():
+<pre><code class="lang-python">class Student():
     sum = 0
 
     def __init__(self, name, age):
@@ -1175,14 +1195,14 @@ student3 = Student(&quot;yu2&quot;, 18)
 print(Student.sum)
 </code></pre>
 <p><strong>类方法的定义：</strong></p>
-<pre><code class="python">@classmethod
+<pre><code class="lang-python">@classmethod
 def plus_sum(cls):
     pass
 # 调用
 类.方法()
 </code></pre>
 <p>上述方法用类方法操作改进:</p>
-<pre><code class="python">class Student():
+<pre><code class="lang-python">class Student():
     sum = 0
     name = &#39;&#39;
     age = 0
@@ -1205,7 +1225,7 @@ Student.plus_sum()
 </code></pre>
 <p>类方法和实例方法的区别：关联的对象不同，一个是类，一个是对象</p>
 <p>类方法不能访问实例变量</p>
-<h4 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h4><pre><code class="python">  @staticmethod
+<h4 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h4><pre><code class="lang-python">  @staticmethod
     def funcname(parameter_list):
         pass
     # 调用
@@ -1221,7 +1241,8 @@ Student.plus_sum()
 </blockquote>
 <p>细节理解：在创建私有的实例变量时，实际python会把变量名改为<code>_类名__变量名</code>，所以在外部访问私有变量<code>__变量名</code>时，实际是创建了新变量<code>__变量名</code>。但是通过<code>_类名__变量名</code>可以修改和访问！</p>
 <p><strong>建议：</strong>对类变量，建议不要直接修改，而是通过方法来修改，这样有利于保护变量</p>
-<h4 id="内建属性"><a href="#内建属性" class="headerlink" title="内建属性"></a>内建属性</h4><table>
+<h4 id="内建属性"><a href="#内建属性" class="headerlink" title="内建属性"></a>内建属性</h4><div class="table-container">
+<table>
 <thead>
 <tr>
 <th style="text-align:center">内建属性</th>
@@ -1239,7 +1260,8 @@ Student.plus_sum()
 </tr>
 </tbody>
 </table>
-<h4 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h4><h4 id="继承-1"><a href="#继承-1" class="headerlink" title="继承"></a>继承</h4><pre><code class="python">from 文件 import 父类
+</div>
+<h4 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h4><h4 id="继承-1"><a href="#继承-1" class="headerlink" title="继承"></a>继承</h4><pre><code class="lang-python">from 文件 import 父类
 # 子类的定义
 class 子类(父类):
     pass
@@ -1250,7 +1272,7 @@ class 子类(父类):
 </ul>
 <p><strong>调用父类构造函数</strong></p>
 <p>父类：</p>
-<pre><code class="python">class Human():
+<pre><code class="lang-python">class Human():
     sum = 0
     def __init__(self, name, age):
         self.name = name
@@ -1260,7 +1282,7 @@ class 子类(父类):
         print(self.name)
 </code></pre>
 <p>子类：</p>
-<pre><code class="python">from c2 import Human
+<pre><code class="lang-python">from c2 import Human
 class Student(Human):
     def __init__(self, school, name, age): #注意：这里包含了子类形参和父类形参
         self.school = school #self.子类变量=值    
@@ -1283,17 +1305,16 @@ student1.get_name()
         self.子类成员变量=值    
         super(子类,self).__init__(父类形参)
 </code></pre><p><strong>父子方法同名问题</strong><br>若父类和子类具有同名的实例方法，则在调用的是子类的。<br>如果想调用父类同名实例方法，需要在定义子类方法时，加上<code>super(子类,self).方法()</code></p>
-<p>#### </p>
-<p>正则表达式也是文本解析中非常重要的知识点。本章我们将讲解什如何在Python中编写正则表达式与常见的正则表达式。此外，JSON作为非常重要的数据格式，我们会重点讲解，包括JSON对象，JSON字符串，Python类型与JSON的转换。</p>
+<h4 id><a href="#" class="headerlink" title=" "></a> </h4><p>正则表达式也是文本解析中非常重要的知识点。本章我们将讲解什如何在Python中编写正则表达式与常见的正则表达式。此外，JSON作为非常重要的数据格式，我们会重点讲解，包括JSON对象，JSON字符串，Python类型与JSON的转换。</p>
 <h3 id="正则表达式初识"><a href="#正则表达式初识" class="headerlink" title="正则表达式初识"></a>正则表达式初识</h3><p>正则表达式是一个特殊的字符序列，检测一个字符串是否与我们所设定的这样的字符序列相匹配。如果匹配，帮助我们快速检索文本，实现一些替换文本的操作。可以用正则表达式来1.检测一串数字是否是电话号码2.检测一个字符串是都符合email3.把一个文本里指定的单词替换为另一个单词等等</p>
 <p><strong>例：判断A中是否含python</strong></p>
-<pre><code class="python">A = &#39;C|C++|Java|Python|Javascript&#39; 
+<pre><code class="lang-python">A = &#39;C|C++|Java|Python|Javascript&#39; 
 #我们可以采用python中的内置函数,优先考虑内置函数
 print(A.index(&#39;Python&#39;)&gt;-1) #True
 print(&#39;Python&#39; in A) #True
 </code></pre>
 <p><strong>采用正则表达式</strong></p>
-<pre><code class="python">import re
+<pre><code class="lang-python">import re
 A = &#39;C|C++|Java|Python|Javascript&#39; 
 #re.findall(&#39;正则表达式&#39;, A) #A是要匹配的字符串
 r = re.findall(&#39;Python&#39;, A) #A是要匹配的字符串,r是列表
@@ -1305,19 +1326,20 @@ if len(r) &gt; 0
 <h3 id="元字符与普通字符"><a href="#元字符与普通字符" class="headerlink" title="元字符与普通字符"></a>元字符与普通字符</h3><p>普通字符：正常文本字符，如上例中的’python’</p>
 <p>元字符：在正则表达式中具有特殊意义的专用字符,如‘\d’。</p>
 <p><strong>示例：</strong></p>
-<pre><code class="python">#找出A中的所有数字
+<pre><code class="lang-python">#找出A中的所有数字
 import re
 A = &#39;C0C++34Java5Python56Javascript&#39; 
 r = re.findall(&#39;\d&#39;, A) #A是要匹配的字符串
 print(r) #返回结果是一个列表
 </code></pre>
 <p><a href="https://baike.baidu.com/item/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F" target="_blank" rel="noopener">正则表达式全集</a></p>
-<h3 id="字符集"><a href="#字符集" class="headerlink" title="字符集"></a>字符集</h3><pre><code class="python">#找出中间字母是c到f的单词
+<h3 id="字符集"><a href="#字符集" class="headerlink" title="字符集"></a>字符集</h3><pre><code class="lang-python">#找出中间字母是c到f的单词
 import re
 S = &#39;abc,acc,adc,aec,afc,ahc&#39;
 r = re.findall(&#39;a[c-f]c&#39;, S) #A是要匹配的字符串
 print(r) #返回结果是一个列表
 </code></pre>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1352,7 +1374,9 @@ print(r) #返回结果是一个列表
 </tr>
 </tbody>
 </table>
-<h3 id="概括字符集"><a href="#概括字符集" class="headerlink" title="概括字符集"></a>概括字符集</h3><table>
+</div>
+<h3 id="概括字符集"><a href="#概括字符集" class="headerlink" title="概括字符集"></a>概括字符集</h3><div class="table-container">
+<table>
 <thead>
 <tr>
 <th style="text-align:center">字符</th>
@@ -1390,8 +1414,9 @@ print(r) #返回结果是一个列表
 </tr>
 </tbody>
 </table>
+</div>
 <p>\w即<code>[0-9A-Za-z_]</code>，\W匹配任何非单词字符。等价于<code>[^A-Za-z0-9_]</code>。概括字符集表述更加简洁</p>
-<h3 id="数量词"><a href="#数量词" class="headerlink" title="数量词"></a>数量词</h3><pre><code class="python">import re
+<h3 id="数量词"><a href="#数量词" class="headerlink" title="数量词"></a>数量词</h3><pre><code class="lang-python">import re
 S = &#39;python 1111java6784php&#39;
 #提取3个单词
 #r = re.findall(&#39;[a-z]{3}&#39;, S) #匹配a-z的数量是固定的3个
@@ -1403,7 +1428,7 @@ print(r) #返回结果是一个列表，[&#39;python&#39;, &#39;java&#39;, &#39;
 <h4 id="贪婪与非贪婪"><a href="#贪婪与非贪婪" class="headerlink" title="贪婪与非贪婪"></a>贪婪与非贪婪</h4><p>数量词有贪婪和非贪婪之分，默认情况下是贪婪的方式</p>
 <p>贪婪：数量词限定在一个区间之内，python倾向于尽可能多的取最大的值，一直到某个字符不满足条件时停止</p>
 <p>非贪婪：<code>[a-z]{3,6}?</code></p>
-<h4 id="匹配0次1次或者无限多次"><a href="#匹配0次1次或者无限多次" class="headerlink" title="匹配0次1次或者无限多次"></a>匹配0次1次或者无限多次</h4><pre><code class="python">import re
+<h4 id="匹配0次1次或者无限多次"><a href="#匹配0次1次或者无限多次" class="headerlink" title="匹配0次1次或者无限多次"></a>匹配0次1次或者无限多次</h4><pre><code class="lang-python">import re
 S = &#39;pytho1python6pythonn&#39;
 #*匹配0次或者无限多次  [&#39;pytho&#39;, &#39;python&#39;, &#39;pythonn&#39;]
 #+匹配1次或者无限多次  [&#39;python&#39;, &#39;pythonn&#39;]
@@ -1411,6 +1436,7 @@ S = &#39;pytho1python6pythonn&#39;
 r = re.findall(&#39;python*&#39;, S)
 print(r) #返回结果是一个列表
 </code></pre>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1437,14 +1463,15 @@ print(r) #返回结果是一个列表
 </tr>
 </tbody>
 </table>
+</div>
 <h3 id="边界匹配符"><a href="#边界匹配符" class="headerlink" title="边界匹配符"></a>边界匹配符</h3><p><code>^</code> <code>$</code></p>
-<pre><code class="python">import re
+<pre><code class="lang-python">import re
 qq = &#39;10000013332&#39;
 #要求qq在4-8位
 r = re.findall(&#39;^\d{4,8}$&#39;, qq) #^从字符串的开始匹配，$从字符串的末尾开始匹配
 print(r) #返回结果是一个列表
 </code></pre>
-<h3 id="组-1"><a href="#组-1" class="headerlink" title="组"></a>组</h3><pre><code class="python">import re
+<h3 id="组-1"><a href="#组-1" class="headerlink" title="组"></a>组</h3><pre><code class="lang-python">import re
 A = &#39;PythonPythonPythonPythonPython&#39;
 #要求判断字符串里是否包含3个python
 r = re.findall(&#39;(Python){3}&#39;, A) #括号括起来成为组，一组的字符重复3次
@@ -1455,6 +1482,7 @@ print(r) #返回结果是一个列表
 <h5 id="匹配-findall"><a href="#匹配-findall" class="headerlink" title="匹配 findall"></a>匹配 findall</h5><blockquote>
 <p>格式：<code>re.findall(子串,主串[,模式|模式2...])</code><br>功能：匹配<br>返回：以列表形式，返回匹配到的子串<br>说明：模式中<code>\|</code>表示且</p>
 </blockquote>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1473,8 +1501,9 @@ print(r) #返回结果是一个列表
 </tr>
 </tbody>
 </table>
+</div>
 <h3 id="re模块下的其他正则表达式"><a href="#re模块下的其他正则表达式" class="headerlink" title="re模块下的其他正则表达式"></a>re模块下的其他正则表达式</h3><h4 id="re-sub"><a href="#re-sub" class="headerlink" title="re.sub"></a>re.sub</h4><p>格式：<code>re.sub(原内容，新内容/函数，主串，替换次数)</code><br>功能：替换<br>返回：返回新的主串<br>说明：替换次数为0表全体换，为n表示替换n个</p>
-<pre><code class="python">#示例
+<pre><code class="lang-python">#示例
 import re
 language = &#39;PythonC#JavaPHPC#&#39;
 r = re.sub(&#39;C#&#39;,&#39;Go&#39;,language,1) 
@@ -1482,8 +1511,8 @@ print(r) #PythonGoJavaPHPC#
 </code></pre>
 <p>进阶：</p>
 <p>动态替换，根据不同的匹配结果进行不同的替换</p>
-<p>&lt;re.Match object; span=(6, 8), match=’C#’&gt;  返回的第一个C#之前有6个字符，自己占7,8</p>
-<pre><code class="python">import re
+<p><re.match object; span="(6," 8), match="C#">  返回的第一个C#之前有6个字符，自己占7,8</re.match></p>
+<pre><code class="lang-python">import re
 
 def convert(value):
     #print(value)  
@@ -1494,7 +1523,7 @@ r = re.sub(&#39;C#&#39;,convert,language)
 print(r)
 #Python!!C#!!JavaPHP!!C#!!
 </code></pre>
-<h4 id="把函数作为参数传递的作用"><a href="#把函数作为参数传递的作用" class="headerlink" title="把函数作为参数传递的作用"></a>把函数作为参数传递的作用</h4><pre><code class="python">import re
+<h4 id="把函数作为参数传递的作用"><a href="#把函数作为参数传递的作用" class="headerlink" title="把函数作为参数传递的作用"></a>把函数作为参数传递的作用</h4><pre><code class="lang-python">import re
 a = &#39;A8C3721D86&#39;
 #找出所有数字，&gt;=6的统一替换成9,&lt;6替换成0
 def convert(value):
@@ -1516,7 +1545,7 @@ print(r) # A9C0900D99
 <p>格式：<code>re.search(子串,主串)</code><br>功能：匹配到一个结果（仅匹配一个），就返回结果.若想获取返回Match对象转为值，则用group()方法 </p>
 </blockquote>
 <p><em>match、search的比较示例代码：</em></p>
-<pre><code class="python">import re
+<pre><code class="lang-python">import re
 a = &#39;A8C3721D86&#39;
 
 r1 = re.match(&#39;\d&#39;, a)
@@ -1530,7 +1559,7 @@ None
 &lt;re.Match object; span=(1, 2), match=&#39;8&#39;&gt;
 </code></pre>
 <p><em>match、search、findall的比较示例代码：</em></p>
-<pre><code class="python">import re
+<pre><code class="lang-python">import re
 a = &#39;8C3721D86&#39;
 
 r1 = re.match(&#39;\d&#39;, a)
@@ -1547,7 +1576,8 @@ print(r3)
 &lt;re.Match object; span=(0, 1), match=&#39;8&#39;&gt;
 [&#39;8&#39;, &#39;3&#39;, &#39;7&#39;, &#39;2&#39;, &#39;1&#39;, &#39;8&#39;, &#39;6&#39;]
 </code></pre>
-<h3 id="group分组"><a href="#group分组" class="headerlink" title="group分组"></a>group分组</h3><table>
+<h3 id="group分组"><a href="#group分组" class="headerlink" title="group分组"></a>group分组</h3><div class="table-container">
+<table>
 <thead>
 <tr>
 <th style="text-align:center">函数</th>
@@ -1565,7 +1595,8 @@ print(r3)
 </tr>
 </tbody>
 </table>
-<pre><code class="python">import re
+</div>
+<pre><code class="lang-python">import re
 
 s = &#39;life is short,i use python&#39;
 r = re.search(&#39;life(.*)python&#39;,s)
@@ -1573,12 +1604,11 @@ print(r.group(1)) #获取分组的匹配
 #0永远记录正则表达式的完整匹配结果
 </code></pre>
 <p>用findall</p>
-<pre><code class="python">import re
+<pre><code class="lang-python">import re
 
 s = &#39;life is short,i use python&#39;
 r = re.findall(&#39;life(.*)python&#39;,s)
 print(r) #获取分组的匹配
-
 </code></pre>
 <h3 id="理解JSON"><a href="#理解JSON" class="headerlink" title="理解JSON"></a>理解JSON</h3><p>JavaScript Object Notation  JavaScript对象标记</p>
 <blockquote>
@@ -1587,8 +1617,6 @@ print(r) #获取分组的匹配
 <li>JSON载体：JSON字符串，字符串是json的表现形式</li>
 <li>JSON优势：易于阅读、易于解析、网络传输效率高，适合跨语言交换数据</li>
 </ul>
-</blockquote>
-<blockquote>
 <p>JSON字符串：是指符合JSON格式的字符串</p>
 </blockquote>
 <p><em>注意：JSON中只能使用双引号</em>，轻量相对于xml而言，符合JSON格式的字符串叫做JSON字符串</p>
@@ -1597,6 +1625,7 @@ print(r) #获取分组的匹配
 <h4 id="反序列化和序列化"><a href="#反序列化和序列化" class="headerlink" title="反序列化和序列化"></a><strong>反序列化和序列化</strong></h4><p>由字符串到语言下的某一数据结构叫反序列化</p>
 <p>python字典转化为字符串</p>
 <p> <strong>JSON函数</strong></p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1615,7 +1644,9 @@ print(r) #获取分组的匹配
 </tr>
 </tbody>
 </table>
+</div>
 <p><strong>JSON与Python类型的对照</strong></p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1658,7 +1689,8 @@ print(r) #获取分组的匹配
 </tr>
 </tbody>
 </table>
-<pre><code class="python">#反序列化
+</div>
+<pre><code class="lang-python">#反序列化
 import json
 json_str = &#39;{&quot;name&quot;:&quot;qiyue&quot;, &quot;age&quot;:18}&#39; #数字不用加引号
 #json有很多数据类型，如数组&#39;[{&quot;name&quot;:&quot;qiyue&quot;, &quot;age&quot;:18，“},{&quot;name&quot;:&quot;qiyue&quot;, &quot;age&quot;:18}]&#39; 
@@ -1672,7 +1704,7 @@ print(student[&quot;age&quot;])
 ********************
 json_str = &#39;[{&quot;name&quot;:&quot;qiyue&quot;, &quot;age&quot;:18}&#39;,{&quot;name&quot;:&quot;qiyue&quot;, &quot;age&quot;:18}&#39;]
 </code></pre>
-<pre><code class="python">#序列化
+<pre><code class="lang-python">#序列化
 import json
 student = [
             {&#39;name&#39;:&#39;qiyue&#39;, &#39;age&#39;:18 ,&#39;flag&#39;:False},
@@ -1682,7 +1714,7 @@ student = [
 #把json字符串转换成对应的python结构(字典)
 json_str = json.dumps(student)
 print(type(json_str))
-print(json_str) 
+print(json_str)
 </code></pre>
 <p>JSON对象，JSON，JSON字符串？</p>
 <p>JSON对象在JavaScript中概念成立</p>
@@ -1690,7 +1722,7 @@ print(json_str)
 <p>JSON有自己的数据类型，虽然它和JavaScript的数据类型有些相似</p>
 <p>REST服务的标准格式：JSON</p>
 <p>本章节我们揭开Python进阶部分的高级特性，详细讲解枚举、闭包，并对函数式编程做出介绍</p>
-<h3 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h3><h4 id="枚举是一个类"><a href="#枚举是一个类" class="headerlink" title="枚举是一个类"></a>枚举是一个类</h4><pre><code class="python">from enum import Enum
+<h3 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h3><h4 id="枚举是一个类"><a href="#枚举是一个类" class="headerlink" title="枚举是一个类"></a>枚举是一个类</h4><pre><code class="lang-python">from enum import Enum
 class VIP(Enum): #继承Enum类
     YELLOW = 1 #数字可以替换成任意数据类型，只要不同就行
     GREEN = 2
@@ -1706,7 +1738,7 @@ for v in VIP
 </code></pre>
 <p><strong>枚举和普通类相比的优势</strong></p>
 <p>如果没有枚举类,在模块中通过变量表示枚举类型</p>
-<pre><code class="python">yellow = 1 #法一
+<pre><code class="lang-python">yellow = 1 #法一
 green = 2  
 {&#39;yellow&#39;:1,&#39;green:2&#39;} #法二
 
@@ -1718,7 +1750,7 @@ class TypeDiamond(): #法三
 <h4 id="枚举类型、枚举名称与枚举值"><a href="#枚举类型、枚举名称与枚举值" class="headerlink" title="枚举类型、枚举名称与枚举值"></a>枚举类型、枚举名称与枚举值</h4><p><code>print(VIP.YELLOW.value)</code>获取枚举值  #6</p>
 <p><code>print(VIP.YELLOW.name)</code> 获取枚举名字  #YELLOW</p>
 <p><code>print(VIP[&#39;GREEN&#39;])</code>  获取枚举类型 #VIP.GREEN</p>
-<h4 id="枚举-比较运算"><a href="#枚举-比较运算" class="headerlink" title="枚举 比较运算"></a>枚举 比较运算</h4><pre><code class="python">from enum import Enum
+<h4 id="枚举-比较运算"><a href="#枚举-比较运算" class="headerlink" title="枚举 比较运算"></a>枚举 比较运算</h4><pre><code class="lang-python">from enum import Enum
 class VIP(Enum): #继承Enum类
     YELLOW = 1 #数字可以替换成任意数据类型，只要不同就行
     GREEN = 2
@@ -1739,7 +1771,7 @@ result = VIP.GREEN == 2 #虽然不报错，但显示False
 </ul>
 <h4 id="枚举转换"><a href="#枚举转换" class="headerlink" title="枚举转换"></a>枚举转换</h4><p>数据库中存储枚举类型最好采用值（数字）</p>
 <p>代码中不建议用数值，建议用枚举类<code>if a == VIP.YELLOW</code></p>
-<pre><code class="python">from enum import Enum
+<pre><code class="lang-python">from enum import Enum
 class VIP(Enum): #继承Enum类
     YELLOW = 1 #数字可以替换成任意数据类型，只要不同就行
     GREEN = 2
@@ -1747,10 +1779,10 @@ class VIP(Enum): #继承Enum类
     RED = 4
 </code></pre>
 <p>把数字转为枚举数据类型</p>
-<pre><code class="python">a = 1
-print(VIP(a)) 
+<pre><code class="lang-python">a = 1
+print(VIP(a))
 </code></pre>
-<pre><code class="python">from enum import Enum, unique
+<pre><code class="lang-python">from enum import Enum, unique
 
 # 如果枚举类继承的是IntEnum，则标签值只允许为int类型
 from enum import IntEnum  
@@ -1849,16 +1881,15 @@ True
 False
 -------枚举转换-------
 VIP.Yellow
-
 </code></pre>
 <p>扩展：</p>
-<pre><code class="python">from enum import IntEnum，unique #强制要求值是数字,限制值不能相同
+<pre><code class="lang-python">from enum import IntEnum，unique #强制要求值是数字,限制值不能相同
 </code></pre>
 <p>加强<a href="https://www.cnblogs.com/pony1223/p/7608955.html" target="_blank" rel="noopener">设计模式</a>的学习,进阶学习</p>
 <h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p>函数：其他语言中，函数只是一段可执行的代码，并不是对象，不能实例化。</p>
 <p>在python中，一切皆对象。可以把函数赋给一个变量，可以把一个函数当做另一个函数的参数</p>
 <p>示例：</p>
-<pre><code class="python">def curve_pre(): #调用curve_pre函数，拿到的是一个函数结果
+<pre><code class="lang-python">def curve_pre(): #调用curve_pre函数，拿到的是一个函数结果
     a = 25
     def curve(x):
         return a*x*x      
@@ -1866,7 +1897,7 @@ VIP.Yellow
 f = curve_pre()
 print(f(2))  #100
 </code></pre>
-<pre><code class="python">def curve_pre(): #调用curve_pre函数，拿到的是一个函数结果
+<pre><code class="lang-python">def curve_pre(): #调用curve_pre函数，拿到的是一个函数结果
     a = 25
     def curve(x):
         return a*x*x      
@@ -1880,7 +1911,7 @@ print(f(2)) #100 没有取a=10来运算（闭包的取值）
 <p>闭包 = 函数 + 环境变量</p>
 <p>（环境变量必须函数定义时的外部变量，且不为全局变量）</p>
 <p>闭包的意义：把函数调用的现场保护起来了，不受外部变量的影响</p>
-<h4 id="闭包的经典误区"><a href="#闭包的经典误区" class="headerlink" title="闭包的经典误区"></a>闭包的经典误区</h4><pre><code class="python">def f1():
+<h4 id="闭包的经典误区"><a href="#闭包的经典误区" class="headerlink" title="闭包的经典误区"></a>闭包的经典误区</h4><pre><code class="lang-python">def f1():
     a = 10 
     def f2():
         a = 20 #a被ptython认为是一个局部变量，此时并不引用外面的环境变量，因此不是闭包
@@ -1897,7 +1928,7 @@ f1()  #1.执行 f1,开始调用f1函数
 <p>编写函数，得到旅行者的位置（关键需要保存上一次函数调用的结果状态）</p>
 <p>非闭包方法</p>
 <p>代码质量不高，在函数内部定义全局变量，代码自封性不强（因为可能其他代码段也会改变全局变量）</p>
-<pre><code class="python">#编写函数，得到旅行者的位置
+<pre><code class="lang-python">#编写函数，得到旅行者的位置
 #关键需要保存上一次函数调用的结果状态
 origin = 0
 
@@ -1913,7 +1944,7 @@ print(go(3))
 print(go(6))
 </code></pre>
 <p>闭包方法：</p>
-<pre><code class="python">origin = 0
+<pre><code class="lang-python">origin = 0
 #这是工厂模式
 def factory(pos): #参数是当前旅行者正处于的位置,pos是环境变量，有保存现场功能
     def go(step):
@@ -1930,7 +1961,7 @@ print(tourist(5))
 </code></pre>
 <h3 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h3><p>本章节进一步介绍函数式编程的lambda、mapeduce、filter以及装饰器</p>
 <p>匿名函数：lambda表达式</p>
-<pre><code class="python">def add(x, y):
+<pre><code class="lang-python">def add(x, y):
     return x+y
 ---------用匿名函数实现--------------
 #lambda parameter_list: expression #不能再表达式中用代码块（如赋值语句等）
@@ -1943,7 +1974,7 @@ f(1,2) #匿名函数的调用
 <p><code>x if x&gt;y else y</code></p>
 <h4 id="map"><a href="#map" class="headerlink" title="map"></a>map</h4><p>闭包不建议在业务代码使用，在架构编写方面可以推荐。</p>
 <p>map推荐在python中多使用</p>
-<pre><code class="python">list_x = [1,2,3,4,5,6,7,8]
+<pre><code class="lang-python">list_x = [1,2,3,4,5,6,7,8]
 
 def square(x):
     return x*x
@@ -1966,7 +1997,7 @@ list_x = [1,2,3,4,5,6,7,8]
 list_y = [1,2,3,4,5,6,7,8]
 r = map(lambda x,y: x*x+y,list_x,list_y)
 </code></pre>
-<h4 id="reduce"><a href="#reduce" class="headerlink" title="reduce"></a>reduce</h4><pre><code class="python">from functools import reduce
+<h4 id="reduce"><a href="#reduce" class="headerlink" title="reduce"></a>reduce</h4><pre><code class="lang-python">from functools import reduce
 
 #连续计算，连续调用lambda
 每一次lamnda的计算结果将作为下一次表达式的参数作为运算，直至遍历结果
@@ -1982,7 +2013,7 @@ print(r)
 </code></pre>
 <p>lambda是联系计算，计算操作表达式内定义</p>
 <p>扩展：大数据计算模型（map/reduce） 映射 规约 并行计算</p>
-<h4 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h4><pre><code class="python">#filter
+<h4 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h4><pre><code class="lang-python">#filter
 list_x = [1, 0, 1, 0, 0, 1]
 r = filter(lambda x:True if x == 1 else False, list_x)
 print(list(r))
@@ -1992,7 +2023,7 @@ print(list(r))
 <p>函数式编程：</p>
 <p>map reduce filter lambda算子</p>
 <p>lisp 函数式编程的鼻祖</p>
-<h3 id="装饰器"><a href="#装饰器" class="headerlink" title="装饰器"></a>装饰器</h3><pre><code class="python">import time
+<h3 id="装饰器"><a href="#装饰器" class="headerlink" title="装饰器"></a>装饰器</h3><pre><code class="lang-python">import time
 def f1():
     print(time.time()) #结果是unix时间戳，1591168510.2112603
     print(&#39;This is a function&#39;)
@@ -2003,7 +2034,7 @@ def f1():
 f1()
 </code></pre>
 <p>解决方案：</p>
-<pre><code class="python">import time
+<pre><code class="lang-python">import time
 def f1():
     print(&#39;This is a function&#39;)
 
@@ -2022,7 +2053,7 @@ print_current_time(f2)
 </code></pre>
 <p>上述缺点：新增的功能是属于每个函数的，最好能和原来的函数绑定</p>
 <p>改进：</p>
-<pre><code class="python">import time 
+<pre><code class="lang-python">import time 
 #装饰器结构
 def decorator(func):
     def wrapper():
@@ -2037,7 +2068,7 @@ f = decorator(f1) #改变了调用方式
 f()
 </code></pre>
 <p>改进：</p>
-<pre><code class="python">import time 
+<pre><code class="lang-python">import time 
 #装饰器结构
 def decorator(func):
     def wrapper():
@@ -2053,7 +2084,7 @@ f1() #不改变原来的调用方式
 </code></pre>
 <p>体现了AOP的设计思想</p>
 <p>支持不同参数：</p>
-<pre><code class="python">import time 
+<pre><code class="lang-python">import time 
 #装饰器结构
 def decorator(func):
     def wrapper(*args): #支持不同参数的个数

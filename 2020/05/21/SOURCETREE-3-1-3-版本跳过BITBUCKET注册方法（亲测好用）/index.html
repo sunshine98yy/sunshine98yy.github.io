@@ -366,7 +366,7 @@
           <p>1.首先下载并安装好git程序。</p>
 <p>2.接着下载并执行SourceTreeSetup-3.1.3.exe，会进入登录或注册bitbucket的界面，我只是想用软件，并不想去注册账号。怎么办？请往下看。</p>
 <p>3.打开 %LocalAppData%\Atlassian目录，接着进入SourceTree目录，创建<strong>accounts.json</strong>文件，并修改accounts.json内容如下：</p>
-<pre><code class="json">[
+<pre><code class="lang-json">[
   {
     &quot;$id&quot;: &quot;1&quot;,
     &quot;$type&quot;: &quot;SourceTree.Api.Host.Identity.Model.IdentityAccount, SourceTree.Api.Host.Identity&quot;,
@@ -393,7 +393,7 @@
 </code></pre>
 <p>4.打开 %LocalAppData%\Atlassian，进入“<strong>SourceTree.exe_Url</strong>_iayhtc13zv3obzuz5vchezjs1az2q5ef”（注该目录可能和版本相关，不同版本的路径可能不完全一样。）</p>
 <p>接着进入”<strong>3.1.3.3158</strong>“目录，打开<strong>user.config</strong>文件，在里面加入六行代码。</p>
-<pre><code class="json">&lt;setting name=&quot;AgreedToEULA&quot; serializeAs=&quot;String&quot;&gt;                                     &lt;value&gt;True&lt;/value&gt;
+<pre><code class="lang-json">&lt;setting name=&quot;AgreedToEULA&quot; serializeAs=&quot;String&quot;&gt;                                     &lt;value&gt;True&lt;/value&gt;
 &lt;/setting&gt;
 &lt;setting name=&quot;AgreedToEULAVersion&quot; serializeAs=&quot;String&quot;&gt;
      &lt;value&gt;20160201&lt;/value&gt;
