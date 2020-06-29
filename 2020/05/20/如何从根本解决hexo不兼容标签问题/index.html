@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">tags | 风中的鱼</title>
+  <title itemprop="name">解决hexo不兼容标签问题 | 风中的鱼</title>
   
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -327,355 +327,205 @@
   </div>
 </header>
 
-      <header class="site-header no-select gizle sabit" role="banner">
-  <div class="site-top">
-    <div class="site-branding">
-      <span class="site-title">
-        <span class="logolink moe-mashiro">
-          <a href="/">
-            <span class="sakurasono">ひみつきち</span>
-            <span class="shironeko">YUYU</span>
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+<div class="pattern-center-blank"></div>
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/dailynotes/flower.jpg);" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/dailynotes/flower.jpg">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      解决hexo不兼容标签问题</h1>
+      <p class="entry-census">
+        <span>
+          <a href="www.yulinblog.com">
+            <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/avatar.jpg">
           </a>
         </span>
-      </span>
-    </div>
-    <div class="searchbox search-form-submit">
-      <i class="iconfont js-toggle-search iconsearch icon-search">
-      </i>
-    </div>
-    <div id="show-nav" class="showNav mobile-fit">
-      <div class="line line1">
-      </div>
-      <div class="line line2">
-      </div>
-      <div class="line line3">
-      </div>
-    </div>
-    <div class="lower-cantiner">
-      <div class="lower">
-        <nav class="mobile-fit-control hide">
-          <ul id="menu-new" class="menu">
-            
-              <li>
-                <a href="/">
-                  <span class="faa-parent animated-hover">
-                    <i class="fa  fas fa-home" aria-hidden="true"></i>
-                    首页
-                  </span>
-                </a>
-                
-              </li>
-            
-              <li>
-                <a href="/archives">
-                  <span class="faa-parent animated-hover">
-                    <i class="fa  fa-archive faa-shake" aria-hidden="true"></i>
-                    归档
-                  </span>
-                </a>
-                
-                  <ul class="sub-menu">
-                    
-                      <li>
-                        <a href="/categories/技术/">
-                          <i class="fa fa-code" aria-hidden="true"></i>
-                          技术
-                        </a>
-                      </li>
-                    
-                      <li>
-                        <a href="/categories/笔记/">
-                          <i class="fa fa-book" aria-hidden="true"></i>
-                          笔记
-                        </a>
-                      </li>
-                    
-                      <li>
-                        <a href="/categories/项目/">
-                          <i class="fa fa-git" aria-hidden="true"></i>
-                          项目
-                        </a>
-                      </li>
-                    
-                      <li>
-                        <a href="/categories/随想/">
-                          <i class="fa fa-commenting-o" aria-hidden="true"></i>
-                          随想
-                        </a>
-                      </li>
-                    
-                      <li>
-                        <a href="/categories/转载/">
-                          <i class="fa fa-share" aria-hidden="true"></i>
-                          转载
-                        </a>
-                      </li>
-                    
-                  </ul>
-                
-              </li>
-            
-              <li>
-                <a href="javascript:;">
-                  <span class="faa-parent animated-hover">
-                    <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
-                    清单
-                  </span>
-                </a>
-                
-                  <ul class="sub-menu">
-                    
-                      <li>
-                        <a href="/bangumi/">
-                          <i class="fa fa-th-list faa-bounce" aria-hidden="true"></i>
-                          书单
-                        </a>
-                      </li>
-                    
-                      <li>
-                        <a href="/music/">
-                          <i class="fa fa-headphones" aria-hidden="true"></i>
-                          歌单
-                        </a>
-                      </li>
-                    
-                      <li>
-                        <a href="/tags/光影艺术/">
-                          <i class="fa fa-photo" aria-hidden="true"></i>
-                          摄影
-                        </a>
-                      </li>
-                    
-                  </ul>
-                
-              </li>
-            
-              <li>
-                <a href="/tags/">
-                  <span class="faa-parent animated-hover">
-                    <i class="fa  fa-tag" aria-hidden="true"></i>
-                    标签
-                  </span>
-                </a>
-                
-              </li>
-            
-              <li>
-                <a href="/categories/">
-                  <span class="faa-parent animated-hover">
-                    <i class="fa  fa-bookmark" aria-hidden="true"></i>
-                    分类
-                  </span>
-                </a>
-                
-              </li>
-            
-              <li>
-                <a href="/comment/">
-                  <span class="faa-parent animated-hover">
-                    <i class="fa  fa-pencil-square-o faa-tada" aria-hidden="true"></i>
-                    留言板
-                  </span>
-                </a>
-                
-              </li>
-            
-              <li>
-                <a href="/links/">
-                  <span class="faa-parent animated-hover">
-                    <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
-                    友人帐
-                  </span>
-                </a>
-                
-              </li>
-            
-              <li>
-                <a href="/donate/">
-                  <span class="faa-parent animated-hover">
-                    <i class="fa  fa-heart faa-pulse" aria-hidden="true"></i>
-                    赞赏
-                  </span>
-                </a>
-                
-              </li>
-            
-              <li>
-                <a href="/atom.xml">
-                  <span class="faa-parent animated-hover">
-                    <i class="fa  fa-rss faa-pulse" aria-hidden="true"></i>
-                    RSS
-                  </span>
-                </a>
-                
-              </li>
-            
-          </ul>
-        </nav>
-      </div>
-    </div>
+        <span>
+          <a href="www.yulinblog.com">YUYU</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2020-5-20<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
   </div>
-</header>
 
+<div id="content" class="site-content">
+  <div id="primary" class="content-area">
+    <main id="main" class="site-main" role="main">
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+        <div class="entry-content">
+          <h2 id="如何从根本解决hexo不兼容标签问题"><a href="#如何从根本解决hexo不兼容标签问题" class="headerlink" title="如何从根本解决hexo不兼容标签问题"></a>如何从根本解决hexo不兼容{{}}标签问题</h2><h2 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h2><p>文字转载于博客<a href="http://xcoding.tech/2020/01/18/hexo/%E5%A6%82%E4%BD%95%E4%BB%8E%E6%A0%B9%E6%9C%AC%E8%A7%A3%E5%86%B3hexo%E4%B8%8D%E5%85%BC%E5%AE%B9%7B%7B%7D%7D%E6%A0%87%E7%AD%BE%E9%97%AE%E9%A2%98/" target="_blank" rel="noopener">如何从根本解决hexo不兼容{{}}标签问题</a></p>
+<p>本人在记录js学习的过程中md使用<code>{{}}</code>符号，发现hexo g报错。</p>
+<p>如果你的博客是使用github+hexo搭建的，很可能也遇到过由于<code>nunjucks</code>模板标签导致MD文件解析报错的问题，常见问题如下：</p>
+<pre><code>15:07:29.010 FATAL Something is wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.html
+Template render error: (unknown path) [Line 37, Column 81]
+  expected variable end
+    at Object._prettifyError (/Users/ubuntuvim/git/xcoding/node_modules/nunjucks/src/lib.js:36:11)
+    at Template.render (/Users/ubuntuvim/git/xcoding/node_modules/nunjucks/src/environment.js:524:21)
+    at Environment.renderString (/Users/ubuntuvim/git/xcoding/node_modules/nunjucks/src/environment.js:362:17)
+    at Promise (/Users/ubuntuvim/git/xcoding/node_modules/hexo/lib/extend/tag.js:66:9)
+    at Promise._execute (/Users/ubuntuvim/git/xcoding/node_modules/bluebird/js/release/debuggability.js:303:9)
+    at Promise._resolveFromExecutor (/Users/ubuntuvim/git/xcoding/node_modules/bluebird/js/release/promise.js:483:18)
+</code></pre><p>或者：</p>
+<pre><code>Unhandled rejection Template render error: (unknown path) [Line 10, Column 95]
+  unexpected token: #
+    at Object._prettifyError (/Users/ubuntuvim/git/xcoding/node_modules/nunjucks/src/lib.js:36:11)
+    at Template.render (/Users/ubuntuvim/git/xcoding/node_modules/nunjucks/src/environment.js:524:21)
+    at Environment.renderString (/Users/ubuntuvim/git/xcoding/node_modules/nunjucks/src/environment.js:362:17)
+    at Promise (/Users/ubuntuvim/git/xcoding/node_modules/hexo/lib/extend/tag.js:66:9)
+    at Promise._execute (/Users/ubuntuvim/git/xcoding/node_modules/bluebird/js/release/debuggability.js:303:9)
+    at Promise._resolveFromExecutor (/Users/ubuntuvim/git/xcoding/node_modules/bluebird/js/release/promise.js:483:18)
+    at new Promise (/Users/ubuntuvim/git/xcoding/node_modules/bluebird/js/release/promise.js:79:10)
+    at Tag.render (/Users/ubuntuvim/git/xcoding/node_modules/hexo/lib/extend/tag.js:64:10)
+    at Object.tagFilter [as onRenderEnd] (/Users/ubuntuvim/git/xcoding/node_modules/hexo/lib/hexo/post.js:230:16)
+    at Promise.then.then.result (/Users/ubuntuvim/git/xcoding/node_modules/hexo/lib/hexo/render.js:65:19)
+    at tryCatcher (/Users/ubuntuvim/git/xcoding/node_modules/bluebird/js/release/util.js:16:23)
+    at Promise._settlePromiseFromHandler (/Users/ubuntuvim/git/xcoding/node_modules/bluebird/js/release/promise.js:512:31)
+    at Promise._settlePromise (/Users/ubuntuvim/git/xcoding/node_modules/bluebird/js/release/promise.js:569:18)
+    at Promise._settlePromise0 (/Users/ubuntuvim/git/xcoding/node_modules/bluebird/js/release/promise.js:614:10)
+    at Promise._settlePromises (/Users/ubuntuvim/git/xcoding/node_modules/bluebird/js/release/promise.js:693:18)
+    at Async._drainQueue (/Users/ubuntuvim/git/xcoding/node_modules/bluebird/js/release/async.js:133:16)
+    at Async._drainQueues (/Users/ubuntuvim/git/xcoding/node_modules/bluebird/js/release/async.js:143:10)
+    at Immediate.Async.drainQueues (/Users/ubuntuvim/git/xcoding/node_modules/bluebird/js/release/async.js:17:14)
+    at runCallback (timers.js:651:20)
+    at tryOnImmediate (timers.js:624:5)
+    at processImmediate [as _immediateCallback] (timers.js:596:5)
+</code></pre><p>出现上述原因都是因为你的Markdown文件中有标签与<code>nunjucks</code>模板引擎的标签冲突了，比如<code>{{}}</code>，<code>}</code>等等这些标签的内容都会解析失败，那么有什么好的处理方案呢？</p>
+<h2 id="处理方案2"><a href="#处理方案2" class="headerlink" title="处理方案2"></a>处理方案2</h2><p>答案是有的，我们可以直接修改<code>nunjucks</code>模板的源代码，找到如下文件：</p>
+<pre><code class="lang-js">node_modules/nunjucks/src/lexer.js
+</code></pre>
+<p>在文件的开头可以看到如下代码：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_chat0618_003.jpg" style="zoom:50%;"></p>
+<p>可以直接改了这些渲染标签，比如我的Markdown文件中就是需要显示<code>{{name}}</code>这一类代码。那么你可以这么做：</p>
+<pre><code class="lang-js">var VARIABLE_START = &#39;{$&#39;;
+var VARIABLE_END = &#39;$}&#39;;
+</code></pre>
+<p>把模板引擎的占位符修改为其他字符之后，这样模板解析的时候就不会跟你的Markdown内容冲突了，而且是对所有Markdown文件都有效的。</p>
+<p>但是需要注意的时候，如果你在项目下执行<code>npm install</code>更新<code>nunjucks</code>模板，那么你修改的<code>node_modules/nunjucks/src/lexer.js</code>会被还原，需要重新修改一遍。<br>但是相对于每个Markdown都修改还是有很大好处的。</p>
+<h2 id="方案3"><a href="#方案3" class="headerlink" title="方案3"></a>方案3</h2><p>提供一个一劳永逸的方案，修改项目的<code>package.json</code>文件，把<code>hexo-generator-feed</code>、<code>hexo-generator-search</code>改为我重新处理过的插件即可。</p>
+<pre><code class="lang-json">{
+  &quot;name&quot;: &quot;xcoding&quot;,
+  &quot;version&quot;: &quot;0.0.1&quot;,
+  &quot;private&quot;: true,
+  &quot;hexo&quot;: {
+    &quot;version&quot;: &quot;3.7.1&quot;
+  },
+  &quot;dependencies&quot;: {
+    //…… 其他省略
+    &quot;hexo-generator-feed-cst&quot;: &quot;^0.1.0&quot;,
+    &quot;hexo-generator-search-cst&quot;: &quot;^0.1.0&quot;,
+    //…… 其他省略
+  }
+}
+</code></pre>
+<p>修改完<code>package.json</code>之后执行命令<code>npm install</code>重新安装依赖。安装完毕后重新启动hexo。这两个插件相关的配置都不需要做任何修改，也不用担心查询更新后被覆盖。</p>
 
-<main class="content">
-
-    
-
-<div id="tags" class="container chip-container">
-    <div class="card">
-        <div class="card-content">
-            <div class="tag-title center-align">
-                <i class="fa fa-tags"></i>&nbsp;&nbsp;文章标签
-            </div>
-            <div class="tag-chips">
-                
-                
-                <a href="/tags/Python/" title="Python: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="Python" style="background-color: #F9EBEA;">Python
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/小程序/" title="小程序: 0">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="小程序" style="background-color: #F5EEF8;">小程序
-                        <span class="tag-length">0</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/Hexo/" title="Hexo: 0">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="Hexo" style="background-color: #D5F5E3;">Hexo
-                        <span class="tag-length">0</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/算法/" title="算法: 0">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="算法" style="background-color: #E8F8F5;">算法
-                        <span class="tag-length">0</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/javascript/" title="javascript: 0">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="javascript" style="background-color: #FEF9E7;">javascript
-                        <span class="tag-length">0</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/HEXO/" title="HEXO: 3">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="HEXO" style="background-color: #F8F9F9;">HEXO
-                        <span class="tag-length">3</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/VSCode/" title="VSCode: 0">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="VSCode" style="background-color: #82E0AA;">VSCode
-                        <span class="tag-length">0</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/sakura/" title="sakura: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="sakura" style="background-color: #D7BDE2;">sakura
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/Java/" title="Java: 5">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="Java" style="background-color: #A3E4D7;">Java
-                        <span class="tag-length">5</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/Linux/" title="Linux: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="Linux" style="background-color: #85C1E9;">Linux
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/转载/" title="转载: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="转载" style="background-color: #F8C471;">转载
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/git/" title="git: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="git" style="background-color: #F9E79F;">git
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/光影艺术/" title="光影艺术: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="光影艺术" style="background-color: #FFF;">光影艺术
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-            </div>
         </div>
-    </div>
-</div>
-
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/wallleap/cdn/css/jqcloud.css">
-<style type="text/css">
-    #tag-wordcloud {
-        width: 100%;
-        height: 300px;
-    }
-</style>
-
-<div class="container" data-aos="fade-up">
-    <div class="card">
-        <div id="tag-wordcloud" class="card-content"></div>
-    </div>
-</div>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/jqcloud-1.0.4.js"></script>
-<script type="text/javascript">
-    
-
-    $('#tag-wordcloud').jQCloud([{"text":"Python","weight":1,"link":"/tags/Python/"},{"text":"小程序","weight":0,"link":"/tags/小程序/"},{"text":"Hexo","weight":0,"link":"/tags/Hexo/"},{"text":"算法","weight":0,"link":"/tags/算法/"},{"text":"javascript","weight":0,"link":"/tags/javascript/"},{"text":"HEXO","weight":3,"link":"/tags/HEXO/"},{"text":"VSCode","weight":0,"link":"/tags/VSCode/"},{"text":"sakura","weight":1,"link":"/tags/sakura/"},{"text":"Java","weight":5,"link":"/tags/Java/"},{"text":"Linux","weight":1,"link":"/tags/Linux/"},{"text":"转载","weight":1,"link":"/tags/转载/"},{"text":"git","weight":2,"link":"/tags/git/"},{"text":"光影艺术","weight":1,"link":"/tags/光影艺术/"}], {
-        autoResize: true
-    });
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/donate/alipay.jpg"></li>
+                <li class="wechat-code"><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/donate/wechatqr.jpg"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+          
+            <div class="post-nepre half previous">
+          
+            <a href="/2020/05/20/Hexo搭建个人博客网站（原理篇）/" rel="prev">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_hexo/hexo.jpeg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/technology_hexo/hexo.jpeg">
+              </div>
+              <span class="label">
+              Previous Post</span>
+              <div class="info">
+                <h3>
+                Hexo搭建个人博客网站（原理篇）</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+        
+          
+            <div class="post-nepre half next">
+          
+            <a href="/2020/05/20/Hexo运营前记/" rel="next">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/dailynotes/weiwen.png" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/dailynotes/weiwen.png">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                Hexo运营前记</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
+      
+<div id="vcomments"></div>
+<script>
+  window.onload = function(){
+      var valine = new Valine();
+      valine.init({
+        el: '#vcomments',
+        appId: "4NBvruApUCpLtmlsyQLevDfx-gzGzoHsz",
+        appKey: "eTSHbT3jvLQPcVYMC7QFXQFd",
+        path: window.location.pathname,
+        placeholder: "你是我一生只会遇见一次的惊喜 ..."
+      })
+  }
 </script>
 
-</main>
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="www.yulinblog.com" class="profile gravatar"><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/avatar.jpg" itemprop="image" alt="YUYU" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="www.yulinblog.com" itemprop="url" rel="author">YUYU</a>
+            </h3>
+          </div>
+        </div>
+        <hr>
+        <p><i class="iconfont icon-write"></i>一个好奇的人</p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
+</div>
+
+
+
     </div>    
     <div class="ins-search">
     <div class="ins-search-mask"></div>
