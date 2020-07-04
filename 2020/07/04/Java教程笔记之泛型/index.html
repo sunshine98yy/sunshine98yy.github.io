@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  
+  <title itemprop="name">Java教程笔记之泛型 | 风中的鱼</title>
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  <meta http-equiv="x-dns-prefetch-control" content="on">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+SerifMerriweather|Merriweather+Sans|Source+Code+Pro|Ubuntu:400,700|Noto+Serif+SC" media="all">
+  <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+  <link rel="stylesheet" id="saukra_css-css" href="/css/style.css" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/lib.min.css" media="all">
+  <link rel="stylesheet" href="/css/font.css" media="all">
+  <link rel="stylesheet" href="/css/insight.css" media="all">
+  <link rel="stylesheet" href="/css/jquery.fancybox.min.css" media="all">
+  <link rel="stylesheet" href="/css/zoom.css" media="all">
+  <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<!--   <link rel="stylesheet" id="saukra_css-css" href="https://2heng.xin/wp-content/cache/autoptimize/css/autoptimize_ad42a61f4c7d4bdd9f91afcff6b5dda5.css
+" type="text/css" media="all"> -->
+  <script>
+  /*Initial Variables*/
+  var mashiro_option = new Object();
+  var mashiro_global = new Object();
+  mashiro_option.NProgressON = true;
+  /* 
+   * 邮箱信息之类的东西可以填在这里，这些js变量基本都作用于sakura-app.js
+   * 这样的设置仅是为了方便在基于PHP开发的主题中设置js变量，既然移植到了Node上，我想或许可以精简这一逻辑吧
+   */
+  mashiro_option.email_domain = "";
+  mashiro_option.email_name = "";
+  mashiro_option.cookie_version_control = "";
+  mashiro_option.qzone_autocomplete = false;
+  mashiro_option.site_name = "ひみつきちYUYU";
+  mashiro_option.author_name = "YUYU";
+  mashiro_option.site_url = "www.yulinblog.com";
+  mashiro_option.v_appId = "4NBvruApUCpLtmlsyQLevDfx-gzGzoHsz";
+  mashiro_option.v_appKey = "eTSHbT3jvLQPcVYMC7QFXQFd";
+  mashiro_option.mathjax = "0";
+  mashiro_option.qq_api_url = "https://api.mashiro.top/qqinfo/"; 
+  mashiro_option.qq_avatar_api_url = "https://api.mashiro.top/qqinfo/";
+
+  // mashiro_option.jsdelivr_css_src = "https://cdn.jsdelivr.net/gh/moezx/cdn@3.4.5/css/lib.min.css";
+  // mashiro_option.float_player_on = true;
+
+  /*End of Initial Variables*/
+  </script>
+  <script type="text/javascript">
+  var bg = "https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/cover/5.jpg,https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/cover/3.jpg,https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/cover/4.jpg,https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/cover/6.jpg".split(",");
+  var bgindex = Math.floor(Math.random()*bg.length);
+  if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
+    alert('朋友，IE浏览器未适配哦~');
+  }
+  </script>
+  <style type="text/css">
+  .hljs-ln{border-collapse:collapse}.hljs-ln td{padding:0}.hljs-ln-n:before{content:attr(data-line-number)}
+  </style>
+  <style type="text/css">.site-top .lower nav{display:block !important;}.author-profile i,.post-like a,.post-share .show-share,.sub-text,.we-info a,span.sitename,.post-more i:hover,#pagination a:hover,.post-content a:hover,.float-content i:hover{color:#FE9600}.feature i,.download,.navigator i:hover,.links ul li:before,.ar-time i,span.ar-circle,.object,.comment .comment-reply-link,.siren-checkbox-radio:checked + .siren-checkbox-radioInput:after{background:#FE9600}::-webkit-scrollbar-thumb{background:#FE9600}.download,.navigator i:hover,.link-title,.links ul li:hover,#pagination a:hover,.comment-respond input[type='submit']:hover{border-color:#FE9600}.entry-content a:hover,.site-info a:hover,.comment h4 a,#comments-navi a.prev,#comments-navi a.next,.comment h4 a:hover,.site-top ul li a:hover,.entry-title a:hover,#archives-temp h3,span.page-numbers.current,.sorry li a:hover,.site-title a:hover,i.iconfont.js-toggle-search.iconsearch:hover,.comment-respond input[type='submit']:hover{color:#FE9600}.comments .comments-main{display:block !important;}.comments .comments-hidden{display:none !important;}background-position:center center;background-attachment:inherit;}
+  </style>
+</head>
+</html>
+<body class="page-template page-template-user page-template-page-analytics page-template-userpage-analytics-php page page-id-1297 chinese-font serif isWebKit">
+  <div class="scrollbar" id="bar">
+  </div>
+  <a href="#" class="cd-top faa-float animated"></a>
+  <section id="main-container">
+    <div class="headertop ">
+  <div id="banner_wave_1"></div>
+  <div id="banner_wave_2"></div>
+  <figure id="centerbg" class="centerbg">
+    <div class="focusinfo no-select">
+      <div class="header-tou">
+        <a href="www.yulinblog.com">
+          <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/avatar.jpg">
+        </a>
+      </div>
+      <div class="header-info">
+        <p>在海边捡贝壳的孩子</p>
+        <div class="top-social_v2">
+          <li id="bg-pre">
+            <img class="flipx" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/other/next-b.svg">
+          </li>
+          
+            
+              
+                <li>
+                  <a href="https://github.com/sunshine98yy" target="_blank" class="social-github" title="github">
+                    <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/social/github1.png">
+                  </a>
+                </li>
+              
+            
+              
+                <li>
+                  <a href="mailto:sunshine98yy@163.com" target="_blank" class="social-github" title="email">
+                    <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/social/email.svg">
+                  </a>
+                </li>
+              
+            
+              
+                <li class="wechat">
+                  <a href="/#">
+                    <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/social/wechat.png">
+                  </a>
+                  <div class="wechatInner">
+                    <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/whchat.jpg">
+                  </div>
+                </li>
+              
+            
+          
+          <li id="bg-next">
+            <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/other/next-b.svg">
+          </li>
+        </div>
+      </div>
+    </div>
+  </figure>
+  <div id="video-container" style="">
+    <video style="object-fit: fill" id="bgvideo" class="video" video-name="" src="" width="auto" preload="auto">
+    </video>
+    <div id="video-btn" class="loadvideo videolive">
+    </div>
+    <div id="video-add">
+    </div>
+    <div class="video-stu">
+    </div>
+  </div>
+  <div class="headertop-down faa-float animated" onclick="headertop_down()">
+    <span>
+      <i class="fa fa-chevron-down" aria-hidden="true">
+      </i>
+    </span>
+  </div>
+</div>
+    <div id="page" class="site wrapper">
+      <header class="site-header no-select gizle sabit" role="banner">
+  <div class="site-top">
+    <div class="site-branding">
+      <span class="site-title">
+        <span class="logolink moe-mashiro">
+          <a href="/">
+            <span class="sakurasono">ひみつきち</span>
+            <span class="shironeko">YUYU</span>
+          </a>
+        </span>
+      </span>
+    </div>
+    <div class="searchbox search-form-submit">
+      <i class="iconfont js-toggle-search iconsearch icon-search">
+      </i>
+    </div>
+    <div id="show-nav" class="showNav mobile-fit">
+      <div class="line line1">
+      </div>
+      <div class="line line2">
+      </div>
+      <div class="line line3">
+      </div>
+    </div>
+    <div class="lower-cantiner">
+      <div class="lower">
+        <nav class="mobile-fit-control hide">
+          <ul id="menu-new" class="menu">
+            
+              <li>
+                <a href="/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fas fa-home" aria-hidden="true"></i>
+                    首页
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-archive faa-shake" aria-hidden="true"></i>
+                    归档
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/categories/技术/">
+                          <i class="fa fa-code" aria-hidden="true"></i>
+                          技术
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/笔记/">
+                          <i class="fa fa-book" aria-hidden="true"></i>
+                          笔记
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/项目/">
+                          <i class="fa fa-git" aria-hidden="true"></i>
+                          项目
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/随想/">
+                          <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                          随想
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/转载/">
+                          <i class="fa fa-share" aria-hidden="true"></i>
+                          转载
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="javascript:;">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
+                    清单
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/bangumi/">
+                          <i class="fa fa-th-list faa-bounce" aria-hidden="true"></i>
+                          书单
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/music/">
+                          <i class="fa fa-headphones" aria-hidden="true"></i>
+                          歌单
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/tags/光影艺术/">
+                          <i class="fa fa-photo" aria-hidden="true"></i>
+                          摄影
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="/tags/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-tag" aria-hidden="true"></i>
+                    标签
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/categories/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-bookmark" aria-hidden="true"></i>
+                    分类
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/comment/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-pencil-square-o faa-tada" aria-hidden="true"></i>
+                    留言板
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/links/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
+                    友人帐
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/donate/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-heart faa-pulse" aria-hidden="true"></i>
+                    赞赏
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/atom.xml">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-rss faa-pulse" aria-hidden="true"></i>
+                    RSS
+                  </span>
+                </a>
+                
+              </li>
+            
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+<div class="pattern-center-blank"></div>
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/0704_008.png);" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/0704_008.png">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      Java教程笔记之泛型</h1>
+      <p class="entry-census">
+        <span>
+          <a href="www.yulinblog.com">
+            <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/avatar.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="www.yulinblog.com">YUYU</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2020-7-4<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
+  </div>
+
+<div id="content" class="site-content">
+  <div id="primary" class="content-area">
+    <main id="main" class="site-main" role="main">
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+        <div class="entry-content">
+          <p>泛型是一种“代码模板”，可以用一套代码套用各种类型。</p>
+<h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><h3 id="什么是泛型"><a href="#什么是泛型" class="headerlink" title="什么是泛型"></a>什么是泛型</h3><p>以ArrayList举例，它可以看做可变长度的数组，因此用起来比数组更方便。实际上ArrayList内部就是一个object[]数组，配合存储一个当前分配的长度，就可以充当“可变数组”：</p>
+<pre><code class="lang-java">public class ArrayList{
+    private Object[] array;
+    private int size;
+    public void add(Object e){...}
+    public void remove(int index){...}
+    public Object get(int index){...}
+}
+</code></pre>
+<p>如果用上述<code>ArrayList</code>存储<code>String</code>类型，会有这么几个缺点：</p>
+<ul>
+<li>需要强制转型；</li>
+<li>不方便，易出错。</li>
+</ul>
+<p>例如，代码必须这么写：</p>
+<pre><code class="lang-java">ArrayList list = new ArrayList();
+list.add(&quot;Hello&quot;);
+// 获取到Object，必须强制转型为String:
+String first = (String) list.get(0);
+</code></pre>
+<p><strong>很容易出现ClassCastException，因为容易“误转型”：</strong></p>
+<pre><code class="lang-java">list.add(new Integer(123));
+// ERROR: ClassCastException:
+String second = (String) list.get(1);
+</code></pre>
+<p>要解决上述问题，我们可以为<code>String</code>单独编写一种<code>ArrayList</code>：</p>
+<pre><code class="lang-java">public class StringArrayList{
+    private String[] array;
+    private int size;
+    public void add(String e){...}
+    public void remove(int index){...}
+    public Object get(int index){...}
+}
+</code></pre>
+<p>这样一来，存入的必须是<code>String</code>，取出的也一定是<code>String</code>，不需要强制转型，因为编译器会强制检查放入的类型：</p>
+<pre><code class="lang-java">StringArrayList list = new StringArrayList();
+list.add(&quot;Hello&quot;);
+String first = list.get(0);
+list.add(new Integer(123));// 编译错误: 不允许放入非String类型:
+</code></pre>
+<p>然而，新的问题是，如果要存储<code>Integer</code>，还需要为<code>Integer</code>单独编写一种<code>ArrayList</code>,实际上，还需要为其他所有class单独编写一种<code>ArrayList</code>：</p>
+<ul>
+<li>LongArrayList</li>
+<li>DoubleArrayList</li>
+<li>PersonArrayList</li>
+<li>…</li>
+</ul>
+<p>这是不可能的，JDK的class就有上千个，而且它还不知道其他人编写的class。为了解决新的问题，我们必须把<code>ArrayList</code>变成一种模板：<code>ArrayList&lt;T&gt;</code>，代码如下：</p>
+<pre><code class="lang-java">public class ArrayList&lt;T&gt;{
+    private T[] array;
+    private int size;
+    public void add(T e){...}
+    public void remove(int index){...}
+    public Object get(int index){...}
+}
+</code></pre>
+<p><code>T</code>可以是任何class。这样一来，我们就实现了：编写一次模版，可以创建任意类型的<code>ArrayList</code>：</p>
+<pre><code class="lang-java">// 创建可以存储String的ArrayList:
+ArrayList&lt;String&gt; strList = new ArrayList&lt;String&gt;();
+// 创建可以存储Float的ArrayList:
+ArrayList&lt;Float&gt; floatList = new ArrayList&lt;Float&gt;();
+// 创建可以存储Person的ArrayList:
+ArrayList&lt;Person&gt; personList = new ArrayList&lt;Person&gt;();
+</code></pre>
+<p>因此，泛型就是定义一种模板，例如<code>ArrayList</code>，然后在代码中为用到的类创建对应的<code>ArrayList&lt;类型&gt;</code>：</p>
+<pre><code class="lang-java">ArrayList&lt;String&gt; strList = new ArrayList&lt;String&gt;();
+</code></pre>
+<p>由编译器针对类型作检查：</p>
+<pre><code class="lang-kava">strList.add(&quot;hello&quot;); // OK
+String s = strList.get(0); // OK
+strList.add(new Integer(123)); // compile error!
+Integer n = strList.get(0); // compile error!
+</code></pre>
+<p>这样一来，<strong>既实现了编写一次，万能匹配，又通过编译器保证了类型安全：这就是泛型</strong>。</p>
+<h4 id="向上转型"><a href="#向上转型" class="headerlink" title="向上转型"></a>向上转型</h4><p>在Java标准库中的<code>ArrayList</code>实现了<code>List</code>接口，它可以向上转型为<code>List</code>：</p>
+<pre><code class="lang-java">public class ArrayList&lt;T&gt; implements List&lt;T&gt; {
+    ...
+}
+
+List&lt;String&gt; list = new ArrayList&lt;String&gt;();
+</code></pre>
+<p>即类型<code>ArrayList&lt;T&gt;</code>可以向上转型为<code>List&lt;T&gt;</code></p>
+<p>要<em>特别注意</em>：不能把<code>ArrayList&lt;Integer&gt;</code>向上转型为<code>ArrayList&lt;Number&gt;</code>或<code>List&lt;Number&gt;</code>。</p>
+<p>这是为什么呢？假设<code>ArrayList&lt;Integer&gt;</code>可以向上转型为<code>ArrayList&lt;Number&gt;</code>，观察一下代码：</p>
+<pre><code>// 创建ArrayList&lt;Integer&gt;类型：
+ArrayList&lt;Integer&gt; integerList = new ArrayList&lt;Integer&gt;();
+// 添加一个Integer：
+integerList.add(new Integer(123));
+// “向上转型”为ArrayList&lt;Number&gt;：
+ArrayList&lt;Number&gt; numberList = integerList;
+// 添加一个Float，因为Float也是Number：
+numberList.add(new Float(12.34));
+// 从ArrayList&lt;Integer&gt;获取索引为1的元素（即添加的Float）：
+Integer n = integerList.get(1); // ClassCastException!
+</code></pre><p>我们把一个<code>ArrayList&lt;Integer&gt;</code>转型为<code>ArrayList&lt;Number&gt;</code>类型后，这个<code>ArrayList&lt;Number&gt;</code>就可以接受<code>Float</code>类型，因为<code>Float</code>是<code>Number</code>的子类。但是，<code>ArrayList&lt;Number&gt;</code>实际上和<code>ArrayList&lt;Integer&gt;</code>是同一个对象，也就是<code>ArrayList&lt;Integer&gt;</code>类型，它不可能接受<code>Float</code>类型， 所以在获取<code>Integer</code>的时候将产生<code>ClassCastException</code>。</p>
+<p>实际上，编译器为了避免这种错误，根本就不允许把<code>ArrayList&lt;Integer&gt;</code>转型为<code>ArrayList&lt;Number&gt;</code>。</p>
+<p> <code>ArrayList&lt;Integer&gt;</code>和<code>ArrayList&lt;Number&gt;</code>两者完全没有继承关系。</p>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>泛型就是编写模板代码来适应任意类型；</p>
+<p>泛型的好处是使用时不必对类型进行强制转换，它通过编译器对类型进行检查；</p>
+<p>注意泛型的继承关系：可以把<code>ArrayList&lt;Integer&gt;</code>向上转型为<code>List&lt;Integer&gt;</code>（<code>T</code>不能变！），但不能把<code>ArrayList&lt;Integer&gt;</code>向上转型为<code>ArrayList&lt;Number&gt;</code>（<code>T</code>不能变成父类）。</p>
+<h3 id="使用泛型"><a href="#使用泛型" class="headerlink" title="使用泛型"></a>使用泛型</h3><p>使用<code>ArrayList</code>时，如果不定义泛型类型时，泛型类型实际上就是<code>Object</code>：</p>
+<pre><code class="lang-java">// 编译器警告:
+List list = new ArrayList();
+list.add(&quot;Hello&quot;);
+list.add(&quot;World&quot;);
+String first = (String) list.get(0);
+String second = (String) list.get(1);
+</code></pre>
+<p>此时，只能把<code>&lt;T&gt;</code>当作<code>Object</code>使用，没有发挥泛型的优势。</p>
+<p>当我们定义泛型类型<code>&lt;String&gt;</code>后，<code>List&lt;T&gt;</code>的泛型接口变为强类型<code>List&lt;String&gt;</code>：</p>
+<pre><code class="lang-java">// 无编译器警告:
+List&lt;String&gt; list = new ArrayList&lt;String&gt;();
+list.add(&quot;Hello&quot;);
+list.add(&quot;World&quot;);
+// 无强制转型:
+String first = list.get(0);
+String second = list.get(1);
+</code></pre>
+<p>类似，当我们定义泛型类型<code>&lt;Number&gt;</code>后，<code>List&lt;T&gt;</code>的泛型接口变为强类型<code>List&lt;Number&gt;</code>：</p>
+<pre><code class="lang-java">List&lt;Number&gt; list = new ArrayList&lt;Number&gt;();
+list.add(new Integer(123));
+list.add(new Double(12.34));
+Number first = list.get(0);
+Number second = list.get(1);
+</code></pre>
+<p>编译器如果能自动推断出泛型类型，就可以省略后面的泛型类型。例如，对于下面的代码：</p>
+<pre><code class="lang-java">List&lt;Number&gt; list = new ArrayList&lt;Number&gt;();
+</code></pre>
+<p>编译器看到泛型类型<code>List&lt;Number&gt;</code>就可以自动推断出后面的<code>ArrayList&lt;T&gt;</code>的泛型类型必须是<code>ArrayList&lt;Number&gt;</code>，因此，可以把代码简写为：</p>
+<pre><code class="lang-java">// 可以省略后面的Number，编译器可以自动推断泛型类型：
+List&lt;Number&gt; list = new ArrayList&lt;&gt;();
+</code></pre>
+<h4 id="泛型接口"><a href="#泛型接口" class="headerlink" title="泛型接口"></a>泛型接口</h4><p>除了<code>ArrayList&lt;T&gt;</code>使用了泛型，还可以在接口中使用泛型。例如，<code>Arrays.sort(Object[])</code>可以对任意数组进行排序，但<strong>待排序的元素必须实现<code>Comparable&lt;T&gt;</code>这个泛型接口：</strong></p>
+<pre><code class="lang-java">public interface Comparable&lt;T&gt; {
+    /**
+     * 返回-1: 当前实例比参数o小
+     * 返回0: 当前实例与参数o相等
+     * 返回1: 当前实例比参数o大
+     */
+    int compareTo(T o);
+}
+</code></pre>
+<p>可以直接对<code>String</code>数组进行排序：</p>
+<pre><code class="lang-java">public class Main {
+    public static void main(String[] args) {
+        String[] ss = new String[] { &quot;Orange&quot;, &quot;Apple&quot;, &quot;Pear&quot; };
+        Arrays.sort(ss);
+        System.out.println(Arrays.toString(ss));
+    }
+}
+</code></pre>
+<p>这是因为<code>String</code>本身已经实现了<code>Comparable&lt;T&gt;</code>接口。</p>
+<p>对自定义的<code>Person</code>类型试试：</p>
+<pre><code class="lang-java">import java.util.Arrays;
+public class Main {
+    public static void main(String[] args) {
+        Person[] ps = new Person[] {
+            new Person(&quot;Bob&quot;, 61),
+            new Person(&quot;Alice&quot;, 88),
+            new Person(&quot;Lily&quot;, 75),
+        };
+        Arrays.sort(ps);
+        System.out.println(Arrays.toString(ps));
+    }
+}
+</code></pre>
+<p>实现正确的泛型类型：</p>
+<pre><code class="lang-java">class Person implements Comparable&lt;Person&gt; {
+    String name;
+    int score;
+    Person(String name, int score) {
+        this.name = name;
+        this.score = score;
+    }
+    public int compareTo(Person other) {//
+        return this.name.compareTo(other.name);
+    }
+    public String toString() {
+        return this.name + &quot;,&quot; + this.score;
+    }
+}
+</code></pre>
+<h4 id="小结-1"><a href="#小结-1" class="headerlink" title="小结"></a>小结</h4><p>使用泛型时，把泛型参数<code>T</code>替换为需要的class类型，例如：<code>ArrayList&lt;String&gt;</code>，<code>ArrayList&lt;Number&gt;</code>等；</p>
+<p>可以省略编译器能自动推断出的类型，例如：<code>List&lt;String&gt; list = new ArrayList&lt;&gt;();</code>；</p>
+<p>不指定泛型参数类型时，编译器会给出警告，且只能将<code>T</code>视为<code>Object</code>类型；</p>
+<p>可<strong>以在接口中定义泛型类型，实现此接口的类必须实现正确的泛型类型。</strong></p>
+<h3 id="编写泛型"><a href="#编写泛型" class="headerlink" title="编写泛型"></a>编写泛型</h3><p>泛型类一般用在集合类中，我们很少需要编写泛型类。如果确实需要编写一个泛型类，可以按照以下步骤来编写：</p>
+<p>首先，按照某种类型，例如：<code>String</code>，来编写类：</p>
+<pre><code class="lang-java">public class Pair {
+    private String first;
+    private String last;
+    public Pair(String first, String last) {
+        this.first = first;
+        this.last = last;
+    }
+    public String getFirst() {
+        return first;
+    }
+    public String getLast() {
+        return last;
+    }
+}
+</code></pre>
+<p>标记所有的特定类型，这里是<code>String</code>,把特定类型<code>String</code>替换为<code>T</code>，并申明<code>&lt;T&gt;</code>：</p>
+<pre><code class="lang-java">public class Pair&lt;T&gt; {
+    private T first;
+    private T last;
+    public Pair(T first, T last) {
+        this.first = first;
+        this.last = last;
+    }
+    public T getFirst() {
+        return first;
+    }
+    public T getLast() {
+        return last;
+    }
+}
+</code></pre>
+<p>熟练后即可直接从<code>T</code>开始编写。</p>
+<h4 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h4><p><strong>要特别注意，泛型类型<code>&lt;T&gt;</code>不能用于静态方法。</strong></p>
+<pre><code class="lang-java">public class Pair&lt;T&gt; {
+    private T first;
+    private T last;
+    public Pair(T first, T last) {
+        this.first = first;
+        this.last = last;
+    }
+    public T getFirst() { ... }
+    public T getLast() { ... }
+
+    // 对静态方法使用&lt;T&gt;:
+    public static Pair&lt;T&gt; create(T first, T last) {//编译错误
+        return new Pair&lt;T&gt;(first, last);
+    }
+}
+</code></pre>
+<p>上述代码会导致编译错误，我们<strong>无法在静态方法<code>create()</code>的方法参数和返回类型上使用泛型类型<code>T</code></strong>。</p>
+<p>对于静态方法，我们可以单独改写为“泛型”方法，只需要使用另一个类型即可。对于上面的<code>create()</code>静态方法，我们应该把它改为另一种泛型类型，例如，<code>&lt;K&gt;</code>：</p>
+<pre><code class="lang-java">public class Pair&lt;T&gt; {
+    private T first;
+    private T last;
+    public Pair(T first, T last) {
+        this.first = first;
+        this.last = last;
+    }
+    public T getFirst() { ... }
+    public T getLast() { ... }
+
+    // 静态泛型方法应该使用其他类型区分:
+    //静态方法由于随着类的加载而加载，不能访问类的泛型（因为在创建对象的时候才确定），因此必须定义自己的泛型类型。
+    public static &lt;K&gt; Pair&lt;K&gt; create(K first, K last) {
+
+        return new Pair&lt;K&gt;(first, last);
+    }
+}
+</code></pre>
+<p>这样才能清楚地将静态方法的泛型类型和实例类型的泛型类型区分开。</p>
+<h4 id="多个泛型类型"><a href="#多个泛型类型" class="headerlink" title="多个泛型类型"></a>多个泛型类型</h4><p>泛型还可以定义多种类型。例如，我们希望<code>Pair</code><strong>存储两个类型不一样的对象</strong>，就可以使用类型``：</p>
+<pre><code class="lang-java">public class Pair&lt;T, K&gt; {
+    private T first;
+    private K last;
+    public Pair(T first, K last) {
+        this.first = first;
+        this.last = last;
+    }
+    public T getFirst() { ... }
+    public K getLast() { ... }
+}
+</code></pre>
+<p>使用的时候，需要指出两种类型：</p>
+<pre><code>Pair&lt;String, Integer&gt; p = new Pair&lt;&gt;(&quot;test&quot;, 123);
+</code></pre><p>Java标准库的<code>Map</code>就是使用两种泛型类型的例子。它对Key使用一种类型，对Value使用另一种类型。</p>
+<h4 id="小结-2"><a href="#小结-2" class="headerlink" title="小结"></a>小结</h4><p>编写泛型时，需要定义泛型类型<code>&lt;T&gt;</code>；</p>
+<p>静态方法不能引用泛型类型<code>&lt;T&gt;</code>，必须定义其他类型（例如<code>&lt;K&gt;</code>）来实现静态泛型方法；</p>
+<p>泛型可以同时定义多种类型，例如<code>Map&lt;K,V&gt;</code>。</p>
+<h3 id="擦拭法"><a href="#擦拭法" class="headerlink" title="擦拭法"></a>擦拭法</h3><p>泛型是一种类似”模板代码“的技术，<strong>不同语言的泛型实现方式不一定相同</strong>。</p>
+<p>Java语言的泛型实现方式是擦拭法（Type Erasure）。所谓擦拭法是指，虚拟机对泛型其实一无所知，所有的工作都是编译器做的。</p>
+<p>例如，我们编写了一个泛型类<code>Pair</code>，这是编译器看到的代码：</p>
+<pre><code class="lang-java">public class Pair&lt;T&gt; {
+    private T first;
+    private T last;
+    public Pair(T first, T last) {
+        this.first = first;
+        this.last = last;
+    }
+    public T getFirst() {
+        return first;
+    }
+    public T getLast() {
+        return last;
+    }
+}
+</code></pre>
+<p>而虚拟机根本不知道泛型。这是虚拟机执行的代码：</p>
+<pre><code class="lang-java">public class Pair {
+    private Object first;
+    private Object last;
+    public Pair(Object first, Object last) {
+        this.first = first;
+        this.last = last;
+    }
+    public Object getFirst() {
+        return first;
+    }
+    public Object getLast() {
+        return last;
+    }
+}
+</code></pre>
+<p>因此，Java使用擦拭法实现泛型，导致了：</p>
+<ul>
+<li>编译器把类型<code>&lt;T&gt;</code>视为<code>Object</code>；</li>
+<li>编译器根据<code>&lt;T&gt;</code>实现安全的强制转型。</li>
+</ul>
+<p>使用泛型的时候，我们编写的代码也是编译器看到的代码：</p>
+<pre><code class="lang-java">Pair&lt;String&gt; p = new Pair&lt;&gt;(&quot;Hello&quot;, &quot;world&quot;);
+String first = p.getFirst();
+String last = p.getLast();
+</code></pre>
+<p>而虚拟机执行的代码并没有泛型：</p>
+<pre><code class="lang-java">Pair p = new Pair(&quot;Hello&quot;, &quot;world&quot;);
+//在需要转型的时候，编译器会根据T的类型自动为我们实行安全地强制转型。
+String first = (String) p.getFirst();
+String last = (String) p.getLast();
+</code></pre>
+<p>所以，<strong>Java的泛型是由编译器在编译时实行的</strong>，编译器内部永远把所有类型<code>T</code>视为<code>Object</code>处理，但是，在需要转型的时候，编译器会根据<code>T</code>的类型自动为我们实行安全地强制转型。</p>
+<h4 id="Java泛型的局限"><a href="#Java泛型的局限" class="headerlink" title="Java泛型的局限"></a>Java泛型的局限</h4><p>局限一：<code>`不能是基本类型，例如</code>int<code>，因为实际类型是</code>Object<code>，</code>Object`类型无法持有基本类型：</p>
+<pre><code>Pair&lt;int&gt; p = new Pair&lt;&gt;(1, 2); // compile error!
+</code></pre><p>局限二：无法取得带泛型的<code>Class</code>。观察以下代码：</p>
+<pre><code class="lang-java">public class Main {
+    public static void main(String[] args) {
+         Pair&lt;String&gt; p1 = new Pair&lt;&gt;(&quot;Hello&quot;, &quot;world&quot;);
+        Pair&lt;Integer&gt; p2 = new Pair&lt;&gt;(123, 456);
+        Class c1 = p1.getClass();
+        Class c2 = p2.getClass();
+        System.out.println(c1==c2); // true
+        System.out.println(c1==Pair.class); // true
+        }
+}
+
+class Pair&lt;T&gt; {
+    ......
+}
+</code></pre>
+<p>我们对<code>Pair&lt;String&gt;</code>和<code>Pair&lt;Integer&gt;</code>类型获取<code>Class</code>时，获取到的是同一个<code>Class</code>，也就是<code>Pair</code>类的<code>Class</code>。</p>
+<p>换句话说，所有泛型实例，无论<code>T</code>的类型是什么，<code>getClass()</code>返回同一个<code>Class</code>实例，因为编译后它们全部都是<code>Pair&lt;Object&gt;</code>。</p>
+<p>局限三：无法判断带泛型的类型：</p>
+<pre><code class="lang-java">Pair&lt;Integer&gt; p = new Pair&lt;&gt;(123, 456);
+// Compile error:
+if (p instanceof Pair&lt;String&gt;) {
+}
+</code></pre>
+<p>原因和前面一样，并不存在<code>Pair.class</code>，而是只有唯一的<code>Pair.class</code>。</p>
+<p>局限四：<strong>不能实例化<code>T</code>类型：</strong></p>
+<pre><code class="lang-java">public class Pair&lt;T&gt; {
+    private T first;
+    private T last;
+    public Pair() {
+        // Compile error:
+        first = new T();
+        last = new T();
+    }
+}
+</code></pre>
+<p>上述代码无法通过编译，因为构造方法的两行语句：</p>
+<pre><code class="lang-java">first = new T();
+last = new T();
+</code></pre>
+<p>擦拭后实际上变成了：</p>
+<pre><code class="lang-java">first = new Object();
+last = new Object();
+</code></pre>
+<p>这样一来，创建<code>new Pair&lt;String&gt;()</code>和创建<code>new Pair&lt;Integer&gt;()</code>就全部成了<code>Object</code>，显然编译器要阻止这种类型不对的代码。</p>
+<p><strong>要实例化<code>T</code>类型，我们必须借助额外的<code>Class</code>参数</strong>：</p>
+<pre><code class="lang-java">public class Pair&lt;T&gt; {
+    private T first;
+    private T last;
+    public Pair(Class&lt;T&gt; clazz) {
+        first = clazz.newInstance();
+        last = clazz.newInstance();
+    }
+}
+</code></pre>
+<p>上述代码借助<code>Class&lt;T&gt;</code>参数并通过反射来实例化<code>T</code>类型，使用的时候，也必须传入<code>Class</code>。例如：</p>
+<pre><code class="lang-java">Pair&lt;String&gt; pair = new Pair&lt;&gt;(String.class);
+</code></pre>
+<p>因为传入了<code>Class</code>的实例，所以我们借助<code>String.class</code>就可以实例化<code>String</code>类型。</p>
+<h4 id="泛型继承"><a href="#泛型继承" class="headerlink" title="泛型继承"></a>泛型继承</h4><p>一个类可以继承自一个泛型类。例如：父类的类型是<code>Pair</code>，子类的类型是<code>IntPair</code>，可以这么继承：</p>
+<pre><code>public class IntPair extends Pair&lt;Integer&gt; {
+}
+</code></pre><p>使用的时候，因为子类<code>IntPair</code>并没有泛型类型，所以，正常使用即可：</p>
+<pre><code>IntPair ip = new IntPair(1, 2);
+</code></pre><p>我们无法获取<code>Pair&lt;Integer&gt;</code>的<code>T</code>类型，即给定一个变量<code>Pair&lt;Integer&gt; p</code>，无法从<code>p</code>中获取到<code>Integer</code>类型。</p>
+<p>但是，在父类是泛型类型的情况下，编译器就必须把类型<code>T</code>（对<code>IntPair</code>来说，也就是<code>Integer</code>类型）保存到子类的class文件中，不然编译器就不知道<code>IntPair</code>只能存取<code>Integer</code>这种类型。</p>
+<p><strong>在继承了泛型类型的情况下，子类可以获取父类的泛型类型。</strong>例如：<code>IntPair</code>可以获取到父类的泛型类型<code>Integer</code>。获取父类的泛型类型代码比较复杂：</p>
+<pre><code class="lang-java">import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+
+public class Main {
+    public static void main(String[] args) {   
+    Class&lt;IntPair&gt; clazz = IntPair.class;
+        Type t = clazz.getGenericSuperclass();
+        if (t instanceof ParameterizedType) {
+            ParameterizedType pt = (ParameterizedType) t;
+            Type[] types = pt.getActualTypeArguments(); // 可能有多个泛型类型
+            Type firstType = types[0]; // 取第一个泛型类型
+            Class&lt;?&gt; typeClass = (Class&lt;?&gt;) firstType;
+            System.out.println(typeClass); // Integer
+        }
+          }
+}
+
+class Pair&lt;T&gt; {
+    private T first;
+    private T last;
+    public Pair(T first, T last) {
+        this.first = first;
+        this.last = last;
+    }
+    public T getFirst() {
+        return first;
+    }
+    public T getLast() {
+        return last;
+    }
+}
+
+class IntPair extends Pair&lt;Integer&gt; {
+    public IntPair(Integer first, Integer last) {
+        super(first, last);
+    }
+}
+</code></pre>
+<h4 id="小结-3"><a href="#小结-3" class="headerlink" title="小结"></a>小结</h4><p>Java的泛型是采用擦拭法实现的；</p>
+<p>擦拭法决定了泛型<code>&lt;T&gt;</code>：</p>
+<ul>
+<li>不能是基本类型，例如：<code>int</code>；</li>
+<li>不能获取带泛型类型的<code>Class</code>，例如：<code>Pair&lt;String&gt;.class</code>；</li>
+<li>不能判断带泛型类型的类型，例如：<code>x instanceof Pair&lt;String&gt;</code>；</li>
+<li>不能实例化<code>T</code>类型，例如：<code>new T()</code>。</li>
+</ul>
+<p>泛型方法要防止重复定义方法，例如：<code>public boolean equals(T obj)</code>；</p>
+<p>子类可以获取父类的泛型类型<code>&lt;T&gt;</code>。</p>
+<h3 id="extends通配符"><a href="#extends通配符" class="headerlink" title="extends通配符"></a>extends通配符</h3><p>假设我们定义了<code>Pair&lt;T&gt;</code>：</p>
+<pre><code class="lang-java">public class Pair&lt;T&gt;{...}
+</code></pre>
+<p>然后，我们又针对<code>Pair&lt;Number&gt;</code>类型写了一个静态方法，它接收的参数类型是<code>Pair&lt;Number&gt;</code>：</p>
+<pre><code class="lang-java">public class PairHelper{
+    static int add(Pair&lt;Number&gt; p){
+        Number first = p.getFirst();
+        Number last = p.getLast();
+        return first.intValue()+last.intValue();
+    }
+}
+</code></pre>
+<p>我们传入：</p>
+<pre><code>int sum = PairHelper.add(new Pair&lt;Number&gt;(1,2));
+</code></pre><p>可以正常编译。</p>
+<p>注意：传入的类型是<code>Pair&lt;Number&gt;</code>，实际参数类型是<code>(Integer, Integer)</code>。</p>
+<p>既然实际参数是<code>Integer</code>类型，试试传入<code>Pair&lt;Integer&gt;</code>：</p>
+<pre><code class="lang-java">int sum = add(new Pair&lt;Integer&gt;(1,2));
+</code></pre>
+<p>编译器直接报错。因为<code>Pair&lt;Integer&gt;</code>不是<code>Pair&lt;Number&gt;</code>的子类，因此，<code>add(Pair&lt;Number&gt;)</code>不接受参数类型<code>Pair&lt;Integer&gt;</code>。</p>
+<p>实际类型是<code>Integer</code>，引用类型是<code>Number</code>，没有问题。问题在于方法参数类型定死了只能传入<code>Pair&lt;Number&gt;</code>。</p>
+<p>有没有办法使得方法参数接受<code>Pair&lt;Integer&gt;</code>？办法是有的，这就是<strong>使用<code>Pair&lt;? extends Number&gt;</code></strong>使得方法<strong>接收所有泛型类型为<code>Number</code>或<code>Number</code>子类的<code>Pair</code>类型。</strong></p>
+<p>代码修改如下：</p>
+<pre><code class="lang-java">public class Main {
+    public static void main(String[] args) {
+        int sum = add(new Pair&lt;Integer&gt;(1,2));
+        System.out.println(sum);
+    }
+
+    static int add(Pair&lt;? extends Number&gt; p){
+        Number first = p.getFirst();
+        Number last = p.getLast();
+        return first.intValue()+last.intValue();
+    }
+}
+
+class Pair&lt;T&gt;{
+    private T first;
+    private T last;
+
+   public Pair(T first,T last){
+       this.first = first;
+       this.last = last;
+   }
+   public T getFirst(){
+       return first;
+    }
+   public  T getLast(){
+       return last;
+   }
+}
+</code></pre>
+<p>这种使用<code>&lt;? extends Number&gt;</code>的泛型定义称之为上界通配符（Upper Bounds Wildcards），即把泛型类型<code>T</code>的上界限定在<code>Number</code>了。</p>
+<p>除了可以传入<code>Pair&lt;Integer&gt;</code>类型，我们还可以传入<code>Pair&lt;Double&gt;</code>类型，<code>Pair&lt;</code>BigDecimal<code>&gt;</code>类型等等，因为<code>Double</code>和<code>BigDecimal</code>都是<code>Number</code>的子类。</p>
+<p>通配符的一个重要限制:</p>
+<pre><code class="lang-java">public class Main {
+     public static void main(String[] args) {
+        Pair&lt;Integer&gt; p = new Pair&lt;&gt;(123, 456);
+        int n = add(p);
+        System.out.println(n);
+    }
+
+    static int add(Pair&lt;? extends Number&gt; p) {
+        Number first = p.getFirst();
+        Number last = p.getLast();
+        p.setFirst(new Integer(first.intValue() + 100));
+        p.setLast(new Integer(last.intValue() + 100));
+        return p.getFirst().intValue() + p.getFirst().intValue();
+    }
+
+}
+
+class Pair&lt;T&gt;{
+    ...
+    public void setFirst(T first) {
+        this.first = first;
+    }
+    public void setLast(T last) {
+        this.last = last;
+    }
+}
+</code></pre>
+<p>报错：编译错误发生在<code>p.setFirst()</code>传入的参数是<code>Integer</code>类型。既然<code>p</code>的定义是<code>Pair</code>，那么<code>setFirst(? extends Number)</code>为什么不能传入<code>Integer</code>？<strong>原因还在于擦拭法</strong>。如果我们传入的<code>p</code>是<code>Pair&lt;Double&gt;</code>，显然它满足参数定义<code>Pair&lt;? extends Number&gt;</code>，然而，<code>Pair&lt;Double&gt;</code>的<code>setFirst()</code>显然无法接受<code>Integer</code>类型。</p>
+<p>这就是<code>&lt;? extends Number&gt;</code>通配符的一个重要限制：<strong>方法参数签名</strong><code>setFirst(? extends Number)</code>无法传递任何<code>Number</code>类型给<code>setFirst(? extends Number)</code>。</p>
+<p>这里唯一的例外是可以给方法参数传入<code>null</code>：</p>
+<pre><code>p.setFirst(null); // ok, 但是后面会抛出NullPointerException
+p.getFirst().intValue(); // NullPointerException
+</code></pre><h4 id="extends通配符的作用"><a href="#extends通配符的作用" class="headerlink" title="extends通配符的作用"></a>extends通配符的作用</h4><p>如果我们考察Java标准库的<code>java.util.List</code>接口，它实现的是一个类似“可变数组”的列表，主要功能包括：</p>
+<pre><code class="lang-java">public interface List&lt;T&gt;{
+    int size(); // 获取个数
+    T get(int index); // 根据索引获取指定元素
+    void add(T t); // 添加一个新元素
+    void remove(T t); // 删除一个已有元素
+}
+</code></pre>
+<p>现在，让我们定义一个方法来处理列表的每个元素：</p>
+<pre><code class="lang-java">int sumOfList(List&lt;? extends Integer&gt; list) {
+    int sum = 0;
+    for (int i=0; i&lt;list.size(); i++) {
+        Integer n = list.get(i);
+        sum = sum + n;
+    }
+    return sum;
+}
+</code></pre>
+<p>为什么我们定义的方法参数类型是<code>List&lt;? extends Integer&gt;</code>而不是<code>List&lt;Integer&gt;</code>？从方法内部代码看，传入<code>List&lt;? extends Integer&gt;</code>或者<code>List&lt;Integer&gt;</code>是完全一样的，但是，注意到<code>List</code>的限制：</p>
+<ul>
+<li>允许调用<code>get()</code>方法获取<code>Integer</code>的引用；</li>
+<li>不允许调用<code>set(? extends Integer)</code>方法并传入任何<code>Integer</code>的引用（<code>null</code>除外）。</li>
+</ul>
+<p>因此，方法参数类型<code>List&lt;? extends Integer&gt;</code>表明了该方法内部只会读取<code>List&lt;Integer&gt;</code>的元素，不会修改<code>List</code>的元素（因为无法调用<code>add(? extends Integer)</code>、<code>remove(? extends Integer)</code>这些方法。换句话说，这是一个对参数<code>List</code>进行只读的方法（恶意调用<code>set(null)</code>除外）。</p>
+<h4 id="使用extends限定T类型"><a href="#使用extends限定T类型" class="headerlink" title="使用extends限定T类型"></a>使用extends限定T类型</h4><p>在定义泛型类型<code>Pair</code>的时候，也可以使用<code>extends</code>通配符来限定<code>T</code>的类型：</p>
+<pre><code>public class Pair&lt;T extends Number&gt; { ... }
+</code></pre><p>现在，我们只能定义：</p>
+<pre><code class="lang-java">Pair&lt;Number&gt; p1 = null;
+Pair&lt;Integer&gt; p2 = new Pair&lt;&gt;(1, 2);
+Pair&lt;Double&gt; p3 = null;
+</code></pre>
+<p>因为<code>Number</code>、<code>Integer</code>和<code>Double</code>都符合<code>&lt;T extends Number&gt;</code>。</p>
+<p>非<code>Number</code>类型将无法通过编译：</p>
+<pre><code class="lang-java">Pair&lt;String&gt; p1 = null; // compile error!
+Pair&lt;Object&gt; p2 = null; // compile error!
+</code></pre>
+<p>因为<code>String</code>、<code>Object</code>都不符合<code>&lt;T extends Number&gt;</code>，因为它们不是<code>Number</code>类型或<code>Number</code>的子类。</p>
+<h4 id="小结-4"><a href="#小结-4" class="headerlink" title="小结"></a>小结</h4><p>使用类似<code>&lt;? extends Number&gt;</code>通配符作为方法参数时表示：</p>
+<ul>
+<li>方法内部可以调用获取<code>Number</code>引用的方法，例如：<code>Number n = obj.getFirst();</code>；</li>
+<li>方法内部无法调用传入<code>Number</code>引用的方法（<code>null</code>除外），例如：<code>obj.setFirst(Number n);</code>。</li>
+</ul>
+<p><strong>即一句话总结：使用<code>extends</code>通配符表示可以读，不能写。</strong></p>
+<p>使用类似<code>&lt;T extends Number&gt;</code>定义泛型类时表示：</p>
+<ul>
+<li>泛型类型限定为<code>Number</code>以及<code>Number</code>的子类。</li>
+</ul>
+<h3 id="super通配符"><a href="#super通配符" class="headerlink" title="super通配符"></a>super通配符</h3><p>考察下面的<code>set</code>方法：</p>
+<pre><code class="lang-java">void set(Pair&lt;Integer&gt; p, Integer first, Integer last) {
+    p.setFirst(first);
+    p.setLast(last);
+}
+</code></pre>
+<p>传入<code>Pair&lt;Integer&gt;</code>是允许的，但是传入<code>Pair&lt;Number&gt;</code>是不允许的。</p>
+<p>和<code>extends</code>通配符相反，这次，我们希望接受<code>Pair&lt;Integer&gt;</code>类型，以及<code>Pair&lt;Number&gt;</code>、<code>Pair&lt;Object&gt;</code>，因为<code>Number</code>和<code>Object</code>是<code>Integer</code>的父类，<code>setFirst(Number)</code>和<code>setFirst(Object)</code>实际上允许接受<code>Integer</code>类型。</p>
+<p>我们使用<code>super</code>通配符来改写这个方法：</p>
+<pre><code class="lang-java">void set(Pair&lt;? super Integer&gt; p, Integer first, Integer last) {
+    p.setFirst(first);
+    p.setLast(last);
+}
+</code></pre>
+<p>注意到<code>Pair&lt;? super Integer&gt;</code>表示，方法参数接受所有泛型类型为<code>Integer</code>或<code>Integer</code>父类的<code>Pair</code>类型。</p>
+<p>考察<code>Pair&lt;? super Integer&gt;</code>的<code>setFirst()</code>方法，它的方法签名实际上是：</p>
+<pre><code class="lang-java">void setFirst(? super Integer);
+</code></pre>
+<p>因此，可以安全地传入<code>Integer</code>类型。</p>
+<p>再考察<code>Pair</code>的<code>getFirst()</code>方法，它的方法签名实际上是：</p>
+<pre><code class="lang-java">? super Integer getFirst();
+</code></pre>
+<p>这里注意到我们无法使用<code>Integer</code>类型来接收<code>getFirst()</code>的返回值，</p>
+<pre><code class="lang-java">Integer x = p.getFirst();
+</code></pre>
+<p>因为如果传入的实际类型是<code>Pair&lt;Number&gt;</code>，编译器无法将<code>Number</code>类型转型为<code>Integer</code>。</p>
+<p>唯一可以接收<code>getFirst()</code>方法返回值的是<code>Object</code>类型：</p>
+<pre><code class="lang-java">Object obj = p.getFirst();
+</code></pre>
+<p>因此，使用<code>&lt;? super Integer&gt;</code>通配符表示：</p>
+<ul>
+<li>允许调用<code>set(? super Integer)</code>方法传入<code>Integer</code>的引用；</li>
+<li>不允许调用<code>get()</code>方法获得<code>Integer</code>的引用。</li>
+</ul>
+<p>唯一例外是可以获取<code>Object</code>的引用：<code>Object o = p.getFirst()</code>。</p>
+<p>换句话说，使用<code>? super Integer</code>通配符作为方法参数，表示方法内部代码对于参数只能写，不能读。</p>
+<h4 id="对比extends和super通配符"><a href="#对比extends和super通配符" class="headerlink" title="对比extends和super通配符"></a>对比extends和super通配符</h4><p>我们再回顾一下<code>extends</code>通配符。作为方法参数，<code>&lt;? extends T&gt;</code>类型和<code>&lt;? super T&gt;</code>类型的区别在于：</p>
+<ul>
+<li><code>&lt;? extends T&gt;</code>允许调用读方法<code>T get()</code>获取<code>T</code>的引用，但不允许调用写方法<code>set(T)</code>传入<code>T</code>的引用（传入<code>null</code>除外）；</li>
+<li><code>? super T</code>允许调用写方法<code>set(T)</code>传入<code>T</code>的引用，但不允许调用读方法<code>T get()</code>获取<code>T</code>的引用（获取<code>Object</code>除外）。</li>
+</ul>
+<p>一个是允许读不允许写，另一个是允许写不允许读。</p>
+<p>先记住上面的结论，我们来看Java标准库的<code>Collections</code>类定义的<code>copy()</code>方法：</p>
+<pre><code class="lang-java">public class Collections {
+    // 把src的每个元素复制到dest中:
+    public static &lt;T&gt; void copy(List&lt;? super T&gt; dest, List&lt;? extends T&gt; src) {
+        for (int i=0; i&lt;src.size(); i++) {
+            T t = src.get(i);
+            dest.add(t);
+        }
+    }
+}
+</code></pre>
+<p>它的作用是把一个<code>List</code>的每个元素依次添加到另一个<code>List</code>中。它的第一个参数是<code>List</code>，表示目标<code>List</code>，第二个参数<code>List</code>，表示要复制的<code>List</code>。我们可以简单地用<code>for</code>循环实现复制。在<code>for</code>循环中，我们可以看到，对于类型<code>的变量`src`，我们可以安全地获取类型`T`的引用，而对于类型</code>的变量<code>dest</code>，我们可以安全地传入<code>T</code>的引用。</p>
+<p>这个<code>copy()</code>方法的定义就完美地展示了<code>extends</code>和<code>super</code>的意图：</p>
+<ul>
+<li><code>copy()</code>方法内部不会读取<code>dest</code>，因为不能调用<code>dest.get()</code>来获取<code>T</code>的引用；</li>
+<li><code>copy()</code>方法内部也不会修改<code>src</code>，因为不能调用<code>src.add(T)</code>。</li>
+</ul>
+<p>这是由编译器检查来实现的。如果在方法代码中意外修改了<code>src</code>，或者意外读取了<code>dest</code>，就会导致一个编译错误：</p>
+<pre><code class="lang-java">public class Collections {
+    // 把src的每个元素复制到dest中:
+    public static &lt;T&gt; void copy(List&lt;? super T&gt; dest, List&lt;? extends T&gt; src) {
+        ...
+        T t = dest.get(0); // compile error!
+        src.add(t); // compile error!
+    }
+}
+</code></pre>
+<p>这个<code>copy()</code>方法的另一个好处是可以安全地把一个<code>List&lt;Integer&gt;</code>添加到<code>List&lt;Number&gt;</code>，但是无法反过来添加：</p>
+<pre><code>// copy List&lt;Integer&gt; to List&lt;Number&gt; ok:
+List&lt;Number&gt; numList = ...;
+List&lt;Integer&gt; intList = ...;
+Collections.copy(numList, intList);
+
+// ERROR: cannot copy List&lt;Number&gt; to List&lt;Integer&gt;:
+Collections.copy(intList, numList);
+</code></pre><p>而这些都是通过<code>super</code>和<code>extends</code>通配符，并由编译器强制检查来实现的。</p>
+<h4 id="PECS原则"><a href="#PECS原则" class="headerlink" title="PECS原则"></a>PECS原则</h4><p>何时使用<code>extends</code>，何时使用<code>super</code>？为了便于记忆，我们可以用PECS原则：Producer Extends Consumer Super。</p>
+<p>即：如果需要返回<code>T</code>，它是生产者（Producer），要使用<code>extends</code>通配符；如果需要写入<code>T</code>，它是消费者（Consumer），要使用<code>super</code>通配符。</p>
+<p>还是以<code>Collections</code>的<code>copy()</code>方法为例：</p>
+<pre><code class="lang-java">public class Collections {
+    public static &lt;T&gt; void copy(List&lt;? super T&gt; dest, List&lt;? extends T&gt; src) {
+        for (int i=0; i&lt;src.size(); i++) {
+            T t = src.get(i); // src是producer
+            dest.add(t); // dest是consumer
+        }
+    }
+}
+</code></pre>
+<p>需要返回<code>T</code>的<code>src</code>是生产者，因此声明为<code>List&lt;? extends T&gt;</code>，需要写入<code>T</code>的<code>dest</code>是消费者，因此声明为<code>List&lt;? super T&gt;</code>。</p>
+<h4 id="无限定通配符"><a href="#无限定通配符" class="headerlink" title="无限定通配符"></a>无限定通配符</h4><p>Java的泛型还允许使用无限定通配符（Unbounded Wildcard Type），即只定义一个<code>?</code>：</p>
+<pre><code class="lang-java">void sample(Pair&lt;?&gt; p) {
+}
+</code></pre>
+<p>因为<code>?</code>通配符既没有<code>extends</code>，也没有<code>super</code>，因此：</p>
+<ul>
+<li>不允许调用<code>set(T)</code>方法并传入引用（<code>null</code>除外）；</li>
+<li>不允许调用<code>T get()</code>方法并获取<code>T</code>引用（只能获取<code>Object</code>引用）。</li>
+</ul>
+<p>换句话说，既不能读，也不能写，那只能做一些<code>null</code>判断：</p>
+<pre><code class="lang-java">static boolean isNull(Pair&lt;?&gt; p) {
+    return p.getFirst() == null || p.getLast() == null;
+</code></pre>
+<p>大多数情况下，可以引入泛型参数<code>&lt;T&gt;</code>消除<code>&lt;?&gt;</code>通配符：</p>
+<pre><code class="lang-java">static &lt;T&gt; boolean isNull(Pair&lt;T&gt; p) {
+    return p.getFirst() == null || p.getLast() == null;
+}
+</code></pre>
+<p><code>&lt;?&gt;</code>通配符有一个独特的特点，就是：<code>Pair&lt;?&gt;</code>是所有<code>Pair&lt;T&gt;</code>的超类：</p>
+<pre><code class="lang-java">  public static void main(String[] args) {
+        Pair&lt;Integer&gt; p = new Pair&lt;&gt;(123, 456);
+        Pair&lt;?&gt; p2 = p; // 安全地向上转型
+        System.out.println(p2.getFirst() + &quot;, &quot; + p2.getLast());
+    }
+</code></pre>
+<h4 id="小结-5"><a href="#小结-5" class="headerlink" title="小结"></a>小结</h4><p>使用类似<code>&lt;? super Integer&gt;</code>通配符作为方法参数时表示：</p>
+<ul>
+<li>方法内部可以调用传入<code>Integer</code>引用的方法，例如：<code>obj.setFirst(Integer n);</code>；</li>
+<li>方法内部无法调用获取<code>Integer</code>引用的方法（<code>Object</code>除外），例如：<code>Integer n = obj.getFirst();</code>。</li>
+</ul>
+<p>即使用<code>super</code>通配符表示只能写不能读。</p>
+<p>使用<code>extends</code>和<code>super</code>通配符要遵循PECS原则。</p>
+<p>无限定通配符<code>&lt;?&gt;</code>很少使用，可以用<code>&lt;T&gt;</code>替换，同时它是所有<code>&lt;T&gt;</code>类型的超类。</p>
+<h3 id="泛型和反射"><a href="#泛型和反射" class="headerlink" title="*泛型和反射"></a>*泛型和反射</h3><p>Java的部分反射API也是泛型。例如：<code>Class</code>就是泛型：</p>
+<pre><code class="lang-java">// compile warning:
+Class clazz = String.class;
+String str = (String) clazz.newInstance();
+
+// no warning:
+Class&lt;String&gt; clazz = String.class;
+String str = clazz.newInstance();
+</code></pre>
+<p>调用<code>Class</code>的<code>getSuperclass()</code>方法返回的<code>Class</code>类型是<code>Class&lt;? super T&gt;</code>：</p>
+<pre><code class="lang-java">Class&lt;? super String&gt; sup = String.class.getSuperclass();
+</code></pre>
+<p>构造方法<code>Constructor&lt;T&gt;</code>也是泛型：</p>
+<pre><code class="lang-java">Class&lt;Integer&gt; clazz = Integer.class;
+Constructor&lt;Integer&gt; cons = clazz.getConstructor(int.class);
+Integer i = cons.newInstance(123);
+</code></pre>
+<p>我们可以声明带泛型的数组，但不能用<code>new</code>操作符创建带泛型的数组：</p>
+<pre><code class="lang-java">Pair&lt;String&gt;[] ps = null; // ok
+Pair&lt;String&gt;[] ps = new Pair&lt;String&gt;[2]; // compile error!
+</code></pre>
+<p>必须通过强制转型实现带泛型的数组：</p>
+<pre><code class="lang-java">@SuppressWarnings(&quot;unchecked&quot;)
+Pair&lt;String&gt;[] ps = (Pair&lt;String&gt;[]) new Pair[2];
+</code></pre>
+<p>使用泛型数组要特别小心，因为数组实际上在运行期没有泛型，编译器可以强制检查变量<code>ps</code>，因为它的类型是泛型数组。但是，编译器不会检查变量<code>arr</code>，因为它不是泛型数组。因为这两个变量实际上指向同一个数组，所以，操作<code>arr</code>可能导致从<code>ps</code>获取元素时报错，例如，以下代码演示了不安全地使用带泛型的数组：</p>
+<pre><code class="lang-java">Pair[] arr = new Pair[2];
+Pair&lt;String&gt;[] ps = (Pair&lt;String&gt;[]) arr;
+
+ps[0] = new Pair&lt;String&gt;(&quot;a&quot;, &quot;b&quot;);
+arr[1] = new Pair&lt;Integer&gt;(1, 2);
+
+// ClassCastException:
+Pair&lt;String&gt; p = ps[1];
+String s = p.getFirst();
+</code></pre>
+<p>要安全地使用泛型数组，必须扔掉<code>arr</code>的引用：</p>
+<pre><code class="lang-java">@SuppressWarnings(&quot;unchecked&quot;)
+Pair&lt;String&gt;[] ps = (Pair&lt;String&gt;[]) new Pair[2];
+</code></pre>
+<p>上面的代码中，由于拿不到原始数组的引用，就只能对泛型数组<code>ps</code>进行操作，这种操作就是安全的。</p>
+<p>带泛型的数组实际上是编译器的类型擦除：</p>
+<pre><code class="lang-java">Pair[] arr = new Pair[2];
+Pair&lt;String&gt;[] ps = (Pair&lt;String&gt;[]) arr;
+
+System.out.println(ps.getClass() == Pair[].class); // true
+
+String s1 = (String) arr[0].getFirst();
+String s2 = ps[0].getFirst();
+</code></pre>
+<p>所以我们不能直接创建泛型数组<code>T[]</code>，因为擦拭后代码变为<code>Object[]</code>：</p>
+<pre><code>// compile error:
+public class Abc&lt;T&gt; {
+    T[] createArray() {
+        return new T[5];
+    }
+}
+</code></pre><p>必须借助<code>Class</code>来创建泛型数组：j们还可以利用可变参数创建泛型数组<code>T[]</code>：</p>
+<pre><code class="lang-java">public class ArrayHelper {
+    @SafeVarargs
+    static &lt;T&gt; T[] asArray(T... objs) {
+        return objs;
+    }
+}
+
+String[] ss = ArrayHelper.asArray(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;);
+Integer[] ns = ArrayHelper.asArray(1, 2, 3);
+</code></pre>
+<h4 id="谨慎使用泛型可变参数"><a href="#谨慎使用泛型可变参数" class="headerlink" title="谨慎使用泛型可变参数"></a>谨慎使用泛型可变参数</h4><p>在上面的例子中，我们看到，通过：</p>
+<pre><code>static &lt;T&gt; T[] asArray(T... objs) {
+    return objs;
+}
+</code></pre><p>似乎可以安全地创建一个泛型数组。但实际上，这种方法非常危险。以下代码来自《Effective Java》的示例：</p>
+<pre><code class="lang-java">  public static void main(String[] args) {
+        String[] arr = asArray(&quot;one&quot;, &quot;two&quot;, &quot;three&quot;);
+        System.out.println(Arrays.toString(arr));
+        // ClassCastException:
+        String[] firstTwo = pickTwo(&quot;one&quot;, &quot;two&quot;, &quot;three&quot;);
+        System.out.println(Arrays.toString(firstTwo));
+    }
+
+    static &lt;K&gt; K[] pickTwo(K k1, K k2, K k3) {
+        return asArray(k1, k2);
+    }
+
+    static &lt;T&gt; T[] asArray(T... objs) {
+        return objs;
+    }
+</code></pre>
+<p>直接调用<code>asArray(T...)</code>似乎没有问题，但是在另一个方法中，我们返回一个泛型数组就会产生<code>ClassCastException</code>，原因还是因为擦拭法，在<code>pickTwo()</code>方法内部，编译器无法检测<code>K[]</code>的正确类型，因此返回了<code>Object[]</code>。</p>
+<p>如果仔细观察，可以发现编译器对所有可变泛型参数都会发出警告，除非确认完全没有问题，才可以用<code>@SafeVarargs</code>消除警告。</p>
+<p> 如果在方法内部创建了泛型数组，最好不要将它返回给外部使用。</p>
+<h4 id="小结-6"><a href="#小结-6" class="headerlink" title="小结"></a>小结</h4><p>部分反射API是泛型，例如：<code>Class</code>，<code>Constructor</code>；</p>
+<p>可以声明带泛型的数组，但不能直接创建带泛型的数组，必须强制转型；</p>
+<p>可以通过<code>Array.newInstance(Class, int)</code>创建<code>T[]</code>数组，需要强制转型；</p>
+<p>同时使用泛型和可变参数时需要特别小心。</p>
+
+        </div>
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/donate/alipay.jpg"></li>
+                <li class="wechat-code"><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/donate/wechatqr.jpg"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+        
+          
+            <div class="post-nepre full next">
+          
+            <a href="/2020/06/29/Java教程笔记之注解/" rel="next">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_suanfa/java_007.png" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_suanfa/java_007.png">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                Java教程笔记之注解</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
+      
+<div id="vcomments"></div>
+<script>
+  window.onload = function(){
+      var valine = new Valine();
+      valine.init({
+        el: '#vcomments',
+        appId: "4NBvruApUCpLtmlsyQLevDfx-gzGzoHsz",
+        appKey: "eTSHbT3jvLQPcVYMC7QFXQFd",
+        path: window.location.pathname,
+        placeholder: "你是我一生只会遇见一次的惊喜 ..."
+      })
+  }
+</script>
+
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="www.yulinblog.com" class="profile gravatar"><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/avatar.jpg" itemprop="image" alt="YUYU" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="www.yulinblog.com" itemprop="url" rel="author">YUYU</a>
+            </h3>
+          </div>
+        </div>
+        <hr>
+        <p><i class="iconfont icon-write"></i>一个好奇的人</p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
+</div>
+
+
+
+    </div>    
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="请输入关键词..."/>
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            // PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+    <!-- <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 YU YU<br>
+      powered_by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer> -->
+<footer id="colophon" class="site-footer" role="contentinfo">
+  <div class="site-info">
+    <div class="footertext">
+      <div class="img-preload">
+        <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/wordpress-rotating-ball-o.svg">
+        <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/disqus-preloader.svg">
+      </div>
+
+       <!-- 不蒜子统计 -->
+       <div><i class="iconfont icon-sakura rotating" style="color: #ffc0cb;display:inline-block"></i>
+        <span id="busuanzi_container_site_pv" >
+             <i class="fa fa-eye" aria-hidden="true"></i><span id="busuanzi_value_site_pv"></span>
+        </span>
+        <span class="post-meta-divider">|</span>
+
+        <span id="busuanzi_container_site_uv" style='display:none'>
+            <i class="fa fa-user-o" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+        </span>
+        <i class="iconfont icon-sakura rotating" style="color: #ffc0cb;display:inline-block"></i>
+        </div>
+
+
+      <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span><script>
+  var now = new Date();
+  function createtime() {
+    var grt= new Date("05/19/2020 22:00:00");//此处修改你的建站时间或者网站上线时间
+    now.setTime(now.getTime()+250);
+    days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+    hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+    if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+    mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+    seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+    snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+    document.getElementById("timeDate").innerHTML = "博客已悄悄运行 "+dnum+" 天 ";
+    document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+  }
+  setInterval("createtime()",250);</script>
+  
+      
+      
+</div>
+
+    <div class="footer-device" style="font-family: 'Ubuntu', sans-serif;">
+   
+        <span style="color: #b9b9b9;"></i>&copy 2020 <i class="fa fa-heart" aria-hidden="true" style="color: pink;"></i> YUYU 
+
+        </span>
+  </div><!-- .site-info -->
+</footer>
+
+
+
+<!-- <script src="/js/tocbot.js"></script> -->
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?5b4b3bde9daad1e9f0023976853b7793";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript" src="/js/lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/InsightSearch.js"></script>
+<script type="text/javascript" src="/js/jquery.fancybox.min.js"></script>
+<script type="text/javascript" src="/js/zoom.min.js"></script>
+<script type="text/javascript" src="/js/sakura-app.js"></script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine@1.3.4/dist/Valine.min.js'></script>
+<script src="/js/botui.js"></script>
+
+<script type="text/javascript" src="/js/funnytitle.js"></script>
+<script type="text/javascript" src="/js/loveclick.js"></script>
+
+
+
+<!-- 不蒜子 网页计数器 -->
+<script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script> -->
+<script type="text/javascript">
+/* <![CDATA[ */
+if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  var Poi = {"pjax":"1","movies":{"url": "https://cdn.jsdelivr.net/gh/honjun/hojun@1.2","name":"Unbroken.mp4","live":"close"},"windowheight":"fixed","codelamp":"close","ajaxurl":"","order":"asc","formpostion":"bottom"};
+} else {
+  var Poi = {"pjax":"1","movies":{"url": "https://cdn.jsdelivr.net/gh/honjun/hojun@1.2","name":"Unbroken.mp4","live":"open"},"windowheight":"auto","codelamp":"close","ajaxurl":"","order":"asc","formpostion":"bottom"};
+}
+/* ]]> */
+
+</script>
+<script>
+$(document).ready(function() {
+  if ($(".toc").length > 0 && document.body.clientWidth > 1200) {
+    if ($(".pattern-center").length > 0) { //有图的情况
+      tocbot.init({
+          // Where to render the table of contents.
+          tocSelector: '.toc', // 放置目录的容器
+          // Where to grab the headings to build the table of contents.
+          contentSelector: '.entry-content', // 正文内容所在
+          // Which headings to grab inside of the contentSelector element.
+          scrollSmooth: true,
+          headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+          headingsOffset: -400,
+          scrollSmoothOffset: -85
+      });
+    } else {
+      tocbot.init({
+          // Where to render the table of contents.
+          tocSelector: '.toc', // 放置目录的容器
+          // Where to grab the headings to build the table of contents.
+          contentSelector: '.entry-content', // 正文内容所在
+          // Which headings to grab inside of the contentSelector element.
+          scrollSmooth: true,
+          headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+          headingsOffset: -85,
+          scrollSmoothOffset: -85
+      });
+    }
+    var offsetTop = $('.toc').offset().top - 95;
+    window.onscroll = function() {
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+      if (scrollTop >= offsetTop) {
+        $('.toc').addClass('toc-fixed');
+      } else {
+        $('.toc').removeClass('toc-fixed');
+      }
+    }
+  }
+});
+</script>
+
+    <div class="openNav no-select" style="height: 50px;">
+      <div class="iconflat no-select" style="width: 50px; height: 50px;">
+        <div class="icon"></div>
+      </div>
+      <div class="site-branding search-form-submit">
+        <i class="iconfont js-toggle-search iconsearch icon-search"></i>
+      </div>
+    </div>
+  </section>
+
+
+ 
+<div class="skin-menu no-select" id="mainskin"  style="position: fixed">
+    <div class="theme-controls row-container">
+        <ul class="menu-list">
+            <li id="white-bg"> <i class="fa fa-television" aria-hidden="true"></i></li>
+            <li id="sakura-bg"> <i class="iconfont icon-sakura"></i></li>
+            <li id="gribs-bg"> <i class="fa fa-slack" aria-hidden="true"></i></li>
+            <li id="KAdots-bg"> <i class="iconfont icon-dots"></i></li>
+            <li id="totem-bg"> <i class="fa fa-optin-monster" aria-hidden="true"></i></li>
+            <li id="pixiv-bg"> <i class="iconfont icon-pixiv"></i></li>
+            <li id="bing-bg"> <i class="iconfont icon-bing"></i></li>
+            <li id="dark-bg"> <i class="fa fa-moon-o" aria-hidden="true"></i></li>
+        </ul>
+    </div>
+</div>   
+<canvas id="night-mode-cover"></canvas>
+ 
+  
+
+<div class="changeSkin-gear no-select">
+    <div class="keys" id="setbtn"> <span id="open-skinMenu"> 切换主题 | SCHEME TOOL &nbsp;<i
+                class="iconfont icon-gear inline-block rotating"></i> </span></div>
+</div>
+
+  
+  <div id="mo-nav" class="">
+  <div class="m-avatar">
+    <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/avatar.jpg">
+  </div>
+  <p style="text-align: center; color: #333; font-weight: 900; font-family: 'Ubuntu', sans-serif; letter-spacing: 1.5px">ひみつきちYUYU</p>
+  <p style="text-align: center; word-spacing: 20px;">
+    
+      
+        <a href="http://github.com/sunshine98yy" class="fa fa-github" target="_blank" style="color: #25c6fe; margin-left:20px"></a>
+      
+        <a href="mailto:sunshine98yy@163.com" class="fa fa-envelope" target="_blank" style="color: #dd4b39; margin-left:20px"></a>
+      
+    
+  </p>
+  <ul id="menu-new-1" class="menu">
+    
+      <li>
+        <a href="/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fas fa-home" aria-hidden="true"></i>
+            首页
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/archives">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-archive faa-shake" aria-hidden="true"></i>
+            归档
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/categories/技术/">
+                  <i class="fa fa-code" aria-hidden="true"></i>
+                  技术
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/笔记/">
+                  <i class="fa fa-book" aria-hidden="true"></i>
+                  笔记
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/项目/">
+                  <i class="fa fa-git" aria-hidden="true"></i>
+                  项目
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/随想/">
+                  <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                  随想
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/转载/">
+                  <i class="fa fa-share" aria-hidden="true"></i>
+                  转载
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="javascript:;">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
+            清单
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/bangumi/">
+                  <i class="fa fa-th-list faa-bounce" aria-hidden="true"></i>
+                  书单
+                </a>
+              </li>
+            
+              <li>
+                <a href="/music/">
+                  <i class="fa fa-headphones" aria-hidden="true"></i>
+                  歌单
+                </a>
+              </li>
+            
+              <li>
+                <a href="/tags/光影艺术/">
+                  <i class="fa fa-photo" aria-hidden="true"></i>
+                  摄影
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="/tags/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-tag" aria-hidden="true"></i>
+            标签
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/categories/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-bookmark" aria-hidden="true"></i>
+            分类
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/comment/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-pencil-square-o faa-tada" aria-hidden="true"></i>
+            留言板
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/links/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
+            友人帐
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/donate/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-heart faa-pulse" aria-hidden="true"></i>
+            赞赏
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/atom.xml">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-rss faa-pulse" aria-hidden="true"></i>
+            RSS
+          </span>
+        </a>
+        
+      </li>
+    
+  </ul>
+  <p style="text-align: center; font-size: 13px; color: #b9b9b9;">&copy 2019 hexo-sakura</p>
+</div>
+<button onclick="topFunction()" class="mobile-cd-top" id="moblieGoTop" title="Go to top" style="display: none;"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<style>
+  .aplayer .aplayer-lrc {
+    height: 35px;
+  }
+  .aplayer .aplayer-lrc p{
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 18px !important;
+  }
+  .aplayer .aplayer-lrc p.aplayer-lrc-current{
+    color: #FF1493;
+  }
+  .aplayer.aplayer-narrow .aplayer-body{
+    left: -66px !important;
+  }
+  .aplayer.aplayer-fixed .aplayer-lrc {
+    display: none;
+  }
+  .aplayer .aplayer-lrc.aplayer-lrc-hide {
+      display:none !important;
+  }
+  .aplayer.aplayer-fixed .lrc-show {
+    display: block;
+    background: rgba(255, 255, 255, 0.8);
+  }
+</style>
+<meting-js
+
+    id="980618283"
+
+    server="netease"
+
+    type="playlist"
+
+    fixed="true"
+
+    autoplay="false"
+
+    loop="all"
+
+    order="random"
+
+    preload="auto"
+
+    volume="0.7"
+
+    mutex="true"
+
+</meting-js>
+<script>
+  $(function(){
+    $('body').on('click', '.aplayer', function(){
+      if($('.aplayer-button').hasClass('aplayer-play')) {
+        $('.aplayer-lrc').removeClass('lrc-show');
+      } else {
+        $('.aplayer-lrc').addClass('lrc-show');
+      }
+    })
+  });
+</script>
+  <script type="text/javascript" src="source/js/loveclick.js"></script>
+  
+</body>
+</html>
