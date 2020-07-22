@@ -363,12 +363,13 @@
         <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
         
         <div class="entry-content">
-          <p>maven学习结合<a href="https://www.runoob.com/maven/maven-tutorial.html" target="_blank" rel="noopener">maven教程</a>,<a href="https://www.liaoxuefeng.com/wiki/1252599548343744/1309301146648610" target="_blank" rel="noopener">廖雪峰的官方网站</a>以及慕课的学习资料总结。</p>
-<p>Maven是一个Java项目管理和构建工具，它可以定义项目结构、项目依赖，并使用统一的方式进行自动化构建，是Java项目不可缺少的工具。</p>
-<h3 id="Maven介绍"><a href="#Maven介绍" class="headerlink" title="Maven介绍"></a>Maven介绍</h3><p>在了解Maven之前，我们先来看看一个Java项目需要的东西。</p>
-<p><strong>首先</strong>，我们需要确定引入哪些依赖包。如果我们需要用到<a href="https://commons.apache.org/proper/commons-logging/" target="_blank" rel="noopener">commons logging</a>，我们就必须把commons logging的jar包放入classpath。如果我们还需要<a href="https://logging.apache.org/log4j/" target="_blank" rel="noopener">log4j</a>，就需要把log4j相关的jar包都放到classpath中。这些就是依赖包的管理。</p>
-<p><strong>其次</strong>，我们要确定项目的目录结构。例如，<code>src</code>目录存放Java源码，<code>resources</code>目录存放配置文件，<code>bin</code>目录存放编译生成的<code>.class</code>文件。</p>
-<p><strong>此外</strong>，我们还需要配置环境，例如JDK的版本，编译打包的流程，当前代码的版本号。</p>
+          <p>maven学习结合<a href="https://www.runoob.com/maven/maven-tutorial.html" target="_blank" rel="noopener">maven教程</a>,<a href="https://www.liaoxuefeng.com/wiki/1252599548343744/1309301146648610" target="_blank" rel="noopener">廖雪峰的官方网站</a>以及<a href="https://www.imooc.com/video/8645" target="_blank" rel="noopener">慕课的学习资料</a>总结。</p>
+<p><span style="color:red">Maven是一个<strong>Java项目管理和构建工具</strong>，它可以定义项目结构、项目依赖，并使用统一的方式进行自动化构建。</span></p>
+<p>基于工程对象模型（POM）的概念，通过一个中央信息管理模块，Maven 能够管理项目的构建、报告和文档。</p>
+<h3 id="Maven介绍"><a href="#Maven介绍" class="headerlink" title="Maven介绍"></a>Maven介绍</h3><p>先来看看一个Java项目需要的东西。</p>
+<p><strong>首先</strong>，确定引入哪些依赖包。如果我们需要用到<a href="https://commons.apache.org/proper/commons-logging/" target="_blank" rel="noopener">commons logging</a>，我们就必须把commons logging的jar包放入classpath。如果我们还需要<a href="https://logging.apache.org/log4j/" target="_blank" rel="noopener">log4j</a>，就需要把log4j相关的jar包都放到classpath中。这些是依赖包的管理。</p>
+<p><strong>其次</strong>，确定项目的目录结构。例如，<code>src</code>目录存放Java源码，<code>resources</code>目录存放配置文件，<code>bin</code>目录存放编译生成的<code>.class</code>文件。</p>
+<p><strong>此外</strong>，配置环境，例如JDK的版本，编译打包的流程，当前代码的版本号。</p>
 <p><strong>最后</strong>，除了使用Eclipse这样的IDE进行编译外，我们还必须能通过命令行工具进行编译，才能够让项目在一个独立的服务器上编译、测试、部署。</p>
 <p>这些工作非常琐碎耗时,我们需要一个标准化的<strong>Java项目管理和构建工具</strong>。</p>
 <p>Maven就是专门为Java项目打造的管理和构建工具，它的主要功能有：</p>
@@ -383,8 +384,7 @@
 <p>存放Java源码的目录是<code>src/main/java</code>，存放项目资源文件(如spring, hibernate配置文件)的目录是<code>src/main/resources</code></p>
 <p>存放测试源码的目录是<code>src/test/java</code>，存放测试资源的目录是<code>src/test/resources</code></p>
 <p>所有编译、打包生成的文件都放在<code>target</code>目录，如.class、.jar、.war文件</p>
-<p>这些就是一个Maven项目的标准目录结构。</p>
-<p>所有的目录结构都是约定好的标准结构，我们不要随意修改目录结构。使用标准结构不需要做任何配置，Maven就可以正常使用。</p>
+<p>所有的目录结构都是约定好的标准结构，不要随意修改目录结构。使用标准结构不需要做任何配置，Maven就可以正常使用。</p>
 <p>我们再来看最关键的一个项目描述文件<code>pom.xml</code>，它的内容长得像下面：</p>
 <pre><code class="lang-xml">&lt;project ...&gt;
     &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
@@ -404,7 +404,7 @@
     &lt;/dependencies&gt;
 &lt;/project&gt;
 </code></pre>
-<p>其中，<code>groupId</code>类似于Java的包名，通常是公司或组织名称，<code>artifactId</code>类似于Java的类名，通常是项目名称，再加上<code>version</code>，一个Maven工程就是由<code>groupId</code>，<code>artifactId</code>和<code>version</code>作为唯一标识。我们在引用其他第三方库的时候，也是通过这3个变量确定。</p>
+<p>其中，<code>groupId</code>类似于Java的包名，通常是公司或组织名称，<code>artifactId</code>类似于Java的类名，通常是项目名称，再加上<code>version</code>，<strong>一个Maven工程就是由<code>groupId</code>，<code>artifactId</code>和<code>version</code>作为唯一标识</strong>。我们在引用其他第三方库的时候，也是通过这3个变量确定。</p>
 <p>使用<code>&lt;dependency&gt;</code>声明一个依赖后，Maven就会自动下载这个依赖包并把它放到classpath中。</p>
 <h4 id="安装Maven"><a href="#安装Maven" class="headerlink" title="安装Maven"></a>安装Maven</h4><p>要安装Maven，可以从<a href="https://maven.apache.org/" target="_blank" rel="noopener">Maven官网</a>下载最新的Maven 3.6.x，然后在本地解压，设置几个环境变量，可参考<a href="https://www.runoob.com/maven/maven-setup.html" target="_blank" rel="noopener">Maven 环境配置</a></p>
 <p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_maven20200610185018.png" style="zoom:67%;"></p>
@@ -506,7 +506,7 @@
     &lt;scope&gt;runtime&lt;/scope&gt;
 &lt;/dependency&gt;
 </code></pre>
-<p><code>provided</code>依赖表示编译时需要，但运行时不需要。最典型的<code>provided</code>依赖是Servlet API，编译的时候需要，但是运行时，Servlet服务器内置了相关的jar，所以运行期不需要：</p>
+<p><code>provided</code>依赖表示编译时需要，但运行时不需要。最典型的<code>provided</code>依赖是Servlet-API，编译的时候需要，但是运行时，Servlet服务器内置了相关的jar，所以运行期不需要：</p>
 <pre><code class="lang-xml">&lt;dependency&gt;
     &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
     &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;
@@ -543,7 +543,7 @@
 <h4 id="搜索第三方组件"><a href="#搜索第三方组件" class="headerlink" title="搜索第三方组件"></a>搜索第三方组件</h4><p>最后一个问题：如果我们要引用一个第三方组件，比如<code>okhttp</code>，如何确切地获得它的<code>groupId</code>、<code>artifactId</code>和<code>version</code>？方法是通过<a href="https://search.maven.org/" target="_blank" rel="noopener">search.maven.org</a>搜索关键字，找到对应的组件后，直接复制</p>
 <h3 id="构建流程"><a href="#构建流程" class="headerlink" title="构建流程"></a>构建流程</h3><p>Maven不但有标准化的项目结构，而且还有一套标准化的构建流程，可以自动化实现编译，打包，发布，等等。</p>
 <h4 id="Lifecycle和Phase"><a href="#Lifecycle和Phase" class="headerlink" title="Lifecycle和Phase"></a>Lifecycle和Phase</h4><p>使用Maven时，我们首先要了解什么是Maven的生命周期（lifecycle）。</p>
-<p>Maven的生命周期由一系列阶段（phase）构成，以内置的生命周期<code>default</code>为例，它包含以下phase：</p>
+<p>Maven的生命周期由一系列阶段（phase）构成，以<strong>内置的生命周期<code>default</code>为例</strong>，它包含以下phase：</p>
 <p>validate<br>initialize<br>generate-sources<br>process-sources<br>generate-resources<br>process-resources<br><strong>compile</strong><br>process-classes<br>generate-test-sources<br>process-test-sources<br>generate-test-resources<br>process-test-resources<br>test-compile<br>process-test-classes<br><strong>test</strong><br>prepare-package<br><strong>package</strong><br>pre-integration-test<br>integration-test<br>post-integration-test<br>verify<br>install<br>deploy</p>
 <p>如果我们运行<code>mvn package</code>，Maven就会执行<code>default</code>生命周期，它会从开始一直运行到<code>package</code>这个phase为止：</p>
 <ul>
@@ -559,9 +559,9 @@
 </ul>
 <p>Maven另一个常用的生命周期是<code>clean</code>，它会执行3个phase：</p>
 <ul>
-<li>pre-clean</li>
-<li>clean （注意这个clean不是lifecycle而是phase）</li>
-<li>post-clean</li>
+<li>pre-clean 执行清理前的工作</li>
+<li>clean （注意这个clean不是lifecycle而是phase）清理上一次构建生成的所有文件</li>
+<li>post-clean 执行清理后的文件</li>
 </ul>
 <p>所以，我们使用<code>mvn</code>这个命令时，后面的参数是phase，Maven自动根据生命周期运行到指定的phase。</p>
 <p>更复杂的例子是指定多个phase，例如，运行<code>mvn clean package</code>，Maven先执行<code>clean</code>生命周期并运行到<code>clean</code>这个phase，然后执行<code>default</code>生命周期并运行到<code>package</code>这个phase，实际执行的phase如下：</p>
@@ -580,10 +580,12 @@
 <p>大多数phase在执行过程中，因为我们通常没有在<code>pom.xml</code>中配置相关的设置，所以这些phase什么事情都不做。</p>
 <p><strong>经常用到的phase其实只有几个：</strong></p>
 <ul>
-<li>clean：清理</li>
+<li>clean：清理删除target</li>
 <li>compile：编译</li>
 <li>test：运行测试</li>
 <li>package：打包</li>
+<li>complie 编译</li>
+<li>install 安装jar包到本地仓库中</li>
 </ul>
 <h4 id="Goal"><a href="#Goal" class="headerlink" title="Goal"></a>Goal</h4><p>执行一个phase又会触发一个或多个goal：</p>
 <div class="table-container">
@@ -614,7 +616,58 @@
 </ul>
 <p>大多数情况，我们只要指定phase，就默认执行这些phase默认绑定的goal，只有少数情况，我们可以直接指定运行一个goal，例如，启动Tomcat服务器：</p>
 <pre><code>mvn tomcat:run
-</code></pre><h4 id="小结-1"><a href="#小结-1" class="headerlink" title="小结"></a>小结</h4><p>Maven通过lifecycle、phase和goal来提供标准的构建流程。</p>
+</code></pre><h4 id="pom常用标签"><a href="#pom常用标签" class="headerlink" title="pom常用标签"></a>pom常用标签</h4><p>pom.xml：maven项目的核心管理文件，用于项目描述、组织管理、依赖管理、构建信息的管理，Pom中包含了许多的标签。</p>
+<p><code>&lt;project&gt;</code>：是pom.xml的<strong>根元素</strong>，包含了pom的一些约束信息。</p>
+<p><code>&lt;modelVersion&gt;</code>：是一个固定的版本，也是必须的元素，指定了当前pom的版本。</p>
+<p><strong>坐标的信息由以下标签组成：</strong></p>
+<p><code>&lt;groupId&gt;</code>：主项目的标识，用来定义当前的maven属于哪个实际的项目，和我们为项目创建的包是一样的，是由反写的<strong>公司网址+项目名组成</strong></p>
+<p><em>注意：maven的项目和实际的项目不是一一对应关系，maven项目体现的是模块化的概念，因此一个实际项目往往会划分成很多的模块。</em></p>
+<p><code>&lt;artifactId&gt;</code>：表示一个模块的标识,实际项目中的一个模块，一般会使用项<strong>目名+模块名</strong>进行标识，比如struts2项目，它下面可能分为struts2demo01、struts2demo02，struts2是项目名，而demo01和demo02是模块名</p>
+<p><code>&lt;version&gt;</code>标识当前项目的版本号，版本号一般都是由三个数字来组成的，第一个0标识大版本号，第二个0表示分支版本号，第三个0表示小版本号，一般形式可以写为0.0.1snapshot，snapshot为快照的版本，版本除了snapshot，还有内测的测试版本alpha，以及公测版beta,比如在网上玩新出的游戏，经常会有公测不删档，对应的就是该版本,还有Release版本，它是一个稳定的版本，以及GA版本是一个正式的发布版本。</p>
+<p><code>&lt;packaging&gt;</code>：maven项目打包的方式,不指定默认打包是jar，还可以打包成其他类型，比如war、zip、pom等</p>
+<p><strong>其他的标签：</strong></p>
+<p><code>&lt;name&gt;</code>：项目的描述名，一般是在产生对象文档时候才会使用</p>
+<p><code>&lt;url&gt;</code>：项目的地址</p>
+<p><code>&lt;description&gt;</code>：项目的描述</p>
+<p><code>&lt;developers&gt;</code>：开发人员的列表,项目发布的时候，可以把开发人员的信息填写进去</p>
+<p><code>&lt;licenses&gt;</code>：许可证的信息,比如经常用到的开源框架，它都会有一些许可证的信息</p>
+<p><code>&lt;organization&gt;</code>：组织信息</p>
+<p><code>&lt;dependencies&gt;</code>依赖列表：依赖列表下可以包含多个依赖项<code>&lt;dependency&gt;</code>，依赖项通过制定它的坐标来确定依赖所在的位置，也就是<code>&lt;groupId&gt;&lt;artifactId&gt;&lt;version&gt;</code>，还可以指定它的<code>&lt;type&gt;</code>,还可以使用<code>&lt;scope&gt;</code>指定依赖的范围（之前写的junit的测试范围是test，test表示junit，这个构件（junit的jar包），只在测试的依赖范围内有用，比如在主代码中引用junit这个类，它就会报错）,<code>&lt;optional&gt;</code>该标签有两个值，分别是true和false，它的作用是设置依赖是否可选，默认是false，子项目默认是false时，子项目默认是继承的，如果为true，子项目必须显示的引入该依赖，</p>
+<p><code>&lt;exclusions&gt;</code>是一个排除依赖传递的列表，该标签下可以排除多个依赖通过<code>&lt;exclusion&gt;</code>,作用是：比如Ajar包依赖Bjar包，Bjar包又依赖Cjar包，C对于A来说就是传递依赖，如果A不想依赖C，就可以使用这个标签，比如我们使用的Spirng除了核心的jar包之外，它的jar包还引用其它很多相关的jar包，但对于我们而言只需要使用Spring的jar包，而其他的一些相关的jar包我们并不需要使用</p>
+<pre><code class="lang-xml">&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;&lt;/groupId&gt;
+        &lt;artifacrId&gt;&lt;/artifacrId&gt;
+        &lt;version&gt;&lt;/version&gt;
+        &lt;type&gt;&lt;/type&gt;
+        &lt;scope&gt;&lt;/scope&gt;
+        &lt;optional&gt;&lt;/optional&gt;
+        &lt;exclusions&gt;
+            &lt;exclusion&gt;&lt;/exclusion&gt;
+        &lt;/exclusions&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+<p><code>&lt;dependencyManagement&gt;</code>:依赖的管理,也可以通过<code>&lt;dependencies&gt;</code>声明依赖列表,通过<code>&lt;dependency&gt;</code>包含多个依赖，但是它并不会被运行，也就是说它不会被引入到实际的依赖当中，该标签一般主要用于定义在父模块中，供子模块继承用的。比如之前多个maven项目中，都使用到junit，我们就可以抽象出一个父类的模块，然后在父类模块中对junit进行一个定义，其他子模块直接继承该父模块即可。</p>
+<pre><code class="lang-xml">&lt;dependencyManagement&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;&lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/dependencyManagemant&gt;
+</code></pre>
+<p><code>&lt;bulid&gt;</code>通常为我们构建的行为来提供相应的支持，我们经常在这里使用到<code>&lt;plugins&gt;</code>表示插件的列表，在该标签下可以有多个<code>&lt;plugins&gt;</code>标签，（我们之前使用到source插件对项目进行打包），在<code>&lt;plugins&gt;</code>中依旧是要指出插件的坐标通过<code>&lt;groupId&gt;&lt;artifactId&gt;&lt;version&gt;</code></p>
+<pre><code class="lang-xml">&lt;build&gt;
+    &lt;plugins&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;&lt;/groupId&gt;
+            &lt;artifactId&gt;&lt;/artifactId&gt;
+            &lt;version&gt;&lt;/version&gt;
+        &lt;/plugin&gt;    
+    &lt;/plugins&gt;    
+&lt;/build&gt;
+</code></pre>
+<p><code>&lt;parent&gt;</code>以及<code>&lt;modules&gt;</code>:经常使用到的：<code>&lt;parent&gt;</code>通常<strong>用于在子模块中</strong>对父模块的pom的一个继承，<code>&lt;modules&gt;</code>用来聚合运行多个maven的项目，如果有很多的maven模块是要编译的话呢，我们之前的办法是一个一个的编译，而使用<code>&lt;modules&gt;</code>就可以指定多个的模块，然后在一起进行编译。</p>
+<h4 id="小结-1"><a href="#小结-1" class="headerlink" title="小结"></a>小结</h4><p>Maven通过lifecycle、phase和goal来提供标准的构建流程。</p>
 <p>最常用的构建命令是指定phase，然后让Maven执行到指定的phase：</p>
 <ul>
 <li>mvn clean</li>
@@ -623,7 +676,18 @@
 <li>mvn clean package</li>
 </ul>
 <p>通常情况，我们总是执行phase默认绑定的goal，因此不必指定goal。</p>
-<h3 id="使用插件"><a href="#使用插件" class="headerlink" title="使用插件"></a>使用插件</h3><p>我们在前面介绍了Maven的lifecycle，phase和goal：使用Maven构建项目就是执行lifecycle，执行到指定的phase为止。每个phase会执行自己默认的一个或多个goal。goal是最小任务单元。</p>
+<h3 id="maven核心知识"><a href="#maven核心知识" class="headerlink" title="maven核心知识"></a>maven核心知识</h3><h4 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h4><p>完整的项目构建过程包括：</p>
+<p>清理、编译、测试、打包、集成测试、验证、部署</p>
+<p>maven中定义了三套相互独立的生命周期，每个生命周期包含若干阶段</p>
+<p>clean 清理项目</p>
+<p>default 构建项目 见前文</p>
+<p><strong>site 生成项目站点</strong></p>
+<p>​    pre-site 在生成项目站点前要完成的工作</p>
+<p>​    site 生成项目的站点文档</p>
+<p>​    post-site 在生成项目站点后要完成的工作</p>
+<p>​    site-deploy 发布生成的站点到服务器</p>
+<h4 id="使用插件"><a href="#使用插件" class="headerlink" title="使用插件"></a>使用插件</h4><p>我们在前面介绍了Maven的lifecycle，phase和goal：</p>
+<p>​    使用Maven构建项目就是执行lifecycle，执行到指定的phase为止。每个phase会执行自己默认的一个或多个goal。goal是最小任务单元。</p>
 <p>我们以<code>compile</code>这个phase为例，如果执行：</p>
 <pre><code>mvn compile
 </code></pre><p>Maven将执行<code>compile</code>这个phase，这个phase会调用<code>compiler</code>插件执行关联的<code>compiler:compile</code>这个goal。</p>
@@ -711,9 +775,9 @@
     xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
     &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
 
-    &lt;groupId&gt;com.itranswarp.learnjava&lt;/groupId&gt;
-    &lt;artifactId&gt;module-a&lt;/artifactId&gt;
-    &lt;version&gt;1.0&lt;/version&gt;
+    &lt;groupId&gt;com.itranswarp.learnjava&lt;/groupId&gt;  //包名
+    &lt;artifactId&gt;module-a&lt;/artifactId&gt;  //类名
+    &lt;version&gt;1.0&lt;/version&gt; 
     &lt;packaging&gt;jar&lt;/packaging&gt;
 
     &lt;name&gt;module-a&lt;/name&gt;
@@ -796,11 +860,11 @@
     &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
 
     &lt;groupId&gt;com.itranswarp.learnjava&lt;/groupId&gt;
-    &lt;artifactId&gt;parent&lt;/artifactId&gt;
+    &lt;artifactId&gt;parent&lt;/artifactId&gt; //
     &lt;version&gt;1.0&lt;/version&gt;
-    &lt;packaging&gt;pom&lt;/packaging&gt;
+    &lt;packaging&gt;pom&lt;/packaging&gt; //
 
-    &lt;name&gt;parent&lt;/name&gt;
+    &lt;name&gt;parent&lt;/name&gt; //
 
     &lt;properties&gt;
         &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
@@ -831,7 +895,8 @@
     &lt;/dependencies&gt;
 &lt;/project&gt;
 </code></pre>
-<p>注意到parent的<code>`是</code>pom<code>而不是</code>jar<code>，因为</code>parent<code>本身不含任何Java代码。编写</code>parent<code>的</code>pom.xml`只是为了在各个模块中减少重复的配置。现在我们的整个工程结构如下：</p>
+<p>注意到parent的<code>&lt;packing&gt;</code>是<code>pom</code>而不是<code>jar</code>，因为<code>parent</code>本身不含任何Java代码。编写<code>parent</code>的<code>pom.xml</code>只是为了在各个模块中减少重复的配置。</p>
+<p>现在我们的整个工程结构如下：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_maven20200610233235.jpg" style="zoom:67%;"></p>
 <pre><code class="lang-java">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
     xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
@@ -861,7 +926,7 @@
         &lt;/dependency&gt;
     &lt;/dependencies&gt;
 </code></pre>
-<p>最后，在编译的时候，需要在根目录创建一个<code>pom.xml</code>统一编译：</p>
+<p>最后，<strong>在编译的时候，需要在根目录创建一个<code>pom.xml</code>统一编译</strong>：</p>
 <pre><code class="lang-xml">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
     xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
     xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
@@ -882,9 +947,18 @@
 &lt;/project&gt;
 </code></pre>
 <p>这样，在根目录执行<code>mvn clean package</code>时，Maven根据根目录的<code>pom.xml</code>找到包括<code>parent</code>在内的共4个``，一次性全部编译。</p>
-<h4 id="中央仓库"><a href="#中央仓库" class="headerlink" title="中央仓库"></a>中央仓库</h4><p>其实我们使用的大多数第三方模块都是这个用法，例如，我们使用commons logging、log4j这些第三方模块，就是第三方模块的开发者自己把编译好的jar包发布到Maven的中央仓库中。</p>
-<h4 id="私有仓库"><a href="#私有仓库" class="headerlink" title="私有仓库"></a>私有仓库</h4><p>私有仓库是指公司内部如果不希望把源码和jar包放到公网上，那么可以搭建私有仓库。私有仓库总是在公司内部使用，它只需要在本地的<code>~/.m2/settings.xml</code>中配置好，使用方式和中央仓位没有任何区别。</p>
-<h4 id="本地仓库"><a href="#本地仓库" class="headerlink" title="本地仓库"></a>本地仓库</h4><p>本地仓库是指把本地开发的项目“发布”在本地，这样其他项目可以通过本地仓库引用它。但是我们不推荐把自己的模块安装到Maven的本地仓库，因为每次修改某个模块的源码，都需要重新安装，非常容易出现版本不一致的情况。更好的方法是使用模块化编译，在编译的时候，告诉Maven几个模块之间存在依赖关系，需要一块编译，Maven就会自动按依赖顺序编译这些模块。</p>
+<h4 id="中央仓库"><a href="#中央仓库" class="headerlink" title="中央仓库"></a>中央仓库</h4><p>​    其实我们使用的大多数第三方模块都是这个用法，例如，我们使用commons logging、log4j这些第三方模块，就是第三方模块的开发者自己把编译好的jar包发布到Maven的中央仓库中。</p>
+<h4 id="私有仓库"><a href="#私有仓库" class="headerlink" title="私有仓库"></a>私有仓库</h4><p>​    私有仓库是指公司内部如果不希望把源码和jar包放到公网上，那么可以搭建私有仓库。私有仓库总是在公司内部使用，它只需要在本地的<code>~/.m2/settings.xml</code>中配置好，使用方式和中央仓位没有任何区别。</p>
+<h4 id="本地仓库"><a href="#本地仓库" class="headerlink" title="本地仓库"></a>本地仓库</h4><p>​    本地仓库是指把本地开发的项目“发布”在本地，这样其他项目可以通过本地仓库引用它。但是我们不推荐把自己的模块安装到Maven的本地仓库，因为每次修改某个模块的源码，都需要重新安装，非常容易出现版本不一致的情况。更好的方法是使用模块化编译，在编译的时候，告诉Maven几个模块之间存在依赖关系，需要一块编译，Maven就会自动按依赖顺序编译这些模块。</p>
+<h3 id="配置maven"><a href="#配置maven" class="headerlink" title="配置maven"></a>配置maven</h3><h4 id="在eclipse中配置maven"><a href="#在eclipse中配置maven" class="headerlink" title="在eclipse中配置maven"></a>在eclipse中配置maven</h4><p>参考回答<a href="https://zhuanlan.zhihu.com/p/38762466" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/38762466</a></p>
+<p><a href="https://blog.csdn.net/wcc27857285/article/details/81812304" target="_blank" rel="noopener">https://blog.csdn.net/wcc27857285/article/details/81812304</a></p>
+<h4 id="创建maven项目"><a href="#创建maven项目" class="headerlink" title="创建maven项目"></a>创建maven项目</h4><p><a href="https://blog.csdn.net/u012052268/article/details/78916196?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.edu_weight&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.edu_weight" target="_blank" rel="noopener">https://blog.csdn.net/u012052268/article/details/78916196?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.edu_weight&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.edu_weight</a></p>
+<p>问题解决</p>
+<p>Eclipse创建的项目中没有Deployment Descriptor:XXX怎么办</p>
+<p><a href="https://blog.csdn.net/qq_23689053/article/details/89493879" target="_blank" rel="noopener">https://blog.csdn.net/qq_23689053/article/details/89493879</a></p>
+<h4 id="使用maven构建web项目"><a href="#使用maven构建web项目" class="headerlink" title="使用maven构建web项目"></a>使用maven构建web项目</h4><p>视频参考<a href="https://www.imooc.com/video/8684" target="_blank" rel="noopener">https://www.imooc.com/video/8684</a></p>
+<p><a href="https://blog.csdn.net/q283614346/article/details/90574984?utm_medium=distribute.pc_relevant.none-task-blog-baidujs-4" target="_blank" rel="noopener">Eclipse使用Maven搭建Java Web项目并部署Tomcat</a></p>
+<p>[<a href="https://www.cnblogs.com/wwjj4811/p/10336253.html" target="_blank" rel="noopener">idea搭建SSM的maven项目（tomcat容器）</a>]<a href="https://www.cnblogs.com/wwjj4811/p/10336253.html" target="_blank" rel="noopener">https://www.cnblogs.com/wwjj4811/p/10336253.html</a> </p>
 
         </div>
         <!-- .entry-content -->
