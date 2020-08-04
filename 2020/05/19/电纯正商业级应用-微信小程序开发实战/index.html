@@ -1,0 +1,1936 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  
+  <title itemprop="name">纯正商业级应用-微信小程序开发实战（更新中） | 风中的鱼</title>
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  <meta http-equiv="x-dns-prefetch-control" content="on">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+SerifMerriweather|Merriweather+Sans|Source+Code+Pro|Ubuntu:400,700|Noto+Serif+SC" media="all">
+  <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+  <link rel="stylesheet" id="saukra_css-css" href="/css/style.css" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/lib.min.css" media="all">
+  <link rel="stylesheet" href="/css/font.css" media="all">
+  <link rel="stylesheet" href="/css/insight.css" media="all">
+  <link rel="stylesheet" href="/css/jquery.fancybox.min.css" media="all">
+  <link rel="stylesheet" href="/css/zoom.css" media="all">
+  <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<!--   <link rel="stylesheet" id="saukra_css-css" href="https://2heng.xin/wp-content/cache/autoptimize/css/autoptimize_ad42a61f4c7d4bdd9f91afcff6b5dda5.css
+" type="text/css" media="all"> -->
+  <script>
+  /*Initial Variables*/
+  var mashiro_option = new Object();
+  var mashiro_global = new Object();
+  mashiro_option.NProgressON = true;
+  /* 
+   * 邮箱信息之类的东西可以填在这里，这些js变量基本都作用于sakura-app.js
+   * 这样的设置仅是为了方便在基于PHP开发的主题中设置js变量，既然移植到了Node上，我想或许可以精简这一逻辑吧
+   */
+  mashiro_option.email_domain = "";
+  mashiro_option.email_name = "";
+  mashiro_option.cookie_version_control = "";
+  mashiro_option.qzone_autocomplete = false;
+  mashiro_option.site_name = "ひみつきちYUYU";
+  mashiro_option.author_name = "YUYU";
+  mashiro_option.site_url = "www.yulinblog.com";
+  mashiro_option.v_appId = "4NBvruApUCpLtmlsyQLevDfx-gzGzoHsz";
+  mashiro_option.v_appKey = "eTSHbT3jvLQPcVYMC7QFXQFd";
+  mashiro_option.mathjax = "0";
+  mashiro_option.qq_api_url = "https://api.mashiro.top/qqinfo/"; 
+  mashiro_option.qq_avatar_api_url = "https://api.mashiro.top/qqinfo/";
+
+  // mashiro_option.jsdelivr_css_src = "https://cdn.jsdelivr.net/gh/moezx/cdn@3.4.5/css/lib.min.css";
+  // mashiro_option.float_player_on = true;
+
+  /*End of Initial Variables*/
+  </script>
+  <script type="text/javascript">
+  var bg = "https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/cover/5.jpg,https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/cover/3.jpg,https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/cover/4.jpg,https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/cover/6.jpg".split(",");
+  var bgindex = Math.floor(Math.random()*bg.length);
+  if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
+    alert('朋友，IE浏览器未适配哦~');
+  }
+  </script>
+  <style type="text/css">
+  .hljs-ln{border-collapse:collapse}.hljs-ln td{padding:0}.hljs-ln-n:before{content:attr(data-line-number)}
+  </style>
+  <style type="text/css">.site-top .lower nav{display:block !important;}.author-profile i,.post-like a,.post-share .show-share,.sub-text,.we-info a,span.sitename,.post-more i:hover,#pagination a:hover,.post-content a:hover,.float-content i:hover{color:#FE9600}.feature i,.download,.navigator i:hover,.links ul li:before,.ar-time i,span.ar-circle,.object,.comment .comment-reply-link,.siren-checkbox-radio:checked + .siren-checkbox-radioInput:after{background:#FE9600}::-webkit-scrollbar-thumb{background:#FE9600}.download,.navigator i:hover,.link-title,.links ul li:hover,#pagination a:hover,.comment-respond input[type='submit']:hover{border-color:#FE9600}.entry-content a:hover,.site-info a:hover,.comment h4 a,#comments-navi a.prev,#comments-navi a.next,.comment h4 a:hover,.site-top ul li a:hover,.entry-title a:hover,#archives-temp h3,span.page-numbers.current,.sorry li a:hover,.site-title a:hover,i.iconfont.js-toggle-search.iconsearch:hover,.comment-respond input[type='submit']:hover{color:#FE9600}.comments .comments-main{display:block !important;}.comments .comments-hidden{display:none !important;}background-position:center center;background-attachment:inherit;}
+  </style>
+</head>
+</html>
+<body class="page-template page-template-user page-template-page-analytics page-template-userpage-analytics-php page page-id-1297 chinese-font serif isWebKit">
+  <div class="scrollbar" id="bar">
+  </div>
+  <a href="#" class="cd-top faa-float animated"></a>
+  <section id="main-container">
+    <div class="headertop ">
+  <div id="banner_wave_1"></div>
+  <div id="banner_wave_2"></div>
+  <figure id="centerbg" class="centerbg">
+    <div class="focusinfo no-select">
+      <div class="header-tou">
+        <a href="www.yulinblog.com">
+          <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/avatar.jpg">
+        </a>
+      </div>
+      <div class="header-info">
+        <p>在海边捡贝壳的孩子</p>
+        <div class="top-social_v2">
+          <li id="bg-pre">
+            <img class="flipx" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/other/next-b.svg">
+          </li>
+          
+            
+              
+                <li>
+                  <a href="https://github.com/sunshine98yy" target="_blank" class="social-github" title="github">
+                    <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/social/github1.png">
+                  </a>
+                </li>
+              
+            
+              
+                <li>
+                  <a href="mailto:sunshine98yy@163.com" target="_blank" class="social-github" title="email">
+                    <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/social/email.svg">
+                  </a>
+                </li>
+              
+            
+              
+                <li class="wechat">
+                  <a href="/#">
+                    <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/social/wechat.png">
+                  </a>
+                  <div class="wechatInner">
+                    <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/whchat.jpg">
+                  </div>
+                </li>
+              
+            
+          
+          <li id="bg-next">
+            <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/other/next-b.svg">
+          </li>
+        </div>
+      </div>
+    </div>
+  </figure>
+  <div id="video-container" style="">
+    <video style="object-fit: fill" id="bgvideo" class="video" video-name="" src="" width="auto" preload="auto">
+    </video>
+    <div id="video-btn" class="loadvideo videolive">
+    </div>
+    <div id="video-add">
+    </div>
+    <div class="video-stu">
+    </div>
+  </div>
+  <div class="headertop-down faa-float animated" onclick="headertop_down()">
+    <span>
+      <i class="fa fa-chevron-down" aria-hidden="true">
+      </i>
+    </span>
+  </div>
+</div>
+    <div id="page" class="site wrapper">
+      <header class="site-header no-select gizle sabit" role="banner">
+  <div class="site-top">
+    <div class="site-branding">
+      <span class="site-title">
+        <span class="logolink moe-mashiro">
+          <a href="/">
+            <span class="sakurasono">ひみつきち</span>
+            <span class="shironeko">YUYU</span>
+          </a>
+        </span>
+      </span>
+    </div>
+    <div class="searchbox search-form-submit">
+      <i class="iconfont js-toggle-search iconsearch icon-search">
+      </i>
+    </div>
+    <div id="show-nav" class="showNav mobile-fit">
+      <div class="line line1">
+      </div>
+      <div class="line line2">
+      </div>
+      <div class="line line3">
+      </div>
+    </div>
+    <div class="lower-cantiner">
+      <div class="lower">
+        <nav class="mobile-fit-control hide">
+          <ul id="menu-new" class="menu">
+            
+              <li>
+                <a href="/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fas fa-home" aria-hidden="true"></i>
+                    首页
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-archive faa-shake" aria-hidden="true"></i>
+                    归档
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/categories/技术/">
+                          <i class="fa fa-code" aria-hidden="true"></i>
+                          技术
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/笔记/">
+                          <i class="fa fa-book" aria-hidden="true"></i>
+                          笔记
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/项目/">
+                          <i class="fa fa-git" aria-hidden="true"></i>
+                          项目
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/随想/">
+                          <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                          随想
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/转载/">
+                          <i class="fa fa-share" aria-hidden="true"></i>
+                          转载
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="javascript:;">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
+                    清单
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/bangumi/">
+                          <i class="fa fa-th-list faa-bounce" aria-hidden="true"></i>
+                          书单
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/music/">
+                          <i class="fa fa-headphones" aria-hidden="true"></i>
+                          歌单
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/tags/光影艺术/">
+                          <i class="fa fa-photo" aria-hidden="true"></i>
+                          摄影
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="/tags/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-tag" aria-hidden="true"></i>
+                    标签
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/categories/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-bookmark" aria-hidden="true"></i>
+                    分类
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/comment/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-pencil-square-o faa-tada" aria-hidden="true"></i>
+                    留言板
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/links/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
+                    友人帐
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/donate/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-heart faa-pulse" aria-hidden="true"></i>
+                    赞赏
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/atom.xml">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-rss faa-pulse" aria-hidden="true"></i>
+                    RSS
+                  </span>
+                </a>
+                
+              </li>
+            
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+<div class="pattern-center-blank"></div>
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/200805.jpg);" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/200805.jpg">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      纯正商业级应用-微信小程序开发实战（更新中）</h1>
+      <p class="entry-census">
+        <span>
+          <a href="www.yulinblog.com">
+            <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/avatar.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="www.yulinblog.com">YUYU</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2020-5-19<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
+  </div>
+
+<div id="content" class="site-content">
+  <div id="primary" class="content-area">
+    <main id="main" class="site-main" role="main">
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+        <div class="entry-content">
+          <p>实战项目笔记根据imooc七月的《纯正商业级应用-微信小程序开发实战》记录。</p>
+<p>开发项目前提，有设计图，数据，需求。课程提供相应设计图原稿（PSD），在线API提供数据，线上案例参考。</p>
+<p>学习小程序开发，建议多阅读参考<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/" target="_blank" rel="noopener">小程序开发者文档</a></p>
+<h2 id="小程序杂记"><a href="#小程序杂记" class="headerlink" title="小程序杂记"></a>小程序杂记</h2><h4 id="回调函数的理解"><a href="#回调函数的理解" class="headerlink" title="回调函数的理解"></a>回调函数的理解</h4><p><a href="https://www.zhihu.com/question/19801131" target="_blank" rel="noopener">回调函数式什么</a></p>
+<p>你到一个商店买东西，刚好你要的东西没有货，于是你在店员那里留下了你的电话，过了几天店里有货了，店员就打了你的电话，然后你接到电话后就到店里去取了货。在这个例子里，你的电话号码就叫回调函数，你把电话留给店员就叫登记回调函数，店里后来有货了叫做触发了回调关联的事件，店员给你打电话叫做调用回调函数，你到店里去取货叫做响应回调事件。</p>
+<p><a href="https://segmentfault.com/a/1190000009391074" target="_blank" rel="noopener">关于js的回调、同步回调、异步回调</a></p>
+<h4 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h4><p><a href="https://zhuanlan.zhihu.com/p/62482741" target="_blank" rel="noopener">JS中的箭头函数与this</a></p>
+<h4 id="异步处理"><a href="#异步处理" class="headerlink" title="异步处理"></a>异步处理</h4><p><a href="https://segmentfault.com/a/1190000016537685" target="_blank" rel="noopener">微信小程序踩坑系列——从wx.request谈谈异步处理</a></p>
+<h4 id="微信小程序组件开发规范"><a href="#微信小程序组件开发规范" class="headerlink" title="微信小程序组件开发规范"></a>微信小程序组件开发规范</h4><p><a href="https://segmentfault.com/a/1190000015203935" target="_blank" rel="noopener">微信小程序组件开发规范</a></p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="申请appkey"><a href="#申请appkey" class="headerlink" title="申请appkey"></a>申请appkey</h3><p>提供了在线的API，开发者需要申请开发者key(appkey)，访问www.7yue.pro提供直接用，前提购买该课程</p>
+<p>可以自己在github上搜，提供一下appkey</p>
+<blockquote>
+<p>纯正商业级应用-微信小程序开发实战 appkey</p>
+</blockquote>
+<ul>
+<li>RdshydjBvcYZhMZC</li>
+<li>GgRhTjUNUYn1fHke</li>
+</ul>
+<h3 id="注册微信小程序"><a href="#注册微信小程序" class="headerlink" title="注册微信小程序"></a>注册微信小程序</h3><p>1.进入微信公众平台官网，新用户需注册，点击立即注册</p>
+<p><a href="http://mp.weixin.qq.com" target="_blank" rel="noopener">http://mp.weixin.qq.com</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_chatchat0612_001.jpg" style="zoom:67%;"></p>
+<p>2.注册微信小程序账号（个人、企业）</p>
+<p>微信对个人小程序较保守，做产品上线时，分析自己需要取得哪些资质</p>
+<p>微信公众号：小程序（小程序、小游戏）、服务号、订阅号、企业微信</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_chatchat0612_002.jpg" style="zoom: 33%;"></p>
+<p>注册完成后，在邮箱点击确认注册信息</p>
+<p>3.下载微信开发者工具</p>
+<p>在小程序首页中，选择【文档】—【开发】—【工具】—【下载】</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_chatchat0612_008.jpg" style="zoom: 33%;"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_chatchat0612_007.jpg" style="zoom:33%;"></p>
+<p>下载软件后，按照安装向导进行安装（自定义安装路径）</p>
+<p>4.获取appid</p>
+<p>使用appid可以调用开放API，无ID无法调用开放API,建议填上</p>
+<p>进入小程序后台管理界面，【开发】—【开发设置】—【开发者ID】查看</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_chatchat0612_013.jpg" style="zoom:33%;"></p>
+<h3 id="熟悉开发工具"><a href="#熟悉开发工具" class="headerlink" title="熟悉开发工具"></a>熟悉开发工具</h3><p>首次登陆微信开发者工具，需要扫码登陆</p>
+<h4 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h4><p>填写项目名和AppID，选择项目目录</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_chatchat0612_009.jpg" style="zoom: 50%;"></p>
+<p>进入工作界面，开发工具为我们初始化了部分文件</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_chatchat0612_014.jpg" style="zoom: 50%;"></p>
+<p>机型适配观察上特别注意下iPhone X机型</p>
+<h4 id="开发工具快捷键"><a href="#开发工具快捷键" class="headerlink" title="开发工具快捷键"></a>开发工具快捷键</h4><p>按F1快速查看快捷键，按需查询</p>
+<p>常用快捷键</p>
+<ul>
+<li>快速打开文件 ctrl+p</li>
+<li>搜索近期打开的文件 ctrl+e</li>
+<li>格式化代码 ctrl+shift+F</li>
+</ul>
+<h4 id="其他设置"><a href="#其他设置" class="headerlink" title="其他设置"></a>其他设置</h4><p>外观设置或快捷键设置：勾选【设置】按钮选择</p>
+<h3 id="小程序基础知识"><a href="#小程序基础知识" class="headerlink" title="小程序基础知识"></a>小程序基础知识</h3><h4 id="小程序文件类型"><a href="#小程序文件类型" class="headerlink" title="小程序文件类型"></a>小程序文件类型</h4><p>小程序有四种文件类型（wxss、wxml、js、json），和传统的css、html相比只是扩展名不同，其他大体无区别</p>
+<p>上手小程序需要有js/css/javascript基础</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_chatchat0612_015.jpg" style="zoom: 40%;"></p>
+<p>json文件无注释，只用双引号</p>
+<h4 id="小程序的组织结构"><a href="#小程序的组织结构" class="headerlink" title="小程序的组织结构"></a>小程序的组织结构</h4><h5 id="基础结构"><a href="#基础结构" class="headerlink" title="基础结构"></a>基础结构</h5><p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_chatgit0612_018.jpg" style="zoom: 50%;"></p>
+<p>每个小程序有三个全局文件，全局配置文件（app.json）、全局样式文件（app.wxss）和全局业务文件（app.js）,名字默认无法更改。</p>
+<p>小程序由多个页面（page）组成，一个page页面一般由四种文件类型构成。</p>
+<h5 id="进阶结构（组件式编程思想）"><a href="#进阶结构（组件式编程思想）" class="headerlink" title="进阶结构（组件式编程思想）"></a>进阶结构（组件式编程思想）</h5><p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_chatgit0612_019.jpg" style="zoom:60%;"></p>
+<p>一个页面由更多的组件构成，每个组件包含四种基本类型</p>
+<p>如旧岛项目的目录</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_chatchat0612_020.jpg" style="zoom: 50%;"></p>
+<h4 id="新建第一个小程序页面"><a href="#新建第一个小程序页面" class="headerlink" title="新建第一个小程序页面"></a>新建第一个小程序页面</h4><p><a href="https://developers.weixin.qq.com/miniprogram/dev/reference/" target="_blank" rel="noopener">小程序框架</a></p>
+<p>新建空白项目，项目下<strong>新建app.js，app.json</strong>。新建pages文件夹，文件夹下新建classic文件夹，新建page，在page（目录下会自动生成四个文件classic新建前提需要补充前面两个新建文件的初始代码，否则无法创建）。</p>
+<pre><code class="lang-js">#app.js
+App(
+
+)
+</code></pre>
+<pre><code class="lang-json">#app.json
+{
+
+}
+</code></pre>
+<p>新建page（classic）后，app.json内容自动生成如下,我们称为<strong>路径注册</strong>：</p>
+<p>小程序中每新建一个页面，都必须在App.json中注册，否则小程序找不到page页面</p>
+<pre><code class="lang-json">{
+  &quot;pages&quot;: [
+    &quot;pages/classic&quot;
+  ]
+}
+</code></pre>
+<p>要删除这四个文件方法：</p>
+<p>在文件所在文件夹中删除</p>
+<p>参考小程序开发文档</p>
+<h5 id="pages"><a href="#pages" class="headerlink" title="pages"></a>pages</h5><p>用于指定小程序由哪些页面组成，每一项都对应一个页面的 路径（含文件名） 信息。文件名不需要写文件后缀，框架会自动去寻找对应位置的 <code>.json</code>, <code>.js</code>, <code>.wxml</code>, <code>.wxss</code> 四个文件进行处理。</p>
+<p><strong>数组的第一项代表小程序的初始页面（首页）。小程序中新增/减少页面，都需要对 pages 数组进行修改。</strong></p>
+<pre><code class="lang-json">#app.json
+{
+  &quot;pages&quot;: [
+    &quot;pages/classic/classic&quot;
+  ]
+}
+</code></pre>
+<h5 id="window"><a href="#window" class="headerlink" title="window"></a>window</h5><p>用于设置小程序的状态栏、导航条、标题、窗口背景色。</p>
+<pre><code class="lang-json">&quot;window&quot;: {
+    &quot;navigationBarBackgroundColor&quot;: &quot;#FFFF00&quot;, //导航栏背景颜色
+    &quot;navigationBarTitleText&quot;:&quot;微信接口功能演示&quot;,  //导航栏标题文字内容
+    &quot;navigationBarTextStyle&quot;:&quot;black&quot;,  //导航栏标题颜色，仅支持 black / white
+    &quot;navigationStyle&quot;:&quot;default&quot; //导航栏样式，仅支持以下值：default 默认样式，custom 自定义导航栏
+  }
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_chatchat0613_001.jpg" style="zoom: 15%;"></p>
+<p><code>backgroundColor</code>窗口的背景色:开发界面中不会显示background区域，开启下拉刷新，可实现。在真机上上拉或下拉可显示</p>
+<p>通常情况下，background的颜色和page保持一致，默认白色。</p>
+<pre><code class="lang-json">#app.json
+{
+  &quot;pages&quot;: [
+    &quot;pages/classic/classic&quot;
+  ],
+  &quot;window&quot;: {
+    &quot;navigationBarBackgroundColor&quot;: &quot;#FFFF00&quot;,
+    &quot;navigationBarTitleText&quot;:&quot;鱼鱼的世界&quot;,
+    &quot;navigationBarTextStyle&quot;:&quot;black&quot;,
+    &quot;navigationStyle&quot;:&quot;default&quot;,
+    &quot;backgroundColor&quot;:&quot;#D80000&quot;,
+    &quot;enablePullDownRefresh&quot;:true //是否开启全局的下拉刷新。
+  }
+}
+</code></pre>
+<p>效果如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_chatchat0613_002.jpg" style="zoom:33%;"></p>
+<h4 id="wxml"><a href="#wxml" class="headerlink" title="wxml"></a>wxml</h4><p>WXML（WeiXin Markup Language）是框架设计的一套标签语言，结合<a href="https://developers.weixin.qq.com/miniprogram/dev/component/index.html" target="_blank" rel="noopener">基础组件</a>、<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/event.html" target="_blank" rel="noopener">事件系统</a>，可以构建出页面的结构</p>
+<p><strong>wxml是一个或多个组件的集合</strong></p>
+<p>小程序中的组件和html的标签类似，不同的组件支持不同的属性。</p>
+<p>有些组件成对出现，也有不用成对出现。</p>
+<ul>
+<li>内置组件，微信提供，可直接用</li>
+<li>自定义组件</li>
+</ul>
+<h4 id="flex布局（重要）"><a href="#flex布局（重要）" class="headerlink" title="flex布局（重要）"></a>flex布局（重要）</h4><p>布局 代码控制元素排布</p>
+<p>需要布局的技巧和嵌套的思维</p>
+<h5 id="block、inline和inline-block"><a href="#block、inline和inline-block" class="headerlink" title="block、inline和inline-block"></a>block、inline和inline-block</h5><p>块级元素独占一行，默认情况下，<strong>是否是块级元素通过display设置</strong>，默认是block</p>
+<p>块状元素转为行内元素：<code>display:inline</code></p>
+<p>行内元素默认不设置高宽，要实现行内元素有高宽属性，设置<code>display:inline-block;</code>(并列显示在一行)</p>
+<pre><code class="lang-css">#wxss
+.chunk{
+  display: inline-block;
+  width: 100px;
+  height: 200px;
+}
+.color1{
+  background-color: brown;
+}
+.color2{
+  background-color: aqua;
+}
+.color3{
+  background-color: blue;
+}
+</code></pre>
+<pre><code class="lang-html">#wxml
+&lt;view class=&quot;chunk color1&quot;/&gt;
+&lt;view class=&quot;chunk color2&quot;/&gt;
+&lt;view class=&quot;chunk color3&quot;/&gt;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_chatchat0613_005.jpg" style="zoom: 50%;"></p>
+<h5 id="flex容器"><a href="#flex容器" class="headerlink" title="flex容器"></a>flex容器</h5><p>容器将消除容器内item的块状特性，块状元素放置于弹性盒子中，块状元素的特性会消除。flex是 flexible box(弹性盒子、弹性布局)的缩写</p>
+<p>两个基本概念 flex container和flex item ，弹性布局需要container和item</p>
+<pre><code class="lang-css">#wxss
+.chunk{
+  width: 100px;
+  height: 200px;
+}
+.container{
+  display: flex;
+}
+.color1{
+  background-color: brown;
+}
+.color2{
+  background-color: aqua;
+}
+.color3{
+  background-color: blue;
+}
+
+#wxml，为3个小色块增加一个容器
+&lt;view class = &quot;container&quot;&gt;
+&lt;view class=&quot;chunk color1&quot;/&gt;
+&lt;view class=&quot;chunk color2&quot;/&gt;
+&lt;view class=&quot;chunk color3&quot;/&gt;
+&lt;/view&gt;
+</code></pre>
+<h5 id="flex-direction属性解析"><a href="#flex-direction属性解析" class="headerlink" title="flex-direction属性解析"></a>flex-direction属性解析</h5><p><strong>设置容器下子项item的排布方向</strong></p>
+<pre><code class="lang-css">.container{
+  display: flex;
+  flex-direction: column; //纵向排列
+  flex-direction: row;//水平排列（默认是水平排列）
+  flex-direction: row-reverse;//reverse倒序排布(靠右开始，有偏移现象)
+  flex-direction: column-reverse;
+}
+</code></pre>
+<p>view组件高度自适应，宽度默认100%</p>
+<p>使用<strong>reverse</strong> ，元素的内容和位置都会倒序</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_chatchat0613_008.jpg" style="zoom:33%;"></p>
+<p>container容器内元素高度自适应。对于上面的view组件来说，不指定高度的话通常自适应填满高度。指定容器后出现偏移效果。</p>
+<h5 id="justify-content属性解析"><a href="#justify-content属性解析" class="headerlink" title="justify-content属性解析"></a>justify-content属性解析</h5><p>控制子元素的对齐方向：</p>
+<pre><code class="lang-css">justify-content:flex-end（下右）
+
+justify-content:flex-start（上左）
+
+justify-content:center（居中）
+</code></pre>
+<pre><code class="lang-css">justify-content:space-between //水平（垂直）方向平均分布
+
+justify-content:space-around //实现等距分布（每个item之间的距离均相等）
+</code></pre>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_chatchat0613_009.jpg" style="zoom:50%;"></td>
+<td><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_chatchat0613_010.jpg" style="zoom:50%;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h5 id="主轴与交叉轴"><a href="#主轴与交叉轴" class="headerlink" title="主轴与交叉轴"></a>主轴与交叉轴</h5><p>主轴和交叉轴的方向取决于flex-direction</p>
+<p><strong>justify-content指的是主轴上的排布和对齐方式，align-items指的是交叉轴上的排布和对齐方式</strong></p>
+<pre><code class="lang-css">.container{
+  display: flex;
+  flex-direction: column; //此时垂直方向是主轴
+  height: 400px;
+  background: #999999;
+  justify-content: start;
+  align-items: center;
+}
+</code></pre>
+<p>当flex-direction: column-reverse;或flex-direction: column-reverse;时，主轴水平垂直方向不变，变得是轴朝向（左-右，上-下）</p>
+<h5 id="baseline与stretch属性"><a href="#baseline与stretch属性" class="headerlink" title="baseline与stretch属性"></a>baseline与stretch属性</h5><p>align-items: baseline; 并不是让子元素对齐，而是让元素内的文字对齐，以第一个元素的文字作为基线对齐</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/07291.jpg" style="zoom:33%;"></p>
+<p>align-items:stretch:不让子 元素随其内容自适用（没有定义height的情况）</p>
+<h5 id="flex-wrap与消除间距"><a href="#flex-wrap与消除间距" class="headerlink" title="flex-wrap与消除间距"></a>flex-wrap与消除间距</h5><p>一行中总元素的宽度大于行宽度，会默认让元素平均分配一行的宽度，不会出现换行</p>
+<pre><code class="lang-css">flex-wrap: wrap; //元素换行
+flex-wrap: nowrap; //默认，元素不换行
+</code></pre>
+<p>消除换行后的间距:间距是flex的默认特性，可以设置总高度消除换行的效果。</p>
+<h4 id="小程序组件"><a href="#小程序组件" class="headerlink" title="小程序组件"></a>小程序组件</h4><h5 id="组件概述"><a href="#组件概述" class="headerlink" title="组件概述"></a>组件概述</h5><p>以项目中心形点赞按钮为例：</p>
+<p>自定义组件，实现js，css，wxml的复用</p>
+<p>新建存放所有组键的目录components，新建心形组件目录,如like，新建component，如index。index只是组件的文件名，并不是组件的名字。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/072903.jpg" style="zoom: 50%;"></p>
+<p>组件新建完成后不会有任何效果</p>
+<p><strong>要使组件生效：需在页面中引用组件，并在wmxl使用它才会生效</strong></p>
+<p>在classic页面中引用组件</p>
+<p>like不是组件名，只是组件的目录。为了规范组件名，使用like-cmp(根据实际规范调整)</p>
+<pre><code class="lang-json">配置文件中引入组件
+#classic.json
+{
+  &quot;usingComponents&quot;: {
+    &quot;like-cmp&quot;:&quot;/components/like/index&quot; //键名：键值
+  }
+}
+页面中使用引入的组件
+#classic.wxml
+&lt;like-cmp/&gt;（自定义组件）
+</code></pre>
+<p>绝对路径：/components/like/index</p>
+<p>相对路径：../../components/like/index</p>
+<p>/表示根目录，../表示返回上一级目录。在同级别目录下才能访问</p>
+<h2 id="项目实战"><a href="#项目实战" class="headerlink" title="项目实战"></a>项目实战</h2><h3 id="LIKE组件实现"><a href="#LIKE组件实现" class="headerlink" title="LIKE组件实现"></a>LIKE组件实现</h3><p>功能：点击心形图片，显示点赞数加1，并且图片有切换效果。</p>
+<h4 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h4><h5 id="图片的存放"><a href="#图片的存放" class="headerlink" title="图片的存放"></a>图片的存放</h5><p>存放组件用图片的方式：</p>
+<ol>
+<li>在对应的组件目录下面新建images图片</li>
+<li>component文件夹下新建images,统一存放</li>
+</ol>
+<p>根目录下的images存放和页面page相关的图片</p>
+<p>​    此处选择把images文件夹放在like目录下</p>
+<p>引用图片</p>
+<pre><code class="lang-html">#index.wxml
+&lt;image src=&quot;images/like.png&quot;&gt;&lt;/image&gt;
+</code></pre>
+<p>问题：图片显示尺寸过大</p>
+<p>在小程序中使用image标签引入图片时必须用image标签设置高和宽，否则是默认尺寸。</p>
+<p>设置图片的原始尺寸</p>
+<pre><code class="lang-css">#index.wxss
+.container{
+    height:32px;
+    width:28px;
+}
+</code></pre>
+<pre><code class="lang-html">#index.wxml
+&lt;image class=&quot;container&quot; src=&quot;images/like.png&quot;&gt;&lt;/image&gt;
+</code></pre>
+<p>问题：按照原始尺寸设计图片效果还是过大</p>
+<h5 id="尺寸的单位"><a href="#尺寸的单位" class="headerlink" title="尺寸的单位"></a>尺寸的单位</h5><p>px是固定尺寸单位，px 和小程序系统中看到的图片大小比例是1：2，用的话除以2（iPhone6的标准），</p>
+<p><strong>rpx</strong>可以屏幕自适应，px 和小程序系统中看到的图片大小比例是 1：1</p>
+<p>根据不同的情况做不同的选择。如字体的大小推荐px,不随机型变化而变化。绝大多数情况可以使用rpx。</p>
+<p>2倍换算的前提：以iphone6尺寸为前提（宽750，高1334像素）</p>
+<h4 id="样式"><a href="#样式" class="headerlink" title="样式"></a>样式</h4><h5 id="样式设计"><a href="#样式设计" class="headerlink" title="样式设计"></a>样式设计</h5><p>考虑数字和图标的布局问题</p>
+<pre><code class="lang-css">#index.wxml
+&lt;view class = &quot;container&quot;&gt;//放入容器
+    &lt;image src=&quot;images/like.png&quot;/&gt;
+    &lt;text&gt;9&lt;/text&gt;//真实数字取值从服务器中得到
+&lt;/view&gt;
+
+#index.wxss
+.container{
+  display: flex; //应用flex布局的第一步
+  flex-direction: row;
+  padding: 10rpx; //9不会被遮挡
+  width: 80rpx;//限定宽度，无法自适应
+}
+
+//样式选择器写法，子元素少的情况使用
+.container image{//image是子元素，此写法避免了给每个元素定义一个新的样式名称
+  width: 32rpx;
+  height: 28rpx;
+}
+
+.container text{
+  position: relative;//数字进行偏移
+  bottom: 10rpx;//上偏移
+  left:6 rpx;//右偏移
+  font-size: 24rpx;
+  color: #bbbbbb;
+  line-height:24rpx ; //文字上下本身有空白间距，消除字体自带上下空白间距
+}
+</code></pre>
+<p>现在的效果组件占满了一行。<strong>容器设置了flex,并不会改变自身的块状属性，改变了子元素的块状属性。</strong></p>
+<pre><code class="lang-css">#index.wxss
+.container{
+  display: inline-flex; //宽度自适应
+  flex-direction: row;
+  padding: 10rpx; //9不会被遮挡  
+}
+</code></pre>
+<p>自适应缺陷：数字的位数跳动时，由于变化也会使页面产生跳动。根据实际情况确定</p>
+<h5 id="组件样式继承"><a href="#组件样式继承" class="headerlink" title="组件样式继承"></a>组件样式继承</h5><p>全局样式（app.wxss）中设置的样式影响到组件的话，就说组件继承了全局样式。</p>
+<pre><code class="lang-css">#app.wxss
+page{
+  font-family: cambria;
+  font-size: 32rpx;
+}
+</code></pre>
+<p>全局样式给了一种统一默认的样式，某个组件有自己样式可以覆盖</p>
+<p><strong>问题：</strong>page设置样式为什么能影响组件？</p>
+<p>虽然组件本身不是页面，但要使用组件时需要被引用到页面中</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/07294.jpg" style="zoom: 67%;"></p>
+<p>组件能继承的样式只有两种：font,color</p>
+<p>几乎所有的css样式可以被page页面继承</p>
+<h4 id="组件状态切换和数字加减"><a href="#组件状态切换和数字加减" class="headerlink" title="组件状态切换和数字加减"></a>组件状态切换和数字加减</h4><p>监听到用户操作后触发业务逻辑,在js中写业务逻辑</p>
+<p><strong>监听用户的点击事件</strong>bind:tap=“onLike”</p>
+<pre><code class="lang-css">#index.wxml
+&lt;view bind:tap=&quot;onLike&quot; class = &quot;container&quot;&gt;
+&lt;image src=&quot;images/like.png&quot;/&gt;
+&lt;text&gt;9&lt;/text&gt;
+&lt;/view&gt;
+
+#index.js
+ methods: {
+    onLike:function(event){
+      console.log(event);
+    }
+  }
+</code></pre>
+<p>index.js的默认代码结构</p>
+<pre><code class="lang-js">Component({
+  /**
+   * 组件的属性列表
+   */
+  properties: {
+
+  },
+
+  /**
+   * 组件的初始数据
+   */
+  data: {
+
+  },
+
+  /**
+   * 组件的方法列表
+   */
+  methods: {
+
+  }
+})
+</code></pre>
+<p>catch:tap 和bind:tap  参考文档</p>
+<p>bind事件绑定不会阻止冒泡事件向上冒泡，catch事件绑定可以阻止冒泡事件向上冒泡</p>
+<h3 id="组件数据、事件与属性"><a href="#组件数据、事件与属性" class="headerlink" title="组件数据、事件与属性"></a>组件数据、事件与属性</h3><h4 id="数据来源的三种途径"><a href="#数据来源的三种途径" class="headerlink" title="数据来源的三种途径"></a>数据来源的三种途径</h4><p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_chat0614_001.jpg" style="zoom: 50%;"></p>
+<h4 id="数据绑定"><a href="#数据绑定" class="headerlink" title="数据绑定"></a>数据绑定</h4><p>数据从js传到wxml中，并由wxml来显示数据的模式叫做<strong>数据绑定</strong></p>
+<p>数据从js传到wxml中，<strong>使用双括号进行引用</strong></p>
+<pre><code class="lang-css">#index.wxml
+&lt;view bind:tap=&quot;onLike&quot; class = &quot;container&quot;&gt;
+&lt;image src=&quot;images/like.png&quot;/&gt;
+&lt;text&gt;{{count}}&lt;/text&gt; //双花括号引用js中的数据
+&lt;/view&gt;
+
+#index.js
+  /**
+   * 组件的初始数据
+   */
+ data: {
+    count:99
+  }
+</code></pre>
+<h5 id="三元表达式与图片切换"><a href="#三元表达式与图片切换" class="headerlink" title="三元表达式与图片切换"></a>三元表达式与图片切换</h5><pre><code class="lang-css"> data: {
+     like:true,
+    count1:99,
+    count2:999//true,显示99，false,显示999
+  }
+
+&lt;text&gt;{{like?count1:count2}}&lt;/text&gt; //使用三元表达式
+</code></pre>
+<pre><code class="lang-css">三元表达式也可以用在属性中
+&lt;image src=&quot;{{like?'images/like.png':'images/like@dis.png'}}&quot;/&gt;
+可以用三元表达式实现点击后图片更换的效果
+(在双引号中表示字符串时用单引号)
+</code></pre>
+<p><strong>写法可以优化，将路径定义成js变量</strong></p>
+<pre><code>data: {
+     like:true,
+    count1:99,
+    count2:999//true,显示99，false,显示999
+    yesSrc:&#39;images/like.png&#39;
+    nosrc:&#39;images/like@dis.png&#39;
+  }
+
+&lt;image src=&quot;{{like?yesSrc:noSrc}}&quot;/&gt;
+</code></pre><h5 id="组件的封装性和开放性"><a href="#组件的封装性和开放性" class="headerlink" title="组件的封装性和开放性"></a>组件的封装性和开放性</h5><pre><code class="lang-js">data: {
+     like:true,
+    count:99,  //从组件的外部可以访问开放的数据
+    yesSrc:&#39;images/like.png&#39;
+    nosrc:&#39;images/like@dis.png&#39; //内部数据不需开放
+  }
+</code></pre>
+<p>开放的数据：从组件外部可以设置被开放出来的数据，如like,count,<strong>开放的数据也可以称为属性</strong></p>
+<p><strong>properties下面定义的变量称为属性。属性是js对象</strong>,可以指定3个属性的特性，type必填，value和observer选填。value不填会自动选取默认值。</p>
+<p>语法如下</p>
+<pre><code class="lang-js">properties: {
+    like:{
+      type: Boolean,
+      value: false,
+      observer:function(){
+      }
+    },
+
+    count:{
+      type:Number,  
+    }      
+  },
+
+data: {
+    yesSrc:&#39;images/like.png&#39;
+    nosrc:&#39;images/like@dis.png&#39; //内部数据不需开放
+</code></pre>
+<p>属性亦可以通过{{}}引用</p>
+<h5 id="let-var与组件事件应用"><a href="#let-var与组件事件应用" class="headerlink" title="let,var与组件事件应用"></a><strong>let,var与组件事件应用</strong></h5><p><strong>ES6建议使用let定义变量</strong>。let声明变量的作用域局限在块级，var定义的变量作用域至少是一个函数之内，是全域。</p>
+<p>setData（）方法接收一个<strong>js对象</strong>，在对象中<strong>更新</strong>变量。</p>
+<p>用于将数据从逻辑层发送到视图层 （异步），同时改变对应的 this.data 的值（同步）。对象以key:value形式表示，将this.data中key对应的值改变成value</p>
+<p><strong>应用</strong>：通过鼠标点击切换like属性状态</p>
+<p>在onlike函数中修改LIKE属性的取值</p>
+<p>通过this关键字访问component下面的各种变量</p>
+<pre><code class="lang-js"> methods: {
+    onLike:function(event){
+    let like = this.properties.like
+    let count = this.properties.count
+
+    count = like?count-1:count+1//like为真，点一次是假，-1
+    //更新数值
+    this.setData({
+      count:count,
+      like:!like
+    })
+    }
+</code></pre>
+<h3 id="访问API数据与ES6在小程序中的应用"><a href="#访问API数据与ES6在小程序中的应用" class="headerlink" title="访问API数据与ES6在小程序中的应用"></a>访问API数据与ES6在小程序中的应用</h3><p><strong>看待组件的两种观点</strong></p>
+<p>组件实现代码的分离（对初学者来说更重要）</p>
+<p>组件实现代码的复用</p>
+<h4 id="访问和封装API"><a href="#访问和封装API" class="headerlink" title="访问和封装API"></a>访问和封装API</h4><h5 id="项目（Blink）-APl介绍和测试API"><a href="#项目（Blink）-APl介绍和测试API" class="headerlink" title="项目（Blink） APl介绍和测试API"></a>项目（Blink） APl介绍和测试API</h5><p>访问项目的API需要APPKEY，七月有风网站有开发文档，点击可查看API说明</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_chat0614_002.jpg" style="zoom:50%;"></p>
+<p><a href="http://bl.7yue.pro/v1/classic/latest?appkey=GgRhTjUNUYn1fHke" target="_blank" rel="noopener">http://bl.7yue.pro/v1/classic/latest?appkey=GgRhTjUNUYn1fHke</a></p>
+<h5 id="小程序中访问API加载数据"><a href="#小程序中访问API加载数据" class="headerlink" title="小程序中访问API加载数据"></a>小程序中访问API加载数据</h5><p>加载时机：在classic页面初始化时向服务器发送请求获取数据</p>
+<h6 id="生命周期函数"><a href="#生命周期函数" class="headerlink" title="生命周期函数"></a>生命周期函数</h6><p>微信提供生命周期函数监听页面的生命周期，描述了一个页面完整的生命历程。</p>
+<p>在classic页面的classic.js中，小程序已经初始化了很多生命周期函数.</p>
+<p>对于生命周期函数来说，原理和之前自己创建的监听点击事件类似，区别在于<strong>函数的触发由小程序内部的系统来调用</strong>，不用bind来监听。触发函数名由系统定义。</p>
+<pre><code class="lang-js">// pages/classic/classic.js
+Page({
+
+  /** * 页面的初始数据*/
+  data: {
+
+  },
+
+  /** * 生命周期函数--监听页面加载 */
+  onLoad: function (options) {
+
+  },
+
+  /** * 生命周期函数--监听页面初次渲染完成 */
+  onReady: function () {
+
+  },
+
+  /** * 生命周期函数--监听页面显示 */
+  onShow: function () {
+
+  },
+
+  /*** 生命周期函数--监听页面隐藏 */
+  onHide: function () {
+
+  },
+
+  /*** 生命周期函数--监听页面卸载 */
+  onUnload: function () {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+
+  },
+
+  /** * 页面上拉触底事件的处理函数 */
+  onReachBottom: function () {
+
+  },
+
+  /*** 用户点击右上角分享 */
+  onShareAppMessage: function () {
+
+  }
+})
+</code></pre>
+<p>onload是最先被触发，更快的从服务器获取数据</p>
+<h6 id="发起-HTTPS-网络请求"><a href="#发起-HTTPS-网络请求" class="headerlink" title="发起 HTTPS 网络请求"></a>发起 HTTPS 网络请求</h6><p><a href="https://developers.weixin.qq.com/miniprogram/dev/api/network/request/wx.request.html" target="_blank" rel="noopener">wx.request(Object object)</a>函数，专门用于向服务器发起http请求,函数接收js对象，对象可以包含很多子参数</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">默认值</th>
+<th style="text-align:left">必填</th>
+<th style="text-align:left">说明</th>
+<th style="text-align:left">最低版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">url</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">开发者服务器接口地址</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">data</td>
+<td style="text-align:left">string/object/ArrayBuffer</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">否</td>
+<td style="text-align:left">请求的参数</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">header</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">否</td>
+<td style="text-align:left">设置请求的 header，header 中不能设置 Referer。 <code>content-type</code> 默认为 <code>application/json</code></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">timeout</td>
+<td style="text-align:left">number</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">否</td>
+<td style="text-align:left">超时时间，单位为毫秒</td>
+<td style="text-align:left"><a href="https://developers.weixin.qq.com/miniprogram/dev/framework/compatibility.html" target="_blank" rel="noopener">2.10.0</a></td>
+</tr>
+<tr>
+<td style="text-align:left">method</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">GET</td>
+<td style="text-align:left">否</td>
+<td style="text-align:left">HTTP 请求方法</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">dataType</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">json</td>
+<td style="text-align:left">否</td>
+<td style="text-align:left">返回的数据格式</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">responseType</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">text</td>
+<td style="text-align:left">否</td>
+<td style="text-align:left">响应的数据类型</td>
+<td style="text-align:left"><a href="https://developers.weixin.qq.com/miniprogram/dev/framework/compatibility.html" target="_blank" rel="noopener">1.7.0</a></td>
+</tr>
+<tr>
+<td style="text-align:left">enableHttp2</td>
+<td style="text-align:left">boolean</td>
+<td style="text-align:left">false</td>
+<td style="text-align:left">否</td>
+<td style="text-align:left">开启 http2</td>
+<td style="text-align:left"><a href="https://developers.weixin.qq.com/miniprogram/dev/framework/compatibility.html" target="_blank" rel="noopener">2.10.4</a></td>
+</tr>
+<tr>
+<td style="text-align:left">enableQuic</td>
+<td style="text-align:left">boolean</td>
+<td style="text-align:left">false</td>
+<td style="text-align:left">否</td>
+<td style="text-align:left">开启 quic</td>
+<td style="text-align:left"><a href="https://developers.weixin.qq.com/miniprogram/dev/framework/compatibility.html" target="_blank" rel="noopener">2.10.4</a></td>
+</tr>
+<tr>
+<td style="text-align:left">enableCache</td>
+<td style="text-align:left">boolean</td>
+<td style="text-align:left">false</td>
+<td style="text-align:left">否</td>
+<td style="text-align:left">开启 cache</td>
+<td style="text-align:left"><a href="https://developers.weixin.qq.com/miniprogram/dev/framework/compatibility.html" target="_blank" rel="noopener">2.10.4</a></td>
+</tr>
+<tr>
+<td style="text-align:left">success</td>
+<td style="text-align:left">function</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">否</td>
+<td style="text-align:left"><strong>接口调用成功的回调函数</strong></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">fail</td>
+<td style="text-align:left">function</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">否</td>
+<td style="text-align:left">接口调用失败的回调函数</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">complete</td>
+<td style="text-align:left">function</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">否</td>
+<td style="text-align:left">接口调用结束的回调函数（调用成功、失败都会执行）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/073111.jpg" style="zoom:50%;"></p>
+<p>不管服务器返回的http状态码的值是多少，都会执行success回调函数。只有如断网断电，走fail回调函数</p>
+<pre><code class="lang-js">onLoad: function (options) {
+    wx.request({
+      url:&#39;http://bl.7yue.pro/v1/classic/latest&#39;,
+      header:{
+        appkey:&quot;GgRhTjUNUYn1fHke&quot;,
+      }
+    })
+  },
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_chat0614_004.jpg" style="zoom: 50%;"></p>
+<p>出现不在合法域名列表的报错：设置—项目设置—不校验合法域名（只适用于开发阶段），最终上线发布还是需要后台账户添加访问的域名</p>
+<p>出现401错误，点击调试器右上方方框按钮调试器弹出</p>
+<p>以上是简单的访问示例，还需要<strong>对访问请求封装</strong>。避免到处写request。</p>
+<h4 id="重要概念"><a href="#重要概念" class="headerlink" title="重要概念"></a>重要概念</h4><h5 id="同步、异步与回调函数"><a href="#同步、异步与回调函数" class="headerlink" title="*同步、异步与回调函数"></a>*同步、异步与回调函数</h5><p>目前服务器返回的数据显示在network调试窗口，<strong>如何在JS代码中获取服务器返回的数据</strong>？</p>
+<p>wx.request是异步函数，let a =wx.request()不能使用。无法用a接收异步调用结果。</p>
+<p>在小程序中，request只有异步没有同步（强制异步）。</p>
+<p><strong>异步编程</strong>:性能好，维护代码成本高</p>
+<p><strong>同步编程</strong>：等待某个调用结束后代码才会继续进行</p>
+<p>那么如何接收异步函数的调用结果呢？回调函数</p>
+<blockquote>
+<p><strong>回调函数</strong>：在JavaScript中，回调函数具体的定义为：函数A作为参数(函数引用)传递到另一个函数B中，并且这个函数B执行函数A。我们就说函数A叫做回调函数。（一个函数被传入之后又被调用）如果没有名称(函数表达式)，就叫做匿名回调函数。</p>
+</blockquote>
+<p>//<strong>success是回调函数，在success函数中接收异步调用的结果。</strong></p>
+<p>什么时候调用这个回调函数？</p>
+<p><strong>服务器返回数据时，小程序触发success函数的执行，把服务器返回的结果当作参数(res)</strong></p>
+<p>写法一：</p>
+<pre><code class="lang-js"> onLoad: function (options) {
+    wx.request({
+      url: &#39;http://bl.7yue.pro/v1/classic/latest&#39;,
+      header:{
+        appkey:&quot;GgRhTjUNUYn1fHke&quot;,
+      },
+      success:function(res){
+        console.log(res)
+      }
+    })
+  },
+</code></pre>
+<p>输出的是一个json对象</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_chat0614_005.jpg" alt></p>
+<p>当前回调函数的缺点：</p>
+<p><strong>回调函数外可以正确访问this,回调函数内无法正确访问this</strong></p>
+<pre><code class="lang-js">  data: {
+    test:1,
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    console.log(this.data.test) //能够访问1
+    wx.request({
+      url:&#39;http://bl.7yue.pro/v1/classic/latest&#39;,
+      header:{
+        appkey:&quot;GgRhTjUNUYn1fHke&quot;,
+      },
+      success:function(res){
+        console.log(this.data.test)//报错，无法正确访问1
+      }
+    })
+  },
+</code></pre>
+<p>这是回调函数定义的最大缺陷。函数作用域发生了改变，this的指代不明确。</p>
+<p><strong>解决方法</strong></p>
+<p>​    先在回调函数的外面把this的指代保存</p>
+<pre><code class="lang-js">onLoad: function (options) {
+    console.log(this.data.test)
+    let that = this.data.test
+    wx.request({
+      url:&#39;http://bl.7yue.pro/v1/classic/latest&#39;,
+      header:{
+        appkey:&quot;GgRhTjUNUYn1fHke&quot;,
+      },
+      success:function(res){
+        console.log(that)  //1
+      }
+    })
+  },
+</code></pre>
+<p>更好的方法:ES6中<strong>箭头函数</strong></p>
+<p>箭头函数完全修复了<code>this</code>的指向，<code>this</code>总是指向词法作用域，也就是外层调用者<code>obj</code></p>
+<pre><code class="lang-js">success:(res)=&gt;{ 
+    console.log(this.data.test)//可以正确访问
+}
+</code></pre>
+<p>Promise函数,要正确的使用</p>
+<p>解决异步嵌套的问题（回调地狱）</p>
+<h5 id="const常量"><a href="#const常量" class="headerlink" title="const常量"></a>const常量</h5><p>对上述的wx.reques进行二次封装，封装原因：</p>
+<p>​    处理返回的异常</p>
+<p>​    不用每次使用都写链接</p>
+<p>项目根目录下新建config.js文件</p>
+<pre><code class="lang-js">#config.js
+const config = {  //设置固定不变的常量，参数不可改变
+  api_base_url:&#39;http://bl.7yue.pro/v1/&#39;,
+  appkey: &quot;GgRhTjUNUYn1fHke&quot;
+}
+</code></pre>
+<p>新建util文件夹，文件夹下新建http.js文件（对wx.request做封装），需要对request进行封装（API调用封装成一个类）</p>
+<h5 id="Module-export-和import"><a href="#Module-export-和import" class="headerlink" title="Module export 和import"></a>Module export 和import</h5><p>在ES6里，<strong>一个js文件就是一个模块</strong>，模块内部定义的变量外部无法访问，需要模块主动输出（export）</p>
+<p>export</p>
+<pre><code class="lang-js">#config.js
+export const config = {  //设置固定不变的常量，参数不可改变
+  api_base_url:&#39;http://bl.7yue.pro/v1/&#39;,
+  appkey: &quot;GgRhTjUNUYn1fHke&quot;
+}
+
+export let fun1 = function(){  //函数
+}
+</code></pre>
+<pre><code class="lang-js">------------另一种写法--------
+#config.js
+const config = {  //设置固定不变的常量，参数不可改变
+  api_base_url:&#39;http://bl.7yue.pro/v1/&#39;,
+  appkey: &quot;GgRhTjUNUYn1fHke&quot;
+}
+let fun1 = function(){  //函数
+
+}
+export {config,fun1}
+export {config as config1,fun1} //导出时改变名字
+</code></pre>
+<p>import</p>
+<pre><code class="lang-js">#http.js
+import {config，fun1} from &#39;/config.js&#39;
+</code></pre>
+<h5 id="封装HTTP类"><a href="#封装HTTP类" class="headerlink" title="封装HTTP类"></a>封装HTTP类</h5><p>对request进行封装（<strong>API调用封装成一个类</strong>）    </p>
+<pre><code class="lang-js">#http.js
+import {config} from &#39;/config.js&#39;//引用路径错，要使用相对路径
+
+class HTTP{
+  request(params){//给类添加方法，直接写方法名
+     if(!params.method){
+       params.method=&quot;GET&quot;  //默认GET
+     }
+     //params(url,method,data)
+    wx.request({
+      url:config.api_base_url+params.url,
+      method:params.method,
+      data:params.data,
+      header:{
+        &#39;content-type&#39;:&#39;application/json&#39;,
+        &#39;appkey&#39;:config.appkey
+      },
+      success: (res)=&gt;{
+        let code = res.statusCode.toString()
+        if (code.startsWith(&#39;2&#39;)){  //状态码是2开头，成功，否则失败
+        }
+        else{
+
+        }
+      },
+      fail:(err)=&gt;{
+
+      }
+    })
+  }
+}
+export {HTTP}
+</code></pre>
+<h5 id="回调函数传递"><a href="#回调函数传递" class="headerlink" title="回调函数传递"></a>回调函数传递</h5><p>对http.js中的res做处理返回给调用方</p>
+<p>classic.js调用request方法时实际是传入params的</p>
+<pre><code class="lang-js">#classic.js
+import {HTTP} from &#39;/util/http.js&#39;（会报错）
+import {HTTP} from &#39;../../util/http.js&#39;（会报错）
+let http = new HTTP()//实例化一个类
+
+onLoad: function (options) {    
+    //request需要接收的参数
+    http.request({
+      url: &#39;classic/latest&#39;,
+      success:(res)=&gt;{
+        console.log(res)
+      }
+    })
+  },
+</code></pre>
+<p>回调函数success作为参数(函数引用)传递到另一个函数request中，并且这个函数request执行函数success。</p>
+<p>上述代码运行报错</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/200801.jpg" style="zoom: 67%;"></p>
+<p>问题：为什么路径会解析错误？</p>
+<p>小程序把绝对路径当做相对路径来解析</p>
+<h4 id="通用错误处理"><a href="#通用错误处理" class="headerlink" title="通用错误处理"></a>通用错误处理</h4><p>HTTP状态码帮助大致判断成功还是失败</p>
+<p>错误码表示具体的业务错误</p>
+<pre><code class="lang-js">#http.js
+import {config} from &#39;../config.js&#39;
+
+const tips = { //json对象，记录每个错误码对应的错误提示
+  1:&#39;出现了一个错误&#39;, //默认的错误码
+  1005:&#39;appkey无效，请申请&#39;,
+  3000:&#39;期刊不存在&#39;
+}
+
+class HTTP{
+  request(params){
+     //url,method,data,
+    wx.request({
+      url:config.api_base_url+params.url,
+      method:params.method,
+      data:params.data,
+      header:{
+        &#39;content-type&#39;:&#39;application/json&#39;,
+        &#39;appkey&#39;:config.appkey
+      },
+      success: (res)=&gt;{
+        let code = res.statusCode.toString()
+        if (code.startsWith(&#39;2&#39;)){  //状态码是2开头，成功，否则失败
+          params.success(res.data)
+        }
+        else{
+          //服务器异常
+          let error_code = res.data.error_code
+         this._show_error(error_code)
+        }
+      },
+      fail:(err)=&gt;{
+        //API调用失败
+        // wx.showToast({ //向用户提供错误信息，接收json对象
+        //   title: &#39;错误&#39;, //向用户提示的文字
+        //   icon:&#39;none&#39;,
+        //   duration:&#39;2000&#39; //设置showToast的显示时间
+        // })
+        this._show_error(1)
+      }
+    })
+  }
+
+
+  _show_error(error_code){//标注表示私有方法
+    if(!error_code){
+      error_code = 1
+    }
+    wx.showToast({
+      title: tips[error_code],
+      icon:&#39;none&#39;,
+      duration:2000
+    })
+  }
+}
+
+export{HTTP}
+</code></pre>
+<h3 id="流行页面编码与组件的细节"><a href="#流行页面编码与组件的细节" class="headerlink" title="流行页面编码与组件的细节"></a>流行页面编码与组件的细节</h3><h4 id="引入model概念"><a href="#引入model概念" class="headerlink" title="*引入model概念"></a>*引入model概念</h4><p>根目录下新建models文件夹，文件夹下新建classic.js文件</p>
+<p>注意和classic文件下classic.js的区别</p>
+<pre><code class="lang-js">#classic.js
+import {HTTP} from &#39;../util/http.js&#39;
+class ClassicModel extends HTTP{
+    getLatest(sCallback){//去服务器加载最新的期刊,getLast中需要接收这个回调函数,用sCallback，
+        this.request({通过继承来引用方法的话不用实例化了
+            url:&#39;classic/latest&#39;,
+            success:(res)=&gt;{
+            //success函数接收到api的调用结果后调用sCallback函数把结果回传回去
+            sCallback(res)
+     }
+   })
+    }
+}
+export {ClassModel}
+</code></pre>
+<p>回到主调方classic.js</p>
+<p>希望接受异步函数的调用结果只能用回调函数，<strong>把回调函数当做参数传到getLatest（）中</strong></p>
+<pre><code class="lang-js"> import {ClassicModel} from &#39;../../models/classic.js&#39;
+ let classic = new classicModel()
+ onLoad: function (options) {
+     classic.getLatest((res)=&gt;{
+        console.log(res)
+    } )//异步的方法
+  },
+</code></pre>
+<p>使用回调函数剥夺了函数return的能力</p>
+<p>有什么办法能在执行getLatest方法后通过变量等于的方式接收到此次调用的结果？有，promise</p>
+<h4 id="组件属性赋值与页面渲染流程"><a href="#组件属性赋值与页面渲染流程" class="headerlink" title="组件属性赋值与页面渲染流程"></a>组件属性赋值与页面渲染流程</h4><p>现在已经成功在getLates()回调函数中拿到服务器回传的数据，拿到数据后做什么？</p>
+<p>把数据显示在页面上。页面由一个个组件构成，我们要把从服务器取到的数据传入组件内部让组件显示这个数据。</p>
+<p>如like组件，<strong>把js中的数据传达页面上，调用setData函数</strong></p>
+<pre><code class="lang-js">#classic.js 
+ data: {
+    classicData:null
+  },
+
+onLoad: function (options) {
+    classic.getLatest((res)=&gt;{
+      this.setData({
+          classicData:res
+      })
+    })
+  },
+</code></pre>
+<p>如何把like组件需要的数据传到like组件中？</p>
+<p>从组件的外部设置组件的属性</p>
+<pre><code class="lang-js">#classic.wxml
+&lt;v-like like=&quot;{{classicData.like_status}}&quot; count = &quot;{{classicData.fav_nums}}&quot;
+</code></pre>
+<p>流程：在页面的classic.js中加载服务器数据——数据绑定——wxml可以使用数据——-通过组属性传递到组件内部</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/200802.jpg" style="zoom:50%;"></p>
+<p>setData：做数据更新</p>
+<h3 id="movie组件的实现"><a href="#movie组件的实现" class="headerlink" title="movie组件的实现"></a>movie组件的实现</h3><p>components目录下新建文件夹classic，文件夹下新建movie文件夹，新建index的component文件。</p>
+<p>在index.wxml下编写骨架</p>
+<pre><code class="lang-html">#index.wxml
+&lt;view&gt;
+    &lt;image&gt;&lt;/image&gt;
+    &lt;image&gt;&lt;/image&gt;
+    &lt;text&gt;&lt;/text&gt;
+&lt;/view&gt;
+</code></pre>
+<p>完成骨架后，有两个</p>
+<p>问题需要解决1.骨架的样式2.骨架中需要填入数据</p>
+<p>思考数据的思路：data内部数据（小图片电影）和properties属性数据(文本图片，大图片)</p>
+<pre><code class="lang-js">#index.js
+properties:{
+    img:String
+    content:String
+},
+</code></pre>
+<p>movie下新建文件夹images,存放movie@tag.png</p>
+<pre><code class="lang-html">#index.wxml
+&lt;view&gt;
+    &lt;image src=&quot;{{img}}&quot;&gt;&lt;/image&gt;
+    &lt;image src=&quot;images/movie@tag.png&quot;&gt;&lt;/image&gt;
+    &lt;text&gt;{{content}}&lt;/text&gt;
+&lt;/view&gt;
+</code></pre>
+<p>classic.json引用movie-cmp组件</p>
+<pre><code class="lang-json">{
+  &quot;usingComponents&quot;: {
+    &quot;like-cmp&quot;:&quot;/components/like/index&quot;,
+    &quot;movie-cmp&quot;:&quot;/components/classic/movie/index&quot;
+  }
+}
+</code></pre>
+<p>classsic.wxml中引用组件</p>
+<pre><code class="lang-html">&lt;like-cmp like=&quot;{{classicData.like_status}}&quot; count=&quot;{{classicData.fav_nums}}&quot;/&gt;
+&lt;movie-cmp img=&quot;{{classicData.image}}&quot; content=&quot;{{classicData.content}}&quot;
+</code></pre>
+<p>index.wxss编写样式</p>
+<pre><code class="lang-html">#index.wxml
+&lt;view class=&quot;classic-container&quot;&gt;
+    &lt;image class=&quot;class-img&quot; src=&quot;{{img}}&quot;&gt;&lt;/image&gt;
+    &lt;image clasa=&quot;tag&quot; src=&quot;images/movie@tag.png&quot;&gt;&lt;/image&gt;
+    &lt;text class=&quot;ccontent&quot;&gt;{{content}}&lt;/text&gt;
+&lt;/view&gt;
+</code></pre>
+<pre><code class="lang-css">.classic-container{
+    display:flex;
+    flex-direction:column,
+    align-items:center //所有元素居中对齐
+}
+
+.classic-img{
+    width:750rpx;
+    height:500rpx,
+}
+
+.tag{
+    width:46rpx;
+    height:142rpx;
+    position:relative;//是相对当前位置的偏移
+    right:310rpx;
+    bottom:58rpx;
+}
+
+.content{
+    font-size:36rpx;
+    max-width:550rpx;  //文本换行(不固定宽度，自适应)
+}
+</code></pre>
+<h3 id="再谈组件"><a href="#再谈组件" class="headerlink" title="再谈组件"></a>再谈组件</h3><p>通过组件提交数据到服务器</p>
+
+        </div>
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/donate/alipay.jpg"></li>
+                <li class="wechat-code"><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/donate/wechatqr.jpg"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+          
+            <div class="post-nepre half previous">
+          
+            <a href="/2020/05/19/Linux核心技术与应用笔记（一）/" rel="prev">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/linux_note/Linuxpaper.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/linux_note/Linuxpaper.jpg">
+              </div>
+              <span class="label">
+              Previous Post</span>
+              <div class="info">
+                <h3>
+                Linux核心技术与应用笔记（一）</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+        
+          
+            <div class="post-nepre half next">
+          
+            <a href="/2020/05/19/Hexo-Theme-Sakura/" rel="next">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/sakura/sakura01.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/sakura/sakura01.jpg">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                Sakura主题配置总结</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
+      
+<div id="vcomments"></div>
+<script>
+  window.onload = function(){
+      var valine = new Valine();
+      valine.init({
+        el: '#vcomments',
+        appId: "4NBvruApUCpLtmlsyQLevDfx-gzGzoHsz",
+        appKey: "eTSHbT3jvLQPcVYMC7QFXQFd",
+        path: window.location.pathname,
+        placeholder: "你是我一生只会遇见一次的惊喜 ..."
+      })
+  }
+</script>
+
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="www.yulinblog.com" class="profile gravatar"><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/avatar.jpg" itemprop="image" alt="YUYU" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="www.yulinblog.com" itemprop="url" rel="author">YUYU</a>
+            </h3>
+          </div>
+        </div>
+        <hr>
+        <p><i class="iconfont icon-write"></i>一个好奇的人</p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
+</div>
+
+
+
+    </div>    
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="请输入关键词..."/>
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            // PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+    <!-- <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 YU YU<br>
+      powered_by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer> -->
+<footer id="colophon" class="site-footer" role="contentinfo">
+  <div class="site-info">
+    <div class="footertext">
+      <div class="img-preload">
+        <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/wordpress-rotating-ball-o.svg">
+        <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/disqus-preloader.svg">
+      </div>
+
+       <!-- 不蒜子统计 -->
+       <div><i class="iconfont icon-sakura rotating" style="color: #ffc0cb;display:inline-block"></i>
+        <span id="busuanzi_container_site_pv" >
+             <i class="fa fa-eye" aria-hidden="true"></i><span id="busuanzi_value_site_pv"></span>
+        </span>
+        <span class="post-meta-divider">|</span>
+
+        <span id="busuanzi_container_site_uv" style='display:none'>
+            <i class="fa fa-user-o" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+        </span>
+        <i class="iconfont icon-sakura rotating" style="color: #ffc0cb;display:inline-block"></i>
+        </div>
+
+
+      <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span><script>
+  var now = new Date();
+  function createtime() {
+    var grt= new Date("05/19/2020 22:00:00");//此处修改你的建站时间或者网站上线时间
+    now.setTime(now.getTime()+250);
+    days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+    hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+    if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+    mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+    seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+    snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+    document.getElementById("timeDate").innerHTML = "博客已悄悄运行 "+dnum+" 天 ";
+    document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+  }
+  setInterval("createtime()",250);</script>
+  
+      
+      
+</div>
+
+    <div class="footer-device" style="font-family: 'Ubuntu', sans-serif;">
+   
+        <span style="color: #b9b9b9;"></i>&copy 2020 <i class="fa fa-heart" aria-hidden="true" style="color: pink;"></i> YUYU 
+
+        </span>
+  </div><!-- .site-info -->
+</footer>
+
+
+
+<!-- <script src="/js/tocbot.js"></script> -->
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?5b4b3bde9daad1e9f0023976853b7793";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript" src="/js/lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/InsightSearch.js"></script>
+<script type="text/javascript" src="/js/jquery.fancybox.min.js"></script>
+<script type="text/javascript" src="/js/zoom.min.js"></script>
+<script type="text/javascript" src="/js/sakura-app.js"></script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine@1.3.4/dist/Valine.min.js'></script>
+<script src="/js/botui.js"></script>
+
+<script type="text/javascript" src="/js/funnytitle.js"></script>
+<script type="text/javascript" src="/js/loveclick.js"></script>
+
+
+
+<!-- 不蒜子 网页计数器 -->
+<script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script> -->
+<script type="text/javascript">
+/* <![CDATA[ */
+if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  var Poi = {"pjax":"1","movies":{"url": "https://cdn.jsdelivr.net/gh/honjun/hojun@1.2","name":"Unbroken.mp4","live":"close"},"windowheight":"fixed","codelamp":"close","ajaxurl":"","order":"asc","formpostion":"bottom"};
+} else {
+  var Poi = {"pjax":"1","movies":{"url": "https://cdn.jsdelivr.net/gh/honjun/hojun@1.2","name":"Unbroken.mp4","live":"open"},"windowheight":"auto","codelamp":"close","ajaxurl":"","order":"asc","formpostion":"bottom"};
+}
+/* ]]> */
+
+</script>
+<script>
+$(document).ready(function() {
+  if ($(".toc").length > 0 && document.body.clientWidth > 1200) {
+    if ($(".pattern-center").length > 0) { //有图的情况
+      tocbot.init({
+          // Where to render the table of contents.
+          tocSelector: '.toc', // 放置目录的容器
+          // Where to grab the headings to build the table of contents.
+          contentSelector: '.entry-content', // 正文内容所在
+          // Which headings to grab inside of the contentSelector element.
+          scrollSmooth: true,
+          headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+          headingsOffset: -400,
+          scrollSmoothOffset: -85
+      });
+    } else {
+      tocbot.init({
+          // Where to render the table of contents.
+          tocSelector: '.toc', // 放置目录的容器
+          // Where to grab the headings to build the table of contents.
+          contentSelector: '.entry-content', // 正文内容所在
+          // Which headings to grab inside of the contentSelector element.
+          scrollSmooth: true,
+          headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+          headingsOffset: -85,
+          scrollSmoothOffset: -85
+      });
+    }
+    var offsetTop = $('.toc').offset().top - 95;
+    window.onscroll = function() {
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+      if (scrollTop >= offsetTop) {
+        $('.toc').addClass('toc-fixed');
+      } else {
+        $('.toc').removeClass('toc-fixed');
+      }
+    }
+  }
+});
+</script>
+
+    <div class="openNav no-select" style="height: 50px;">
+      <div class="iconflat no-select" style="width: 50px; height: 50px;">
+        <div class="icon"></div>
+      </div>
+      <div class="site-branding search-form-submit">
+        <i class="iconfont js-toggle-search iconsearch icon-search"></i>
+      </div>
+    </div>
+  </section>
+
+
+ 
+<div class="skin-menu no-select" id="mainskin"  style="position: fixed">
+    <div class="theme-controls row-container">
+        <ul class="menu-list">
+            <li id="white-bg"> <i class="fa fa-television" aria-hidden="true"></i></li>
+            <li id="sakura-bg"> <i class="iconfont icon-sakura"></i></li>
+            <li id="gribs-bg"> <i class="fa fa-slack" aria-hidden="true"></i></li>
+            <li id="KAdots-bg"> <i class="iconfont icon-dots"></i></li>
+            <li id="totem-bg"> <i class="fa fa-optin-monster" aria-hidden="true"></i></li>
+            <li id="pixiv-bg"> <i class="iconfont icon-pixiv"></i></li>
+            <li id="bing-bg"> <i class="iconfont icon-bing"></i></li>
+            <li id="dark-bg"> <i class="fa fa-moon-o" aria-hidden="true"></i></li>
+        </ul>
+    </div>
+</div>   
+<canvas id="night-mode-cover"></canvas>
+ 
+  
+
+<div class="changeSkin-gear no-select">
+    <div class="keys" id="setbtn"> <span id="open-skinMenu"> 切换主题 | SCHEME TOOL &nbsp;<i
+                class="iconfont icon-gear inline-block rotating"></i> </span></div>
+</div>
+
+  
+  <div id="mo-nav" class="">
+  <div class="m-avatar">
+    <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/img/custom/avatar.jpg">
+  </div>
+  <p style="text-align: center; color: #333; font-weight: 900; font-family: 'Ubuntu', sans-serif; letter-spacing: 1.5px">ひみつきちYUYU</p>
+  <p style="text-align: center; word-spacing: 20px;">
+    
+      
+        <a href="http://github.com/sunshine98yy" class="fa fa-github" target="_blank" style="color: #25c6fe; margin-left:20px"></a>
+      
+        <a href="mailto:sunshine98yy@163.com" class="fa fa-envelope" target="_blank" style="color: #dd4b39; margin-left:20px"></a>
+      
+    
+  </p>
+  <ul id="menu-new-1" class="menu">
+    
+      <li>
+        <a href="/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fas fa-home" aria-hidden="true"></i>
+            首页
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/archives">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-archive faa-shake" aria-hidden="true"></i>
+            归档
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/categories/技术/">
+                  <i class="fa fa-code" aria-hidden="true"></i>
+                  技术
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/笔记/">
+                  <i class="fa fa-book" aria-hidden="true"></i>
+                  笔记
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/项目/">
+                  <i class="fa fa-git" aria-hidden="true"></i>
+                  项目
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/随想/">
+                  <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                  随想
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/转载/">
+                  <i class="fa fa-share" aria-hidden="true"></i>
+                  转载
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="javascript:;">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
+            清单
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/bangumi/">
+                  <i class="fa fa-th-list faa-bounce" aria-hidden="true"></i>
+                  书单
+                </a>
+              </li>
+            
+              <li>
+                <a href="/music/">
+                  <i class="fa fa-headphones" aria-hidden="true"></i>
+                  歌单
+                </a>
+              </li>
+            
+              <li>
+                <a href="/tags/光影艺术/">
+                  <i class="fa fa-photo" aria-hidden="true"></i>
+                  摄影
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="/tags/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-tag" aria-hidden="true"></i>
+            标签
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/categories/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-bookmark" aria-hidden="true"></i>
+            分类
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/comment/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-pencil-square-o faa-tada" aria-hidden="true"></i>
+            留言板
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/links/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
+            友人帐
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/donate/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-heart faa-pulse" aria-hidden="true"></i>
+            赞赏
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/atom.xml">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-rss faa-pulse" aria-hidden="true"></i>
+            RSS
+          </span>
+        </a>
+        
+      </li>
+    
+  </ul>
+  <p style="text-align: center; font-size: 13px; color: #b9b9b9;">&copy 2019 hexo-sakura</p>
+</div>
+<button onclick="topFunction()" class="mobile-cd-top" id="moblieGoTop" title="Go to top" style="display: none;"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<style>
+  .aplayer .aplayer-lrc {
+    height: 35px;
+  }
+  .aplayer .aplayer-lrc p{
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 18px !important;
+  }
+  .aplayer .aplayer-lrc p.aplayer-lrc-current{
+    color: #FF1493;
+  }
+  .aplayer.aplayer-narrow .aplayer-body{
+    left: -66px !important;
+  }
+  .aplayer.aplayer-fixed .aplayer-lrc {
+    display: none;
+  }
+  .aplayer .aplayer-lrc.aplayer-lrc-hide {
+      display:none !important;
+  }
+  .aplayer.aplayer-fixed .lrc-show {
+    display: block;
+    background: rgba(255, 255, 255, 0.8);
+  }
+</style>
+<meting-js
+
+    id="980618283"
+
+    server="netease"
+
+    type="playlist"
+
+    fixed="true"
+
+    autoplay="false"
+
+    loop="all"
+
+    order="random"
+
+    preload="auto"
+
+    volume="0.7"
+
+    mutex="true"
+
+</meting-js>
+<script>
+  $(function(){
+    $('body').on('click', '.aplayer', function(){
+      if($('.aplayer-button').hasClass('aplayer-play')) {
+        $('.aplayer-lrc').removeClass('lrc-show');
+      } else {
+        $('.aplayer-lrc').addClass('lrc-show');
+      }
+    })
+  });
+</script>
+  <script type="text/javascript" src="source/js/loveclick.js"></script>
+  
+</body>
+</html>
