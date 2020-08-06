@@ -366,9 +366,11 @@
           <p>实战项目笔记根据imooc七月的《纯正商业级应用-微信小程序开发实战》记录。</p>
 <p>开发项目前提，有设计图，数据，需求。课程提供相应设计图原稿（PSD），在线API提供数据，线上案例参考。</p>
 <p>学习小程序开发，建议多阅读参考<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/" target="_blank" rel="noopener">小程序开发者文档</a></p>
-<h2 id="小程序杂记"><a href="#小程序杂记" class="headerlink" title="小程序杂记"></a>小程序杂记</h2><h4 id="回调函数的理解"><a href="#回调函数的理解" class="headerlink" title="回调函数的理解"></a>回调函数的理解</h4><p><a href="https://www.zhihu.com/question/19801131" target="_blank" rel="noopener">回调函数式什么</a></p>
+<h2 id="小程序杂记"><a href="#小程序杂记" class="headerlink" title="小程序杂记"></a>小程序杂记</h2><p>入手小程序前，务必理解回调函数。</p>
+<h4 id="回调函数的理解"><a href="#回调函数的理解" class="headerlink" title="回调函数的理解"></a>回调函数的理解</h4><p><a href="https://www.zhihu.com/question/19801131" target="_blank" rel="noopener">回调函数式什么</a></p>
 <p>你到一个商店买东西，刚好你要的东西没有货，于是你在店员那里留下了你的电话，过了几天店里有货了，店员就打了你的电话，然后你接到电话后就到店里去取了货。在这个例子里，你的电话号码就叫回调函数，你把电话留给店员就叫登记回调函数，店里后来有货了叫做触发了回调关联的事件，店员给你打电话叫做调用回调函数，你到店里去取货叫做响应回调事件。</p>
-<p><a href="https://segmentfault.com/a/1190000009391074" target="_blank" rel="noopener">关于js的回调、同步回调、异步回调</a></p>
+<p><a href="https://blog.csdn.net/samt007/article/details/54647361" target="_blank" rel="noopener">关于js的callback回调函数以及嵌套回调函数的执行过程理解</a></p>
+<p><a href="https://blog.csdn.net/UnderIcon/article/details/81188923?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.edu_weight&amp;depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.edu_weight" target="_blank" rel="noopener">JS中回调函数(callback)理解</a></p>
 <h4 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h4><p><a href="https://zhuanlan.zhihu.com/p/62482741" target="_blank" rel="noopener">JS中的箭头函数与this</a></p>
 <h4 id="异步处理"><a href="#异步处理" class="headerlink" title="异步处理"></a>异步处理</h4><p><a href="https://segmentfault.com/a/1190000016537685" target="_blank" rel="noopener">微信小程序踩坑系列——从wx.request谈谈异步处理</a></p>
 <h4 id="微信小程序组件开发规范"><a href="#微信小程序组件开发规范" class="headerlink" title="微信小程序组件开发规范"></a>微信小程序组件开发规范</h4><p><a href="https://segmentfault.com/a/1190000015203935" target="_blank" rel="noopener">微信小程序组件开发规范</a></p>
@@ -1044,7 +1046,7 @@ Page({
 </blockquote>
 <p>//<strong>success是回调函数，在success函数中接收异步调用的结果。</strong></p>
 <p>什么时候调用这个回调函数？</p>
-<p><strong>服务器返回数据时，小程序触发success函数的执行，把服务器返回的结果当作参数(res)</strong></p>
+<p><strong>服务器返回数据时，小程序触发success函数的执行，把服务器调用的结果当作参数(res)输出</strong></p>
 <p>写法一：</p>
 <pre><code class="lang-js"> onLoad: function (options) {
     wx.request({
@@ -1058,10 +1060,10 @@ Page({
     })
   },
 </code></pre>
-<p>输出的是一个json对象</p>
+<p>输出的是一个json对象，我们主要关注的是data</p>
 <p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_chat0614_005.jpg" alt></p>
 <p>当前回调函数的缺点：</p>
-<p><strong>回调函数外可以正确访问this,回调函数内无法正确访问this</strong></p>
+<p><strong>回调函数success外可以正确访问this,回调函数内无法正确访问this</strong></p>
 <pre><code class="lang-js">  data: {
     test:1,
   },
@@ -1107,7 +1109,7 @@ Page({
 </code></pre>
 <p>Promise函数,要正确的使用</p>
 <p>解决异步嵌套的问题（回调地狱）</p>
-<h5 id="const常量"><a href="#const常量" class="headerlink" title="const常量"></a>const常量</h5><p>对上述的wx.reques进行二次封装，封装原因：</p>
+<h4 id="二次封装"><a href="#二次封装" class="headerlink" title="二次封装"></a>二次封装</h4><h5 id="const常量"><a href="#const常量" class="headerlink" title="const常量"></a>const常量</h5><p>对上述的wx.reques进行二次封装，封装原因：</p>
 <p>​    处理返回的异常</p>
 <p>​    不用每次使用都写链接</p>
 <p>项目根目录下新建config.js文件</p>
@@ -1150,6 +1152,7 @@ import {config，fun1} from &#39;/config.js&#39;
 import {config} from &#39;/config.js&#39;//引用路径错，要使用相对路径
 
 class HTTP{
+    //params包含访问一个api时包含的全部参数
   request(params){//给类添加方法，直接写方法名
      if(!params.method){
        params.method=&quot;GET&quot;  //默认GET
@@ -1165,6 +1168,7 @@ class HTTP{
       },
       success: (res)=&gt;{
         let code = res.statusCode.toString()
+        //显而易见，我们只有在HTTP状态码为2**才调用success，所以我们需要对响应结果的状态码进行判断，根据判断结果决定是否执行params.success
         if (code.startsWith(&#39;2&#39;)){  //状态码是2开头，成功，否则失败
         }
         else{
@@ -1179,24 +1183,23 @@ class HTTP{
 }
 export {HTTP}
 </code></pre>
-<h5 id="回调函数传递"><a href="#回调函数传递" class="headerlink" title="回调函数传递"></a>回调函数传递</h5><p>对http.js中的res做处理返回给调用方</p>
-<p>classic.js调用request方法时实际是传入params的</p>
+<h5 id="回调函数传递给调用方"><a href="#回调函数传递给调用方" class="headerlink" title="*回调函数传递给调用方"></a>*回调函数传递给调用方</h5><p>我们希望classic.js的success函数能打印服务器最终返回的信息。在http.js 的回调函数中把res返回给调用方。如何把res返回给调用方呢？</p>
+<p>调用request方法时其实传了一个params,有一个已经设定好的success函数，在http.js中判断成功后调用params下的success函数把res传递进来就可以</p>
 <pre><code class="lang-js">#classic.js
 import {HTTP} from &#39;/util/http.js&#39;（会报错）
-import {HTTP} from &#39;../../util/http.js&#39;（会报错）
+import {HTTP} from &#39;../../util/http.js&#39;
 let http = new HTTP()//实例化一个类
 
 onLoad: function (options) {    
     //request需要接收的参数
     http.request({
       url: &#39;classic/latest&#39;,
-      success:(res)=&gt;{
+      success:(res)=&gt;{//res为http中的res.data
         console.log(res)
       }
     })
   },
 </code></pre>
-<p>回调函数success作为参数(函数引用)传递到另一个函数request中，并且这个函数request执行函数success。</p>
 <p>上述代码运行报错</p>
 <p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/200801.jpg" style="zoom: 67%;"></p>
 <p>问题：为什么路径会解析错误？</p>
@@ -1223,10 +1226,10 @@ class HTTP{
         &#39;content-type&#39;:&#39;application/json&#39;,
         &#39;appkey&#39;:config.appkey
       },
-      success: (res)=&gt;{
+      success: (res)=&gt;{//访问服务器得到的数据
         let code = res.statusCode.toString()
         if (code.startsWith(&#39;2&#39;)){  //状态码是2开头，成功，否则失败
-          params.success(res.data)
+          params.success(res.data)//结果返回回去
         }
         else{
           //服务器异常
@@ -1262,7 +1265,35 @@ class HTTP{
 export{HTTP}
 </code></pre>
 <h3 id="流行页面编码与组件的细节"><a href="#流行页面编码与组件的细节" class="headerlink" title="流行页面编码与组件的细节"></a>流行页面编码与组件的细节</h3><h4 id="引入model概念"><a href="#引入model概念" class="headerlink" title="*引入model概念"></a>*引入model概念</h4><p>根目录下新建models文件夹，文件夹下新建classic.js文件</p>
-<p>注意和classic文件下classic.js的区别</p>
+<p>之前在pages的classic文件下onload函数里调用http的request方法，现在在models/classic的getlatest方法中发送http请求</p>
+<pre><code class="lang-js">#models/classic.js
+import {HTTP} from &#39;../util/http.js&#39;
+class ClassicModel extends HTTP{类继承
+    getLatest(){
+        this.request({通过继承来引用方法的话不用实例化了
+            url:&#39;classic/latest&#39;,
+            success:(res)=&gt;{//res为http中得到的服务器数据res.data
+
+     }
+   })
+    }
+}
+export {ClassModel}
+</code></pre>
+<p>回到主调方pages下的classic.js，想在onload中接收到API的请求结果，该何如调用？</p>
+<p>既然有了model,通过model的调用来获取API的结果</p>
+<p>怎么接受getlatest方法的调用结果呢？</p>
+<p>let latest = classic.getlatest()   错误，getlatest是一个异步的方法。为什么getlatest是一个异步的方法呢？<a href="https://blog.csdn.net/samt007/article/details/54647361" target="_blank" rel="noopener">关于js的callback回调函数以及嵌套回调函数的执行过程理解</a></p>
+<p>希望接受异步函数的调用结果只能用回调函数，<strong>我们把这个回调函数当做参数传到getLatest（）中，getLatest中接受这个参数，sCallback</strong></p>
+<pre><code class="lang-js">#pages下的classic.js
+import {ClassicModel} from &#39;../../models/classic.js&#39;
+ let classic = new classicModel()
+ onLoad: function (options) {
+     classic.getLatest((res)=&gt;{
+        console.log(res)
+    } )//异步的方法
+  },
+</code></pre>
 <pre><code class="lang-js">#classic.js
 import {HTTP} from &#39;../util/http.js&#39;
 class ClassicModel extends HTTP{
@@ -1270,23 +1301,13 @@ class ClassicModel extends HTTP{
         this.request({通过继承来引用方法的话不用实例化了
             url:&#39;classic/latest&#39;,
             success:(res)=&gt;{
-            //success函数接收到api的调用结果后调用sCallback函数把结果回传回去
+            //访问成功，success函数接收到api的调用结果后调用sCallback函数把结果回传回去
             sCallback(res)
      }
    })
     }
 }
 export {ClassModel}
-</code></pre>
-<p>回到主调方classic.js</p>
-<p>希望接受异步函数的调用结果只能用回调函数，<strong>把回调函数当做参数传到getLatest（）中</strong></p>
-<pre><code class="lang-js"> import {ClassicModel} from &#39;../../models/classic.js&#39;
- let classic = new classicModel()
- onLoad: function (options) {
-     classic.getLatest((res)=&gt;{
-        console.log(res)
-    } )//异步的方法
-  },
 </code></pre>
 <p>使用回调函数剥夺了函数return的能力</p>
 <p>有什么办法能在执行getLatest方法后通过变量等于的方式接收到此次调用的结果？有，promise</p>
@@ -1300,7 +1321,7 @@ export {ClassModel}
 
 onLoad: function (options) {
     classic.getLatest((res)=&gt;{
-      this.setData({
+      this.setData({//接受json对象
           classicData:res
       })
     })
@@ -1311,6 +1332,9 @@ onLoad: function (options) {
 <pre><code class="lang-js">#classic.wxml
 &lt;v-like like=&quot;{{classicData.like_status}}&quot; count = &quot;{{classicData.fav_nums}}&quot;
 </code></pre>
+<p>like_status是classicData(json)对象的一个属性</p>
+<p>在小程序setData中所有的js对象可以在调试器中看到</p>
+<p>调试器——AppData,快速查找设置属性的名字</p>
 <p>流程：在页面的classic.js中加载服务器数据——数据绑定——wxml可以使用数据——-通过组属性传递到组件内部</p>
 <p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/200802.jpg" style="zoom:50%;"></p>
 <p>setData：做数据更新</p>
