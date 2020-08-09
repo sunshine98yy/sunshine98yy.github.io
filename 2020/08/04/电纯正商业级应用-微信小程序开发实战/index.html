@@ -1408,8 +1408,726 @@ properties:{
     max-width:550rpx;  //文本换行(不固定宽度，自适应)
 }
 </code></pre>
-<h3 id="再谈组件"><a href="#再谈组件" class="headerlink" title="再谈组件"></a>再谈组件</h3><p>通过组件提交数据到服务器</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/200807.jpg" style="zoom: 50%;"></p>
+<h3 id="组件的通用性"><a href="#组件的通用性" class="headerlink" title="组件的通用性"></a>组件的通用性</h3><p>此时，点击like组件，数字加一，重新加载页面，会恢复初始状态。因为点击时只是在小程序的前端做了样式的改变，真实的数据并没有提交到服务器。</p>
+<p><strong>向服务器提交数据</strong>：</p>
+<p>like组件的index.js,定位到onLike。<strong>onlike函数是我们对于用户点击LIKE组件事件的监听函数</strong>。在onlike函数里调用服务器的API就可以把数据提交到服务器中。</p>
+<pre><code class="lang-js">methods: {
+    onlike:function(event){
+      wx.request({
+          url:使用Like组件的使用场景不同，点赞的服务器请求的API会变化
+      })
+      let count = this.properties.count;
+      let like = this.properties.like;
+      count = like?count-1:count+1;
+      this.setData(
+        {
+          count: count,
+          like:!like
+        }
+      )
+    }
+  }
+</code></pre>
+<p>上述写法的问题：使用Like组件的使用场景不同，点赞的服务器请求的API会变化（如对电影点赞和对书籍点赞），两个场景下面所访问的服务器API是不同的，直接把请求在onlike函数里写死没法复用。</p>
+<p>对于并不通用的业务，比如请求API，不要把他写在组件里面，从而保持组件的通用性。</p>
+<p>请求不写在组件里面，该写在哪里呢？</p>
+<p>考虑Like组件数据初始化的时候在page中请求到数据后传到Like中，同样的逻辑，在提交数据的时候，我们应该把代码写在页面也就是classic.js中。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/2008072.jpg" style="zoom: 67%;"></p>
+<p>三个页面都需要使用某一个组件，原则：组件只完成通用的业务逻辑，不完成特定的业务逻辑，特定的业务逻辑写在组件使用方page1,page2,page3… …</p>
+<p>业务逻辑到底写在组件的使用方还是封装在组件里，体现了组件的<strong>粒度</strong></p>
+<h3 id="自定义事件的激活与监听"><a href="#自定义事件的激活与监听" class="headerlink" title="自定义事件的激活与监听"></a>自定义事件的激活与监听</h3><p>对于点赞的操作写在组件的使用方classic.js。在页面上怎么知道用户什么时候点击了LIKE组件。</p>
+<p>like组件的index.js的onlike知道当前的点赞状态</p>
+<h4 id="创建自定义事件"><a href="#创建自定义事件" class="headerlink" title="创建自定义事件"></a>创建自定义事件</h4><p>自定义事件需要实现目标：1事件需要通知我们的页面用户点击了这个组件 2附加一个状态，用户点赞的状态</p>
+<pre><code class="lang-js">#like/index.js
+methods: {
+    onlike:function(event){
+      let count = this.properties.count;
+      let like = this.properties.like;
+      count = like?count-1:count+1;
+      this.setData({
+          count: count,
+          like:!like
+        })
+        //标识用户点赞还是取消点赞
+        //激活
+        let behavior = this.properties.like?&#39;like&#39;:&#39;cancel&#39;
+        this.triggerEvent(&#39;like&#39;,{
+            behavior:behavior
+        },{})
+    }
+  }
+</code></pre>
+<h4 id="激活一个自定义事件"><a href="#激活一个自定义事件" class="headerlink" title="激活一个自定义事件"></a>激活一个自定义事件</h4><p>triggerEvent(‘自定义事件的名称’,{js对象，自己定义的属性}，{一般情况下不需要使用})。</p>
+<p>激活了一个自定义事件，在页面中激活这个自定义事件</p>
+<pre><code class="lang-js">#pages/class.js
+&lt;like-cmp bind:like=&quot;onLike&quot; like=&quot;{{classicData.like_status}}&quot; count=&quot;{{classicData.fav_nums}}&quot;/&gt;
+&lt;movie-cmp img=&quot;{{classicData.image}}&quot; content=&quot;{{classicData.content}}&quot;/&gt;
+</code></pre>
+<p>运行显示如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/200808.jpg" style="zoom: 50%;"></p>
+<p>detail的状态此时是like</p>
+<pre><code class="lang-js">#pages/classic.js
+//自定义事件
+  onLike:function(event){
+    console.log(event)
+      //拿到like组件当前的状态
+    let behavior = event.detail.behavior
+    //向服务器提交相应的状态数据(放到models下面编写)
+  },
+</code></pre>
+<p>models下新建文件like.js</p>
+<pre><code class="lang-js">import {HTTP} from &#39;../util/http.js&#39;
+class  LikeModel extends HTTP{
+    like(hehavior,artID,category){//点赞对象，点赞类型
+        let url = hehavior==&quot;like&quot;?&#39;like&#39;:&#39;like/cancel&#39;
+        //数据的提交
+        this.request({
+            url:url,
+            method:&#39;POST,
+            data:{
+                art_id:artID,
+                type:category
+            }
+        })
+    }
+}
+export {LikeModel}
+</code></pre>
+<p>上面不用到回调函数succeess</p>
+<p>在pages/classic.js中使用likeModel</p>
+<pre><code class="lang-js">import {ClassicModel} from &#39;../../models/classic.js&#39;
+import {LikeModel} from &#39;../../models/like.js&#39;
+let classicModel = new ClassicModel()
+let likeModel = new LikeModel()
+... ...
+ onLoad: function (options) {
+    classic.getLatest((res)=&gt;{
+      this.setData({
+        classicData:res
+      })
+    })
+  },
+//自定义事件
+  onLike:function(event){
+    console.log(event)
+      //拿到like组件当前的状态
+    let behavior = event.detail.behavior
+    //向服务器提交相应的状态数据，放到models下面编写
+    likeModel.like(behavior,this.data.classicData.id,this.data.classicData.type)
+  },
+</code></pre>
+<p>有报错：</p>
+<pre><code class="lang-java">VM804:1 MiniProgramError
+params.success is not a function
+TypeError: params.success is not a function
+    at success (http://127.0.0.1:19643/appservice/util/http.js:45:20)
+    at Object.i.&lt;computed&gt; (http://127.0.0.1:19643/appservice/__dev__/WAService.js:2:1794394)
+    at http://127.0.0.1:19643/appservice/__dev__/WAService.js:2:661168
+</code></pre>
+<p>调用request时没有request函数，但在http.js中有</p>
+<p>改进http.js</p>
+<pre><code class="lang-js"> success:(res)=&gt;{
+        let code = res.statusCode.toString();
+        if (code.startsWith(&#39;2&#39;)){
+            //params.success为空时不执行后面的代码
+          params.success &amp;&amp; params.success(res.data)
+        }else{
+          let error_code = res.data.error_code
+          this._show_error(error_code)
+        }
+      },
+</code></pre>
+<h3 id="期刊组件"><a href="#期刊组件" class="headerlink" title="期刊组件"></a>期刊组件</h3><p> compenents文件夹下新建epsoide文件，新建组件index</p>
+<pre><code class="lang-js">#eposide/index.js
+ /**
+   * 组件的属性列表
+   */
+  properties: {
+    index:Number
+  },
 
+  /**
+   * 组件的初始数据
+   */
+  data: {
+    year:Number,//错
+    month:String//错
+  },
+</code></pre>
+<pre><code class="lang-js">#index.wxml
+&lt;view&gt;
+  &lt;text&gt;No.&lt;/text&gt;
+  &lt;text&gt;{{index}}&lt;/text&gt;
+  &lt;text&gt;|&lt;/text&gt;
+  &lt;text&gt;{{month}}&lt;/text&gt;
+  &lt;text&gt;{{year}}&lt;/text&gt;
+&lt;/view&gt;
+</code></pre>
+<pre><code class="lang-json">#classic.json
+{
+  &quot;usingComponents&quot;: {
+    &quot;like-cmp&quot;:&quot;/components/like/index&quot;,
+    &quot;movie-cmp&quot;:&quot;/components/classic/movie/index&quot;,
+    &quot;epsoide-cmp&quot;:&quot;/components/epsoide/index&quot;
+  }
+}
+</code></pre>
+<pre><code class="lang-html">&lt;epsoide-cmp/&gt;
+&lt;like-cmp bind:like=&quot;onLike&quot; like=&quot;{{classicData.like_status}}&quot; count=&quot;{{classicData.fav_nums}}&quot;/&gt;
+&lt;movie-cmp img=&quot;{{classicData.image}}&quot; content=&quot;{{classicData.content}}&quot;/&gt;
+</code></pre>
+<h4 id="组件的生命周期函数"><a href="#组件的生命周期函数" class="headerlink" title="组件的生命周期函数"></a>组件的生命周期函数</h4><p>​    <img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/20080811.jpg" style="zoom:50%;"></p>
+<p>组件的生命周期直接写在外面（不写在method方法中）</p>
+<p>当组件被页面加载时就会执行attached函数</p>
+<pre><code class="lang-js">#epsoide/index.js
+attached:function(){
+    console.log(this.properties)
+    console.log(this.data)
+  },
+</code></pre>
+<p>执行打印出</p>
+<pre><code class="lang-java">{year: ƒ, month: ƒ, index: 0}
+index: 0
+month: ƒ String()
+year: ƒ Number()
+
+__proto__: Object
+{year: ƒ, month: ƒ, index: 0}
+index: 0
+month: ƒ String()
+year: ƒ Number()
+__proto__: Object
+</code></pre>
+<p>小程序后台会将data和properties合并，year和month都是内置的函数</p>
+<p>对data:{}下面的变量做初始化，不能用number,string,会让其变成一个函数</p>
+<pre><code class="lang-js">/**
+   * 组件的初始数据
+   */
+  data: {
+    year:0,
+    month:&#39;&#39;
+  },
+</code></pre>
+<pre><code class="lang-html">&lt;epsoide-cmp index=&quot;{{classicData.index}}&quot;/&gt;/&gt;
+&lt;like-cmp bind:like=&quot;onLike&quot; like=&quot;{{classicData.like_status}}&quot; count=&quot;{{classicData.fav_nums}}&quot;/&gt;
+&lt;movie-cmp img=&quot;{{classicData.image}}&quot; content=&quot;{{classicData.content}}&quot;/&gt;
+</code></pre>
+<p><strong>业务逻辑写在组件里还是页面里？</strong></p>
+<p>上述的期刊数据8要显示成08，这一业务逻辑放在epsoide组件中实现，因为只有这个组件有这个需求</p>
+<pre><code class="lang-js">#eposide/index.js
+
+properties:{
+    index:{
+        type:Number,
+        //函数的意义在于当我们改变属性的时候微信小程序会主动调用observer，同时往函数内部传递几个值
+        observer:function(newVal,oldVal,changedPath){
+            let val = newVal &lt;10?&#39;0&#39;+newVal:newVal
+            //更新属性
+            this.setData({
+              index:val
+        })
+        }
+    }
+}
+</code></pre>
+<p>结果还是8。因为index是number,08自动当成数据</p>
+<p>index类型取数字不会出现无限递归调用的情况：最开始0，在外部把数字0改成8，触发observer监听函数的调用，8传进来后通过let处理变成08，setData虽然改变了，由于index是数字，08还是强制转型变成8，不会再次触发observer的调用。</p>
+<p>把index的属性变成String——-&gt;出现无限递归调用造成内存泄漏（在一个监听函数内部更改observer属性有一次触发observer…. …）</p>
+<p><strong>综上不要在observer中修改自身属性</strong></p>
+<pre><code class="lang-js">#epsoide/index.js
+properties:{
+    index:{
+        type:Number,
+        //函数的意义在于当我们改变属性的时候微信小程序会主动调用observer，同时往函数内部传递几个值
+        observer:function(newVal,oldVal,changedPath){
+            let val = newVal &lt;10?&#39;0&#39;+newVal:newVal
+            //更新属性
+            this.setData({
+              _index:val
+        })
+        }
+    }
+}
+
+data:{
+    year:0,
+    month:&#39;&#39;,
+    //不和properties中的index重名
+    _index:&#39;&#39;
+}
+</code></pre>
+<p>xml中： <text>{{_index}}</text></p>
+<h4 id="epsoide组件与样式"><a href="#epsoide组件与样式" class="headerlink" title="epsoide组件与样式"></a>epsoide组件与样式</h4><pre><code class="lang-js">#epsoide/index.js
+data: {
+    months:[
+      &#39;一月&#39;,&#39;二月&#39;,&#39;三月&#39;,&#39;四月&#39;,&#39;五月&#39;,&#39;六月&#39;,&#39;七月&#39;,&#39;八月&#39;,&#39;九月&#39;,&#39;十月&#39;,&#39;十一月&#39;,&#39;十二月&#39;
+    ],
+    year:0,
+    month:&#39;&#39;,
+    _index:&#39;&#39;
+  },
+
+  attached:function(){
+   let date = new Date()
+   let year = date.getFullYear()
+   let month = date.getMonth()//从0开始
+
+   this.setData({
+     year:year,
+     month:this.data.months[month]
+   })
+  },
+</code></pre>
+<p>样式</p>
+<pre><code class="lang-html">#index.wxml
+&lt;view class=&quot;container&quot;&gt;
+
+  &lt;view class=&quot;index-container&quot;&gt;
+    &lt;text class=&quot;plain&quot;&gt;No.&lt;/text&gt;
+    &lt;text class=&quot;index&quot;&gt;{{_index}}&lt;/text&gt;
+    &lt;view class=&quot;line&quot;&gt;&lt;/view&gt;
+  &lt;/view&gt;
+
+  &lt;view class=&quot;date-container&quot;&gt;
+    &lt;text class=&quot;month&quot;&gt;{{month}}&lt;/text&gt;
+    &lt;text class=&quot;year&quot;&gt;{{year}}&lt;/text&gt;
+  &lt;/view&gt;
+
+&lt;/view&gt;
+</code></pre>
+<pre><code class="lang-css">#index.wxss
+.container{
+  height:60rpx;
+  display:inline-flex;
+  flex-direction: row;
+}
+
+.index-container{
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;  //底部对齐
+}
+
+.plain{
+  font-size: 32rpx;
+}
+
+.index{
+  font-size: 60rpx;
+  line-height: 60rpx;
+  font-weight: 800;//加粗
+  margin-right: 14rpx;//调整和竖线的距离
+}
+
+.line{
+  height: 44rpx;
+  margin-right: 14rpx;
+  border-left: 1px solid black;
+}
+
+.date-container{
+  display: flex;
+  flex-direction: column;
+  margin-top: 5rpx;//上边距
+}
+
+.month{
+  font-size: 24rpx;
+  line-height: 24rpx;
+}
+
+.year{
+  font-size: 20rpx;
+}
+</code></pre>
+<pre><code class="lang-html">#classic.wxml
+&lt;view class=&quot;header&quot;&gt;
+ &lt;epsoide-cmp class=&quot;epsoide&quot; index=&quot;{{classicData.index}}&quot;/&gt;
+ &lt;like-cmp class=&quot;like&quot; bind:like=&quot;onLike&quot; like=&quot;{{classicData.like_status}}&quot; count=&quot;{{classicData.fav_nums}}&quot;/&gt;
+&lt;/view&gt;
+&lt;movie-cmp img=&quot;{{classicData.image}}&quot; content=&quot;{{classicData.content}}&quot;/&gt;
+</code></pre>
+<pre><code class="lang-css">#classic.wxss
+.header{
+  display: flex;
+  flex-direction: row;
+  height: 100rpx;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #f5f5f5;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.epsoide{
+  margin-left: 20rpx;
+  margin-top:4rpx;
+}
+
+.like{
+  margin-top:6rpx;
+}
+</code></pre>
+<h3 id="Behavior行为与加入缓存系统优化流行页面"><a href="#Behavior行为与加入缓存系统优化流行页面" class="headerlink" title="Behavior行为与加入缓存系统优化流行页面"></a>Behavior行为与加入缓存系统优化流行页面</h3><p>即使服务器返回数据的速度再快，我们依然需要在页面中加入缓存系统来优化用户体验。组件是一种复用的逻辑，但多个组件间的共同JS代码又改如何复用？使用Behaviors行为将解决这个问题。同时，我们也将谈谈Behavior和多继承的思想。</p>
+<h4 id="navi组件"><a href="#navi组件" class="headerlink" title="navi组件"></a>navi组件</h4><p>components文件夹下新建navi组件。navi下新建images存放相关图片。</p>
+<p>1navi组件的骨架</p>
+<p>背景（container容器），向左向右的img,title（文本）</p>
+<pre><code class="lang-html">#navi/index.wxml
+&lt;view&gt;
+  &lt;image&gt;&lt;/image&gt;
+  &lt;text&gt;&lt;/text&gt;
+  &lt;image&gt;&lt;/image&gt;
+&lt;/view&gt;
+</code></pre>
+<p>2确定属性和内部私有变量</p>
+<pre><code class="lang-js">#navi/index.js
+properties: {
+    title:String,
+    first:Boolean,//当前的期刊是否是最新一期
+    latest:Boolean//当前的期刊是否是最后一期
+  },
+
+  data: {
+     //四张图片的位置
+    disLeftSrc:&#39;images/triangle.dis@left.png&#39;,
+    lefSrc:&#39;images/triangle@left.png&#39;,
+    disRightSrc:&#39;images/triangle.dis@right.png&#39;,
+    rightSrc:&#39;images/triangle@right.png&#39;
+  },
+</code></pre>
+<p>3.wxml中需要绑定哪些变量</p>
+<pre><code class="lang-html">&lt;view&gt;
+  &lt;image src=&quot;{{latest?disLeftSrc;leftSrc}}&quot;&gt;&lt;/image&gt;
+  &lt;text&gt;{{title}}&lt;/text&gt;
+  &lt;image src=&quot;{{first?disRightSrc;rightSrc}}&quot;&gt;&lt;/image&gt;
+&lt;/view&gt;
+</code></pre>
+<pre><code class="lang-json">classic.json
+{
+  &quot;usingComponents&quot;: {
+    &quot;like-cmp&quot;:&quot;/components/like/index&quot;,
+    &quot;movie-cmp&quot;:&quot;/components/classic/movie/index&quot;,
+    &quot;epsoide-cmp&quot;:&quot;/components/epsoide/index&quot;,
+    &quot;navi-cmp&quot;:&quot;/components/navi/index&quot;
+  }
+}
+</code></pre>
+<pre><code class="lang-html">classic.wxml
+&lt;view class=&quot;header&quot;&gt;
+ &lt;epsoide-cmp class=&quot;epsoide&quot; index=&quot;{{classicData.index}}&quot;/&gt;
+ &lt;like-cmp class=&quot;like&quot; bind:like=&quot;onLike&quot; like=&quot;{{classicData.like_status}}&quot; count=&quot;{{classicData.fav_nums}}&quot;/&gt;
+&lt;/view&gt;
+
+&lt;movie-cmp img=&quot;{{classicData.image}}&quot; content=&quot;{{classicData.content}}&quot;/&gt;
+&lt;navi-cmp/&gt;
+</code></pre>
+<p>样式：</p>
+<pre><code class="lang-html">&lt;view class= &quot;container&quot;&gt;
+  &lt;image class=&quot;icon&quot; src=&quot;{{latest?disLeftSrc:leftSrc}}&quot;&gt;&lt;/image&gt;
+  &lt;text class=&quot;title&quot;&gt;{{title}}&lt;/text&gt;
+  &lt;image class=&quot;icon&quot; src=&quot;{{first?disRightSrc:rightSrc}}&quot;&gt;&lt;/image&gt;
+&lt;/view&gt;
+</code></pre>
+<pre><code class="lang-css">.container{
+  width: 600rpx;
+  height: 80rpx;
+  background-color: #f7f7f7;
+  border-radius: 2px;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center; 
+}
+
+.icon{
+  height: 80rpx;
+  width: 80rpx;
+}
+
+.title{
+  font-size: 28rpx;
+}
+</code></pre>
+<p>navi组件成行了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/200809.jpg" style="zoom:50%;"></p>
+<p>因为还没有传入数据，所有组件行为还没展现。</p>
+<p>前端编程小经验：移动端真实的触碰区比实际按钮要大。需要扩大触碰区域</p>
+<p>调整组件在classic页面中的位置</p>
+<p>碰到布局的问题查看调试器的Wxml,</p>
+<pre><code class="lang-css">.container{
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header{
+  width: 100%; //避免居中
+  display: flex;
+  flex-direction: row;
+  height: 100rpx;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #f5f5f5;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.epsoide{
+  margin-left: 20rpx;
+  margin-top:4rpx;
+}
+
+.like{
+  margin-top:6rpx;
+}
+
+.navi{
+  display: flex;
+  position: absolute;
+  bottom: 40rpx;
+}
+</code></pre>
+<pre><code class="lang-xml">&lt;view class=&quot;container&quot;&gt;
+  &lt;view class=&quot;header&quot;&gt;
+  &lt;epsoide-cmp class=&quot;epsoide&quot; index=&quot;{{classicData.index}}&quot;/&gt;
+  &lt;like-cmp class=&quot;like&quot; bind:like=&quot;onLike&quot; like=&quot;{{classicData.like_status}}&quot; count=&quot;{{classicData.fav_nums}}&quot;/&gt;
+  &lt;/view&gt;
+  &lt;movie-cmp img=&quot;{{classicData.image}}&quot; content=&quot;{{classicData.content}}&quot;/&gt;
+  &lt;navi-cmp class=&quot;navi&quot;/&gt;
+&lt;/view&gt;
+</code></pre>
+<p>传入属性</p>
+<p>服务器没有直接返回first,latest，也就不能直接用classicData.来引用</p>
+<pre><code class="lang-js">classic.js
+data: {
+    classicData:null,
+    latest:true,
+    first:false
+  },
+</code></pre>
+<pre><code class="lang-html"> classic.wxml
+ &lt;navi-cmp class=&quot;navi&quot; title=&quot;{{classicData.title}}&quot; first=&quot;{{first}}&quot; latest=&quot;{{latest}}&quot;/&gt;
+</code></pre>
+<p>预览小程序</p>
+<p><strong>真机预览小程序</strong></p>
+<p>预览—扫描二维码，如果想访问API，打开小程序调试模式</p>
+<p>navi组件操作movie组件，需要知道用户什么时候点击和点击方向</p>
+<p>在navi组件的内部监听用户点击letft,right的事件，监听到内部事件后在navi组件内部用triggerEvent激活自定义事件</p>
+<pre><code class="lang-html">&lt;view class= &quot;container&quot;&gt;
+  &lt;image bind:tap=&quot;onLeft&quot; class=&quot;icon&quot; src=&quot;{{latest?disLeftSrc:leftSrc}}&quot;&gt;&lt;/image&gt;
+  &lt;text class=&quot;title&quot;&gt;{{title}}&lt;/text&gt;
+  &lt;image bind:tap=&quot;onRight&quot; class=&quot;icon&quot; src=&quot;{{first?disRightSrc:rightSrc}}&quot;&gt;&lt;/image&gt;
+&lt;/view&gt;
+</code></pre>
+<p>定义好监听函数后在index.js中method里实现：</p>
+<pre><code class="lang-js">index.js
+methods: {
+    onLeft:function(event){
+      // 觸發一個自定義事件
+      this.triggerEvent(&#39;left&#39;,{},{})
+    },
+
+    onRight:function(event){
+      this.triggerEvent(&#39;right&#39;,{},{})
+    }
+  }
+</code></pre>
+<p>到classic页面中监听navi组件抛出的事件</p>
+<pre><code class="lang-html">&lt;view class=&quot;container&quot;&gt;
+  &lt;view class=&quot;header&quot;&gt;
+  &lt;epsoide-cmp class=&quot;epsoide&quot; index=&quot;{{classicData.index}}&quot;/&gt;
+  &lt;like-cmp class=&quot;like&quot; bind:like=&quot;onLike&quot; like=&quot;{{classicData.like_status}}&quot; count=&quot;{{classicData.fav_nums}}&quot;/&gt;
+  &lt;/view&gt;
+  &lt;movie-cmp img=&quot;{{classicData.image}}&quot; content=&quot;{{classicData.content}}&quot;/&gt;
+  &lt;navi-cmp bind:left=&quot;onNext&quot; bind:right=&quot;onPrevious&quot; class=&quot;navi&quot; title=&quot;{{classicData.title}}&quot; first=&quot;{{first}}&quot; latest=&quot;{{latest}}&quot;/&gt;
+&lt;/view&gt;
+</code></pre>
+<p>在classic.js自定义onNext,onProvious监听函数</p>
+<p>关于自定义事件以及事件的传递：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/2008092.jpg" style="zoom: 50%;"></p>
+<p>多级的事件传递,component1中自定触发义激活event事件,通过一层层的监听捕获传到页面中</p>
+<h5 id="禁用事件的技巧"><a href="#禁用事件的技巧" class="headerlink" title="禁用事件的技巧"></a>禁用事件的技巧</h5><p>组件自身处理</p>
+<p>index.js</p>
+<pre><code class="lang-js">  methods: {
+    onLeft:function(event){
+      if(!this.properties.latest){
+          // 觸發一個自定義事件
+        this.triggerEvent(&#39;left&#39;,{},{})
+      }
+
+
+    },
+    onRight:function(event){
+      if(!this.properties.first){
+        this.triggerEvent(&#39;right&#39;,{},{})
+      }   
+    }
+  }
+})
+</code></pre>
+<p>classic.js中先增加自定义函数</p>
+<pre><code class="lang-js">  onNext:function(event){
+
+  },
+  onPrevious:function(event){
+
+  }
+</code></pre>
+<h3 id="music组件"><a href="#music组件" class="headerlink" title="music组件"></a>music组件</h3><p>新建文件方法不再累述</p>
+<p>components/classic/music</p>
+<p>数据</p>
+<pre><code class="lang-js">Component({
+
+  properties: {
+    img:String,
+    content:String
+  },
+
+
+  data: {
+    pauseSrc:&#39;images/player@waitting.png&#39;,
+    playSrc:&#39;images/player@playing.png&#39;
+  },
+</code></pre>
+<p>骨架</p>
+<pre><code class="lang-html">&lt;view&gt;
+  &lt;image src=&quot;{{img}}&quot;&gt;&lt;/image&gt;
+  &lt;image src=&quot;{{playSrc}}&quot;&gt;&lt;/image&gt;
+  &lt;image src=&quot;images/music@tag.png&quot;&gt;&lt;/image&gt;
+  &lt;text&gt;{{content}}&lt;/text&gt;
+&lt;/view&gt;
+</code></pre>
+<h3 id="句子组件"><a href="#句子组件" class="headerlink" title="句子组件"></a>句子组件</h3><p>components/classic/essay</p>
+<h4 id="初识组件的behavior行为"><a href="#初识组件的behavior行为" class="headerlink" title="初识组件的behavior行为"></a>初识组件的behavior行为</h4><p>数据</p>
+<pre><code>Component({
+
+  properties: {
+  //与movie相同
+    img:String,
+    content:String
+  },
+  data: {
+
+  },
+</code></pre><p>小程序中对于组件的代码复用通过behavior实现。定义behavior是给多个组件定义共同的行为。把behavior定义在单独的文件中。我们在components的classic文件夹下新建classic-beh.js</p>
+<p>编写Behavior的方式和Component类似</p>
+<pre><code> properties: {
+  //与movie相同
+    img:String,
+    content:String
+  }
+</code></pre><p>上述属性是music,essay,moive共有的</p>
+<p>behavior是一个构造器，构造一个行为，用一个变量来接受它</p>
+<pre><code class="lang-js">#classic-beh.js
+let classicBeh = Behavior({
+  properties:{
+    img:String,
+    content:String
+  },
+  data:{
+
+  },
+  methods:{
+
+  }
+
+})
+
+export {classicBeh}
+</code></pre>
+<p>其他组件中引用behavior</p>
+<p>如essay,同理更新别的代码</p>
+<pre><code class="lang-js">index.js
+// components/classic/essay/index.js
+import {classicBeh} from &#39;../classic-beh.js&#39;
+Component({
+  /**
+   * 组件的属性列表
+   */
+  //通過屬性顯示指定essay組件繼承classicbehavior
+  behaviors:[classicBeh],
+  //多继承
+  properties: {
+
+  },
+</code></pre>
+<h4 id="behavior继承与多继承的覆盖规则"><a href="#behavior继承与多继承的覆盖规则" class="headerlink" title="behavior继承与多继承的覆盖规则"></a>behavior继承与多继承的覆盖规则</h4><p>子类覆盖父类中的相关属性</p>
+<p>behaviors:[A,B,C]</p>
+<p>多继承中有同名属性，最后 的Behavior如C得到继承</p>
+<p>对behavior的继承有特例，生命周期函数继承。如在子函数中attached:function,在behavior也有，不会有覆盖发生，小程序依次调用每个behavior中的生命周期函数，最后调用子函数的生命周期函数。不会有覆盖。</p>
+<h4 id="期刊切换"><a href="#期刊切换" class="headerlink" title="期刊切换"></a>期刊切换</h4><p>essay的骨架：</p>
+<pre><code class="lang-html">&lt;view class=&quot;classic-container&quot;&gt;
+  &lt;image class=&quot;classic-img&quot; src=&quot;{{img}}&quot;&gt;&lt;/image&gt;
+  &lt;image class=&quot;tag&quot; src=&quot;images/eaasy@tag.png&quot;&gt;&lt;/image&gt;
+  &lt;text class=&quot;content&quot;&gt;{{content}}&lt;/text&gt;
+&lt;/view&gt;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/2008094.jpg" style="zoom: 50%;"></p>
+<p>pages/classic.js的onPrevious。不把调用的直接方法写在当中，定义在models中</p>
+<pre><code class="lang-js">#classic.js
+......
+onPrevious:function(event){
+    let index = this.data.classicData.index//当前期刊的序号
+    classicModel.getPrevious(index,(res)=&gt;{
+      console.log(res)
+    })
+  },
+</code></pre>
+<p>models/classic.js中新增方法getPrevious</p>
+<pre><code class="lang-js">#models/classic.js
+... ...
+getPrevious(index,sCallback){
+  this.request({
+    url:&#39;classic/&#39;+ index +&#39;/previous&#39;,
+    success:(res)=&gt;{
+      sCallback(res)
+    }
+  })
+ }
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/08095.jpg" style="zoom:50%;"></p>
+<p>获取到最新的classic数据后需要替换原信息，更新数据</p>
+<pre><code class="lang-js">#classic.js
+......
+onPrevious:function(event){
+    let index = this.data.classicData.index//当前期刊的序号
+    classicModel.getPrevious(index,(res)=&gt;{
+      this.setData({
+          classicData:res
+      })
+    })
+  },
+</code></pre>
+<p>问题：1无法回退 2到了最后还能继续翻3左边的永远不可点击</p>
+<p>classic.js中的data没有更改</p>
+<pre><code class="lang-js"> data: {
+    classicData:null,
+    latest:true,
+    first:false
+  },
+</code></pre>
+<p>如何动态决定latest和first的取值呢？</p>
+<p>models/classic.js</p>
+<pre><code>isFirst(index){
+    return index == 1 ? true:false
+  }
+
+  isLatest(index){
+    //需要拿到的是最新的期刊號
+    retu
+  }
+</code></pre><p>pages/classic.js的onload()中拿到的是最新的期刊号</p>
+<p>我们现在定义两个classic,onload中获取到的称作latestClassic latestIndex，我们点击onPrevious加载的classic称为currentClassic currentIndex。比较两个index就能知道是否是最新的</p>
+<pre><code>  onLoad: function (options) {
+    classicModel.getLatest((res)=&gt;{
+      this.setData({
+        classicData:res
+      })
+      console.log(res)
+      latestClassic
+    })
+  },
+</code></pre>
         </div>
         <!-- .entry-content -->
         <div class="single-reward">
