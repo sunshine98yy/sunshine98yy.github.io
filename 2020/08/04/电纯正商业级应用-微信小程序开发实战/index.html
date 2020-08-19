@@ -2325,7 +2325,7 @@ _getLikeStatus:function(artID,category){
     })
   },
 </code></pre>
-<h3 id="ES6使用技巧"><a href="#ES6使用技巧" class="headerlink" title="ES6使用技巧"></a>ES6使用技巧</h3><h4 id="ES6模板字符串"><a href="#ES6模板字符串" class="headerlink" title="ES6模板字符串"></a>ES6模板字符串</h4><pre><code>let  a=123
+<h3 id="ES6使用技巧"><a href="#ES6使用技巧" class="headerlink" title="ES6使用技巧"></a>ES6使用技巧</h3><h4 id="ES6模板字符串"><a href="#ES6模板字符串" class="headerlink" title="ES6模板字符串"></a>ES6模板字符串</h4><pre><code class="lang-js">let  a=123
 console.log(`${a}123`)  //123456
 
 test:function(){
@@ -2337,15 +2337,18 @@ console.log(`${this.test()}456`)
  url:&#39;classic/&#39;+index+&#39;/&#39;+nextOrPrevious,
  改成
   url:`classic/${index}/${nextOrPrevious}`,
-</code></pre><h4 id="扩展运算符"><a href="#扩展运算符" class="headerlink" title="扩展运算符"></a>扩展运算符</h4><pre><code class="lang-js">classicData:res---&gt;...res
-index=&quot;{{classicData.index}}&quot;---&gt;index=&quot;{{index}}&quot;
 </code></pre>
-<p>如何让自定义组件支持hidden？</p>
+<h4 id="扩展运算符"><a href="#扩展运算符" class="headerlink" title="扩展运算符"></a>扩展运算符</h4><pre><code class="lang-js">classicData:res---&gt;...res
+index=&quot;{{classicData.index}}&quot;---&gt;index=&quot;{{index}}&quot;？
+</code></pre>
 <h3 id="动态显示组件"><a href="#动态显示组件" class="headerlink" title="动态显示组件"></a>动态显示组件</h3><p>当前问题：</p>
-<p>固定显示moive，没有动态显示组件。条件渲染有选择性的显示组件，用在wxml中。</p>
+<p>每个页面固定显示moive的tag，没有动态显示music、essay组件。</p>
+<p>条件渲染有选择性的显示组件，条件渲染只能用在wxml中。</p>
+<p><strong>wx:if</strong></p>
 <pre><code class="lang-html"> &lt;movie-cmp wx:if=&quot;{{true}}&quot; img=&quot;{{classicData.image}}&quot; content=&quot;{{classicData.content}}&quot;/&gt;
 </code></pre>
-<p>hidden也能控制标签的显示和隐藏，适用于wxml的默认标签。hidden用于自定义标签需要设计。</p>
+<p><strong>hidden</strong></p>
+<p>hidden也能控制标签的显示和隐藏，适用于wxml的默认标签。hidden用于自定义标签时需要设计。</p>
 <p>moive/index.js中增加hidden属性</p>
 <pre><code class="lang-js">properties: {
     hidden:Boolean
@@ -2355,12 +2358,13 @@ index=&quot;{{classicData.index}}&quot;---&gt;index=&quot;{{index}}&quot;
 <p>绑定</p>
 <pre><code class="lang-html">&lt;view hidden=&quot;{{hidden}}&quot; class=&quot;classic-container&quot;&gt;
 </code></pre>
+<p>pages/classic.js</p>
 <pre><code class="lang-html"> &lt;movie-cmp hidden=&quot;{{true}}&quot;
 </code></pre>
 <p>两者比较：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/200818.jpg" style="zoom:50%;"></p>
 <p>实现：</p>
-<p>classic.wxml</p>
+<p>pages/classic.wxml</p>
 <pre><code class="lang-html">&lt;view class=&quot;container&quot;&gt;
   &lt;view class=&quot;header&quot;&gt;
   &lt;epsoide-cmp class=&quot;epsoide&quot; index=&quot;{{classicData.index}}&quot;/&gt;
@@ -2372,29 +2376,44 @@ index=&quot;{{classicData.index}}&quot;---&gt;index=&quot;{{index}}&quot;
   &lt;navi-cmp bind:left=&quot;onNext&quot; bind:right=&quot;onPrevious&quot;  class=&quot;navi&quot; title=&quot;{{classicData.title}}&quot; first=&quot;{{first}}&quot; latest=&quot;{{latest}}&quot;/&gt;  
 &lt;/view&gt;
 </code></pre>
-<p>改进：在共同的行为里加上hidden,不用再music,essay分别加</p>
-<p>index.wxml</p>
+<p>moive/index.js</p>
+<pre><code class="lang-js">import {classicBeh} from &#39;../classic-beh.js&#39;
+Component({
+  /**
+   * 组件的属性列表
+   */
+  behaviors:[classicBeh],
+  properties: {
+    hidden:Boolean
+  },
+</code></pre>
+<p>改进：在共同的行为里加上hidden,不用再music,essay的index.js分别加hidden属性</p>
+<p>music/index.wxml</p>
 <pre><code class="lang-html">&lt;view class=&quot;container&quot; hidden=&quot;{{hidden}}&quot;&gt;
-  &lt;image class=&quot;classic-img&quot; src=&quot;{{img}}&quot;&gt;&lt;/image&gt;
-  &lt;image class=&quot;player-img&quot; src=&quot;{{playSrc}}&quot;&gt;&lt;/image&gt;
-  &lt;image class=&quot;tag&quot; src=&quot;images/music@tag.png&quot;&gt;&lt;/image&gt;
-  &lt;text class=&quot;content&quot;&gt;{{content}}&lt;/text&gt;
+  ... ... 
 &lt;/view&gt;
 </code></pre>
+<p>essay同理</p>
 <p>classic-beh.js</p>
-<pre><code class="lang-js">properties: {
+<pre><code class="lang-js">let classicBeh = Behavior({
+  properties: {
     img:String,
     content:String,
     hidden:Boolean
   },
- data: {
-    pauseSrc:&#39;images/player@pause.png&#39;,
-    playSrc:&#39;images/player@play.png&#39;
+  data:{
+
   },
+  methods:{
+
+  }
+})
+
+export {classicBeh}
 </code></pre>
-<h3 id="essay、music样式"><a href="#essay、music样式" class="headerlink" title="essay、music样式"></a>essay、music样式</h3><h4 id="import在组件间复用样式"><a href="#import在组件间复用样式" class="headerlink" title="@import在组件间复用样式"></a>@import在组件间复用样式</h4><p>essay和moive的样式相同，实现复用共同wxss代码</p>
-<p>组件的behavior行为解决组件js文件相关代码的复用，模板template可以复用wxss。</p>
-<p>在components/classic文件夹下新建common.wxss,存放movie和essa共同的代码</p>
+<h3 id="essay、music样式"><a href="#essay、music样式" class="headerlink" title="essay、music样式"></a>essay、music样式</h3><h4 id="import在组件间复用样式"><a href="#import在组件间复用样式" class="headerlink" title="@import在组件间复用样式"></a>@import在组件间复用样式</h4><p>essay和moive的样式相同，实现复用共同使用wxss代码</p>
+<p>组件的behavior行为解决组件js文件相关代码的复用，模板template实现复用wxss。</p>
+<p>在components/classic文件夹下新建common.wxss,存放movie和essay共同的代码</p>
 <pre><code class="lang-css">.classic-container {
   display: flex;
   flex-direction: column;
@@ -2422,9 +2441,12 @@ index=&quot;{{classicData.index}}&quot;---&gt;index=&quot;{{index}}&quot;
 <p>moive/index.wxss</p>
 <pre><code class="lang-css">@import &quot;../common.wxss&quot;;
 </code></pre>
+<p>essay/index.wxss</p>
+<pre><code class="lang-css">@import &quot;../common.wxss&quot;
+</code></pre>
 <h4 id="music组件样式"><a href="#music组件样式" class="headerlink" title="music组件样式"></a>music组件样式</h4><p>index.js</p>
 <pre><code class="lang-js">properties: {
-   src:String
+   src:String//音乐播放地址
   },
 </code></pre>
 <p>index.wxml</p>
@@ -2465,14 +2487,14 @@ index=&quot;{{classicData.index}}&quot;---&gt;index=&quot;{{index}}&quot;
 }
 </code></pre>
 <h4 id="新版音乐播放对象"><a href="#新版音乐播放对象" class="headerlink" title="*新版音乐播放对象"></a>*新版音乐播放对象</h4><p>音乐播放API</p>
-<p>在小程序中实现音乐播放有两种方式，第一种音乐播放控制API,一组API控制。第二种背景音频播放管理，调用对象的相关属性和方法来完成。</p>
+<p>在小程序中实现音乐播放有两种方式，第一种音乐播放控制API,由一组API控制。第二种背景音频播放管理，调用对象的相关属性和方法来完成。</p>
 <p><a href="https://developers.weixin.qq.com/miniprogram/dev/api/media/background-audio/BackgroundAudioManager.html" target="_blank" rel="noopener">getBackgroundAudioManager</a></p>
 <p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/2008181.jpg" style="zoom: 50%;"><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/2008182.jpg" alt></p>
 <p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/2008181.jpg" style="zoom: 50%;"><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/2008182.jpg" alt></p>
-<p>index.js</p>
+<p>实现功能：</p>
 <p>点击播放按钮，图片由播放变暂停，音乐播放</p>
-<h5 id="图片切换"><a href="#图片切换" class="headerlink" title="图片切换"></a>图片切换</h5><p>设置一个变量控制image</p>
-<p>wxml</p>
+<h5 id="图片切换"><a href="#图片切换" class="headerlink" title="图片切换"></a>图片切换</h5><p>设置一个变量控制playing</p>
+<p>wxml.js</p>
 <pre><code class="lang-html">&lt;image class=&quot;player-img&quot; bind:tap=&quot;onPlay&quot; src=&quot;{{!playing?playSrc:pauseSrc}}&quot;&gt;&lt;/image&gt;
 </code></pre>
 <p>index.js</p>
@@ -2504,20 +2526,227 @@ Component({
     onPlay:function(event){
       //图片要切换
       this.setData({
-        playing:true
+        playing:true//后改
       })
     }
   }
 })
 </code></pre>
 <h5 id="音乐播放"><a href="#音乐播放" class="headerlink" title="音乐播放"></a>音乐播放</h5><p>先拿到背景音乐管理对象</p>
+<pre><code class="lang-js">//返回音乐管理对象
+import {classicBeh} from &#39;../classic-beh.js&#39;
+
+//返回音乐管理对象
+const mMgr = wx.getBackgroundAudioManager() 
+
+Component({
+  /**
+   * 组件的属性列表
+   */
+  behaviors:[classicBeh],
+  properties: {
+   src:String,
+   title:String
+  },
+
+  /**
+   * 组件的初始数据
+   */
+  data: {
+    // 控制变量
+    playing:false,
+    pauseSrc:&#39;images/player@pause.png&#39;,
+    playSrc:&#39;images/player@play.png&#39;
+
+  },
+
+  /**
+   * 组件的方法列表
+   */
+  methods: {
+    onPlay:function(event){
+      //图片要切换
+    if(!this.data.playing){
+      this.setData({
+        playing:true
+      })
+      mMgr.src = this.properties.src //src自动赋值就会播放音乐
+      mMgr.title = this.properties.title
+    }else{
+      this.setData({
+        playing:false
+      })
+      mMgr.pause()
+    }
+    }
+
+  }
+})
+</code></pre>
+<p>遇到的坑:小程序没添加title时没有声音，添加代码</p>
+<pre><code class="lang-js">mMgr.title = this.properties.title
+</code></pre>
+<p>基本完成了音乐播放的功能。细节：后面所有的音乐页面图片都是播放状态</p>
+<p>初步改进：</p>
+<p>1.切换期刊时停止当前正在播放的音乐</p>
+<p>思路：监听切换事件停止音乐，需要在music组件中监听navi组件</p>
+<h4 id="组件间通信"><a href="#组件间通信" class="headerlink" title="组件间通信"></a>组件间通信</h4><p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/2008191.jpg" alt></p>
+<p>组件间通信一般情况下是父子关系，平行关系的组件要想直接交换数据怎么解决？</p>
+<p>1.间接传递数据，利用页面做数据的转发</p>
+<p>思路：切换页面时like组件会变成另外一个组件，当like组件消失时监听到组件消失的事件停止音乐</p>
+<p>detached：组件声明周期函数，在组件实例被从页面结点树移除时执行</p>
+<p>当组件触发detached时暂停音乐</p>
+<p>music/index.js</p>
+<pre><code class="lang-js">detached:function(event){
+  mMgr.stop()
+},
+</code></pre>
+<p>并没有效果</p>
+<p>因为detached函数不会执行，原因：classic.wxml中有hidden属性，<strong>hidden不会触发组件的detached,但wx:if会</strong></p>
+<p>解决：用wx:if</p>
+<pre><code class="lang-html"> &lt;movie-cmp hidden=&quot;{{classicData.type!=100}}&quot; img=&quot;{{classicData.image}}&quot; content=&quot;{{classicData.content}}&quot;/&gt;
+&lt;--!hidden改为wx:if--&gt;
+  &lt;music-cmp wx:if=&quot;{{classicData.type==200}}&quot; img=&quot;{{classicData.image}}&quot; content=&quot;{{classicData.content}}&quot; title=&quot;{{classicData.title}}&quot;src=&quot;{{classicData.url}}&quot;/&gt;
+  &lt;essay-cmp hidden=&quot;{{classicData.type!=300}}&quot; img=&quot;{{classicData.image}}&quot; content=&quot;{{classicData.content}}&quot;/&gt;
+</code></pre>
+<p>效果：切换页面后音乐会停止，且后面音乐的图片状态正常，是待播放状态。原因：每一次改变wx:if的值的时候，所控制的组件都会执行一次完成的声明周期。从一个组件切换到另一个组件，这个组件又重新进行了一次初始化，playing默认恢复false</p>
+<h3 id="完成音乐播放"><a href="#完成音乐播放" class="headerlink" title="完成音乐播放"></a>完成音乐播放</h3><p>除非用户主动取消音乐播放，否则音乐一直会播放。同时切换期刊时时每个音乐播放状态显示正常</p>
+<p>每次切换到music组件时做一个检测，当前正在播放的音乐是否是当前musci组件显示的音乐。相等，小图标显示为暂停，否则显示播放状态</p>
+<p>在哪个地方编写检测代码：</p>
+<p>用组件的声明周期函数（attached）写检测代码</p>
+<pre><code class="lang-js">attached:function(event){
+    this._recoverStatus()//直接使用methods下的方法
+},
+
+  methods: {
+    onPlay:function(event){
+     .......
+    },
+    _recoverStatus:function(){
+      if(mMgr.paused){//当前没有音乐在播放
+        this.setData({
+          playing:false
+        })
+        return
+      }
+      if(mMgr.src==this.properties.src){
+        this.setData({
+          playing:true
+        })
+      }
+    }
+  },
+</code></pre>
+<p>我们在生命周期函数中尽量不写具体的业务逻辑，把业务逻辑用私有方法封装起来，直接调用</p>
+<h4 id="优化音乐播放"><a href="#优化音乐播放" class="headerlink" title="优化音乐播放"></a>优化音乐播放</h4><p>考虑到总控开关对音乐播放控制，没有产生联动</p>
+<p>如何用总控开关控制自己的图片状态</p>
+<p>监听总控开关的事件，onPlay,onPause,onStop,onEnded。这四个事件都接受回调函数作为参数</p>
+<pre><code class="lang-js">
+attached:function(event){
+    this._recoverStatus()//直接使用methods下的方法
+    this._monitorSwitch()
+},
+
+  methods: {
+    onPlay:function(event){
+     .......
+    },
+    _recoverStatus:function(){
+    .......
+  },
+  _monitorSwitch:function(){
+      mMgr.onPlay(()=&gt;{//音乐播放时执行这个回调函数
+        this._recoverStatus()
+      })
+      mMgr.onPause(()=&gt;{//音乐播放时执行这个回调函数
+        this._recoverStatus()
+      })
+      //关闭音乐播放器
+      mMgr.onStop(()=&gt;{//音乐播放时执行这个回调函数
+        this._recoverStatus()
+      })
+      //让音乐自动播放完成
+      mMgr.onEnded(()=&gt;{//音乐播放时执行这个回调函数
+        this._recoverStatus()
+      })
+    }
+</code></pre>
+<h4 id="旋转效果"><a href="#旋转效果" class="headerlink" title="旋转效果"></a>旋转效果</h4><p>实现动画 css3  动画API</p>
+<p>music/index.wxss</p>
+<pre><code class="lang-css">.rotation {
+  -webkit-transform: rotate(360deg);
+  animation: rotation 12s linear infinite;
+  -moz-animation: rotation 12s linear infinite;
+  -webkit-animation: rotation 12s linear infinite;
+  -o-animation: rotation 12s linear infinite;
+}
+
+@-webkit-keyframes rotation {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+</code></pre>
+<pre><code class="lang-html"> &lt;image class=&quot;classic-img {{playing?'rotation':''}}&quot; src=&quot;{{img}}&quot;&gt;&lt;/image&gt;
+</code></pre>
+<p> Component与Model的好处</p>
+<p>组件的复用性提高</p>
+<p>简化了pages页面</p>
+<p>提升了团队协作</p>
+<p>model主要用来处理业务逻辑，pages完成数据绑定，简化页面的代码量，因此功能的实现细节方便阅读</p>
+<h3 id="Promise正确用法与函数签名设计技巧"><a href="#Promise正确用法与函数签名设计技巧" class="headerlink" title="Promise正确用法与函数签名设计技巧"></a>Promise正确用法与函数签名设计技巧</h3><p>本章我们将讲解Promise的正确使用方式，重构http.js，同时还将使用ES6对象解构、默认值等.</p>
+<h4 id="tabBar配置"><a href="#tabBar配置" class="headerlink" title="tabBar配置"></a>tabBar配置</h4><p>开始实现图书的相关功能，为小程序增加一个tabBar栏。</p>
+<p>APP.json中配置即可</p>
+<pre><code class="lang-js">#app.json
+{
+    ......
+    &quot;tabBar&quot;:{
+        &quot;selectedColor&quot;:&quot;#000000&quot;,
+        &quot;backgroundColor&quot;:&quot;#ffffff&quot;,
+        &quot;color&quot;:&quot;#c7c7c7&quot;,//未选中时颜色
+        &quot;list&quot;:[
+          { 
+            &quot;pagePath&quot;:&quot;pages/classic/classic&quot;,
+            &quot;text&quot;:&quot;流行&quot;,
+            &quot;iconPath&quot;:&quot;/images/tab/classic.png&quot;,
+            &quot;selectedIconPath&quot;:&quot;/images/tab/classic@highlight.png&quot;
+          },
+          { 
+            &quot;pagePath&quot;:&quot;pages/book/book&quot;,
+            &quot;text&quot;:&quot;书籍&quot;,
+            &quot;iconPath&quot;:&quot;/images/tab/book.png&quot;,
+            &quot;selectedIconPath&quot;:&quot;/images/tab/book@highlight.png&quot;
+          },
+          { 
+            &quot;pagePath&quot;:&quot;pages/my/my&quot;,
+            &quot;text&quot;:&quot;喜欢&quot;,
+            &quot;iconPath&quot;:&quot;/images/tab/my.png&quot;,
+            &quot;selectedIconPath&quot;:&quot;/images/tab/my@highlight.png&quot;
+          }
+        ]
+      }
+}
+</code></pre>
+<p>导航栏下有多个按钮，用list配置多个按钮（json对象）</p>
+<p>项目的目录下新建一个文件夹images,存放页面和全局的图片。images下新建tab文件夹，存在tab相关的图片。</p>
+<p> 灰色未选中，黑色选中</p>
+<p>一个tab栏至少需要两个按钮。</p>
+<p>pages下新建book,my页面</p>
+<h4 id="airbnb编码规范"><a href="#airbnb编码规范" class="headerlink" title="airbnb编码规范"></a>airbnb编码规范</h4><p>编写书籍相关的功能。书籍里使用规范的代码风格编写（js），eslint插件检测风格</p>
+<p>github上可以查看</p>
+<p>几个实用的代码编写风格：</p>
 <pre><code>
 
-</code></pre><p>组件间通信</p>
-<p>hidden不会触发组件的detached，但wx:if会</p>
-<p>完成音乐播放</p>
-<p>用简洁的代码优化音乐播放</p>
-<p> 真实感受Component与Model的好处</p>
+</code></pre><p> 纯粹回调、Promise与async、await</p>
+<p>Promise的本质与用法</p>
+<p>Promise重构 一 参数列表设计原则与默认值</p>
+<p>Promise重构 二 重构request</p>
+<p>Promise重构 三 对象解构</p>
+<p>Promise的正确用法</p>
 
         </div>
         <!-- .entry-content -->
