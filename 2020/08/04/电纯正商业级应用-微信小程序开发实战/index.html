@@ -2698,14 +2698,14 @@ attached:function(event){
 <p>简化了pages页面</p>
 <p>提升了团队协作</p>
 <p>model主要用来处理业务逻辑，pages完成数据绑定，简化页面的代码量，因此功能的实现细节方便阅读</p>
-<h3 id="Promise正确用法与函数签名设计技巧"><a href="#Promise正确用法与函数签名设计技巧" class="headerlink" title="Promise正确用法与函数签名设计技巧"></a>Promise正确用法与函数签名设计技巧</h3><p>本章我们将讲解Promise的正确使用方式，重构http.js，同时还将使用ES6对象解构、默认值等.</p>
+<h3 id="Promise正确用法与函数签名设计技巧"><a href="#Promise正确用法与函数签名设计技巧" class="headerlink" title="*Promise正确用法与函数签名设计技巧"></a>*Promise正确用法与函数签名设计技巧</h3><p>本章我们将讲解Promise的正确使用方式，重构http.js，同时还将使用ES6对象解构、默认值等.</p>
 <h4 id="tabBar配置"><a href="#tabBar配置" class="headerlink" title="tabBar配置"></a>tabBar配置</h4><p>开始实现图书的相关功能，为小程序增加一个tabBar栏。</p>
 <p>APP.json中配置即可</p>
 <pre><code class="lang-js">#app.json
 {
     ......
     &quot;tabBar&quot;:{
-        &quot;selectedColor&quot;:&quot;#000000&quot;,
+        &quot;selectedColor&quot;:&quot;#000000&quot;,//选中时颜色
         &quot;backgroundColor&quot;:&quot;#ffffff&quot;,
         &quot;color&quot;:&quot;#c7c7c7&quot;,//未选中时颜色
         &quot;list&quot;:[
@@ -2739,15 +2739,742 @@ attached:function(event){
 <h4 id="airbnb编码规范"><a href="#airbnb编码规范" class="headerlink" title="airbnb编码规范"></a>airbnb编码规范</h4><p>编写书籍相关的功能。书籍里使用规范的代码风格编写（js），eslint插件检测风格</p>
 <p>github上可以查看</p>
 <p>几个实用的代码编写风格：</p>
-<pre><code>
+<pre><code class="lang-js">属性简写：year:year--&gt;year
+方法简写：attached:function(enent)---&gt;attached(event)
+import{
+    classic
+}from 
+定义的变量不做改变时尽量用const
+</code></pre>
+<h4 id="纯粹回调、Promise与async、await"><a href="#纯粹回调、Promise与async、await" class="headerlink" title="纯粹回调、Promise与async、await"></a>纯粹回调、Promise与async、await</h4><p>js中处理异步的几种方式：</p>
+<p><strong>纯粹callback回调</strong> </p>
+<p>定义：一旦使用了纯粹的回调函数的写法，那么一层层的封装中都要传入回调函数</p>
+<p>问题：容易陷入回调地狱，剥夺了函数return的能力</p>
+<p><strong>promise</strong> 解决回调地狱，return 多个异步等待合并，不需要每一层传递回调函数（因为没有剥夺return的能力）</p>
+<p><strong>async await</strong> ES2017 小程序不支持，promise的语法糖</p>
+<h4 id="Promise的本质与用法"><a href="#Promise的本质与用法" class="headerlink" title="*Promise的本质与用法"></a>*Promise的本质与用法</h4><p>promise 是对象，不是函数</p>
+<p>对象可以保存状态，函数无法保存状态（闭包函数除外）</p>
+<p>promise可以传入一个函数，作为参数的函数又可以接受两个参数resolve,reject</p>
+<p>new了promise,promise就处于进行中的状态，对于进行中的promise,结果只有已成功或已失败，通过resolve和reject修改状态,进行中的状态变为已成功或已失败后整个promise状态就凝固了，不能再改变。</p>
+<p><strong>可以通过new出来的promise变量拿到异步调用的结果</strong>(精髓)</p>
+<pre><code class="lang-js">//Promise第一步，框架
+//Promise第二步，把要处理的异步代码写在promise函数中
+//Promise第三步，通过then方法获取结果
+const promise = new Promise((resolve,reject)=&gt;{
+    //pending fulfilled rejected  promise的三种状态，分别为异步操作进行中，已成功，已失败
+    wx.getSystemInfo({//例：获取系统信息的异步函数
+        success:(res)=&gt;{res就是返回回来的系统信息
+            resolve(res) //进行中的变为已成功
+        }，
+        fail:(error)=&gt;{
+            reject(error)//进行中的变为已失败
+        }
+    })
+})
 
-</code></pre><p> 纯粹回调、Promise与async、await</p>
-<p>Promise的本质与用法</p>
-<p>Promise重构 一 参数列表设计原则与默认值</p>
-<p>Promise重构 二 重构request</p>
-<p>Promise重构 三 对象解构</p>
-<p>Promise的正确用法</p>
+//调用then方法，方法接收两个回调函数,1需要传入一个当promise调用成功的回调函数（接受调用的结果），当promise失败的回调函数，
+promise.then((res)=&gt;{
+    console.log(res)
+},(error)=&gt;{
+    console.log(error)
+})
 
+
+代码简化：
+const promise = new Promise((resolve,reject)=&gt;{
+    wx.getSystemInfo({
+        success:res=&gt;resolve(res) ，
+        fail:error=&gt;reject(error)
+        }
+    })
+})
+
+promise.then(
+    res=&gt;console.log(res),
+    error=&gt;console.log(error)
+)
+</code></pre>
+<p>promise的精髓在于用对象的方式保存了异步调用的结果。<strong>promise本身作为对象可以复制给一个变量，变量在代码中可以到处传递，不需要附带任何的回调函数</strong>，一直到想去promise中取异步调用的结果时才需要加回调函数。</p>
+<p>纯粹callback的问题在于封装很多层的话每一层都要写回调函数传递，每一层的函数都多了一个参数需要接收回调函数，promise作为变量不管有多少层每一层只要把promise返回回去,一直到最外面要用promise时才会用回调函数。</p>
+<h4 id="Promise重构"><a href="#Promise重构" class="headerlink" title="Promise重构"></a>Promise重构</h4><p>http.js重构为http-p.js</p>
+<p>让request方法return返回一个promise</p>
+<p>把原来的request变成一个私有方法，另外写一个request</p>
+<pre><code class="lang-js">.......
+class HTTP{
+    request(url,data={},method=&#39;GET&#39;){//箭头函数中写异步代码，调用_request。
+        return new Promise((resolve,reject)=&gt;{
+            this._request(url,resolve,reject,data,method)
+        })
+    }
+
+  //_request作为独立的方法没法直接拿到resolve,把resolve作为参数传到_request 
+  _request(url,resolve,reject,data={},method=&#39;GET&#39;){//之前的parmas是js对象，由于动态语言的特性parmas可以被添加任意多个属性，现在改为明确的写法。可以默认赋值。必填参数在默认函数之前  
+    wx.request({
+      url: config.api_base_url+url,
+      method:method,
+      data:data,
+      header:{
+        &#39;content-type&#39;:&#39;application/json&#39;,
+        &#39;appkey&#39;:config.appkey
+      },
+      success:(res)=&gt;{
+        const code = res.statusCode.toString();
+        if (code.startsWith(&#39;2&#39;)){
+          resolve(res.data)
+        }else{
+          reject()
+          const error_code = res.data.error_code
+          this._show_error(error_code)
+        }
+      },
+      fail:(res)=&gt;{
+        reject()
+        this._show_error(1)
+      }
+    })
+  }
+
+  _show_error(error_code){
+    if (!error_code){
+      error_code = 1;
+    }
+    const tip = tips[error_code]
+    wx.showToast({
+      title: tip?tip:tips[1],
+      icon:&#39;none&#39;,
+      duration:2000
+    })
+  }
+}
+export {HTTP}
+</code></pre>
+<p>models文件夹中新建book.js文件</p>
+<p><img src="C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20200821141607633.png" alt="image-20200821141607633" style="zoom:50%;"></p>
+<pre><code class="lang-js">import{
+    HTTP
+}
+from &#39;../util/http-p.js&#39;
+
+class BookModel extends HTTP{
+    getHotList(){
+        return this.request(&#39;book/hot_list&#39;)
+    }
+}
+export {bookModel}
+</code></pre>
+<p>pages/book.js调用model</p>
+<pre><code class="lang-js">import{
+    BookModel
+}from &#39;../../models/book.js&#39;
+const bookModel = new BookModel()
+
+onload:function(){
+    const hotList = bookModel.getHostList()
+    hotList.then(
+        res=&gt;console.log(res)
+    )
+}
+</code></pre>
+<h4 id="Promise的正确用法"><a href="#Promise的正确用法" class="headerlink" title="*Promise的正确用法"></a>*Promise的正确用法</h4><p>多次调用服务器的API，若存在链式调用，如调用服务器 的3个API, api1,api2,api3。每个回调函数内部需在写一个异步请求……</p>
+<pre><code class="lang-js">//promise的错误用法
+const hotList = bookModel.getHostList()
+ hotList.then(
+        res=&gt;console.log(res)
+        bookModel.getMyBookCount()
+        .then(res=&gt;{
+            console.log(res)
+            bookModel.getMybookCount()
+            .then(res=&gt;res{
+            console.log(res)
+            })
+        })
+    )
+
+ //正确。平行调用的关系。关键在于每次的异步调用都要返回promise
+bookModel.getHostList()
+ .then(res=&gt;{
+    return bookModel.getMyBookCount()
+})
+.then(res=&gt;{
+    console.log(res)
+    return bookMoel.getMyBookCount()
+})
+.then(res=&gt;){
+      console.log(res)
+      }
+</code></pre>
+<h3 id="组件高级应用"><a href="#组件高级应用" class="headerlink" title="组件高级应用"></a>组件高级应用</h3><h4 id="图书组件"><a href="#图书组件" class="headerlink" title="图书组件"></a>图书组件</h4><p>components/book下面新建个组件文件。<strong>一个组件对应一本图书</strong></p>
+<p>index.js</p>
+<pre><code class="lang-js">Component({ 
+  properties: {
+    book:Object//子属性封装起来
+  },
+
+  data: {
+
+  },
+  methods: {
+
+  }
+})
+</code></pre>
+<p>index.wxml</p>
+<pre><code class="lang-html">&lt;view class=&quot;container&quot;&gt;
+  &lt;image src=&quot;{{book.image}}&quot;&gt;&lt;/image&gt;
+  &lt;view class=&quot;description&quot;&gt;
+    &lt;text class=&quot;title&quot;&gt;{{book.title}}&lt;/text&gt;
+    &lt;text class=&quot;author&quot;&gt;{{book.author}}&lt;/text&gt;
+    &lt;view class=&quot;foot&quot;&gt;
+      &lt;text class=&quot;footer&quot;&gt;{{book.fav_nums}}喜欢&lt;/text&gt;
+    &lt;/view&gt;
+  &lt;/view&gt;
+&lt;/view&gt;
+</code></pre>
+<p>pages/book.json引入组件</p>
+<pre><code class="lang-json">{
+  &quot;usingComponents&quot;: {
+    &quot;book-cmp&quot;:&quot;/components/book/index&quot;
+  }
+}
+</code></pre>
+<p>服务器返回的是一组图书的数据</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/2008211.jpg" style="zoom: 67%;"></p>
+<p>如何处理一组图书的数据？</p>
+<p>数据的绑定：</p>
+<p>pages/book.js</p>
+<pre><code class="lang-js">data:{//做数据的初始化
+    books:[]
+},
+ onLoad: function (options) {
+   bookModel.getHostList()
+   .then(
+     this.setData({
+          books:res
+     })
+
+   )
+  },
+</code></pre>
+<p>pages/book.wxml使用组件</p>
+<pre><code class="lang-html">&lt;book-cmp book=&quot;{{books[0]}}/&gt;
+</code></pre>
+<p>book组件的样式</p>
+<p>book/index.wxss</p>
+<pre><code class="lang-css">.container{
+    margin-top: 30rpx;
+    display: flex;
+    /* 让description参照container定位 */
+    position: relative;
+    /* 阴影效果 */
+    box-shadow: 2px 2px 3px #e3e3e3;
+    flex-direction: column;
+    width: 240rpx;
+    height: 360rpx;
+}
+
+.container image{
+  width: 100%;
+  height: 100%;
+  border-radius: 2px;
+}
+
+.description{
+  240-10-15
+  width: 216rpx;
+  /* 白色区域覆盖图片上方，位于容器最底部 */
+  /* 生成绝对定位的元素，相对于static定位以外的第一个父元素进行定位 */
+  position: absolute;
+  bottom: 0;
+  background-color: #fff;
+  padding: 5rpx 10rpx 8rpx 15rpx;
+  font-size: 24rpx;
+  display: flex;
+  flex-direction: column;
+  border-bottom-right-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+.title{
+  margin-top: 10rpx;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.author{
+  font-size: 20rpx;
+  color: #999999;
+  margin-bottom: 10rpx;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.foot{
+  font-size: 20rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.footer{
+  color: #666666;
+}
+</code></pre>
+<h4 id="列表渲染"><a href="#列表渲染" class="headerlink" title="列表渲染"></a>列表渲染</h4><p>在页面中把一组数据统统用组件展示出来</p>
+<p>pages/book.html</p>
+<p>wxml如何使用循环<strong>wx:for</strong>（列表渲染），在需要重复的组件外层加block。{{}}内加需要循环遍历的数据</p>
+<pre><code class="lang-html">&lt;book-cmp book=&quot;{{books[0]}}&quot;/&gt;
+
+修改
+&lt;block wx:for=&quot;{{books}}&quot;&gt;
+    &lt;book-cmp  book=&quot;{{item}}&quot;/&gt;
+&lt;/block&gt;
+</code></pre>
+<p>说明：item指一组数据中的其中一个，规定在for内部指定item代表。可以用wx:for-item=“itemName”指定别名</p>
+<p>block没有实际的意义</p>
+<h4 id="书籍首页布局"><a href="#书籍首页布局" class="headerlink" title="书籍首页布局"></a>书籍首页布局</h4><p>pages/book.wxml</p>
+<pre><code class="lang-html">&lt;view class=&quot;container&quot;&gt;
+  &lt;view class=&quot;header&quot;&gt;
+    &lt;view class=&quot;box&quot;&gt;
+      &lt;image src=&quot;/images/icon/search.png&quot;&gt;&lt;/image&gt;
+      &lt;text&gt;搜索书籍&lt;/text&gt;
+    &lt;/view&gt;  
+  &lt;/view&gt;
+  &lt;view class=&quot;sub-container&quot;&gt;
+    &lt;image class=&quot;head-img&quot; src=&quot;/images/book/quality.png&quot;&gt;&lt;/image&gt;
+    &lt;view class=&quot;books-container&quot;&gt;
+       &lt;block wx:for=&quot;{{books}}&quot;&gt;
+         &lt;book-cmp book=&quot;{{item}}&quot;/&gt;
+      &lt;/block&gt; 
+    &lt;/view&gt;  
+  &lt;/view&gt;
+&lt;/view&gt;
+</code></pre>
+<p>pages/book.wxss</p>
+<pre><code class="lang-css">.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.sub-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f5f5f5;
+  margin-top: 100rpx;
+}
+
+.box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  background-color: #f5f5f5;
+  height: 68rpx;
+  width: 700rpx;
+  color: #999999;
+}
+
+.header {
+ /* 让header始终保持固定的位置*/
+  position: fixed;
+  background-color: #ffffff;
+  height: 100rpx;
+  width: 100%;
+  border-top: 1px solid #f5f5f5;
+  border-bottom: 1px solid #f5f5f5;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 3px 0 #e3e3e3;
+  z-index: 99;
+}
+
+.head-img {
+  width: 106rpx;
+  height: 34rpx;
+  margin-top: 40rpx;
+}
+
+.box image {
+  margin-right: 10px;
+  width: 14px;
+  height: 14px;
+  margin-bottom: -2px;
+}
+
+
+.books-container {
+  margin-top: 10rpx;
+  display: flex;
+  flex-direction: row;
+  /* 自动换行 */
+  flex-wrap: wrap;
+  justify-content: space-between;
+  /* 设置宽度让一行只显示两本图书 */
+  padding: 0 90rpx;
+}
+
+/* 控制每本书（组件）的上下间距 */
+.books-container book-cmp{
+  margin-bottom: 10rpx;
+}
+</code></pre>
+<h4 id="wx：key的用法与意义"><a href="#wx：key的用法与意义" class="headerlink" title="wx：key的用法与意义"></a>wx：key的用法与意义</h4><p>wx：key为列表中的每个元素指定一个唯一的标识</p>
+<p>wx:key———列表元素是object对象类型 。object下的某个属性不重复且数字或字符串，此处是book.id。wx:key=”id” </p>
+<p>wx:key———列表元素 是数字或字符串，wx:key=”*this” </p>
+<pre><code class="lang-html"> &lt;block wx:key=&quot;&quot; wx:for=&quot;{{books}}&quot;&gt;
+         &lt;book-cmp book=&quot;{{item}}&quot;/&gt;
+      &lt;/block&gt;
+</code></pre>
+<h4 id="项目型组件与通用性组件"><a href="#项目型组件与通用性组件" class="headerlink" title="项目型组件与通用性组件"></a>项目型组件与通用性组件</h4><p>实现效果：点击图书页面后页面跳转到图书详情</p>
+<p>wx.naviagteTo()跳转页面</p>
+<p>pages下新建book-detail。点击图书的时候把book id传到book-detail。</p>
+<p>一个页面接收外部传递的参数（组件接收参数通过properties）：向页面传参的话所有参数都包含在onload的options中。</p>
+<pre><code class="lang-js">#pages/book-detail.js
+onload:function(options){
+    const bid = options.bid //接收一个外部传递过来的bid参数
+    console.log(bid)
+}
+</code></pre>
+<p>跳转的代码写在book页面中还是组件中？</p>
+<p>如果写在页面中：navigateto要包含当前点击图书的id号，当用户点击图书后，图书组件要把id号传到页面中。组件内部把id传到页面：组价自身监听用户tap点击事件，监听到事件后，会产生组件的自定义事件triggerevent，在triggerevent中把自身的id号包含在事件的参数中，同时在页面中监听triggerevent事件从而拿到id</p>
+<p>所以把navigateto写在组件内部就不要一个传递过程。</p>
+<p>components/index.wxml中监听事件</p>
+<pre><code class="lang-html">&lt;view bind:tap=&quot;onTap&quot; class=&quot;container&quot;&gt;
+</code></pre>
+<p>index.js</p>
+<pre><code class="lang-js">method:{
+    onTap(event){
+    const bid = this.properties.book.id
+    wx.navigateTo({
+        url:`/pages/book-detail/book-detail?bid=${bid}`
+    })
+    }
+}
+</code></pre>
+<p>从组件内部直接跳转：</p>
+<p>方便，缺陷：写死了跳转，降低了组件的通用性</p>
+<p>适用于如果组件仅服务于当前项目（项目组件），通用性组件内部不要写业务逻辑</p>
+<h4 id="书籍详情页面三组数据加载"><a href="#书籍详情页面三组数据加载" class="headerlink" title="书籍详情页面三组数据加载"></a>书籍详情页面三组数据加载</h4><p>图书的内容简介，短评，点赞的数量和状态</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/2008221.jpg" style="zoom:50%;"></p>
+<p>通过获取书籍点赞情况，获取书籍详细信息，获取书籍短评这三个API</p>
+<p>model/book.js中编写</p>
+<pre><code class="lang-js">getDetail(bid){
+    return this.request({
+        url:`book/${bid}/detail`
+    })
+}
+
+getLikeStatus(bid){
+    return this.request()
+    url:`/book/${bid}/favor`
+}
+
+getComments(bid){
+    return this.request({
+        url:`book/${bid}/short_comment`
+    })
+}
+</code></pre>
+<p>book-detail.js</p>
+<pre><code class="lang-js">import{
+    BookModel
+}from &#39;../../models/book.js&#39;
+const bookModel = new BookModel()
+
+data:{//要用的数据初始化定义下
+    comments:[],
+    detail:null,
+    likeStatus:false,
+    likeCount:0
+}
+
+onload:function(options){
+    const bid = options.bid
+    const detail = bookModel.getDetail(bid)
+    const comments = bookModel.getCommetns(bid)
+    const likeStatus = bookModel.getLikeStatus(bid)
+
+    detail.then(res=&gt;{
+        this.setData({
+            book:res
+        })
+    })
+
+    comments.then(res=&gt;{
+        this.setData({
+            comments:res
+        })
+    })
+
+    likestatus.then(res=&gt;{
+        this.setData({
+            likeStatus:res.like_status,
+            likeCount:res.fav_nums     
+        })
+    })
+}
+</code></pre>
+<h4 id="三种小程序编译模式"><a href="#三种小程序编译模式" class="headerlink" title="三种小程序编译模式"></a>三种小程序编译模式</h4><p>默认:普通编译（每次重新编译都从首页开始）</p>
+<p>​        二维码编译</p>
+<p>​        添加编译模式：指定一个启动的页面</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/200822.jpg" style="zoom:50%;"></p>
+<h4 id="标签组件难点提示"><a href="#标签组件难点提示" class="headerlink" title="标签组件难点提示"></a>标签组件难点提示</h4><p>pages/book-detail.wxml页面</p>
+<pre><code class="lang-html">&lt;view class=&quot;container&quot;&gt;
+  &lt;view class=&quot;head&quot;&gt;
+        &lt;image src=&quot;{{book.image}}&quot;&gt;&lt;/image&gt;
+        &lt;text class=&#39;title&#39;&gt;{{book.title}}&lt;/text&gt;
+        &lt;text class=&#39;author&#39;&gt;{{book.author}}&lt;/text&gt;
+    &lt;/view&gt;
+  &lt;view class=&quot;sub-container&quot;&gt;
+        &lt;text class=&quot;headline&quot;&gt;短评&lt;/text&gt;
+    &lt;/view&gt;
+&lt;/view&gt;
+</code></pre>
+<p>wxss</p>
+<pre><code class="lang-css">/* pages/book-detail/book-detail.wxss */
+.container {
+  background-color: #f5f5f5;
+  width: 100%;
+}
+
+.head {
+  background-color: #fff;
+  padding-top: 40rpx;
+  padding-bottom: 40rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  color: #2f2f2f;
+  margin-top: 20rpx;
+  font-size: 38rpx;
+  font-weight: 600;
+}
+
+.author {
+  font-size: 28rpx;
+  color: #999;
+  /* margin-bottom: 30rpx; */
+}
+
+.head image {
+  width: 200rpx;
+  height: 300rpx;
+  box-shadow: 2px 2px 3px #e3e3e3;
+}
+
+.sub-container {
+  width: 690rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30rpx;
+  background-color: #fff;
+  padding: 30rpx;
+}
+
+.headline {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #2f2f2f;
+  margin-bottom: 20rpx;
+}
+</code></pre>
+<h4 id="标签布局"><a href="#标签布局" class="headerlink" title="标签布局"></a>标签布局</h4><p>components/tag组件</p>
+<pre><code class="lang-js">#index.js
+properties:{
+    text:String
+}
+</code></pre>
+<pre><code class="lang-html">#wxml
+&lt;view class=&quot;container&quot;&gt;
+    &lt;text&gt;{{text}}&lt;/text&gt;
+&lt;view&gt;
+</code></pre>
+<pre><code class="lang-css">#wxss
+.container {
+    padding: 4rpx 12rpx;
+    background-color: #f5f5f5;
+    color: #666666;
+    border-radius: 2px;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 28rpx;
+}
+</code></pre>
+<pre><code class="lang-json">pages/book-detail.json
+{
+    &quot;usingComponents&quot;:{
+        &quot;tag-cmp&quot;:&quot;/components/tag/index&quot;
+    }
+}
+</code></pre>
+<p>在book-detail的骨架中使用tag组件用来展示所有的评论数据</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/200823.jpg" style="zoom:50%;"></p>
+<pre><code class="lang-wxml">pages/book-detail.wxml
+&lt;view&gt;
+    ...
+    &lt;block wx:for=&quot;{{comments}}&quot; wx:key=&quot;content&quot;&gt;//错
+        &lt;tag-cmp text=&quot;{{item.content}}&quot;/&gt;
+    &lt;/block&gt;
+&lt;view&gt;
+</code></pre>
+<p>排查：appdata:comments下的comments</p>
+<pre><code>&lt;block wx:for=&quot;{{comments.comments}}&quot;&gt;
+或者
+comments：res.comments
+</code></pre><p>标签样式：</p>
+<pre><code class="lang-html">&lt;view class=&quot;comment-container&quot;&gt;
+    &lt;block wx:for=&quot;{{comments.comments}}&quot; wx:key=&quot;content&quot;&gt;//错
+     &lt;tag-cmp&gt;
+&lt;/view&gt;
+</code></pre>
+<p>让每个标签之间有间距</p>
+<p>book-detail.wxss</p>
+<pre><code class="lang-css">.comment-container{
+    display:flex;
+    flex-direction:row;
+    flex-wrap：wrap//让felx自动换行 
+}
+
+.comment-container tag-cmp{
+    margin-right:15rpx;水平间距
+    margin-bottom:10rpx;上下间距（发现没有效果，让本身的容器采用flex布局）
+}
+</code></pre>
+<h4 id="组件设计思想：slot插槽的使用"><a href="#组件设计思想：slot插槽的使用" class="headerlink" title="组件设计思想：slot插槽的使用"></a>组件设计思想：slot插槽的使用</h4><p>短评后面的number看情况添加。使用小程序slot（插槽）特性</p>
+<pre><code class="lang-html">#tag/index.wxml
+&lt;view class=&quot;container&quot;&gt;
+  &lt;text&gt;{{text}}&lt;/text&gt;
+  &lt;slot name=&quot;after&quot;&gt;&lt;/slot&gt;//name区分不同的插槽
+&lt;/view&gt;
+</code></pre>
+<p>slot视外部传进来内容的有无来进行实际的改变。和属性行为相近，从外部向组件的内部传递标签。</p>
+<pre><code class="lang-html">#pages/detail-wxml
+......
+&lt;block wx:for=&quot;{{comments}}&quot; wx:key=&quot;content&quot;&gt;
+        &lt;tag-cmp text=&quot;{{item.content}}&quot;/&gt;
+        //&lt;text&gt;{{'+'+item.nums}}&lt;/text&gt;//问题：如何把text当做tag组件的插槽传进去呢？    
+&lt;/block&gt;
+</code></pre>
+<p>修改：tag-cmp不能是单行标签的形式</p>
+<pre><code class="lang-html">#pages/detail-wxml
+......
+&lt;block wx:for=&quot;{{comments}}&quot; wx:key=&quot;content&quot;&gt;
+    &lt;tag-cmp text=&quot;{{item.content}}&quot;&gt;
+           &lt;text class=&quot;num&quot; slot=&quot;after&quot;&gt;{{'+'+item.nums}}&lt;/text&gt;
+    &lt;/tag-cmp&gt;
+&lt;/block&gt;
+</code></pre>
+<p>插槽的样式book-detail.wxss</p>
+<pre><code class="lang-css">.num {
+  margin-left: 10rpx;
+  font-size: 22rpx;
+  color: #aaa;
+}
+</code></pre>
+<p>数字没有显示出来：slot默认不启用</p>
+<p>在tag/index.js中Componentz中加上</p>
+<pre><code>options:{
+
+​    multipleSlots:true
+
+}
+</code></pre><h4 id="自定义组件样式探讨"><a href="#自定义组件样式探讨" class="headerlink" title="自定义组件样式探讨"></a>自定义组件样式探讨</h4><p>实现tag组件的着色</p>
+<p>如让第一个和第二个tag着色</p>
+<h5 id="hack方式"><a href="#hack方式" class="headerlink" title="hack方式"></a>hack方式</h5><p>css选择器定位到标签中的第一个和第二个，强制修改组件内部的背景颜色</p>
+<pre><code class="lang-css">#book-detail.wxss
+.comment-container tag-cmp:nth-child(1){
+    background-color:#fffbdd
+}
+</code></pre>
+<p>选择器选择的tag-cmp是自定义组件，我们之前应用的通常是view.text.image小程序内置的组件。对自定义使用css样式：</p>
+<p>技巧：选择tag组件内部的子元素view,设置view的bkcolor.</p>
+<pre><code class="lang-css">#book-detail.wxss
+.comment-container tag-cmp:nth-child(1) view{
+    background-color:#fffbdd
+}
+
+.comment-container&gt;tag-cmp:nth-child(2)&gt;view{
+    background-color:#fffbdd
+}
+</code></pre>
+<p>可以生效，但写法存放安全隐患。</p>
+<p><strong>子元素选择器和后代选择器的区别：</strong></p>
+<p>子元素选择&gt;更精准，不会影响到其他元素样式</p>
+<p>我们使用子元素选择器</p>
+<pre><code class="lang-css">.comment-container&gt;tag-cmp:nth-child(1)&gt;view{
+    background-color:#fffbdd
+}
+.comment-container&gt;tag-cmp:nth-child(2)&gt;view{
+    background-color:#fffbdd
+}
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/2008232.jpg" style="zoom:50%;"></p>
+<p>此方法灵活，对组件内部细节理解要求高。称为hack方式、</p>
+<h5 id="外部样式的概念"><a href="#外部样式的概念" class="headerlink" title="外部样式的概念"></a>外部样式的概念</h5><p>设计开源组件时，存在默认样式和自定义样式 的需求</p>
+<p>开发者应提供不违反组件封装原则的修改默认样式的机制</p>
+<p>组件属性 slot没有违反封装原则。（组件允许才能做修改，组件属性对js相关数据的传递 slot是html,wxml）。共性：参数传递</p>
+<p>上例是强行修改组件的css样式。</p>
+<p>遵守参数传递的原则修改CSS样式</p>
+<p><strong>样式css的传递机制：外部样式 externalClass</strong>,不违反组件封装原则</p>
+<h5 id="外部样式的问题"><a href="#外部样式的问题" class="headerlink" title="外部样式的问题"></a>外部样式的问题</h5><p>tag/index.js中定义一个参数接收组件外部传递进来的样式</p>
+<pre><code class="lang-js">externalClasses:[&#39;tag-class&#39;],//允许定义多个外部样式类
+</code></pre>
+<p>tag/index.wxml</p>
+<p>外部样式覆盖普通样式（小程序中覆盖不一定成功）</p>
+<pre><code class="lang-html">&lt;view class=&quot;container tag-class&quot;&gt;//tag-class可以覆盖修改container
+......
+&lt;/view&gt;
+</code></pre>
+<p><strong>外部样式传递到组件内部中</strong></p>
+<p>pages/book-detail.wxss</p>
+<pre><code class="lang-css">ex-tag{
+    background-color:#fffbdd;
+}
+</code></pre>
+<p>detail.wxml</p>
+<pre><code class="lang-html">&lt;tag-cmp tag-class=&quot;ex-tag&quot;&gt;
+</code></pre>
+<p>没效果，因为小程序没有覆盖<code>container tag-class</code>,先后顺序小程序不确定</p>
+<h5 id="外部样式如何强制覆盖普通样式"><a href="#外部样式如何强制覆盖普通样式" class="headerlink" title="外部样式如何强制覆盖普通样式"></a>外部样式如何强制覆盖普通样式</h5><p>确定先后顺序。</p>
+<pre><code class="lang-css">#detail
+.ex-tag{
+    background-color:#fffbdd !important;
+}
+</code></pre>
+<h5 id="外部样式类的使用技巧"><a href="#外部样式类的使用技巧" class="headerlink" title="外部样式类的使用技巧"></a>外部样式类的使用技巧</h5><pre><code class="lang-css">#detail
+.ex-tag1{
+    background-color:#fffbdd !important;
+}
+
+.ex-tag2{
+    background-color:#eefbff !important;
+}
+</code></pre>
+<pre><code class="lang-html">#detail.wxml index可以用来指代序号
+
+ &lt;tag-cmp tag-class=&quot;{{index==0?'ex-tag1':''||index==1?'ex-tag2':''}}&quot; text=&quot;{{item.content}}&quot;&gt;
+            &lt;text class=&quot;num&quot; slot=&quot;after&quot;&gt;{{'+'+item.nums}}&lt;/text&gt;
+ &lt;/tag-cmp&gt;
+</code></pre>
+<p>方式可行，但不推荐，进行优化</p>
+<h3 id="小程序wxs的应用"><a href="#小程序wxs的应用" class="headerlink" title="小程序wxs的应用"></a>小程序wxs的应用</h3><h4 id="分析换行符-不解析换行的原因"><a href="#分析换行符-不解析换行的原因" class="headerlink" title="分析换行符 不解析换行的原因"></a>分析换行符 不解析换行的原因</h4><h4 id="wxs的概念与应用"><a href="#wxs的概念与应用" class="headerlink" title="wxs的概念与应用"></a>wxs的概念与应用</h4><h4 id="在小程序中编写limit过滤器"><a href="#在小程序中编写limit过滤器" class="headerlink" title="在小程序中编写limit过滤器"></a>在小程序中编写limit过滤器</h4><h4 id="短评功能实现"><a href="#短评功能实现" class="headerlink" title="短评功能实现"></a>短评功能实现</h4><p>在wxml中编写wxs代码</p>
+<p>mask组件</p>
+<p>提交短评数据</p>
+<p>支持input输入短评</p>
+<h5 id="细节处理"><a href="#细节处理" class="headerlink" title="细节处理"></a>细节处理</h5>
         </div>
         <!-- .entry-content -->
         <div class="single-reward">
