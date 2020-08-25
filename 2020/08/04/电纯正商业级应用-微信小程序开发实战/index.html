@@ -2801,7 +2801,7 @@ promise.then(
 <p>把原来的request变成一个私有方法，另外写一个request</p>
 <pre><code class="lang-js">.......
 class HTTP{
-    request(url,data={},method=&#39;GET&#39;){//箭头函数中写异步代码，调用_request。
+    request({url,data={},method=&#39;GET&#39;}){//箭头函数中写异步代码，调用_request。
         return new Promise((resolve,reject)=&gt;{
             this._request(url,resolve,reject,data,method)
         })
@@ -3165,22 +3165,24 @@ onload:function(options){
 <p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/2008221.jpg" style="zoom:50%;"></p>
 <p>通过获取书籍点赞情况，获取书籍详细信息，获取书籍短评这三个API</p>
 <p>model/book.js中编写</p>
-<pre><code class="lang-js">getDetail(bid){
+<pre><code class="lang-js">  getDetail(bid) {
     return this.request({
-        url:`book/${bid}/detail`
+        url: `book/${bid}/detail`
     })
 }
 
-getLikeStatus(bid){
-    return this.request()
-    url:`/book/${bid}/favor`
-}
-
-getComments(bid){
+getLikeStatus(bid) {
     return this.request({
-        url:`book/${bid}/short_comment`
+        url: `book/${bid}/favor`
     })
 }
+  getComments(bid){
+      return this.request({
+        url: `book/${bid}/short_comment`
+      }
+
+      )
+  }
 </code></pre>
 <p>book-detail.js</p>
 <pre><code class="lang-js">import{
@@ -3470,11 +3472,513 @@ comments：res.comments
  &lt;/tag-cmp&gt;
 </code></pre>
 <p>方式可行，但不推荐，进行优化</p>
-<h3 id="小程序wxs的应用"><a href="#小程序wxs的应用" class="headerlink" title="小程序wxs的应用"></a>小程序wxs的应用</h3><h4 id="分析换行符-不解析换行的原因"><a href="#分析换行符-不解析换行的原因" class="headerlink" title="分析换行符 不解析换行的原因"></a>分析换行符 不解析换行的原因</h4><h4 id="wxs的概念与应用"><a href="#wxs的概念与应用" class="headerlink" title="wxs的概念与应用"></a>wxs的概念与应用</h4><h4 id="在小程序中编写limit过滤器"><a href="#在小程序中编写limit过滤器" class="headerlink" title="在小程序中编写limit过滤器"></a>在小程序中编写limit过滤器</h4><h4 id="短评功能实现"><a href="#短评功能实现" class="headerlink" title="短评功能实现"></a>短评功能实现</h4><p>在wxml中编写wxs代码</p>
-<p>mask组件</p>
-<p>提交短评数据</p>
-<p>支持input输入短评</p>
-<h5 id="细节处理"><a href="#细节处理" class="headerlink" title="细节处理"></a>细节处理</h5>
+<h3 id="小程序wxs的应用"><a href="#小程序wxs的应用" class="headerlink" title="小程序wxs的应用"></a>小程序wxs的应用</h3><p>完成内容简介</p>
+<pre><code class="lang-html">#pages/book-detail.wxml
+......
+&lt;view class=&quot;sub-container&quot;&gt;
+    &lt;text class=&quot;headline&quot;&gt;短评&lt;/text&gt;  
+     ....
+&lt;/view&gt; 
+
+&lt;view class=&quot;sub-container&quot;&gt;
+    &lt;text class=&quot;headline&quot;&gt;内筒简介&lt;/text&gt;  
+    &lt;text class=&quot;content&quot;&gt;{{book.summary}}&lt;/text&gt;
+&lt;/view&gt;
+</code></pre>
+<p>会发现内容中有多个/n，/n其实都是换行的效果。且需要首行缩进2字符</p>
+<h4 id="分析换行符-不解析换行的原因"><a href="#分析换行符-不解析换行的原因" class="headerlink" title="分析换行符 不解析换行的原因"></a>分析换行符 不解析换行的原因</h4><p><code>&lt;text&gt;</code>组件会自动解析换行\n。为什么从服务器加载的内容简介不会出现换行效果呢？</p>
+<p>在network中查看字符串。点击response查看原始数据。</p>
+<p>会发现<code>\n</code>在源码中是<code>\\n</code>,所以输出的是<code>\n</code>。</p>
+<p>问题解决：通过正则表达式</p>
+<p>我们可以在book-detail.js中对summary先做一次处理在绑定到wxml</p>
+<h4 id="wxs的概念与应用"><a href="#wxs的概念与应用" class="headerlink" title="wxs的概念与应用"></a>wxs的概念与应用</h4><p>思路：能否编写一个函数，在wxml的{{}}内部调用这个函数并把summary当做参数传递进去，类似<code>{{func(book.summary)}}</code></p>
+<p>老版本中，wxml编写js或者调用js是不可能的，新版中提供<strong>wxs</strong>,让wxml具备写或调用js的能力。</p>
+<p>wxs可以在wxml中写，也可以新建文件中写</p>
+<p>我们在util中新建一个文件，文件名filter.wxs。</p>
+<pre><code class="lang-js">var format = function(text){
+
+  return &#39;123123&#39;//测试
+}
+//不能用const,因為const是ES6的語法.wxs语法更接近ES5
+//wxs!=javascript,wxs是小程序的一種腳本語言，語法不能完全通用
+module.exports = {
+  format:format
+}
+</code></pre>
+<pre><code class="lang-html">#book-detail/wxml调用format
+&lt;wxs src=&quot;../../util/filter.wxs&quot; module=&quot;util&quot; /&gt;引用
+... ...
+    &lt;view class=&quot;sub-container&quot;&gt;
+    &lt;text class=&quot;headline&quot;&gt;内筒简介&lt;/text&gt;  
+    &lt;text class=&quot;content&quot;&gt;{{util.format(book.summary)}}&lt;/text&gt;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/2008233.jpg" style="zoom:50%;"></p>
+<p>使用wxs中的正则表达式</p>
+<pre><code class="lang-js">var format = function(text){
+  var reg = getRegExp(&#39;\\\\n&#39;,&#39;g&#39;)//返回雙//
+  return text.replace(reg,&#39;\n&#39;)
+}
+
+module.exports = {
+  format:format
+}
+</code></pre>
+<p>会报错。因为setData()中book.summary初始化了一次，初始化时book为空，后更新了一次。一共执行的两次。</p>
+<p>改正：</p>
+<pre><code class="lang-js">var format = function(text){
+  if(!text){
+    return
+  }
+  var reg = getRegExp(&#39;\\\\n&#39;,&#39;g&#39;)//返回雙//
+  return text.replace(reg,&#39;\n&#39;)
+}
+
+module.exports = {
+  format:format
+}
+</code></pre>
+<p><strong>实现每段段落首行缩进两个字符</strong>：</p>
+<p>text-indent属性</p>
+<pre><code class="lang-css">#book-detail.wxss
+.content{
+    text-indent:58rpx;
+    font-weight:500
+}
+</code></pre>
+<pre><code class="lang-html"> &lt;text class=&quot;content&quot;&gt;{{util.format(book.summary)}}&lt;/text&gt;
+</code></pre>
+<p>只对整个text文本的开头有效<code>&lt;text&gt;</code>标签相当于<code>&lt;p&gt;</code></p>
+<p>所以不能用css的方式解决</p>
+<pre><code>var format = function(text){
+  if(!text){
+    return
+  }
+  var reg = getRegExp(&#39;\\\\n&#39;,&#39;g&#39;)//返回雙//
+  return text.replace(reg,&#39;\n&amp;nbsp;&amp;nbsp;&#39;)
+}
+......
+</code></pre><p>没效果，要让<code>text</code>解析nbsp,需要开启decode属性</p>
+<pre><code class="lang-html">&lt;text class=&quot;content&quot; decode=&quot;{{true}}&quot;&gt;{{util.format(book.summary)}}&lt;/text&gt;
+</code></pre>
+<h4 id="在小程序中编写limit过滤器"><a href="#在小程序中编写limit过滤器" class="headerlink" title="在小程序中编写limit过滤器"></a>在小程序中编写limit过滤器</h4><p>限制短评的数量展现：</p>
+<p>编写过滤器在bolck标签的<code>{{}}</code>里面做截取操作</p>
+<pre><code class="lang-js">#filter.wxs
+...
+var limit = function(array,length){
+    return array.slice(0,length)//截取
+}
+
+module.exports = {
+    format:format,
+    limit:limit
+}
+</code></pre>
+<pre><code class="lang-html">&lt;block wx:for=&quot;{{util.limit(comments,10)}}&quot; wx:key=&quot;content&quot;&gt;
+</code></pre>
+<p>过滤器可以复用</p>
+<h4 id="书本信息"><a href="#书本信息" class="headerlink" title="书本信息"></a>书本信息</h4><pre><code class="lang-html">#book-detail.wxml
+......
+&lt;view class=&quot;sub-container&quot;&gt;
+        &lt;text class=&quot;headline&quot;&gt;书本信息&lt;/text&gt;
+        &lt;view class=&quot;detail-container&quot;&gt;
+            &lt;view class=&quot;vertical description&quot;&gt;
+                &lt;text&gt;出版社&lt;/text&gt;
+                &lt;text&gt;出版年&lt;/text&gt;
+                &lt;text&gt;页数&lt;/text&gt;
+                &lt;text&gt;定价&lt;/text&gt;
+                &lt;text&gt;装帧&lt;/text&gt;
+            &lt;/view&gt;
+            &lt;view class=&quot;vertical&quot;&gt;
+                &lt;text&gt;{{book.publisher}}&lt;/text&gt;
+                &lt;text&gt;{{book.pubdate}}&lt;/text&gt;
+                &lt;text&gt;{{book.pages}}&lt;/text&gt;
+                &lt;text&gt;{{book.price}}&lt;/text&gt;
+                &lt;text&gt;{{book.binding}}&lt;/text&gt;
+            &lt;/view&gt;
+        &lt;/view&gt;
+    &lt;/view
+</code></pre>
+<pre><code class="lang-css">#book-detail.wxss
+.detail-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-bottom: 100rpx;
+  font-size: 28rpx;
+  color: #666;
+}
+
+.vertical {
+  display: flex;
+  flex-direction: column;
+}
+
+.description {
+  color: #999;
+  margin-right: 30rpx;
+}
+</code></pre>
+<h4 id="短评功能"><a href="#短评功能" class="headerlink" title="短评功能"></a>短评功能</h4><p>功能描述：</p>
+<p>固定在页面的最底部，不随页面滑动。</p>
+<p>点击输入短评时，弹出新的覆盖层，上部灰色遮罩。下部描述性文本，附加热门标签。新添加的标签排在第一个位置显示。点击了哪个标签，标签的数字+1。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/2008234.jpg" style="zoom: 50%;"></p>
+<h5 id="短评实现一"><a href="#短评实现一" class="headerlink" title="短评实现一"></a>短评实现一</h5><pre><code class="lang-html">#book-detail.wxml
+&lt;view class=&quot;post-container&quot; &gt;
+    &lt;view  class=&quot;post-fake&quot;&gt;//不是真正输入短评，而是点击后弹出真正输入短评的页面
+        &lt;text&gt;输入短评&lt;/text&gt;
+    &lt;/view&gt;
+&lt;/view&gt;
+</code></pre>
+<pre><code class="lang-css">#book-detail.wxss
+.post-container {
+    height: 100rpx;
+    box-shadow: 1px -1px 1px #e3e3e3;
+    position: fixed;
+    width: 690rpx;
+    background-color: #fff;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 30rpx;
+    justify-content: space-between;
+}
+
+.post-fake {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 60rpx;
+    width: 460rpx;
+    border: 1px solid #999;
+    border-radius: 15px;
+    font-size: 22rpx;
+    padding-left: 20rpx;
+}
+</code></pre>
+<p>输入短评旁点赞按钮，引入like组件(like组件没有实现具体的业务) </p>
+<pre><code class="lang-json">#book-detail.json
+{
+  &quot;usingComponents&quot;: {
+    &quot;tag-cmp&quot;:&quot;/components/tag/index&quot;,
+    &quot;like-cmp&quot;:&quot;/components/like/index&quot;
+  }
+}
+</code></pre>
+<pre><code class="lang-html">#book-detail.wxml
+&lt;view class=&quot;post-container&quot; &gt;
+    &lt;view  class=&quot;post-fake&quot;&gt;//不是真正输入短评，而是点击后弹出真正输入短评的页面
+        &lt;text&gt;输入短评&lt;/text&gt;
+    &lt;/view&gt;
+    &lt;view class=&quot;like-container&quot;&gt;
+        &lt;like-cmp bind:like=&quot;onLike&quot; class=&quot;like&quot; like=&quot;{{likeStatus}}&quot; count=&quot;{{likeCount}}&quot; /&gt;
+    &lt;/view&gt;
+&lt;/view&gt;
+</code></pre>
+<pre><code class="lang-css">#book-detail.wxss
+.like {
+    margin-right: 30rpx;
+    margin-top: 10rpx;
+}
+
+.like-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+</code></pre>
+<p>完成了like前端演示的效果，还需要编写onLike的业务逻辑</p>
+<pre><code class="lang-js">#book-detail.js
+...
+import {
+  LikeModel
+} from &#39;../../models/like.js&#39;
+
+const likeModel = new LikeModel()
+
+onLike(event) {
+    const like_or_cancel = event.detail.behavior
+    likeModel.like(like_or_cancel, this.data.book.id, 400)
+  },
+</code></pre>
+<h5 id="短评实现二"><a href="#短评实现二" class="headerlink" title="短评实现二"></a>短评实现二</h5><p>点击短评，出现短评真正的输入框。点击取消，恢复到初始状态。</p>
+<p>第一步：在输入短评的按钮上绑定一个事件。</p>
+<pre><code class="lang-js">&lt;view class=&quot;post-container&quot; &gt;
+    &lt;view bind:tap=&quot;onFakePost&quot; class=&quot;post-fake&quot;&gt;
+        &lt;text&gt;输入短评&lt;/text&gt;
+    &lt;/view&gt;
+    ......
+&lt;/view&gt;
+</code></pre>
+<pre><code class="lang-js">book-detail.js
+data:{
+    ...
+    posting:false
+}
+onFakePost(event){
+    this.setData({
+        posting:true
+    })
+}
+</code></pre>
+<p>编写真正的评论输入框：</p>
+<pre><code class="lang-html">&lt;view class=&quot;posting-container&quot;&gt;
+    &lt;view class=&quot;post-header&quot;&gt;
+        &lt;text &gt;仅可点击标签+1&lt;/text&gt;
+        &lt;text  class=&quot;cancel&quot;&gt;取消&lt;/text&gt;
+    &lt;/view&gt;
+    &lt;view class=&quot;comment-container&quot;&gt;//取前三个热评
+    &lt;/view&gt;
+    &lt;input class=&quot;post&quot; placeholder=&#39;短评最多12个字&#39;&gt;&lt;/input&gt;
+&lt;/view&gt;
+</code></pre>
+<pre><code class="lang-css">.posting-container {
+    bottom: 0;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    width: 100%;
+    z-index: 999;
+}
+
+.post-header {
+    width: 100%;
+    border-bottom: 1px solid #f5f5f5;
+    border-top: 1px solid #f5f5f5;
+    height: 100rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cancel {
+    color: #666;
+}
+
+.post-header text {
+    padding: 25rpx;
+}
+
+.post-header&gt;text:first-child {
+    font-size: 28rpx;
+    color: #bbb;
+}
+
+.posting-container .comment-container {//因为之前有同名
+    width: 690rpx;
+    padding: 40rpx 30rpx 0 30rpx;
+}
+.post {
+    width: 690rpx;
+    margin: 30rpx auto;
+    height: 56rpx;
+    background-color: #f5f5f5;
+    border-radius: 15px;
+    padding-left: 25rpx;
+}
+
+.shadow {
+    color: #999;
+}
+</code></pre>
+<p>效果：真实的面板把假的覆盖了。两者之间应有一个显示和隐藏的切换。posting作为切换变量</p>
+<pre><code class="lang-html">&lt;view class=&quot;post-container&quot; hidden=&quot;{{posting}}&quot;&gt;
+    &lt;view bind:tap=&quot;onFakePost&quot; class=&quot;post-fake&quot;&gt;
+        &lt;text&gt;输入短评&lt;/text&gt;
+    &lt;/view&gt;
+    &lt;view class=&quot;like-container&quot;&gt;
+        &lt;v-like bind:like=&quot;onLike&quot; class=&quot;like&quot; like=&quot;{{likeStatus}}&quot; count=&quot;{{likeCount}}&quot; /&gt;
+    &lt;/view&gt;
+&lt;/view&gt;
+
+&lt;view class=&quot;posting-container&quot; wx:if=&quot;{{posting}}&quot;&gt;
+    &lt;view class=&quot;post-header&quot;&gt;
+        &lt;text wx:if=&quot;{{comments==true}}&quot;&gt;仅可点击标签+1&lt;/text&gt;
+        &lt;text wx:else&gt;暂无短评&lt;/text&gt;
+        &lt;text bind:tap=&quot;onCancel&quot; class=&quot;cancel&quot;&gt;取消&lt;/text&gt;
+    &lt;/view&gt;
+    &lt;view class=&quot;comment-container&quot;&gt;//显示三条热评
+        &lt;block wx:for=&quot;{{util.limit(comments, 3)}}&quot; wx:key=&quot;content&quot;&gt;
+            &lt;tag-cmp bind:tapping=&quot;onPost&quot; tag-class=&quot;{{tool.highlight(index)}}&quot; text=&quot;{{item.content}}&quot;&gt;
+                &lt;text class=&quot;num&quot; slot=&quot;after&quot;&gt;{{'+'+item.nums}}&lt;/text&gt;
+            &lt;/tag-cmp&gt;
+        &lt;/block&gt;
+    &lt;/view&gt;
+    &lt;input bindconfirm=&quot;onPost&quot; class=&quot;post&quot; placeholder=&#39;短评最多12个字&#39;&gt;&lt;/input&gt;
+&lt;/view&gt;
+</code></pre>
+<pre><code class="lang-js">js
+...
+onCancel(event) {
+    this.setData({
+      posting: false
+    })
+  },
+</code></pre>
+<h5 id="在wxml中编写wxs代码"><a href="#在wxml中编写wxs代码" class="headerlink" title="在wxml中编写wxs代码"></a>在wxml中编写wxs代码</h5><pre><code class="lang-html">detail-wxml
+...
+&lt;tag-cmp bind:tapping=&quot;onPost&quot; tag-class=&quot;{{tool.highlight(index)}}&quot; text=&quot;{{item.content}}&quot;&gt;
+...
+&lt;wxs module=&quot;tool&quot;&gt;
+    var highlight = function(index){
+        if(index==0){
+            return &#39;ex-tag1&#39;
+        }
+        if(index==1){
+            return &#39;ex-tag2&#39;
+        }
+        return &#39;&#39;
+    }
+
+    module.exports = {
+        highlight:highlight
+    }
+&lt;/wxs&gt;
+</code></pre>
+<h5 id="mask组件"><a href="#mask组件" class="headerlink" title="mask组件"></a>mask组件</h5><p>黑色透明背景（遮罩效果） 封装为一个组件</p>
+<p>components/mask</p>
+<p>js中不用谢任何代码</p>
+<pre><code class="lang-html">#wxml
+&lt;view class=&quot;container&quot;&gt;&lt;/view&gt;
+</code></pre>
+<pre><code class="lang-css">#wxss
+.container{
+    background-color:#000000;
+    position:fixed;
+    top:0;
+    opacity:0.6;//透明度
+    width:100%;
+    height:100%;
+    z-index:99;//
+}
+</code></pre>
+<pre><code class="lang-json">#book-detail.json
+&quot;mask-cmp&quot;:&quot;/components/mask/index&quot;
+</code></pre>
+<pre><code class="lang-html">#pages/detail.wxml
+&lt;mask-cmp wx:if=&quot;{{posting}}&quot;/&gt;
+</code></pre>
+<h5 id="提交短评数据"><a href="#提交短评数据" class="headerlink" title="提交短评数据"></a>提交短评数据</h5><p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/2008241.jpg" style="zoom:33%;"></p>
+<p>book-id可以在book-detail.js中拿到</p>
+<p>content:如何确认？如果是用户自身输入，content容易拿到。点击标签时标签里的content如何拿到？</p>
+<p>book-detail页面不知道标签内部的内容，标签本身知道自己内部的内容，<strong>标签组件的内部做一个事件</strong>，当用户点击标签时标签在事件的参数中携带文本的内容。页面通过监听点击事件接收到标签内部content内容，流程同like</p>
+<pre><code class="lang-html">#tag/index.wxml
+//小程序内置的tap事件
+&lt;view bind:tap=&quot;onTap&quot; class=&quot;container tag-class&quot;&gt;
+  &lt;text&gt;{{text}}&lt;/text&gt;
+  &lt;slot name=&quot;after&quot;&gt;&lt;/slot&gt;
+&lt;/view&gt;
+</code></pre>
+<pre><code class="lang-js">#tag/index.js
+methods: {
+    onTap(event){
+        //自定义事件
+        this.triggerEvent(&#39;tapping&#39;,{//触发一个自定义事件，把文本text传递出去
+            text:this.properties.text
+        })
+    }
+  }
+</code></pre>
+<p>页面监听tap的自定义事件tapping,监听函数onPost。输入方式两种：点击标签或文本输入</p>
+<pre><code class="lang-html">#pages/book-detail.wxml
+&lt;view class=&quot;posting-container&quot; wx:if=&quot;{{posting}}&quot;&gt;
+    ......
+    &lt;view class=&quot;comment-container&quot;&gt;
+      &lt;block wx:for=&quot;{{util.limit(comments,3)}}&quot; wx:key=&quot;content&quot;&gt;
+          //监听组件的tapping,处理函数onpost
+        &lt;tag-cmp bind:tapping=&quot;onPost&quot; tag-class=&quot;{{tool.highlight(index)}}&quot; text=&quot;{{item.content}}&quot;&gt;&lt;/tag-cmp&gt;
+        &lt;text class=&quot;num&quot; slot=&quot;after&quot;&gt;{{'+'+item.nums}}&lt;/text&gt;
+      &lt;/block&gt;
+    &lt;/view&gt;
+    &lt;input class=&quot;post&quot; placeholder=&#39;短评最多12个字&#39;&gt;&lt;/input&gt;
+&lt;/view&gt;
+</code></pre>
+<pre><code class="lang-js">#book-detail.js
+onPost(event){//event有可能是tapping或input发送的事件
+   const comment = event.detail.text
+
+   //内容长度jiance
+   if(comment.length&gt;12){通过长度检测
+       wx.showToast({
+           title:&#39;短评最多12个字&#39;，
+           icon:&#39;none&#39;
+       })
+       return
+   }
+
+   bookModel.postComment(this.data.book.id,comment) //返回一个promise
+   .then(res=&gt;{
+      wx.showToast({//客户端提示处理
+          title:&quot;+1&quot;,
+          icon:&quot;none&quot;
+      }) 
+       把新增加的短评添加到comments数组中去，然后this.setdata更新整个comments数组
+       this.data.comments.unshift({//把新的元素添加到数组首尾
+           content：comment,
+           nums:1//还有一个数量
+       }) 
+
+      this.setData({
+          comments:this.data.comments
+      })
+
+},
+</code></pre>
+<pre><code class="lang-js">model/book.js 向服务器提交数据的API
+postComment(bid,comment){
+    return this.request({
+        url:&#39;book/add/short_comment&#39;,
+        method:&#39;POST&#39;,
+        data:{
+            book_id:bid,
+            content:comment
+        }
+    })
+}
+</code></pre>
+<p>用户点击标签后把遮罩层关闭掉：</p>
+<pre><code class="lang-js">this.setData({
+        comments:this.data.comments,
+        posting:false
+      })
+</code></pre>
+<p>至此点击标签发表评论的功能实现</p>
+<h5 id="支持input输入短评"><a href="#支持input输入短评" class="headerlink" title="支持input输入短评"></a>支持input输入短评</h5><p>使用input特有的事件bindconfirm,监听的是当用户输入完成点击确认按钮后，触发自定义函数</p>
+<pre><code class="lang-html">&lt;input bindconfirm=&quot;onPost&quot; class=&quot;post&quot; placeholder=&#39;短评最多12个字&#39;&gt;&lt;/input&gt;
+</code></pre>
+<pre><code class="lang-js">#book-detail.js
+ onPost(event){
+    const comment = event.detail.text || event.detail.value
+    //const commentInput = event.detail.value(因为comment和commentInput是一个有值时一个无值的)
+    if(!comment){
+        return
+    }
+
+    if(comment.length&gt;12){
+      wx.showToast({
+        title: &#39;短評最多12個字&#39;,
+        icon:&quot;none&quot;
+      })
+      return
+    }
+</code></pre>
+<h5 id="细节处理"><a href="#细节处理" class="headerlink" title="细节处理"></a>细节处理</h5><p>图书没有短评时，给出暂无短评的提示</p>
+<pre><code class="lang-html">book-deatil.wxml
+&lt;view class=&quot;sub-container&quot;&gt;
+    &lt;text class=&quot;headline&quot;&gt;短评&lt;/text&gt;  
+    &lt;text class=&quot;shadow&quot; wx:if=&quot;{{comments==false}}&quot;&gt;还没有短评&lt;/text&gt;
+     &lt;view class=&quot;comment-container&quot;&gt;
+        ......
+&lt;view class=&quot;posting-container&quot; wx:if=&quot;{{posting}}&quot;&gt;
+    &lt;view class=&quot;post-header&quot;&gt;
+        &lt;text &gt;仅可点击标签+1&lt;/text&gt;
+</code></pre>
+
         </div>
         <!-- .entry-content -->
         <div class="single-reward">
