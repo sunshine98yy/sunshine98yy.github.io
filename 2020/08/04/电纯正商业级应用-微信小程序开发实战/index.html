@@ -3976,8 +3976,480 @@ postComment(bid,comment){
         ......
 &lt;view class=&quot;posting-container&quot; wx:if=&quot;{{posting}}&quot;&gt;
     &lt;view class=&quot;post-header&quot;&gt;
-        &lt;text &gt;仅可点击标签+1&lt;/text&gt;
+        &lt;text wx:if=&quot;{{comments==true}}&quot;&gt;仅可点击标签+1&lt;/text&gt;
+        &lt;text wx:else&gt;暂无短评&lt;/text&gt;
 </code></pre>
+<h3 id="搜索与高阶组件"><a href="#搜索与高阶组件" class="headerlink" title="搜索与高阶组件"></a>搜索与高阶组件</h3><p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/200825.jpg" style="zoom:50%;"></p>
+<h4 id="并行请求与串行请求"><a href="#并行请求与串行请求" class="headerlink" title="并行请求与串行请求"></a>并行请求与串行请求</h4><p>点击书籍详情，需要向服务器发送三个请求。加载数据需要时间，取决于当前用户的网路状况，取决于服务器的性能。<strong>加载数据时显示loading的提示，加载完数据后提示结束</strong>。小程序中内置了两种方式，页面中间小圈圈，页面导航栏上小圈圈。</p>
+<p>book-detail.js</p>
+<p>执行onload函数时显示loading，所有数据加载完成后loading提示取消。</p>
+<p>什么时候取消Loading？</p>
+<p>数据加载完成。如何确定三个并行的异步请求完成的时机？</p>
+<pre><code class="lang-js">onLoad: function (options) {
+    wx.showLoading()
+    const bid = options.bid
+    ......
+    detail.then(res=&gt;{
+      console.log(res)
+      this.setData({
+        book:res
+      })
+    })
+
+    comments.then(res=&gt;{
+      console.log(res)
+      this.setData({
+        comments:res.comments
+      })
+    })
+
+    likeStatus.then(res=&gt;{
+      console.log(res)
+      this.setData({
+          likeStatus:res.like_status,
+          likeCount:res.fav_nums     
+      })
+  })
+  },
+</code></pre>
+<h4 id="Promise-all与Promise-race"><a href="#Promise-all与Promise-race" class="headerlink" title="Promise.all与Promise.race"></a>Promise.all与Promise.race</h4><p>Promise.all()把多个promise实例合并成一个，返回一个新的实例，可以看做合体。只有当三个子promise都完成后才会触发新promise的then</p>
+<p>.all是等待所有子promise完成后才触发回调函数，.race有一个完成后就马上执行回调函数，res携带竞争成功的回调结果。</p>
+<pre><code class="lang-js">onLoad: function (options) {
+    wx.showLoading()
+    const bid = options.bid
+    const detail = bookModel.getDetail(bid)
+    const comments = bookModel.getComments(bid)
+    const likeStatus = bookModel.getLikeStatus(bid)
+
+    Promise.all([detail,comments,likeStatus])
+    .then(res=&gt;{ 接收新的返回结果
+        this.setData({
+            book:res[0],
+            comments:res[1].comments,
+            likeStatus:res[2].like_status,
+            likeCount:res[2].fav_nums
+        })
+        wx.hideLoading()
+    })
+
+  },
+</code></pre>
+<h4 id="高阶组件示例1：搜索组件"><a href="#高阶组件示例1：搜索组件" class="headerlink" title="高阶组件示例1：搜索组件"></a>高阶组件示例1：搜索组件</h4><p>包含了大量的业务逻辑编写。components下新建search组件</p>
+<pre><code class="lang-css">wxss
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.header {
+    background-color: #ffffff;
+    position: fixed;
+    height: 100rpx;
+    border-top: 1px solid #f5f5f5;
+    border-bottom: 1px solid #f5f5f5;
+    display: flex;
+    flex-direction: row;
+    width: 750rpx;
+    align-items: center;
+    z-index: 99;
+}
+
+.search-container {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #f5f5f5;
+    border-radius: 50px;
+    margin-left: 20rpx;
+}
+
+.in-bar {
+    color: #999;
+}
+
+.bar {
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    display: inline-block;
+    height: 68rpx;
+    width: 1000rpx;
+    font-size: 28rpx;
+}
+
+.icon {
+    width: 28rpx;
+    height: 28rpx;
+    margin-left: 24rpx;
+    margin-right: 16rpx;
+}
+
+.cancel {
+    line-height: 68rpx;
+    width: 120rpx;
+    text-align: center;
+    display: inline-block;
+    border: none;
+}
+
+.cancel-img {
+    width: 28rpx;
+    height: 28rpx;
+    margin-right: 20rpx;
+}
+
+.history {
+    width: 690rpx;
+    margin: 40rpx 0 20rpx 0;
+    display: flex;
+    font-size: 28rpx;
+    margin-top: 160rpx;
+    flex-direction: column;
+}
+
+.hot-search {
+    margin-top: 70rpx;
+}
+
+.title {
+    line-height: 30rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.books-container v-book {
+    margin-bottom: 25rpx;
+}
+
+.books-container {
+    width: 570rpx;
+    margin-top: 100rpx;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0 90rpx 0 90rpx;
+    justify-content: space-between;
+}
+
+.loading {
+    margin: 50rpx 0 50rpx 0;
+}
+
+.loading-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+.empty-tip {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+}
+
+.chunk {
+    height: 30rpx;
+    width: 10rpx;
+    background-color: #000;
+    display: inline-block;
+    margin-right: 20rpx;
+}
+
+.tags {
+    /* padding-left:15px; */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 24rpx;
+    padding-left: 30rpx;
+    width: 630rpx;
+}
+
+.tags v-tag {
+    margin-right: 20rpx;
+    margin-bottom: 20rpx;
+}
+
+.bar {
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    display: inline-block;
+    height: 68rpx;
+    width: 500rpx;
+    font-size: 28rpx;
+}
+</code></pre>
+<p>search.png和cancel.png图片放入文件夹images</p>
+<pre><code class="lang-html">&lt;view class=&quot;container&quot;&gt;
+  &lt;view class=&quot;header&quot;&gt;
+    &lt;view class=&quot;search-container&quot;&gt;
+      &lt;image class=&quot;icon&quot; src=&quot;images/search.png&quot;/&gt;
+      &lt;input placeholder-class=&quot;in-bar&quot; placeholder=&quot;书籍名&quot; class=&quot;bar&quot; auto-auto-focus=&quot;true&quot;/&gt;//自动聚焦的功能
+      &lt;image class=&quot;cancel-img&quot; src=&quot;images/..&quot;/&gt;
+    &lt;/view&gt; 
+    &lt;view class=&quot;cancel&quot;&gt;取消&lt;/view&gt;
+  &lt;/view&gt;
+&lt;/view&gt;
+</code></pre>
+<p>页面使用</p>
+<pre><code class="lang-json">book.json
+{
+  &quot;usingComponents&quot;: {
+    &quot;book-cmp&quot;:&quot;/components/book/index&quot;,
+    &quot;search-cmp&quot;:&quot;/components/search/index&quot;
+  }
+}
+</code></pre>
+<p>serarch组件和container同一时间只显示一个，searching变量控制。点击搜索书籍时切换</p>
+<pre><code class="lang-html">book.wxml
+&lt;view wx:if=&quot;{{!searching}}&quot; class=&quot;container&quot;&gt;//显示控制
+    &lt;view class=&quot;header&quot;&gt;
+    &lt;view bind:tap=&quot;onSearch&quot; class=&quot;box&quot;&gt;//自定义监听函数
+      &lt;image src=&quot;/images/icon/search.png&quot;&gt;&lt;/image&gt;
+      &lt;text&gt;搜索书籍&lt;/text&gt;
+    &lt;/view&gt;  
+  &lt;/view&gt;
+  &lt;view class=&quot;sub-container&quot;&gt;
+    &lt;image class=&quot;head-img&quot; src=&quot;/images/book/quality.png&quot;&gt;&lt;/image&gt;
+    &lt;view class=&quot;books-container&quot;&gt;
+       &lt;block wx:key=&quot;id&quot; wx:for=&quot;{{books}}&quot;&gt;
+         &lt;book-cmp book=&quot;{{item}}&quot;/&gt;
+      &lt;/block&gt; 
+    &lt;/view&gt;  
+  &lt;/view&gt;
+&lt;/view&gt;
+&lt;search-cmp wx:if=&quot;{{searching}}&quot;/&gt;//显示控制
+</code></pre>
+<pre><code class="lang-js">pages/book.js
+ data: {
+    books:[],
+    searching:false
+  },
+
+  onSearching(event){
+      this.setData({
+          searching:true
+      })
+  }
+</code></pre>
+<p>取消</p>
+<pre><code class="lang-html">search/index.wxml
+ &lt;view bind:tap=&quot;onCancel&quot; class=&quot;cancel&quot;&gt;取消&lt;/view&gt;
+</code></pre>
+<pre><code class="lang-js">search/index.js
+methods:{
+    onCancel(event){//组件不能操作页面中的变量searching
+        this.triggerEvent(&#39;cancel&#39;,{},{})
+    }
+}
+</code></pre>
+<p>onCancel中自己触发一个triggerevent，事件抛到外部让页面监听onCancel，由页面处理组件的显示和隐藏</p>
+<pre><code class="lang-html">book.wxml
+&lt;search-cmp bind:cancel=&quot;onCancel&quot; wx:if=&quot;{{searching}}&quot;/&gt;
+</code></pre>
+<pre><code class="lang-js">book.js
+onCancel(event){
+    this.setData({
+        searching:false
+    })
+}
+</code></pre>
+<h4 id="自定义组件的models目录探讨"><a href="#自定义组件的models目录探讨" class="headerlink" title="自定义组件的models目录探讨"></a>自定义组件的models目录探讨</h4><p>历史搜索和热门搜索用tag组件。需要填充标签内容</p>
+<pre><code class="lang-html">&lt;!--components/search/index.wxml--&gt;
+&lt;view class=&quot;container&quot;&gt;
+  &lt;view class=&quot;header&quot;&gt;
+       ......
+  &lt;/view&gt;
+
+   &lt;view&gt;
+    &lt;view class=&quot;history&quot;&gt;
+      &lt;view class=&quot;title&quot;&gt;
+        &lt;view class=&quot;chunk&quot;&gt;&lt;/view&gt;
+        &lt;text&gt;历史搜索&lt;/text&gt;
+      &lt;/view&gt;
+    &lt;/view&gt;
+
+    &lt;view class=&quot;history hot-search&quot;&gt;
+      &lt;view class=&quot;title&quot;&gt; 
+        &lt;view class=&quot;chunk&quot;&gt;&lt;/view&gt;
+        &lt;text&gt;热门搜索&lt;/text&gt;
+      &lt;/view&gt;
+    &lt;/view&gt;
+  &lt;/view&gt;
+&lt;/view&gt;
+</code></pre>
+<p>历史搜索（个人）和热门搜索标签（服务器提供）</p>
+<p><strong>历史搜索实现方法</strong>：搜索内容存放在storage，展示时从缓存中读取所有历史搜索标签。逻辑写在model目录下的keyword.js中。model可以在search组件目录下，此时js业务只能被search组件应用，在components目录下，被所有的组件复用，在根目录下，被整个项目使用。</p>
+<p>建议：若只是一个项目，放在根目录下。把components发布出去提供给别的开发者使用，存放在components文件下。</p>
+<p>此处放在/models/keyword.js下。</p>
+<h4 id="数据结构队列的应用"><a href="#数据结构队列的应用" class="headerlink" title="数据结构队列的应用"></a>数据结构队列的应用</h4><pre><code class="lang-js">/models/keyword.js
+class KeywordModel{
+
+  key = &#39;q&#39;
+  maxLength = 10
+  // 获取历史搜索的关键字
+  getHistory(){
+
+    const words = wx.getStorageSync(this.key)
+    if(!words){
+      return []
+    }
+    return words
+  }
+
+  //获取热门搜索的关键字
+  getHot(){
+
+  }
+
+  //关键字(数组)写入到缓存中
+  addToHistory(keyword){
+    //判断新添加的key是否已存在数组中
+    let words = this.getHistory()//拿到历史数组
+    const has = words.includes(keyword)
+    if(!has){
+      //数组末尾删除，keyword添加到数组第一位
+      const length = words.length
+      if (length&gt;= this.maxLength){
+        words.pop()
+      }
+      words.unshift(keyword)
+      wx.setStorageSync(this.key, words)
+    }
+  }
+}
+
+export{KeywordModel}
+</code></pre>
+<pre><code class="lang-html">search/index.wxml
+&lt;input bind:confirm=&quot;onConfirm&quot; placeholder-class=&quot;in-bar&quot; placeholder=&quot;书籍名&quot;
+</code></pre>
+<pre><code class="lang-js">search/index.js
+import {KeywordModel} from &#39;../../models/keyword.js&#39;
+const keywordModel = new KeywordModel()
+......
+
+methods: {
+    onCancel(event){
+      this.triggerEvent(&#39;cancel&#39;,{},{})
+    },
+    onConfirm(event){
+      const word = event.detail.value
+      keywordModel.addToHistory(word)
+    }
+  }
+</code></pre>
+<h4 id="实现历史搜索"><a href="#实现历史搜索" class="headerlink" title="实现历史搜索"></a>实现历史搜索</h4><p>运行程序，缓存中可以读到数据。那么如何展示这些历史搜索数据？js中调用models中的相关方法获取历史搜索的所有关键字数据，然后做steData数据绑定</p>
+<pre><code class="lang-js">search/index.js
+data: {
+    historyWords:[]
+  },
+
+  //初始化组件时小程序默认调用的初始化函数
+  attached(event){
+    const historyWords = keywordModel.getHistory()
+    this.setData({
+      historyWords:historyWords
+    })
+  },
+</code></pre>
+<p>做完数据绑定后考虑把historyword呈现在search组件页面上，通过tag的形式呈现。所以search组件要引用tag组件。</p>
+<pre><code class="lang-json">search/index.json
+{
+  &quot;component&quot;: true,
+  &quot;usingComponents&quot;: {
+    &quot;tag-cmp&quot;:&quot;/components/tag/index&quot;
+  }
+}
+</code></pre>
+<p>遍历historywords,把所有标签呈现出来</p>
+<pre><code class="lang-html">search/index.wxml
+&lt;view class=&quot;history&quot;&gt;
+      &lt;view class=&quot;title&quot;&gt;
+        &lt;view class=&quot;chunk&quot;&gt;&lt;/view&gt;
+        &lt;text&gt;历史搜索&lt;/text&gt;
+      &lt;/view&gt;
+    &lt;view class=&quot;tags&quot;&gt;//
+          &lt;block wx:for=&quot;{{historyWords}}&quot;&gt;
+            &lt;tag-cmp text=&quot;{{item}}&quot;/&gt;
+          &lt;/block&gt;
+        &lt;/view&gt;
+    &lt;/view&gt;
+</code></pre>
+<h4 id="实现热门搜索"><a href="#实现热门搜索" class="headerlink" title="实现热门搜索"></a>实现热门搜索</h4><p><img src="https://cdn.jsdelivr.net/gh/sunshine98yy/mycdn/note_java/200826.jpg" style="zoom:50%;"></p>
+<p>获取接口：get /book/hot_keyword</p>
+<pre><code class="lang-js">model/keyword.js
+import {HTTP} from &#39;../util/http-p.js&#39;
+class KeywordModel extends HTTP{
+    ......
+     getHot(){
+    return this.request({
+      urll:&quot;book/hot_keyword&quot;
+    })
+  }
+}
+</code></pre>
+<pre><code class="lang-js">search/index.js
+  data: {
+    historyWords:[],
+    hotWords:[]
+  },
+
+  //初始化组件时小程序默认调用的初始化函数
+  attached(event){
+    const historyWords = keywordModel.getHistory()//返回的是数组
+    const hotWords = keywordModel.getHot()//返回的是promise
+    this.setData({
+      historyWords:historyWords,
+
+    })
+
+    hotWords.then(res=&gt;{
+      this.setData({
+        hotWords:res.hot
+      })
+    })
+  },
+</code></pre>
+<pre><code class="lang-html">wxml
+&lt;view class=&quot;history hot-search&quot;&gt;
+      &lt;view class=&quot;title&quot;&gt; 
+        &lt;view class=&quot;chunk&quot;&gt;&lt;/view&gt;
+        &lt;text&gt;热门搜索&lt;/text&gt;
+      &lt;/view&gt;
+      &lt;view class=&quot;tags&quot;&gt;
+        &lt;block wx:for=&quot;{{hotWords}}&quot;&gt;
+          &lt;tag-cmp text=&quot;{{item}}&quot;/&gt;
+        &lt;/block&gt;
+      &lt;/view&gt;
+    &lt;/view&gt;
+  &lt;/view&gt;
+</code></pre>
+<p>搜索实现3</p>
+<h3 id="代码重构与行为抽象"><a href="#代码重构与行为抽象" class="headerlink" title="代码重构与行为抽象"></a>代码重构与行为抽象</h3><p> 用随机字符串触发Oberver函数</p>
+<p> 加载更多数据的判断技巧</p>
+<p>使用锁的概念解决重复加载数据的问题</p>
+<p>组件行为逻辑抽象——分页行为</p>
+<p>是否还有更多数据的判断逻辑</p>
+<p>搜索代码重构——增强代码可阅读性</p>
+<p>注意避免死锁</p>
+<p>特别注意setData与直接赋值的区别</p>
+<p>空搜索结果的处理</p>
+<h3 id="高级知识与应用"><a href="#高级知识与应用" class="headerlink" title="高级知识与应用"></a>高级知识与应用</h3><p>将锁提取到分页行为中</p>
+<p>open-data显示用户信息</p>
+<p> 新版微信授权机制</p>
+<p>wx.getUserInfo需要用户先授权</p>
+<p>通过opensetting判断用户是否授权</p>
+<p>自定义button实现获取用户信息</p>
+<p>为什么有open-data还需要getUserInfo？</p>
+<p> 自定义分享button</p>
+<p>小程序之间的跳转</p>
+<p>preview组件</p>
+<p>小程序云开发的场景和意义</p>
 
         </div>
         <!-- .entry-content -->
